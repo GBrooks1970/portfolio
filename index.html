@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gary Brooks — Test Automation Portfolio</title>
+<meta name="description" content="A test-automation portfolio: E2E web UI, API/BDD, multi-stack parity, real-time WebSocket, a Screenplay teaching library, and a shipped product.">
+<style>
+  :root {
+    --ink: #16202b; --muted: #5a6672; --line: #e3e8ee; --bg: #f7f9fc;
+    --card: #ffffff; --accent: #2f5d8a; --accent-ink: #ffffff;
+    --chip: #eef3f8; --chip-ink: #34597e; --ok: #2e7d4f; --priv: #8a6d2f; --priv-bg: #faf3e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#e8edf2; --muted:#9fb0c0; --line:#26313d; --bg:#0f151b; --card:#161e26;
+      --accent:#5b9bd5; --chip:#1d2731; --chip-ink:#9cc4e6; --priv:#d6b25e; --priv-bg:#2a2415; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.55;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 22px 80px; }
+  header.hero { border-bottom: 3px solid var(--accent); padding-bottom: 26px; margin-bottom: 34px; }
+  header.hero h1 { font-size: 2.2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  header.hero p.tag { font-size: 1.08rem; color: var(--muted); margin: 0 0 16px; }
+  header.hero p.lede { max-width: 70ch; margin: 0; }
+  header.hero .links { margin-top: 16px; display: flex; gap: 10px 18px; flex-wrap: wrap; font-size: 0.9rem; }
+  header.hero .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  header.hero .links a:hover { text-decoration: underline; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 20px 18px;
+    display: flex; flex-direction: column; }
+  .card h2 { font-size: 1.12rem; margin: 0 0 4px; }
+  .card h2 a { color: var(--ink); text-decoration: none; }
+  .card h2 a:hover { color: var(--accent); }
+  .card .disc { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 10px; }
+  .card p.desc { margin: 0 0 14px; font-size: 0.95rem; color: var(--ink); flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .chip { background: var(--chip); color: var(--chip-ink); font-size: 0.74rem; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+  .btn { display: inline-block; font-size: 0.82rem; font-weight: 600; text-decoration: none; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); color: var(--accent); background: transparent; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.demo::before { content: "\25B6  "; font-size: 0.7em; }
+  .badge { height: 20px; vertical-align: middle; }
+  .pill-private { font-size: 0.72rem; font-weight: 600; color: var(--priv); background: var(--priv-bg);
+    border: 1px solid var(--priv); border-radius: 20px; padding: 2px 10px; }
+  footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
+  footer a { color: var(--accent); }
+  .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>Test Automation Portfolio</h1>
+  <p class="tag">Gary Brooks &middot; QA / Test Automation Engineer</p>
+  <p class="lede">Seven projects spanning end-to-end web UI, API and BDD, multi-stack parity,
+  real-time WebSocket testing, a dependency-free Screenplay teaching library, and a shipped
+  product &mdash; each built docs-first, gated in CI, and documented with living handovers.</p>
+  <div class="links">
+    <a href="https://github.com/GBrooks1970">GitHub: @GBrooks1970</a>
+    <span style="color:var(--muted)">Library work under @NeoCognitus70</span>
+  </div>
+</header>
+
+<main class="grid">
+
+  <!-- 1. magento -->
+  <article class="card">
+    <h2><a href="https://github.com/GBrooks1970/magento-checkout-automation">Magento Checkout Automation</a></h2>
+    <p class="disc">End-to-end web UI &middot; reference project</p>
+    <p class="desc">Guest-checkout E2E against Magento 2, the portfolio's reference suite: profile-driven
+      scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.</p>
+    <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">TypeScript</span></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/GBrooks1970/magento-checkout-automation">Repo</a>
+      <a class="btn demo" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
+      <a href="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    </div>
+  </article>
+
+  <!-- 2. orangehrm -->
+  <article class="card">
+    <h2><a href="https://github.com/GBrooks1970/orangehrm-pim-automation">OrangeHRM PIM Automation</a></h2>
+    <p class="disc">End-to-end web UI</p>
+    <p class="desc">Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised,
+      seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.</p>
+    <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/GBrooks1970/orangehrm-pim-automation">Repo</a>
+      <a class="btn demo" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
+      <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    </div>
+  </article>
+
+  <!-- 3. bfx -->
+  <article class="card">
+    <h2><a href="https://github.com/GBrooks1970/bfx-ws-screenplay">Bitfinex WebSocket Screenplay</a></h2>
+    <p class="disc">Real-time WebSocket testing</p>
+    <p class="desc">Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay
+      layer &mdash; including a flagship CRC-32 order-book checksum verified against consecutive live
+      frames. Specification-driven, one SPEC unit at a time.</p>
+    <div class="chips"><span class="chip">Cypress</span><span class="chip">Screenplay</span><span class="chip">WebSocket</span><span class="chip">TypeScript</span></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/GBrooks1970/bfx-ws-screenplay">Repo</a>
+      <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    </div>
+  </article>
+
+  <!-- 4. hand-baked -->
+  <article class="card">
+    <h2><a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Hand-Baked Screenplay Pattern</a></h2>
+    <p class="disc">Framework internals &middot; teaching library</p>
+    <p class="desc">A dependency-free TypeScript implementation of the Screenplay Pattern, following the
+      Serenity/JS design model from scratch &mdash; actors, abilities, tasks, questions &mdash; with a
+      pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.</p>
+    <div class="chips"><span class="chip">TypeScript</span><span class="chip">Vitest</span><span class="chip">Zero-deps</span><span class="chip">Library</span></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Repo</a>
+      <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    </div>
+  </article>
+
+  <!-- 5. markdown-renderer -->
+  <article class="card">
+    <h2><a href="https://github.com/GBrooks1970/markdown-renderer">Markdown Renderer</a></h2>
+    <p class="disc">Shipped product</p>
+    <p class="desc">A static, offline, browser-based Markdown viewer: pick a folder, browse a
+      drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over
+      <code>file://</code>. Tested with Vitest units and Playwright E2E.</p>
+    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">Product</span></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/GBrooks1970/markdown-renderer">Repo</a>
+      <a class="btn demo" href="https://gbrooks1970.github.io/markdown-renderer/">Live demo</a>
+      <a href="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    </div>
+  </article>
+
+  <!-- 6. calculator (private) -->
+  <article class="card">
+    <h2>Calculator Screenplay BDD</h2>
+    <p class="disc">API + BDD</p>
+    <p class="desc">A calculator API exercised through playwright-bdd and a Screenplay layer, with an
+      OpenAPI contract and a contract-drift guard. Demonstrates BDD at the API tier and
+      consumer-facing contract discipline.</p>
+    <div class="chips"><span class="chip">playwright-bdd</span><span class="chip">Screenplay</span><span class="chip">OpenAPI</span><span class="chip">TypeScript</span></div>
+    <div class="actions">
+      <span class="pill-private">Private repo</span>
+    </div>
+  </article>
+
+  <!-- 7. sudoku (private) -->
+  <article class="card">
+    <h2>Sudoku Multi-Stack Parity POC</h2>
+    <p class="disc">Multi-stack parity</p>
+    <p class="desc">The same Sudoku smoke suite implemented three ways &mdash; TypeScript/Cypress,
+      Python/pytest, C#/SpecFlow &mdash; with automated cross-stack parity checks proving 46 scenarios
+      stay in lock-step across all three. A study in test-suite portability.</p>
+    <div class="chips"><span class="chip">Cypress</span><span class="chip">pytest</span><span class="chip">SpecFlow</span><span class="chip">Parity</span></div>
+    <div class="actions">
+      <span class="pill-private">Private repo</span>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <p><strong>How these are built.</strong> Every project is documented docs-first, gated by CI, and
+  carries versioned <em>session-notes</em> handovers so any engineer &mdash; or agent &mdash; can
+  resume it cold. Shared methodology, prompts, and templates back the whole portfolio.</p>
+  <p class="note">Two projects (Calculator, Sudoku) are currently private repositories and are shown
+  without links; the other five are public with live CI. &middot; Licensed under MIT. &middot;
+  This page is static and self-contained.</p>
+</footer>
+
+</div>
+</body>
+</html>
