@@ -9,11 +9,11 @@
   :root {
     --ink: #16202b; --muted: #5a6672; --line: #e3e8ee; --bg: #f7f9fc;
     --card: #ffffff; --accent: #2f5d8a; --accent-ink: #ffffff;
-    --chip: #eef3f8; --chip-ink: #34597e; --ok: #2e7d4f; --priv: #8a6d2f; --priv-bg: #faf3e0;
+    --chip: #eef3f8; --chip-ink: #34597e; --ok: #2e7d4f;
   }
   @media (prefers-color-scheme: dark) {
     :root { --ink:#e8edf2; --muted:#9fb0c0; --line:#26313d; --bg:#0f151b; --card:#161e26;
-      --accent:#5b9bd5; --chip:#1d2731; --chip-ink:#9cc4e6; --priv:#d6b25e; --priv-bg:#2a2415; }
+      --accent:#5b9bd5; --chip:#1d2731; --chip-ink:#9cc4e6; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.55;
@@ -42,8 +42,6 @@
   .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .btn.demo::before { content: "\25B6  "; font-size: 0.7em; }
   .badge { height: 20px; vertical-align: middle; }
-  .pill-private { font-size: 0.72rem; font-weight: 600; color: var(--priv); background: var(--priv-bg);
-    border: 1px solid var(--priv); border-radius: 20px; padding: 2px 10px; }
   footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
   footer a { color: var(--accent); }
   .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
@@ -153,29 +151,31 @@
     </div>
   </article>
 
-  <!-- 7. calculator (private) -->
+  <!-- 7. calculator -->
   <article class="card">
-    <h2>Calculator Screenplay BDD</h2>
+    <h2><a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Calculator Screenplay BDD</a></h2>
     <p class="disc">API + BDD</p>
     <p class="desc">A calculator API exercised through playwright-bdd and a Screenplay layer, with an
-      OpenAPI contract and a contract-drift guard. Demonstrates BDD at the API tier and
+      OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and
       consumer-facing contract discipline.</p>
     <div class="chips"><span class="chip">playwright-bdd</span><span class="chip">Screenplay</span><span class="chip">OpenAPI</span><span class="chip">TypeScript</span></div>
     <div class="actions">
-      <span class="pill-private">Private repo</span>
+      <a class="btn primary" href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Repo</a>
+      <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml/badge.svg?branch=main"></a>
     </div>
   </article>
 
-  <!-- 8. sudoku (private) -->
+  <!-- 8. sudoku -->
   <article class="card">
-    <h2>Sudoku Multi-Stack Parity POC</h2>
+    <h2><a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Sudoku Multi-Stack Parity POC</a></h2>
     <p class="disc">Multi-stack parity</p>
-    <p class="desc">The same Sudoku smoke suite implemented three ways &mdash; TypeScript/Cypress,
-      Python/pytest, C#/SpecFlow &mdash; with automated cross-stack parity checks proving 46 scenarios
+    <p class="desc">The same Sudoku smoke suite implemented three ways &mdash; TypeScript/Cucumber.js,
+      Python/pytest-bdd, C#/Reqnroll &mdash; with automated cross-stack parity checks proving 46 scenarios
       stay in lock-step across all three. A study in test-suite portability.</p>
-    <div class="chips"><span class="chip">Cypress</span><span class="chip">pytest</span><span class="chip">SpecFlow</span><span class="chip">Parity</span></div>
+    <div class="chips"><span class="chip">Cucumber.js</span><span class="chip">pytest-bdd</span><span class="chip">Reqnroll</span><span class="chip">Parity</span></div>
     <div class="actions">
-      <span class="pill-private">Private repo</span>
+      <a class="btn primary" href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Repo</a>
+      <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml"><img class="badge" alt="CI" src="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml/badge.svg?branch=main"></a>
     </div>
   </article>
 
@@ -185,8 +185,7 @@
   <p><strong>How these are built.</strong> Every project is documented docs-first, gated by CI, and
   carries versioned <em>session-notes</em> handovers so any engineer &mdash; or agent &mdash; can
   resume it cold. Shared methodology, prompts, and templates back the whole portfolio.</p>
-  <p class="note">Two projects (Calculator, Sudoku) are currently private repositories and are shown
-  without links; the other six are public with live CI. &middot;
+  <p class="note">All eight project repositories are public with live CI. &middot;
   <a href="LICENSE">Landing-page source: MIT</a>. Project licences vary; each repository is
   authoritative. &middot; This page is static and self-contained.</p>
 </footer>
