@@ -9,3 +9,10 @@ with their repositories, live demos, and CI status.
 
 `index.html` is the whole site — no build step, no dependencies. Merge changes to `main` through a
 pull request; Pages redeploys automatically.
+
+## Licence
+
+[MIT](LICENSE) — © 2026 Gary Brooks.
+
+The MIT licence applies only to the landing-page source in this repository. Portfolio projects and
+support material stored elsewhere may use different terms; each owning repository is authoritative.
