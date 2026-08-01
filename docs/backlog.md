@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 11
+**Version:** 12
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 through LAND-05 complete; LAND-06 in review
+**Status:** ACTIVE — LAND-01 through LAND-06 closed; candidates await owner promotion
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -45,6 +45,8 @@ Do not promote a candidate improvement into required work without recording the 
 - **BLOCKED:** dependency or owner decision must be completed first.
 - **PROPOSED:** unscheduled candidate; not authority to implement.
 - **DONE:** acceptance criteria and completion evidence are recorded.
+- **DONE WITH EXCEPTION:** the owner explicitly closed a documented evidence gap; this is not an
+  unqualified pass and the exception remains visible in completion evidence.
 
 ## Current required cycle
 
@@ -56,7 +58,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-03 | P1 | DONE | LAND-02R | Generate cards and counts from structured data |
 | LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
-| LAND-06 | P1 | IN REVIEW | LAND-01 | Strengthen navigation and accessibility contracts |
+| LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -284,7 +286,7 @@ repository-owned workflow; the GitHub-managed Pages warning remains an external 
 ### LAND-06 — Strengthen navigation and accessibility contracts
 
 **Priority:** P1
-**Status:** IN REVIEW — implementation and desktop checks pass; 390px/keyboard review pending
+**Status:** DONE WITH EXCEPTION — owner accepted documented 390px/keyboard evidence gaps
 **Type:** HTML and CSS
 
 Acceptance criteria:
@@ -297,7 +299,9 @@ Acceptance criteria:
       wrapping.
 - [x] Light and dark colour schemes pass the chosen automated contrast checks — pre-delivered by
       LAND-05's 16-pair gate and dark primary-button token correction.
-- [ ] 390px and desktop layouts have no horizontal overflow or obscured actions.
+- [x] 390px and desktop layouts have no horizontal overflow or obscured actions — closed by owner
+      acceptance of LAND-03's verified 390px baseline plus unchanged horizontal geometry; no fresh
+      390px render was obtained in LAND-06.
 
 Completion evidence: implementation commit
 [`c26dcf2`](https://github.com/GBrooks1970/portfolio/commit/c26dcf2794459c904d1fdf05feb778bcdd2dd89c)
@@ -311,9 +315,20 @@ to labelled `main#projects`. Exact-head pull-request
 passed in [draft PR #12](https://github.com/GBrooks1970/portfolio/pull/12).
 
 The available browser could not expose a 390px viewport and its security policy rejected an
-embedded preview; direct keyboard activation dispatch also remained unreliable. The combined
-390px/desktop criterion therefore remains unchecked. See the immutable
-[implementation log](implementation-logs/2026-08-01_land-06-navigation-accessibility.md).
+embedded preview; direct keyboard activation dispatch also remained unreliable. After these gaps
+were reported, the owner explicitly instructed merge. PR #12 merged as
+`628b58c8cae8423d4c2d13fb6d3da66343a003a4`; exact-merge
+[quality run 30720104041](https://github.com/GBrooks1970/portfolio/actions/runs/30720104041)
+and [Pages run 30720103723](https://github.com/GBrooks1970/portfolio/actions/runs/30720103723)
+both passed. The live page returned HTTP 200 with all LAND-06 structural markers and exactly
+matched `main` at normalised SHA-256
+`19D40D49BEF3FAFC9586D013015199D2196CE7689124BE873968A371ABDADC8F`.
+
+LAND-06 is therefore DONE WITH EXCEPTION. The 390px conclusion uses LAND-03's verified one-column
+390px result plus the fact that LAND-06 did not widen the grid, cards, wrapper or action padding;
+this is an accepted inference, not a fresh viewport pass. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-06-navigation-accessibility.md) and
+[merge closure](implementation-logs/2026-08-01_land-06-merge-closure.md).
 
 ## Candidate improvements — unscheduled
 
@@ -351,6 +366,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 | OD-LAND-03 — Durable data ownership | Accepted 2026-08-01 | Hybrid boundary recorded in decision 001: registry owns membership/role; landing owns public copy/order |
 | OD-LAND-04 — ParaBank public artefact | Pending candidate promotion | Repository + CI now; consider a static Serenity snapshot later, never the Docker SUT |
 | OD-LAND-05 — Public methodology target | Accepted 2026-08-01 | Make `NeoCognitus70/portfolio-prompts` public after a repository/history/log scan; unauthenticated access now returns 200 and secret scanning/push protection are enabled |
+| OD-LAND-06 — Browser evidence exception | Accepted 2026-08-01 | Merge LAND-06 with no fresh 390px render or reliable keyboard-only Enter dispatch; retain the gaps and inherited-evidence rationale permanently |
 
 ## Maintenance rules
 
