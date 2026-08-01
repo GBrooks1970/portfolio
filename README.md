@@ -10,6 +10,20 @@ with their repositories, live demos, and CI status.
 `index.html` is the whole site — no build step, no dependencies. Merge changes to `main` through a
 pull request; Pages redeploys automatically.
 
+## Contributor entry point
+
+Before changing the landing page, read these repository-owned control records:
+
+1. [`docs/project-contract.md`](docs/project-contract.md) — scope, validation and working norms.
+2. [`docs/backlog.md`](docs/backlog.md) — authoritative priorities, dependencies and acceptance
+   criteria.
+3. [`docs/portfolio-page-audit-2026-08-01.md`](docs/portfolio-page-audit-2026-08-01.md) — evidence
+   behind the current remediation cycle.
+
+Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
+closing its backlog item. These documents use ordinary Markdown and repository-relative paths so
+they can be followed by a human or any AI-assisted engineering tool.
+
 ## Licence
 
 [MIT](LICENSE) — © 2026 Gary Brooks.
