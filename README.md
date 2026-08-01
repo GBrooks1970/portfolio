@@ -20,6 +20,15 @@ python tools/generate_site.py --check
 python -B -m unittest discover -s tools/tests -p test_*.py
 ```
 
+To verify the committed registry lock against its exact canonical source as well as the manifest
+and generated page, provide a full-history checkout of the public prompt-library repository:
+
+```powershell
+python tools/check_registry_parity.py --registry-repository ..\portfolio-prompts
+```
+
+Pull requests run the same parity check with read-only permissions and no repository secrets.
+
 Do not edit `index.html` directly. See [`docs/generation.md`](docs/generation.md) for the schema,
 registry-lock refresh and reproducibility contract. Merge changes to `main` through a pull request;
 Pages redeploys the committed output automatically.
@@ -36,7 +45,7 @@ Before changing the landing page, read these repository-owned control records:
 4. [`docs/decisions/001-presentation-ownership.md`](docs/decisions/001-presentation-ownership.md) —
    ownership of portfolio membership, public copy and generated output.
 5. [`docs/generation.md`](docs/generation.md) — deterministic source files, commands and registry
-   pinning procedure.
+   pinning/parity procedure.
 
 Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
 closing its backlog item. These documents use ordinary Markdown and repository-relative paths so

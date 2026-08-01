@@ -31,16 +31,18 @@ Also confirm every new repository-relative Markdown link resolves.
 
 ### HTML, CSS or generated-content changes
 
-Until LAND-05 supplies an automated local gate:
+Until LAND-05 supplies the complete publication-quality local gate:
 
-1. Run `python tools/generate_site.py --check`.
-2. Run `python -B -m unittest discover -s tools/tests -p test_*.py`.
-3. Run `python -m http.server 8000` from the repository root.
-4. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
-5. Confirm no horizontal overflow, obscured actions or console errors.
-6. Exercise every changed repository, CI, demo/report and internal link.
-7. Confirm keyboard focus order and visible focus treatment.
-8. Run `git diff --check`.
+1. Run `python tools/check_registry_parity.py --registry-repository <portfolio-prompts-path>` using
+   a full-history canonical checkout.
+2. Run `python tools/generate_site.py --check`.
+3. Run `python -B -m unittest discover -s tools/tests -p test_*.py`.
+4. Run `python -m http.server 8000` from the repository root.
+5. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
+6. Confirm no horizontal overflow, obscured actions or console errors.
+7. Exercise every changed repository, CI, demo/report and internal link.
+8. Confirm keyboard focus order and visible focus treatment.
+9. Run `git diff --check`.
 
 When LAND-05 adds an executable validation command, update this contract in the same PR and make
 that command the first gate.
@@ -73,6 +75,8 @@ that command the first gate.
   PRs, even when they describe the same project.
 - Generated files and their source data must be reviewed together.
 - Do not mix unrelated portfolio-root or project-repository changes into this repository.
+- Pull-request workflows must use the `pull_request` event, least-privilege read permissions, no
+  repository secrets, and non-persisted checkout credentials when executing proposed code.
 
 ## Completion evidence
 
