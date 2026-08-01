@@ -1,5 +1,8 @@
 # Portfolio Quality Gate
 
+This gate implements the source, publication and deployment boundary accepted in
+[`decision 002`](decisions/002-publication-quality-gate.md).
+
 The repository exposes one complete, cross-platform pull-request gate. It requires a full-history
 checkout of the public canonical registry repository and no credentials or repository secrets:
 

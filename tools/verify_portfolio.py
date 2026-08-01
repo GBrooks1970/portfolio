@@ -42,11 +42,15 @@ def main() -> int:
         print(f"portfolio-verify: ERROR — {exc}", file=sys.stderr)
         return 2
 
+    reference_label = (
+        "reference" if site.internal_references == 1 else "references"
+    )
     print(
         "portfolio-verify: sources PASS — "
         f"{showcase_count} showcase, {methodology_count} methodology, "
         f"{site.interactive_elements} named controls, {site.internal_references} internal "
-        f"references, {site.external_urls} external URLs, {site.contrast_pairs} contrast pairs"
+        f"{reference_label}, {site.external_urls} external URLs, "
+        f"{site.contrast_pairs} contrast pairs"
     )
     suite = unittest.defaultTestLoader.discover(
         str(ROOT / "tools" / "tests"), pattern="test_*.py"

@@ -1,6 +1,6 @@
 # Portfolio Landing — Backlog
 
-**Version:** 9
+**Version:** 10
 **Last updated:** 2026-08-01
 **Status:** ACTIVE — LAND-01 through LAND-04 complete; LAND-05 in review; LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
@@ -241,7 +241,7 @@ and [merge closure](implementation-logs/2026-08-01_land-04-merge-closure.md).
 ### LAND-05 — Add publication-quality automated gates
 
 **Priority:** P1
-**Status:** IN REVIEW — local complete gate passes; pull-request CI and owner merge pending
+**Status:** IN REVIEW — local and exact-head pull-request gates pass; owner merge pending
 **Type:** CI and validation code
 
 The repository currently relies on the Pages deployment alone. Add fast pull-request checks for
@@ -258,10 +258,17 @@ Acceptance criteria:
 - [x] Pages deployment remains a separate post-merge signal; a successful deploy is not treated as
       proof that content is correct.
 
-Completion evidence: branch `codex/land-05-quality-gate`; complete local command passed canonical
-parity for 9 showcase / 1 methodology projects, all 33 unique external link/resource targets,
-16 light/dark contrast pairs and 20/20 deterministic tests. Pull-request/head commit and CI evidence
-remain pending.
+Completion evidence: implementation commit
+[`90a334b`](https://github.com/GBrooks1970/portfolio/commit/90a334b006a93e5703ba16cf3381af2f0569b15b)
+on branch `codex/land-05-quality-gate`; complete local command passed canonical parity for 9
+showcase / 1 methodology projects, 34 named controls, all 33 unique external link/resource targets,
+16 light/dark contrast pairs and 20/20 deterministic tests. The first quality run found the dark
+primary action at 2.96:1; the theme-specific text token raises it to 6.20:1. Read-only pull-request
+[run 30717568452](https://github.com/GBrooks1970/portfolio/actions/runs/30717568452)
+passed at the exact implementation head in [PR #11](https://github.com/GBrooks1970/portfolio/pull/11).
+Owner merge, exact-merge `main` quality, Pages deployment and unauthenticated live verification
+remain pending. See [decision 002](decisions/002-publication-quality-gate.md) and the immutable
+[implementation log](implementation-logs/2026-08-01_land-05-publication-quality-gate.md).
 
 Platform observation: exact-merge Pages run 30716076304 passed but reported that GitHub's generated
 Pages workflow still invokes Node 20-based `actions/checkout@v4` and `actions/upload-artifact@v4`
