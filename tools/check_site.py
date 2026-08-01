@@ -46,6 +46,8 @@ CONTRAST_PAIRS = (
     ("accent", "bg"),
     ("accent", "card"),
     ("accent-ink", "accent"),
+    ("focus", "bg"),
+    ("focus", "card"),
 )
 
 
@@ -105,6 +107,13 @@ class SiteParser(HTMLParser):
         self.viewports: list[str] = []
         self.descriptions: list[str] = []
         self.article_lines_outside_main: list[int] = []
+        self.skip_links: list[tuple[str, int]] = []
+        self.main_landmarks: list[dict[str, str | None]] = []
+        self.project_headings: list[tuple[int, set[str], bool]] = []
+        self.project_heading_text: list[str] = []
+        self._project_heading_depth = 0
+        self.headings: list[tuple[int, int, bool]] = []
+        self.ci_badges: list[tuple[int, str, str]] = []
 
     @property
     def line(self) -> int:
@@ -133,6 +142,7 @@ class SiteParser(HTMLParser):
                 + ", ".join(duplicate_attributes)
             )
         attributes = {name.lower(): value for name, value in attrs}
+        classes = set((attributes.get("class") or "").split())
         self.counts[tag] += 1
 
         identifier = (attributes.get("id") or "").strip()
@@ -163,6 +173,8 @@ class SiteParser(HTMLParser):
 
         if tag == "html":
             self.html_languages.append((attributes.get("lang") or "").strip())
+        elif tag == "main":
+            self.main_landmarks.append(attributes)
         elif tag == "meta":
             if attributes.get("charset") is not None:
                 self.charsets.append((attributes.get("charset") or "").strip())
@@ -177,6 +189,20 @@ class SiteParser(HTMLParser):
             self._style_depth += 1
         elif tag == "article" and not any(open_tag == "main" for open_tag, _ in self.stack):
             self.article_lines_outside_main.append(self.line)
+
+        if tag == "a" and "skip-link" in classes:
+            self.skip_links.append(((attributes.get("href") or "").strip(), self.line))
+
+        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
+            level = int(tag[1])
+            in_article = any(open_tag == "article" for open_tag, _ in self.stack)
+            self.headings.append((level, self.line, in_article))
+            if identifier == "projects-heading":
+                hidden = "hidden" in attributes or bool(
+                    classes & {"hidden", "sr-only", "visually-hidden"}
+                )
+                self.project_headings.append((self.line, classes, hidden))
+                self._project_heading_depth += 1
 
         labelled_by = (attributes.get("aria-labelledby") or "").strip()
         if labelled_by:
@@ -194,6 +220,13 @@ class SiteParser(HTMLParser):
                 self.errors.append(f"line {self.line}: image requires non-empty alt text")
             if self._interactive_stack and alt:
                 self._interactive_stack[-1].image_alts.append(alt)
+            if "badge" in classes:
+                link_label = (
+                    self._interactive_stack[-1].aria_label
+                    if self._interactive_stack
+                    else ""
+                )
+                self.ci_badges.append((self.line, alt or "", link_label))
 
         if tag in INTERACTIVE_ELEMENTS:
             if tag == "a" and not (attributes.get("href") or "").strip():
@@ -213,6 +246,8 @@ class SiteParser(HTMLParser):
             self.title_text.append(data)
         if self._style_depth:
             self.style_text.append(data)
+        if self._project_heading_depth:
+            self.project_heading_text.append(data)
         if self._interactive_stack:
             self._interactive_stack[-1].text.append(data)
 
@@ -235,6 +270,8 @@ class SiteParser(HTMLParser):
             self._title_depth -= 1
         elif tag == "style" and self._style_depth:
             self._style_depth -= 1
+        elif tag == "h2" and self._project_heading_depth:
+            self._project_heading_depth -= 1
 
         if tag in INTERACTIVE_ELEMENTS:
             if not self._interactive_stack:
@@ -315,6 +352,86 @@ def _validate_contrast(styles: str, errors: list[str]) -> int:
                     f"requires {CONTRAST_THRESHOLD:.1f}:1"
                 )
     return checked
+
+
+def _validate_navigation_contract(
+    parser: SiteParser, styles: str, errors: list[str]
+) -> None:
+    if len(parser.skip_links) != 1:
+        errors.append(
+            f"document must contain exactly one skip link; found {len(parser.skip_links)}"
+        )
+    elif parser.skip_links[0][0] != "#projects":
+        errors.append(
+            f"line {parser.skip_links[0][1]}: skip link must target '#projects'"
+        )
+
+    if len(parser.main_landmarks) == 1:
+        main = parser.main_landmarks[0]
+        if main.get("id") != "projects":
+            errors.append("main landmark must use id='projects' as the skip target")
+        if main.get("aria-labelledby") != "projects-heading":
+            errors.append("main landmark must be labelled by 'projects-heading'")
+        if main.get("tabindex") != "-1":
+            errors.append("main landmark must use tabindex='-1' for skip-link focus")
+
+    if len(parser.project_headings) != 1:
+        errors.append(
+            "document must contain exactly one visible projects-heading; "
+            f"found {len(parser.project_headings)}"
+        )
+    else:
+        line, _, hidden = parser.project_headings[0]
+        if hidden:
+            errors.append(f"line {line}: projects-heading must remain visible")
+        if not _normalise_title(parser.project_heading_text):
+            errors.append(f"line {line}: projects-heading must contain visible text")
+
+    article_headings = [
+        (level, line) for level, line, in_article in parser.headings if in_article
+    ]
+    if len(article_headings) != parser.counts["article"] or any(
+        level != 3 for level, _ in article_headings
+    ):
+        errors.append("each project article must contain exactly one <h3> heading")
+
+    previous_level = 0
+    for level, line, _ in parser.headings:
+        if previous_level and level > previous_level + 1:
+            errors.append(
+                f"line {line}: heading level jumps from h{previous_level} to h{level}"
+            )
+        previous_level = level
+
+    for line, alt, link_label in parser.ci_badges:
+        if re.fullmatch(r".+\sCI status", alt.strip()) is None:
+            errors.append(f"line {line}: CI badge alt text must be project-specific")
+        if re.fullmatch(r".+\sCI workflow", link_label.strip()) is None:
+            errors.append(f"line {line}: CI link name must be project-specific")
+
+    focus_rule = re.search(
+        r"a\s*:\s*focus-visible\s*\{[^{}]*outline\s*:\s*3px\s+solid\s+"
+        r"var\(--focus\)",
+        styles,
+        flags=re.DOTALL,
+    )
+    if focus_rule is None:
+        errors.append("CSS must define a 3px --focus outline for a:focus-visible")
+    if re.search(
+        r"\.skip-link\s*:\s*focus-visible\s*\{[^{}]*transform\s*:\s*"
+        r"translateY\(0\)",
+        styles,
+        flags=re.DOTALL,
+    ) is None:
+        errors.append("CSS must reveal the skip link on :focus-visible")
+    touch_target = re.search(
+        r"\.actions\s*>\s*a\s*\{[^{}]*min-height\s*:\s*"
+        r"([0-9]+(?:\.[0-9]+)?)px",
+        styles,
+        flags=re.DOTALL,
+    )
+    if touch_target is None or float(touch_target.group(1)) < 44:
+        errors.append("CSS project actions must provide at least a 44px touch target")
 
 
 def _resolve_internal_reference(
@@ -432,7 +549,9 @@ def audit_document(
         if error:
             errors.append(error)
 
-    contrast_pairs = _validate_contrast("\n".join(parser.style_text), errors)
+    styles = "\n".join(parser.style_text)
+    _validate_navigation_contract(parser, styles, errors)
+    contrast_pairs = _validate_contrast(styles, errors)
     summary = SiteSummary(
         identifiers=len(parser.identifiers),
         interactive_elements=len(parser.interactive_elements),

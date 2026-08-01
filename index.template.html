@@ -9,16 +9,23 @@
 <style>
   :root {
     --ink: #16202b; --muted: #5a6672; --line: #e3e8ee; --bg: #f7f9fc;
-    --card: #ffffff; --accent: #2f5d8a; --accent-ink: #ffffff;
+    --card: #ffffff; --accent: #2f5d8a; --accent-ink: #ffffff; --focus: #8a3000;
     --chip: #eef3f8; --chip-ink: #34597e; --ok: #2e7d4f;
   }
   @media (prefers-color-scheme: dark) {
     :root { --ink:#e8edf2; --muted:#9fb0c0; --line:#26313d; --bg:#0f151b; --card:#161e26;
-      --accent:#5b9bd5; --accent-ink:#0f151b; --chip:#1d2731; --chip-ink:#9cc4e6; }
+      --accent:#5b9bd5; --accent-ink:#0f151b; --focus:#ffd166;
+      --chip:#1d2731; --chip-ink:#9cc4e6; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.55;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .skip-link { position: fixed; z-index: 10; top: 8px; left: 8px; min-height: 45px;
+    display: inline-flex; align-items: center; padding: 9px 14px; border: 2px solid var(--focus);
+    border-radius: 6px; background: var(--card); color: var(--ink); font-weight: 700;
+    transform: translateY(-150%); transition: transform 120ms ease-out; }
+  .skip-link:focus-visible { transform: translateY(0); }
+  a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 22px 80px; }
   header.hero { border-bottom: 3px solid var(--accent); padding-bottom: 26px; margin-bottom: 34px; }
   header.hero h1 { font-size: 2.2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
@@ -28,17 +35,23 @@
   header.hero .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
   header.hero .links a:hover { text-decoration: underline; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+  .grid:focus { outline: none; }
+  .section-heading { grid-column: 1 / -1; font-size: 1.35rem; margin: 0 0 4px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 20px 18px;
     display: flex; flex-direction: column; }
-  .card h2 { font-size: 1.12rem; margin: 0 0 4px; }
-  .card h2 a { color: var(--ink); text-decoration: none; }
-  .card h2 a:hover { color: var(--accent); }
+  .card h3 { font-size: 1.12rem; margin: 0 0 4px; }
+  .card h3 a { color: var(--ink); text-decoration: none; }
+  .card h3 a:hover { color: var(--accent); }
   .card .disc { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 10px; }
   .card p.desc { margin: 0 0 14px; font-size: 0.95rem; color: var(--ink); flex: 1; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
   .chip { background: var(--chip); color: var(--chip-ink); font-size: 0.74rem; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
-  .btn { display: inline-block; font-size: 0.82rem; font-weight: 600; text-decoration: none; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); color: var(--accent); background: transparent; }
+  .actions > a { min-height: 45px; display: inline-flex; align-items: center;
+    justify-content: center; }
+  .btn { font-size: 0.82rem; font-weight: 600; text-decoration: none; padding: 9px 12px;
+    border-radius: 6px; border: 1px solid var(--line); color: var(--accent);
+    background: transparent; }
   .btn:hover { border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .btn.demo::before { content: "\25B6  "; font-size: 0.7em; }
@@ -54,6 +67,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#projects">Skip to showcase projects</a>
 <div class="wrap">
 
 <header class="hero">
@@ -68,7 +82,10 @@
   </div>
 </header>
 
-<main class="grid" data-showcase-count="{{SHOWCASE_COUNT}}">
+<main class="grid" id="projects" data-showcase-count="{{SHOWCASE_COUNT}}" tabindex="-1"
+  aria-labelledby="projects-heading">
+
+  <h2 class="section-heading" id="projects-heading">Showcase projects</h2>
 
 {{SHOWCASE_CARDS}}
 

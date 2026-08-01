@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 10
+**Version:** 11
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 through LAND-04 complete; LAND-05 in review; LAND-06 ready
+**Status:** ACTIVE — LAND-01 through LAND-05 complete; LAND-06 in review
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -55,8 +55,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-02R | P1 | DONE | LAND-02 | Implement presentation roles in the canonical registry |
 | LAND-03 | P1 | DONE | LAND-02R | Generate cards and counts from structured data |
 | LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
-| LAND-05 | P1 | IN REVIEW | — | Add publication-quality automated gates |
-| LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
+| LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
+| LAND-06 | P1 | IN REVIEW | LAND-01 | Strengthen navigation and accessibility contracts |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -241,7 +241,7 @@ and [merge closure](implementation-logs/2026-08-01_land-04-merge-closure.md).
 ### LAND-05 — Add publication-quality automated gates
 
 **Priority:** P1
-**Status:** IN REVIEW — local and exact-head pull-request gates pass; owner merge pending
+**Status:** DONE
 **Type:** CI and validation code
 
 The repository currently relies on the Pages deployment alone. Add fast pull-request checks for
@@ -266,9 +266,15 @@ showcase / 1 methodology projects, 34 named controls, all 33 unique external lin
 primary action at 2.96:1; the theme-specific text token raises it to 6.20:1. Read-only pull-request
 [run 30717568452](https://github.com/GBrooks1970/portfolio/actions/runs/30717568452)
 passed at the exact implementation head in [PR #11](https://github.com/GBrooks1970/portfolio/pull/11).
-Owner merge, exact-merge `main` quality, Pages deployment and unauthenticated live verification
-remain pending. See [decision 002](decisions/002-publication-quality-gate.md) and the immutable
-[implementation log](implementation-logs/2026-08-01_land-05-publication-quality-gate.md).
+Owner merged PR #11 as `16c2cf2f6f83d84b1c50eb64fea3049a06f6b549`; exact-merge
+[quality run 30719108064](https://github.com/GBrooks1970/portfolio/actions/runs/30719108064)
+and [Pages run 30719107654](https://github.com/GBrooks1970/portfolio/actions/runs/30719107654)
+both passed. The live page returned HTTP 200 with nine showcase cards and one methodology entry;
+normalised live and `main` SHA-256 both equal
+`455FDFA2EFF6B1F41AA01225FB1C4238D69CDE6E23019D75F4B240ED5D049F94`. See
+[decision 002](decisions/002-publication-quality-gate.md), the immutable
+[implementation log](implementation-logs/2026-08-01_land-05-publication-quality-gate.md) and
+[merge closure](implementation-logs/2026-08-01_land-05-merge-closure.md).
 
 Platform observation: exact-merge Pages run 30716076304 passed but reported that GitHub's generated
 Pages workflow still invokes Node 20-based `actions/checkout@v4` and `actions/upload-artifact@v4`
@@ -278,22 +284,36 @@ repository-owned workflow; the GitHub-managed Pages warning remains an external 
 ### LAND-06 — Strengthen navigation and accessibility contracts
 
 **Priority:** P1
-**Status:** READY — implement with or after LAND-01
+**Status:** IN REVIEW — implementation and desktop checks pass; 390px/keyboard review pending
 **Type:** HTML and CSS
 
 Acceptance criteria:
 
-- [ ] A skip link targets the project collection.
-- [ ] The project collection has a visible heading and coherent heading hierarchy.
-- [ ] Every CI badge/link has a project-specific accessible name.
-- [ ] Keyboard focus has an explicit, high-contrast `:focus-visible` treatment.
-- [ ] Primary actions provide comfortable touch targets, aiming for 44px while retaining responsive
+- [x] A skip link targets the project collection.
+- [x] The project collection has a visible heading and coherent heading hierarchy.
+- [x] Every CI badge/link has a project-specific accessible name.
+- [x] Keyboard focus has an explicit, high-contrast `:focus-visible` treatment.
+- [x] Primary actions provide comfortable touch targets, aiming for 44px while retaining responsive
       wrapping.
 - [x] Light and dark colour schemes pass the chosen automated contrast checks — pre-delivered by
       LAND-05's 16-pair gate and dark primary-button token correction.
 - [ ] 390px and desktop layouts have no horizontal overflow or obscured actions.
 
-Completion evidence: **Not yet implemented.**
+Completion evidence: implementation commit
+[`c26dcf2`](https://github.com/GBrooks1970/portfolio/commit/c26dcf2794459c904d1fdf05feb778bcdd2dd89c)
+on branch `codex/land-06-accessibility`; complete local gate passed with 35 named controls, two
+internal references, 33 external targets, 20 light/dark text/focus pairs and 25/25 tests.
+At 1280 × 720 dark mode, browser inspection found nine cards, three columns, no horizontal/action
+overflow, no console errors, nine project-specific CI name pairs and a 44.996px minimum action
+height. First keyboard focus exposed the skip link with its visible ring; activating it moved focus
+to labelled `main#projects`. Exact-head pull-request
+[run 30719723900](https://github.com/GBrooks1970/portfolio/actions/runs/30719723900)
+passed in [draft PR #12](https://github.com/GBrooks1970/portfolio/pull/12).
+
+The available browser could not expose a 390px viewport and its security policy rejected an
+embedded preview; direct keyboard activation dispatch also remained unreliable. The combined
+390px/desktop criterion therefore remains unchecked. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-06-navigation-accessibility.md).
 
 ## Candidate improvements — unscheduled
 

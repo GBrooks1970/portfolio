@@ -162,6 +162,7 @@ def _action_link(action: dict[str, str]) -> str:
 
 def render_card(project: str, entry: dict[str, Any], github: str) -> str:
     repo_url = f"https://github.com/{github}"
+    title = _escape(entry["title"])
     chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
     actions = [f'<a class="btn primary" href="{_escape(repo_url)}">Repo</a>']
     if entry["actions"]["demo"] is not None:
@@ -172,13 +173,14 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
     if workflow is not None:
         workflow_url = f"{repo_url}/actions/workflows/{workflow}"
         actions.append(
-            f'<a href="{_escape(workflow_url)}"><img class="badge" alt="CI" '
+            f'<a href="{_escape(workflow_url)}" aria-label="{title} CI workflow">'
+            f'<img class="badge" alt="{title} CI status" '
             f'src="{_escape(workflow_url)}/badge.svg?branch=main"></a>'
         )
     action_html = "\n      ".join(actions)
     return f'''  <!-- Generated: {project} -->
   <article class="card" data-project="{_escape(project)}">
-    <h2><a href="{_escape(repo_url)}">{_escape(entry["title"])}</a></h2>
+    <h3><a href="{_escape(repo_url)}">{title}</a></h3>
     <p class="disc">{_escape(entry["discipline"])}</p>
     <p class="desc">{_escape(entry["summary"])}</p>
     <div class="chips">{chips}</div>
