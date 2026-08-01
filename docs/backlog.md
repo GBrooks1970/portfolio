@@ -162,7 +162,8 @@ and post-merge `main` integrity
 [run 30710731714](https://github.com/NeoCognitus70/portfolio-prompts/actions/runs/30710731714)
 both passed. LAND-03/04 must consume the merged commit above, never the topic-branch commit.
 See the immutable
-[LAND-02 closure / LAND-02R review log](implementation-logs/2026-08-01_land-02-closure_land-02r-review.md).
+[LAND-02 closure / LAND-02R review log](implementation-logs/2026-08-01_land-02-closure_land-02r-review.md)
+and final [LAND-02R registry closure log](implementation-logs/2026-08-01_land-02r-registry-closure.md).
 
 ### LAND-03 — Generate cards and counts from structured data
 
