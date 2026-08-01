@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 4
+**Version:** 6
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 complete; LAND-02 decision in review; LAND-05 and LAND-06 ready
+**Status:** ACTIVE — LAND-01, LAND-02 and LAND-02R complete; LAND-03, LAND-05 and LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -51,9 +51,9 @@ Do not promote a candidate improvement into required work without recording the 
 | ID | Priority | Status | Depends on | Outcome |
 |---|---|---|---|---|
 | LAND-01 | P0 | DONE | — | Restore public inventory and factual accuracy |
-| LAND-02 | P0 | IN REVIEW | LAND-01 | Define durable presentation ownership |
-| LAND-02R | P1 | BLOCKED | LAND-02 | Implement presentation roles in the canonical registry |
-| LAND-03 | P1 | BLOCKED | LAND-02R | Generate cards and counts from structured data |
+| LAND-02 | P0 | DONE | LAND-01 | Define durable presentation ownership |
+| LAND-02R | P1 | DONE | LAND-02 | Implement presentation roles in the canonical registry |
+| LAND-03 | P1 | READY | LAND-02R | Generate cards and counts from structured data |
 | LAND-04 | P1 | BLOCKED | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | READY | — | Add publication-quality automated gates |
 | LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
@@ -94,7 +94,7 @@ warnings/errors. See the original
 ### LAND-02 — Define durable presentation ownership
 
 **Priority:** P0
-**Status:** IN REVIEW
+**Status:** DONE
 **Type:** Decision and design documentation
 
 Record a durable boundary between canonical portfolio membership and public-facing presentation
@@ -122,15 +122,18 @@ Acceptance criteria:
 Completion evidence: [`decision 001`](decisions/001-presentation-ownership.md) records the accepted
 hybrid boundary, full current classification, lifecycle procedures and static-generation contract.
 The separate registry-schema implementation is explicit as LAND-02R; LAND-03/04 dependencies are
-reconciled accordingly. Decision commit `2dcb5868d6959c42112233bc987acf5acb08eef2` is in draft
-[PR #7](https://github.com/GBrooks1970/portfolio/pull/7); see the immutable
-[implementation log](implementation-logs/2026-08-01_land-02_presentation-ownership.md). Owner merge
-remains required before LAND-02 is DONE.
+reconciled accordingly. Decision commit `2dcb5868d6959c42112233bc987acf5acb08eef2` and evidence
+commit `baa9a21607ac1034e3f9a4b57c4b234195e45902` merged through
+[PR #7](https://github.com/GBrooks1970/portfolio/pull/7) as
+`3f4f77f456fc372f6f1da813a807e48beafda5dd`. The exact merge commit was published successfully by
+[Pages run 30710048684](https://github.com/GBrooks1970/portfolio/actions/runs/30710048684).
+See the original
+[implementation log](implementation-logs/2026-08-01_land-02_presentation-ownership.md).
 
 ### LAND-02R — Implement presentation roles in the canonical registry
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-02 owner merge
+**Status:** DONE
 **Type:** Cross-repository schema, validation and documentation (`NeoCognitus70/portfolio-prompts`)
 
 Implement decision 001's registry-owned `presentation_role` without mixing the change into this
@@ -138,21 +141,34 @@ landing repository.
 
 Acceptance criteria:
 
-- [ ] Every `projects:` row in `portfolio-prompts/registry.yml` declares exactly one
+- [x] Every `projects:` row in `portfolio-prompts/registry.yml` declares exactly one
       `presentation_role`: `showcase`, `methodology` or `hidden`.
-- [ ] The nine current non-meta projects are `showcase`; `portfolio-prompts` is `methodology`.
-- [ ] Registry validation rejects missing and unsupported roles and proves lifecycle status and
+- [x] The nine current non-meta projects are `showcase`; `portfolio-prompts` is `methodology`.
+- [x] Registry validation rejects missing and unsupported roles and proves lifecycle status and
       `orchestration_target` remain independent.
-- [ ] Registry field documentation and tests cover showcase, methodology and hidden cases.
-- [ ] `python tools/check-library.py` passes in the registry repository and its PR/main CI is green.
-- [ ] This backlog records the merged registry commit for LAND-03/04 to consume.
+- [x] Registry field documentation and tests cover showcase, methodology and hidden cases.
+- [x] `python tools/check-library.py` passes locally and on the current PR head.
+- [x] Registry owner merges the PR and post-merge `main` CI is green.
+- [x] This backlog records the merged registry commit for LAND-03/04 to consume.
 
-Completion evidence: **Blocked; none.**
+Completion evidence: implementation commit
+[`d9ea5d0`](https://github.com/NeoCognitus70/portfolio-prompts/commit/d9ea5d02886bf518aaebd33f72f9e1cdbe31d1f5)
+and implementation-log/evidence commits through head `47f3c02db8d9ea508a3bed3090c4913351bab070`
+merged through [portfolio-prompts PR #50](https://github.com/NeoCognitus70/portfolio-prompts/pull/50)
+as `78a7a3e40c3ea614674dee106d78854471cee571`.
+The local self-gate passed with 13 tests; current-head PR integrity
+[run 30710503211](https://github.com/NeoCognitus70/portfolio-prompts/actions/runs/30710503211)
+and post-merge `main` integrity
+[run 30710731714](https://github.com/NeoCognitus70/portfolio-prompts/actions/runs/30710731714)
+both passed. LAND-03/04 must consume the merged commit above, never the topic-branch commit.
+See the immutable
+[LAND-02 closure / LAND-02R review log](implementation-logs/2026-08-01_land-02-closure_land-02r-review.md)
+and final [LAND-02R registry closure log](implementation-logs/2026-08-01_land-02r-registry-closure.md).
 
 ### LAND-03 — Generate cards and counts from structured data
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-02R
+**Status:** READY
 **Type:** Code and generated HTML
 
 Replace repeated hand-authored cards and numeric prose with a deterministic presentation manifest
@@ -168,12 +184,12 @@ Acceptance criteria:
 - [ ] Generation is byte-stable for unchanged input and has an executable `--check` mode.
 - [ ] All LAND-01 public content remains present after migration.
 
-Completion evidence: **Blocked; none.**
+Completion evidence: **Not yet implemented.**
 
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-02R and LAND-03
+**Status:** BLOCKED — LAND-03
 **Type:** CI and validation code
 
 Make a missing or unknown public project a failing pull-request check rather than a visual-review
@@ -189,7 +205,7 @@ Acceptance criteria:
 - [ ] The check runs on pull requests without write permissions or repository secrets.
 - [ ] Registry source/ref and failure recovery are documented so the check is reproducible.
 
-Completion evidence: **Blocked; none.**
+Completion evidence: **Blocked by LAND-03; none.**
 
 ### LAND-05 — Add publication-quality automated gates
 
