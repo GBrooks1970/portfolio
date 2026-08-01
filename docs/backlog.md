@@ -190,8 +190,11 @@ Completion evidence: branch `codex/land-03-generated-portfolio` pins canonical r
 `78a7a3e40c3ea614674dee106d78854471cee571`; `python tools/generate_site.py --check` PASS;
 3/3 deterministic tests PASS; desktop 1280 × 720 and mobile 390 × 844 checks found 9 showcase
 cards, one methodology entry, 3/1 columns, no horizontal overflow, contained actions and no console
-warnings/errors; all 24 external links and `LICENSE` resolve. Commit, PR, owner merge, Pages and live
-verification evidence remain pending.
+warnings/errors; all 24 external links and `LICENSE` resolve. Implementation commit
+[`12d502d`](https://github.com/GBrooks1970/portfolio/commit/12d502db8f9dee1d4c0e34f0dec4d6e3c57357a9)
+is in draft [PR #9](https://github.com/GBrooks1970/portfolio/pull/9). Owner merge, Pages and live
+verification evidence remain pending. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-03-generated-portfolio.md).
 
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
