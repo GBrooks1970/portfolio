@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 7
+**Version:** 8
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01, LAND-02 and LAND-02R complete; LAND-03 in review; LAND-05 and LAND-06 ready
+**Status:** ACTIVE — LAND-01 through LAND-03 complete; LAND-04 in review; LAND-05 and LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -53,8 +53,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-01 | P0 | DONE | — | Restore public inventory and factual accuracy |
 | LAND-02 | P0 | DONE | LAND-01 | Define durable presentation ownership |
 | LAND-02R | P1 | DONE | LAND-02 | Implement presentation roles in the canonical registry |
-| LAND-03 | P1 | IN REVIEW | LAND-02R | Generate cards and counts from structured data |
-| LAND-04 | P1 | BLOCKED | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
+| LAND-03 | P1 | DONE | LAND-02R | Generate cards and counts from structured data |
+| LAND-04 | P1 | IN REVIEW | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | READY | — | Add publication-quality automated gates |
 | LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
 
@@ -168,7 +168,7 @@ and final [LAND-02R registry closure log](implementation-logs/2026-08-01_land-02
 ### LAND-03 — Generate cards and counts from structured data
 
 **Priority:** P1
-**Status:** IN REVIEW — owner merge, Pages deployment and live verification pending
+**Status:** DONE
 **Type:** Code and generated HTML
 
 Replace repeated hand-authored cards and numeric prose with a deterministic presentation manifest
@@ -184,7 +184,7 @@ Acceptance criteria:
 - [x] Generation is byte-stable for unchanged input and has an executable `--check` mode.
 - [x] All LAND-01 public content remains present after migration.
 - [x] Every generated external link resolves for an unauthenticated visitor.
-- [ ] Owner merges the PR; the exact Pages deployment succeeds and the live output is verified.
+- [x] Owner merges the PR; the exact Pages deployment succeeds and the live output is verified.
 
 Completion evidence: branch `codex/land-03-generated-portfolio` pins canonical registry merge
 `78a7a3e40c3ea614674dee106d78854471cee571`; `python tools/generate_site.py --check` PASS;
@@ -192,14 +192,20 @@ Completion evidence: branch `codex/land-03-generated-portfolio` pins canonical r
 cards, one methodology entry, 3/1 columns, no horizontal overflow, contained actions and no console
 warnings/errors; all 24 external links and `LICENSE` resolve. Implementation commit
 [`12d502d`](https://github.com/GBrooks1970/portfolio/commit/12d502db8f9dee1d4c0e34f0dec4d6e3c57357a9)
-is in draft [PR #9](https://github.com/GBrooks1970/portfolio/pull/9). Owner merge, Pages and live
-verification evidence remain pending. See the immutable
-[implementation log](implementation-logs/2026-08-01_land-03-generated-portfolio.md).
+and evidence commit `6d2537423da4965fcf7dc0e67fd54d16308deee7` merged through
+[PR #9](https://github.com/GBrooks1970/portfolio/pull/9) as
+`b7037b3e2e2932b87eca5294594dc29f238be5d5`. Exact-merge
+[Pages run 30716076304](https://github.com/GBrooks1970/portfolio/actions/runs/30716076304)
+passed. The live URL returned HTTP 200 with 9 showcase cards, ParaBank and the methodology entry;
+its line-ending-normalised HTML exactly matched the merge commit at SHA-256
+`4C964DF58AF80166E0B94BA4B66E9D2900522F2855492CC74F08F9F7CD0B3326`. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-03-generated-portfolio.md) and
+[publication closure](implementation-logs/2026-08-01_land-03-publication-closure.md).
 
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-03
+**Status:** IN REVIEW — local gates pass; pull-request CI and owner merge pending
 **Type:** CI and validation code
 
 Make a missing or unknown public project a failing pull-request check rather than a visual-review
@@ -207,15 +213,25 @@ discovery.
 
 Acceptance criteria:
 
-- [ ] Validation compares registry identifiers and presentation roles with the landing manifest.
-- [ ] It fails when a required showcase is absent, an unknown project is present or a methodology
+- [x] Validation compares registry identifiers and presentation roles with the landing manifest.
+- [x] It fails when a required showcase is absent, an unknown project is present or a methodology
       project is counted as a showcase.
-- [ ] It fails when the displayed/generated showcase count differs from the manifest.
-- [ ] Tests cover missing, extra, duplicate, hidden and methodology entries.
-- [ ] The check runs on pull requests without write permissions or repository secrets.
-- [ ] Registry source/ref and failure recovery are documented so the check is reproducible.
+- [x] It fails when the displayed/generated showcase count differs from the manifest.
+- [x] Tests cover missing, extra, duplicate, hidden and methodology entries.
+- [x] The check runs on pull requests without write permissions or repository secrets.
+- [x] Registry source/ref and failure recovery are documented so the check is reproducible.
 
-Completion evidence: **Blocked by LAND-03; none.**
+Completion evidence: implementation commit
+[`70dec95`](https://github.com/GBrooks1970/portfolio/commit/70dec9554a7b2c098fb1ab67dd59396fe2c00c07)
+on branch `codex/land-04-ci-parity`; `tools/check_registry_parity.py` rebuilt the lock from canonical
+commit `78a7a3e40c3ea614674dee106d78854471cee571` and passed with 9 showcase / 1 methodology projects;
+deterministic unit suite passed 10/10, including seven explicit LAND-04 parity cases; generator
+`--check`, workflow least-privilege assertions, Markdown links and `git diff --check` passed.
+Read-only pull-request
+[run 30716526046](https://github.com/GBrooks1970/portfolio/actions/runs/30716526046)
+passed at the exact implementation head in draft [PR #10](https://github.com/GBrooks1970/portfolio/pull/10).
+Owner merge and the first exact-merge `main` parity run remain pending. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-04-registry-parity.md).
 
 ### LAND-05 — Add publication-quality automated gates
 
@@ -238,6 +254,11 @@ Acceptance criteria:
       proof that content is correct.
 
 Completion evidence: **Not yet implemented.**
+
+Platform observation: exact-merge Pages run 30716076304 passed but reported that GitHub's generated
+Pages workflow still invokes Node 20-based `actions/checkout@v4` and `actions/upload-artifact@v4`
+under a forced Node 24 runtime. LAND-05 must use current Node 24 action releases for any
+repository-owned workflow; the GitHub-managed Pages warning remains an external platform signal.
 
 ### LAND-06 — Strengthen navigation and accessibility contracts
 

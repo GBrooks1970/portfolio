@@ -1,0 +1,2 @@
+# The generated artefact is compared byte-for-byte and is always emitted with LF endings.
+index.html text eol=lf

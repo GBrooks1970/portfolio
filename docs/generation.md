@@ -69,7 +69,9 @@ python -B -m unittest discover -s tools/tests -p test_*.py
 
 The generator uses only the Python standard library. It writes UTF-8 with LF endings and orders
 projects deterministically. `--check` compares exact bytes and exits non-zero when committed output
-is stale, so an unchanged input produces unchanged output on every platform.
+is stale, so an unchanged input produces unchanged output on every platform. `.gitattributes`
+forces `index.html` to remain LF-normalised in Windows working trees so this byte-level contract is
+preserved after a fresh checkout.
 
 ## Refresh the canonical registry lock
 
@@ -89,6 +91,42 @@ python tools/generate_site.py --check
 does not trust the checkout's working tree. Review the full commit recorded in
 `data/registry-lock.json` and commit the lock, manifest and regenerated HTML together.
 
-LAND-04 will add pull-request CI that independently fetches/checks the recorded canonical source
-and exercises negative parity cases. Until that work lands, the generator enforces the locked
-source-to-manifest/output contract locally while keeping the upstream enforcement gap explicit.
+## Verify canonical registry parity
+
+`tools/check_registry_parity.py` closes the gap between the committed lock and its upstream source.
+It rebuilds the lock from the exact `source.commit` and `source.path` recorded in
+`data/registry-lock.json`, then verifies all four layers together:
+
+1. canonical registry identifiers, GitHub slugs and presentation roles at the recorded commit;
+2. the committed registry lock;
+3. the landing-owned presentation manifest; and
+4. the generated showcase/methodology inventory, count marker and exact `index.html` bytes.
+
+The command requires a full-history checkout containing the recorded commit. From the normal
+portfolio workspace layout:
+
+```powershell
+git -C ..\portfolio-prompts fetch origin
+python tools/check_registry_parity.py --registry-repository ..\portfolio-prompts
+```
+
+The pull-request workflow checks out the public canonical repository with full history and runs the
+same command. It uses the ordinary `pull_request` event, grants only `contents: read`, persists no
+checkout credentials and reads no repository secrets. The recorded full commit—not a mutable
+branch name—is the reproducible registry reference checked by the gate.
+
+### Failure recovery
+
+- **Missing, unknown, hidden, duplicate or misclassified entry:** update
+  `data/presentation.json` to match the approved public roles, or correct the upstream registry and
+  merge that change first. Do not weaken the check or edit the lock by hand.
+- **Lock/source mismatch:** use `tools/lock_registry.py` against the intended merged canonical
+  commit, review the lock diff, regenerate `index.html`, then rerun parity and unit tests.
+- **Stale generated output/count:** run `python tools/generate_site.py`, review `index.html`, and
+  rerun the parity command.
+- **Transient checkout/network failure:** rerun the job. Do not replace the recorded commit merely
+  to clear a transient failure.
+- **Recorded commit genuinely unavailable:** confirm the canonical repository and history were not
+  moved or rewritten. With owner approval, select a reachable merged canonical commit, refresh the
+  lock and regenerate all dependent output in one PR; never silently fall back to an unpinned
+  branch tip.
