@@ -29,23 +29,26 @@ git diff --check
 
 Also confirm every new repository-relative Markdown link resolves.
 
+### Complete code and content gate
+
+For code, data, generated output or workflow changes, run the same command as pull-request CI:
+
+```powershell
+python tools/verify_portfolio.py --registry-repository <portfolio-prompts-path>
+```
+
+Use a full-history canonical checkout. `--skip-external` is an offline diagnostic only and does not
+constitute a complete gate. See [`quality-gate.md`](quality-gate.md) for coverage and retry policy.
+
 ### HTML, CSS or generated-content changes
 
-Until LAND-05 supplies the complete publication-quality local gate:
-
-1. Run `python tools/check_registry_parity.py --registry-repository <portfolio-prompts-path>` using
-   a full-history canonical checkout.
-2. Run `python tools/generate_site.py --check`.
-3. Run `python -B -m unittest discover -s tools/tests -p test_*.py`.
-4. Run `python -m http.server 8000` from the repository root.
-5. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
-6. Confirm no horizontal overflow, obscured actions or console errors.
-7. Exercise every changed repository, CI, demo/report and internal link.
-8. Confirm keyboard focus order and visible focus treatment.
-9. Run `git diff --check`.
-
-When LAND-05 adds an executable validation command, update this contract in the same PR and make
-that command the first gate.
+1. Run the complete gate above.
+2. Run `python -m http.server 8000` from the repository root.
+3. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
+4. Confirm no horizontal overflow, obscured actions or console errors.
+5. Exercise every changed interactive path in a browser.
+6. Confirm keyboard focus order and visible focus treatment.
+7. Run `git diff --check`.
 
 ### Post-merge publication
 

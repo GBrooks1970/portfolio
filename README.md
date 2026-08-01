@@ -27,7 +27,16 @@ and generated page, provide a full-history checkout of the public prompt-library
 python tools/check_registry_parity.py --registry-repository ..\portfolio-prompts
 ```
 
-Pull requests run the same parity check with read-only permissions and no repository secrets.
+The complete local pull-request gate adds HTML, internal/external link, metadata, accessibility and
+test validation:
+
+```powershell
+python tools/verify_portfolio.py --registry-repository ..\portfolio-prompts
+```
+
+Pull requests run that same command with read-only permissions and no repository secrets. See
+[`docs/quality-gate.md`](docs/quality-gate.md) for its coverage, live-URL retry policy and offline
+diagnostic mode.
 
 Do not edit `index.html` directly. See [`docs/generation.md`](docs/generation.md) for the schema,
 registry-lock refresh and reproducibility contract. Merge changes to `main` through a pull request;
@@ -46,6 +55,8 @@ Before changing the landing page, read these repository-owned control records:
    ownership of portfolio membership, public copy and generated output.
 5. [`docs/generation.md`](docs/generation.md) — deterministic source files, commands and registry
    pinning/parity procedure.
+6. [`docs/quality-gate.md`](docs/quality-gate.md) — reproducible PR gate, accessibility scope and
+   external-link failure policy.
 
 Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
 closing its backlog item. These documents use ordinary Markdown and repository-relative paths so
