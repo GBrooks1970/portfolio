@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 2
+**Version:** 3
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 implemented locally; review and post-merge publication evidence pending
+**Status:** ACTIVE — LAND-01 complete; LAND-02, LAND-05 and LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -49,7 +49,7 @@ Do not promote a candidate improvement into required work without recording the 
 
 | ID | Priority | Status | Depends on | Outcome |
 |---|---|---|---|---|
-| LAND-01 | P0 | IN REVIEW | — | Restore public inventory and factual accuracy |
+| LAND-01 | P0 | DONE | — | Restore public inventory and factual accuracy |
 | LAND-02 | P0 | READY | LAND-01 evidence may inform the decision | Define durable presentation ownership |
 | LAND-03 | P1 | BLOCKED | LAND-02 | Generate cards and counts from structured data |
 | LAND-04 | P1 | BLOCKED | LAND-02, LAND-03 | Enforce registry-to-landing inventory parity in CI |
@@ -59,7 +59,7 @@ Do not promote a candidate improvement into required work without recording the 
 ### LAND-01 — Restore public inventory and factual accuracy
 
 **Priority:** P0
-**Status:** IN REVIEW
+**Status:** DONE
 **Type:** HTML, documentation and repository metadata
 
 Add the missing ParaBank showcase and reconcile every public claim affected by the ninth showcase
@@ -76,14 +76,17 @@ Acceptance criteria:
       card.
 - [x] The GitHub repository homepage is set to `https://gbrooks1970.github.io/portfolio/`.
 - [x] Desktop and 390px mobile checks show every card, no horizontal overflow and no console errors.
-- [ ] GitHub Pages deploys the merged commit successfully and the live page matches the source.
+- [x] GitHub Pages deploys the merged commit successfully and the live page matches the source.
 
-Completion evidence: implementation branch `codex/land-01-portfolio-accuracy`; local browser checks
-passed at 1280 × 720 (3 columns) and 390 × 844 (1 column), both with 9 cards, no horizontal
-overflow and no console warnings/errors. Repository, workflow and methodology destinations resolve;
-the repository homepage was verified through GitHub. Implementation commit `fe30c92` is in draft
-[PR #5](https://github.com/GBrooks1970/portfolio/pull/5). Pages and live-source evidence remain
-pending owner merge.
+Completion evidence: implementation commit `fe30c92058317564ac2bf07a0c96e29b75701e28` merged through
+[PR #5](https://github.com/GBrooks1970/portfolio/pull/5) as
+`69811285eead431290d5c70f3ee3d7288206a33c`. The exact merge commit was published successfully by
+[Pages run 30706419372](https://github.com/GBrooks1970/portfolio/actions/runs/30706419372).
+The live URL returned HTTP 200 and its line-ending-normalised HTML exactly matched `origin/main`
+(SHA-256 `CE1EA5B76D73058D0CAD75798025C11E9B838B43038DE5D8E03CC141149D21DB`). Live browser checks at
+1280 × 720 (3 columns) and 390 × 844 (1 column) found 9 cards, no horizontal overflow and no console
+warnings/errors. See the original
+[implementation log](implementation-logs/2026-08-01_land-01_portfolio-accuracy.md).
 
 ### LAND-02 — Define durable presentation ownership
 
