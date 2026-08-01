@@ -46,7 +46,9 @@ class SiteQualityTests(unittest.TestCase):
         summary, errors = SITE.audit_document(self.document, ROOT)
         self.assertEqual(errors, [])
         self.assertEqual(summary.external_urls, 33)
-        self.assertEqual(summary.contrast_pairs, 16)
+        self.assertEqual(summary.interactive_elements, 35)
+        self.assertEqual(summary.internal_references, 2)
+        self.assertEqual(summary.contrast_pairs, 20)
 
     def test_duplicate_identifier_is_rejected(self) -> None:
         html = self.html.replace(
@@ -96,6 +98,47 @@ class SiteQualityTests(unittest.TestCase):
         )
         self.assertTrue(
             any("dark accent-ink/accent contrast" in error for error in self.audit_variant(html))
+        )
+
+    def test_skip_link_must_target_the_project_collection(self) -> None:
+        html = self.html.replace('href="#projects"', 'href="#methodology-heading"', 1)
+        self.assertTrue(
+            any("skip link must target" in error for error in self.audit_variant(html))
+        )
+
+    def test_project_articles_require_level_three_headings(self) -> None:
+        html = self.html.replace("<h3>", "<h2>", 1).replace("</h3>", "</h2>", 1)
+        self.assertTrue(
+            any("exactly one <h3>" in error for error in self.audit_variant(html))
+        )
+
+    def test_ci_link_name_must_identify_its_project(self) -> None:
+        html = self.html.replace(
+            'aria-label="Magento Checkout Automation CI workflow"',
+            'aria-label="CI workflow"',
+            1,
+        )
+        self.assertTrue(
+            any(
+                "CI link name must be project-specific" in error
+                for error in self.audit_variant(html)
+            )
+        )
+
+    def test_focus_visible_outline_is_enforced(self) -> None:
+        html = self.html.replace("a:focus-visible", "a:focus", 1)
+        self.assertTrue(
+            any("a:focus-visible" in error for error in self.audit_variant(html))
+        )
+
+    def test_project_action_touch_target_is_enforced(self) -> None:
+        html = self.html.replace(
+            ".actions > a { min-height: 45px;",
+            ".actions > a { min-height: 40px;",
+            1,
+        )
+        self.assertTrue(
+            any("at least a 44px touch target" in error for error in self.audit_variant(html))
         )
 
     def test_transient_external_failure_is_retried(self) -> None:

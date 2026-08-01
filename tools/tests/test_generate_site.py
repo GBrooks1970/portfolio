@@ -27,6 +27,11 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertIn("Nine showcase projects", self.rendered)
         self.assertIn("All nine showcase project repositories", self.rendered)
         self.assertIn("ParaBank Bank Automation", self.rendered)
+        self.assertIn('<a class="skip-link" href="#projects">', self.rendered)
+        self.assertIn('aria-labelledby="projects-heading"', self.rendered)
+        self.assertEqual(self.rendered.count("<h3><a href="), 9)
+        self.assertEqual(self.rendered.count(" CI workflow\">"), 9)
+        self.assertEqual(self.rendered.count(" CI status\""), 9)
 
     def test_respects_explicit_showcase_order(self) -> None:
         titles = [

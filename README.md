@@ -53,9 +53,11 @@ Before changing the landing page, read these repository-owned control records:
    behind the current remediation cycle.
 4. [`docs/decisions/001-presentation-ownership.md`](docs/decisions/001-presentation-ownership.md) —
    ownership of portfolio membership, public copy and generated output.
-5. [`docs/generation.md`](docs/generation.md) — deterministic source files, commands and registry
+5. [`docs/decisions/002-publication-quality-gate.md`](docs/decisions/002-publication-quality-gate.md)
+   — the boundary between source quality, deployment and live verification.
+6. [`docs/generation.md`](docs/generation.md) — deterministic source files, commands and registry
    pinning/parity procedure.
-6. [`docs/quality-gate.md`](docs/quality-gate.md) — reproducible PR gate, accessibility scope and
+7. [`docs/quality-gate.md`](docs/quality-gate.md) — reproducible PR gate, accessibility scope and
    external-link failure policy.
 
 Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
