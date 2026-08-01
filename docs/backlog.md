@@ -218,14 +218,20 @@ Acceptance criteria:
       project is counted as a showcase.
 - [x] It fails when the displayed/generated showcase count differs from the manifest.
 - [x] Tests cover missing, extra, duplicate, hidden and methodology entries.
-- [ ] The check runs on pull requests without write permissions or repository secrets.
+- [x] The check runs on pull requests without write permissions or repository secrets.
 - [x] Registry source/ref and failure recovery are documented so the check is reproducible.
 
-Completion evidence: branch `codex/land-04-ci-parity`; `tools/check_registry_parity.py` rebuilt the
-lock from canonical commit `78a7a3e40c3ea614674dee106d78854471cee571` and passed with 9
-showcase / 1 methodology projects; deterministic unit suite passed 10/10, including seven explicit
-LAND-04 parity cases; generator `--check`, workflow least-privilege assertions and
-`git diff --check` passed. Pull-request/head commit and CI evidence remain pending.
+Completion evidence: implementation commit
+[`70dec95`](https://github.com/GBrooks1970/portfolio/commit/70dec9554a7b2c098fb1ab67dd59396fe2c00c07)
+on branch `codex/land-04-ci-parity`; `tools/check_registry_parity.py` rebuilt the lock from canonical
+commit `78a7a3e40c3ea614674dee106d78854471cee571` and passed with 9 showcase / 1 methodology projects;
+deterministic unit suite passed 10/10, including seven explicit LAND-04 parity cases; generator
+`--check`, workflow least-privilege assertions, Markdown links and `git diff --check` passed.
+Read-only pull-request
+[run 30716526046](https://github.com/GBrooks1970/portfolio/actions/runs/30716526046)
+passed at the exact implementation head in draft [PR #10](https://github.com/GBrooks1970/portfolio/pull/10).
+Owner merge and the first exact-merge `main` parity run remain pending. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-04-registry-parity.md).
 
 ### LAND-05 — Add publication-quality automated gates
 
