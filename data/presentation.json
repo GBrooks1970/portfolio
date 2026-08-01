@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "projects": {
+    "magento-checkout-automation": {
+      "title": "Magento Checkout Automation",
+      "discipline": "End-to-end web UI · reference project",
+      "summary": "Guest-checkout E2E against Magento 2, the portfolio's reference suite: profile-driven scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.",
+      "order": 10,
+      "tags": ["Serenity/JS", "Playwright", "Cucumber", "TypeScript"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": {
+          "label": "Live report",
+          "url": "https://gbrooks1970.github.io/magento-checkout-automation/"
+        }
+      }
+    },
+    "orangehrm-pim-automation": {
+      "title": "OrangeHRM PIM Automation",
+      "discipline": "End-to-end web UI",
+      "summary": "Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised, seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.",
+      "order": 20,
+      "tags": ["Serenity/JS", "Playwright", "Cucumber", "Docker"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": {
+          "label": "Live report",
+          "url": "https://gbrooks1970.github.io/orangehrm-pim-automation/"
+        }
+      }
+    },
+    "parabank-bank-automation": {
+      "title": "ParaBank Bank Automation",
+      "discipline": "Banking UI + API BDD",
+      "summary": "Docker-backed ParaBank automation combining Serenity/JS and Playwright UI journeys with stateful API BDD, live OpenAPI validation, and REST–SOAP parity.",
+      "order": 30,
+      "tags": ["Serenity/JS", "Playwright", "OpenAPI", "Docker"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null
+      }
+    },
+    "bfx-ws-screenplay": {
+      "title": "Bitfinex WebSocket Screenplay",
+      "discipline": "Real-time WebSocket testing",
+      "summary": "Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay layer — including a flagship CRC-32 order-book checksum verified against consecutive live frames. Specification-driven, one SPEC unit at a time.",
+      "order": 40,
+      "tags": ["Cypress", "Screenplay", "WebSocket", "TypeScript"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null
+      }
+    },
+    "hand-baked-screenplay-pattern": {
+      "title": "Hand-Baked Screenplay Pattern",
+      "discipline": "Framework internals · teaching library",
+      "summary": "A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.",
+      "order": 50,
+      "tags": ["TypeScript", "Vitest", "Zero-deps", "Library"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null
+      }
+    },
+    "markdown-renderer": {
+      "title": "Markdown Renderer",
+      "discipline": "Shipped product",
+      "summary": "A static, offline, browser-based Markdown viewer: pick a folder, browse a drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over file://. Tested with Vitest units and Playwright E2E.",
+      "order": 60,
+      "tags": ["JavaScript", "Vitest", "Playwright", "Product"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": {
+          "label": "Live demo",
+          "url": "https://gbrooks1970.github.io/markdown-renderer/"
+        },
+        "report": null
+      }
+    },
+    "mobile-forex-automation": {
+      "title": "Mobile Forex Automation",
+      "discipline": "Mobile-web test automation",
+      "summary": "A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&L oracles, and on-device breakpoint and overflow checks.",
+      "order": 70,
+      "tags": ["Playwright", "Screenplay", "Mobile", "TypeScript"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": {
+          "label": "Live demo",
+          "url": "https://gbrooks1970.github.io/mobile-forex-automation/"
+        },
+        "report": null
+      }
+    },
+    "calculator-screenplay-bdd": {
+      "title": "Calculator Screenplay BDD",
+      "discipline": "API + BDD",
+      "summary": "A calculator API exercised through playwright-bdd and a Screenplay layer, with an OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and consumer-facing contract discipline.",
+      "order": 80,
+      "tags": ["playwright-bdd", "Screenplay", "OpenAPI", "TypeScript"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null
+      }
+    },
+    "gb.automation.smoketests.sudoku.poc": {
+      "title": "Sudoku Multi-Stack Parity POC",
+      "discipline": "Multi-stack parity",
+      "summary": "The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 48-scenario contract stays in lock-step across all three. A study in test-suite portability.",
+      "order": 90,
+      "tags": ["Cucumber.js", "pytest-bdd", "Reqnroll", "Parity"],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null
+      }
+    },
+    "portfolio-prompts": {
+      "title": "portfolio-prompts",
+      "discipline": "Methodology and tooling",
+      "summary": "provides the shared registry, lifecycle prompts, templates, and agent-agnostic handover conventions behind these showcases.",
+      "order": 10,
+      "tags": ["Registry", "Lifecycle", "Handover"],
+      "actions": {
+        "workflow": null,
+        "demo": null,
+        "report": null
+      }
+    }
+  }
+}

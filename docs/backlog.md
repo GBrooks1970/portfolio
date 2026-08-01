@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 6
+**Version:** 7
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01, LAND-02 and LAND-02R complete; LAND-03, LAND-05 and LAND-06 ready
+**Status:** ACTIVE — LAND-01, LAND-02 and LAND-02R complete; LAND-03 in review; LAND-05 and LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -53,7 +53,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-01 | P0 | DONE | — | Restore public inventory and factual accuracy |
 | LAND-02 | P0 | DONE | LAND-01 | Define durable presentation ownership |
 | LAND-02R | P1 | DONE | LAND-02 | Implement presentation roles in the canonical registry |
-| LAND-03 | P1 | READY | LAND-02R | Generate cards and counts from structured data |
+| LAND-03 | P1 | IN REVIEW | LAND-02R | Generate cards and counts from structured data |
 | LAND-04 | P1 | BLOCKED | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | READY | — | Add publication-quality automated gates |
 | LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
@@ -168,7 +168,7 @@ and final [LAND-02R registry closure log](implementation-logs/2026-08-01_land-02
 ### LAND-03 — Generate cards and counts from structured data
 
 **Priority:** P1
-**Status:** READY
+**Status:** IN REVIEW — owner merge, Pages deployment and live verification pending
 **Type:** Code and generated HTML
 
 Replace repeated hand-authored cards and numeric prose with a deterministic presentation manifest
@@ -176,15 +176,25 @@ and generator while retaining a static Pages output.
 
 Acceptance criteria:
 
-- [ ] Structured project data has a documented schema and stable registry identifier per entry.
-- [ ] Card HTML, showcase count and methodology links are generated from that data.
-- [ ] Display order is explicit and deterministic.
-- [ ] Generated output is committed or deployed by the recorded strategy; contributors do not
+- [x] Structured project data has a documented schema and stable registry identifier per entry.
+- [x] Card HTML, showcase count and methodology links are generated from that data.
+- [x] Display order is explicit and deterministic.
+- [x] Generated output is committed by the recorded strategy; contributors do not
       hand-edit generated regions.
-- [ ] Generation is byte-stable for unchanged input and has an executable `--check` mode.
-- [ ] All LAND-01 public content remains present after migration.
+- [x] Generation is byte-stable for unchanged input and has an executable `--check` mode.
+- [x] All LAND-01 public content remains present after migration.
+- [x] Every generated external link resolves for an unauthenticated visitor.
+- [ ] Owner merges the PR; the exact Pages deployment succeeds and the live output is verified.
 
-Completion evidence: **Not yet implemented.**
+Completion evidence: branch `codex/land-03-generated-portfolio` pins canonical registry merge
+`78a7a3e40c3ea614674dee106d78854471cee571`; `python tools/generate_site.py --check` PASS;
+3/3 deterministic tests PASS; desktop 1280 × 720 and mobile 390 × 844 checks found 9 showcase
+cards, one methodology entry, 3/1 columns, no horizontal overflow, contained actions and no console
+warnings/errors; all 24 external links and `LICENSE` resolve. Implementation commit
+[`12d502d`](https://github.com/GBrooks1970/portfolio/commit/12d502db8f9dee1d4c0e34f0dec4d6e3c57357a9)
+is in draft [PR #9](https://github.com/GBrooks1970/portfolio/pull/9). Owner merge, Pages and live
+verification evidence remain pending. See the immutable
+[implementation log](implementation-logs/2026-08-01_land-03-generated-portfolio.md).
 
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
@@ -283,6 +293,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 | OD-LAND-02 — Meta-project presentation | Accepted for this cycle | `portfolio-prompts` appears as methodology/tooling, not as the tenth showcase card |
 | OD-LAND-03 — Durable data ownership | Accepted 2026-08-01 | Hybrid boundary recorded in decision 001: registry owns membership/role; landing owns public copy/order |
 | OD-LAND-04 — ParaBank public artefact | Pending candidate promotion | Repository + CI now; consider a static Serenity snapshot later, never the Docker SUT |
+| OD-LAND-05 — Public methodology target | Accepted 2026-08-01 | Make `NeoCognitus70/portfolio-prompts` public after a repository/history/log scan; unauthenticated access now returns 200 and secret scanning/push protection are enabled |
 
 ## Maintenance rules
 
