@@ -122,8 +122,10 @@ Acceptance criteria:
 Completion evidence: [`decision 001`](decisions/001-presentation-ownership.md) records the accepted
 hybrid boundary, full current classification, lifecycle procedures and static-generation contract.
 The separate registry-schema implementation is explicit as LAND-02R; LAND-03/04 dependencies are
-reconciled accordingly. Branch `codex/land-02-presentation-ownership`; commit and PR evidence pending
-the publication workflow. Owner merge remains required before LAND-02 is DONE.
+reconciled accordingly. Decision commit `2dcb5868d6959c42112233bc987acf5acb08eef2` is in draft
+[PR #7](https://github.com/GBrooks1970/portfolio/pull/7); see the immutable
+[implementation log](implementation-logs/2026-08-01_land-02_presentation-ownership.md). Owner merge
+remains required before LAND-02 is DONE.
 
 ### LAND-02R — Implement presentation roles in the canonical registry
 
