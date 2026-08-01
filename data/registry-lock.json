@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
+    "commit": "78a7a3e40c3ea614674dee106d78854471cee571",
+    "path": "registry.yml"
+  },
+  "projects": [
+    {
+      "project": "bfx-ws-screenplay",
+      "github": "GBrooks1970/bfx-ws-screenplay",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "calculator-screenplay-bdd",
+      "github": "NeoCognitus70/calculator-screenplay-bdd",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "gb.automation.smoketests.sudoku.poc",
+      "github": "GBrooks1970/gb.automation.smoketests.sudoku.poc",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "hand-baked-screenplay-pattern",
+      "github": "NeoCognitus70/hand-baked-screenplay-pattern",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "magento-checkout-automation",
+      "github": "GBrooks1970/magento-checkout-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "markdown-renderer",
+      "github": "GBrooks1970/markdown-renderer",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "mobile-forex-automation",
+      "github": "GBrooks1970/mobile-forex-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "orangehrm-pim-automation",
+      "github": "GBrooks1970/orangehrm-pim-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "parabank-bank-automation",
+      "github": "GBrooks1970/parabank-bank-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "portfolio-prompts",
+      "github": "NeoCognitus70/portfolio-prompts",
+      "presentation_role": "methodology"
+    }
+  ]
+}

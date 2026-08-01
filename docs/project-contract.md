@@ -11,6 +11,9 @@ own portfolio membership, project health or the behaviour of linked projects.
 - Accepted records in `docs/decisions/` define architectural choices and ownership boundaries.
 - `portfolio-prompts/registry.yml` is the source of truth for portfolio membership.
 - This repository owns public copy, layout, presentation metadata and Pages deployment.
+- `data/presentation.json` owns public copy and order; `data/registry-lock.json` is a generated,
+  reviewable snapshot of canonical registry fields at its recorded commit.
+- `index.template.html` is the layout source and `index.html` is generated, committed output.
 - A GitHub Pages deployment proves publication only; it does not prove inventory or content
   correctness.
 
@@ -30,12 +33,14 @@ Also confirm every new repository-relative Markdown link resolves.
 
 Until LAND-05 supplies an automated local gate:
 
-1. Run `python -m http.server 8000` from the repository root.
-2. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
-3. Confirm no horizontal overflow, obscured actions or console errors.
-4. Exercise every changed repository, CI, demo/report and internal link.
-5. Confirm keyboard focus order and visible focus treatment.
-6. Run `git diff --check`.
+1. Run `python tools/generate_site.py --check`.
+2. Run `python -B -m unittest discover -s tools/tests -p test_*.py`.
+3. Run `python -m http.server 8000` from the repository root.
+4. Inspect `http://127.0.0.1:8000/` at desktop and 390px mobile widths.
+5. Confirm no horizontal overflow, obscured actions or console errors.
+6. Exercise every changed repository, CI, demo/report and internal link.
+7. Confirm keyboard focus order and visible focus treatment.
+8. Run `git diff --check`.
 
 When LAND-05 adds an executable validation command, update this contract in the same PR and make
 that command the first gate.
@@ -50,6 +55,8 @@ that command the first gate.
 
 - All `main` changes go through a branch and pull request; the owner authorises merges.
 - Preserve the static, dependency-light delivery model unless an approved decision changes it.
+- Edit `data/presentation.json` or `index.template.html`, then regenerate; never hand-edit
+  `index.html` or `data/registry-lock.json`.
 - Do not call GitHub or registry APIs from visitors' browsers; generate data before deployment.
 - Never hard-code a project total when it can be derived from structured source data.
 - Keep registry identifiers stable and public display copy separate.
