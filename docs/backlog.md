@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 8
+**Version:** 9
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 through LAND-03 complete; LAND-04 in review; LAND-05 and LAND-06 ready
+**Status:** ACTIVE — LAND-01 through LAND-04 complete; LAND-05 in review; LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -54,8 +54,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-02 | P0 | DONE | LAND-01 | Define durable presentation ownership |
 | LAND-02R | P1 | DONE | LAND-02 | Implement presentation roles in the canonical registry |
 | LAND-03 | P1 | DONE | LAND-02R | Generate cards and counts from structured data |
-| LAND-04 | P1 | IN REVIEW | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
-| LAND-05 | P1 | READY | — | Add publication-quality automated gates |
+| LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
+| LAND-05 | P1 | IN REVIEW | — | Add publication-quality automated gates |
 | LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
 
 ### LAND-01 — Restore public inventory and factual accuracy
@@ -205,7 +205,7 @@ its line-ending-normalised HTML exactly matched the merge commit at SHA-256
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
 **Priority:** P1
-**Status:** IN REVIEW — local gates pass; pull-request CI and owner merge pending
+**Status:** DONE
 **Type:** CI and validation code
 
 Make a missing or unknown public project a failing pull-request check rather than a visual-review
@@ -229,14 +229,19 @@ deterministic unit suite passed 10/10, including seven explicit LAND-04 parity c
 `--check`, workflow least-privilege assertions, Markdown links and `git diff --check` passed.
 Read-only pull-request
 [run 30716526046](https://github.com/GBrooks1970/portfolio/actions/runs/30716526046)
-passed at the exact implementation head in draft [PR #10](https://github.com/GBrooks1970/portfolio/pull/10).
-Owner merge and the first exact-merge `main` parity run remain pending. See the immutable
-[implementation log](implementation-logs/2026-08-01_land-04-registry-parity.md).
+passed at the exact implementation head. Owner merged [PR #10](https://github.com/GBrooks1970/portfolio/pull/10)
+as `c70855af2c2ebbe287f2496c98704a8b554bad22`; exact-merge `main`
+[parity run 30716866062](https://github.com/GBrooks1970/portfolio/actions/runs/30716866062) and
+[Pages run 30716865649](https://github.com/GBrooks1970/portfolio/actions/runs/30716865649)
+both passed. The live page returned HTTP 200, retained 9 cards and exactly matched `main` at
+normalised SHA-256 `4C964DF58AF80166E0B94BA4B66E9D2900522F2855492CC74F08F9F7CD0B3326`.
+See the immutable [implementation log](implementation-logs/2026-08-01_land-04-registry-parity.md)
+and [merge closure](implementation-logs/2026-08-01_land-04-merge-closure.md).
 
 ### LAND-05 — Add publication-quality automated gates
 
 **Priority:** P1
-**Status:** READY
+**Status:** IN REVIEW — local complete gate passes; pull-request CI and owner merge pending
 **Type:** CI and validation code
 
 The repository currently relies on the Pages deployment alone. Add fast pull-request checks for
@@ -244,16 +249,19 @@ the static artefact.
 
 Acceptance criteria:
 
-- [ ] HTML structure and duplicate identifiers are validated.
-- [ ] Repository, demo/report and workflow URLs are checked with a documented policy for transient
+- [x] HTML structure and duplicate identifiers are validated.
+- [x] Repository, demo/report and workflow URLs are checked with a documented policy for transient
       failures.
-- [ ] Internal links and required metadata are validated.
-- [ ] Automated accessibility checks cover landmark structure, names, focusability and contrast.
-- [ ] A local command reproduces the CI gate without requiring secrets.
-- [ ] Pages deployment remains a separate post-merge signal; a successful deploy is not treated as
+- [x] Internal links and required metadata are validated.
+- [x] Automated accessibility checks cover landmark structure, names, focusability and contrast.
+- [x] A local command reproduces the CI gate without requiring secrets.
+- [x] Pages deployment remains a separate post-merge signal; a successful deploy is not treated as
       proof that content is correct.
 
-Completion evidence: **Not yet implemented.**
+Completion evidence: branch `codex/land-05-quality-gate`; complete local command passed canonical
+parity for 9 showcase / 1 methodology projects, all 33 unique external link/resource targets,
+16 light/dark contrast pairs and 20/20 deterministic tests. Pull-request/head commit and CI evidence
+remain pending.
 
 Platform observation: exact-merge Pages run 30716076304 passed but reported that GitHub's generated
 Pages workflow still invokes Node 20-based `actions/checkout@v4` and `actions/upload-artifact@v4`
@@ -274,7 +282,8 @@ Acceptance criteria:
 - [ ] Keyboard focus has an explicit, high-contrast `:focus-visible` treatment.
 - [ ] Primary actions provide comfortable touch targets, aiming for 44px while retaining responsive
       wrapping.
-- [ ] Light and dark colour schemes pass the chosen automated contrast checks.
+- [x] Light and dark colour schemes pass the chosen automated contrast checks — pre-delivered by
+      LAND-05's 16-pair gate and dark primary-button token correction.
 - [ ] 390px and desktop layouts have no horizontal overflow or obscured actions.
 
 Completion evidence: **Not yet implemented.**
