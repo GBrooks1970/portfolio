@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 3
+**Version:** 4
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 complete; LAND-02, LAND-05 and LAND-06 ready
+**Status:** ACTIVE — LAND-01 complete; LAND-02 decision in review; LAND-05 and LAND-06 ready
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -14,9 +14,10 @@ resume from the repository alone, without access to a prior conversation.
 Source precedence:
 
 1. This backlog defines approved work, priority, dependencies and completion.
-2. [`project-contract.md`](project-contract.md) defines gates and working norms.
-3. The audit records evidence and recommendations; it does not authorise implementation by itself.
-4. `README.md` and `index.html` describe the product but are not planning sources.
+2. Accepted records in [`decisions/`](decisions/) define architectural choices and ownership.
+3. [`project-contract.md`](project-contract.md) defines gates and working norms.
+4. The audit records evidence and recommendations; it does not authorise implementation by itself.
+5. `README.md` and `index.html` describe the product but are not planning sources.
 
 Do not promote a candidate improvement into required work without recording the decision here.
 
@@ -50,9 +51,10 @@ Do not promote a candidate improvement into required work without recording the 
 | ID | Priority | Status | Depends on | Outcome |
 |---|---|---|---|---|
 | LAND-01 | P0 | DONE | — | Restore public inventory and factual accuracy |
-| LAND-02 | P0 | READY | LAND-01 evidence may inform the decision | Define durable presentation ownership |
-| LAND-03 | P1 | BLOCKED | LAND-02 | Generate cards and counts from structured data |
-| LAND-04 | P1 | BLOCKED | LAND-02, LAND-03 | Enforce registry-to-landing inventory parity in CI |
+| LAND-02 | P0 | IN REVIEW | LAND-01 | Define durable presentation ownership |
+| LAND-02R | P1 | BLOCKED | LAND-02 | Implement presentation roles in the canonical registry |
+| LAND-03 | P1 | BLOCKED | LAND-02R | Generate cards and counts from structured data |
+| LAND-04 | P1 | BLOCKED | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | READY | — | Add publication-quality automated gates |
 | LAND-06 | P1 | READY | LAND-01 | Strengthen navigation and accessibility contracts |
 
@@ -92,7 +94,7 @@ warnings/errors. See the original
 ### LAND-02 — Define durable presentation ownership
 
 **Priority:** P0
-**Status:** READY
+**Status:** IN REVIEW
 **Type:** Decision and design documentation
 
 Record a durable boundary between canonical portfolio membership and public-facing presentation
@@ -109,20 +111,46 @@ Recommended decision:
 
 Acceptance criteria:
 
-- [ ] A versioned decision record defines membership, presentation roles and ownership of public
+- [x] A versioned decision record defines membership, presentation roles and ownership of public
       copy.
-- [ ] The decision states how future projects become visible and how retired projects are removed.
-- [ ] `portfolio-prompts` is classified as methodology; all nine current non-meta projects are
+- [x] The decision states how future projects become visible and how retired projects are removed.
+- [x] `portfolio-prompts` is classified as methodology; all nine current non-meta projects are
       classified as showcases.
-- [ ] The decision preserves a static deployable artefact and avoids runtime GitHub/API coupling.
-- [ ] The backlog dependencies are reconciled if the chosen design differs from the recommendation.
+- [x] The decision preserves a static deployable artefact and avoids runtime GitHub/API coupling.
+- [x] The backlog dependencies are reconciled if the chosen design differs from the recommendation.
 
-Completion evidence: **Not yet implemented.**
+Completion evidence: [`decision 001`](decisions/001-presentation-ownership.md) records the accepted
+hybrid boundary, full current classification, lifecycle procedures and static-generation contract.
+The separate registry-schema implementation is explicit as LAND-02R; LAND-03/04 dependencies are
+reconciled accordingly. Branch `codex/land-02-presentation-ownership`; commit and PR evidence pending
+the publication workflow. Owner merge remains required before LAND-02 is DONE.
+
+### LAND-02R — Implement presentation roles in the canonical registry
+
+**Priority:** P1
+**Status:** BLOCKED — LAND-02 owner merge
+**Type:** Cross-repository schema, validation and documentation (`NeoCognitus70/portfolio-prompts`)
+
+Implement decision 001's registry-owned `presentation_role` without mixing the change into this
+landing repository.
+
+Acceptance criteria:
+
+- [ ] Every `projects:` row in `portfolio-prompts/registry.yml` declares exactly one
+      `presentation_role`: `showcase`, `methodology` or `hidden`.
+- [ ] The nine current non-meta projects are `showcase`; `portfolio-prompts` is `methodology`.
+- [ ] Registry validation rejects missing and unsupported roles and proves lifecycle status and
+      `orchestration_target` remain independent.
+- [ ] Registry field documentation and tests cover showcase, methodology and hidden cases.
+- [ ] `python tools/check-library.py` passes in the registry repository and its PR/main CI is green.
+- [ ] This backlog records the merged registry commit for LAND-03/04 to consume.
+
+Completion evidence: **Blocked; none.**
 
 ### LAND-03 — Generate cards and counts from structured data
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-02
+**Status:** BLOCKED — LAND-02R
 **Type:** Code and generated HTML
 
 Replace repeated hand-authored cards and numeric prose with a deterministic presentation manifest
@@ -143,7 +171,7 @@ Completion evidence: **Blocked; none.**
 ### LAND-04 — Enforce registry-to-landing inventory parity
 
 **Priority:** P1
-**Status:** BLOCKED — LAND-02 and LAND-03
+**Status:** BLOCKED — LAND-02R and LAND-03
 **Type:** CI and validation code
 
 Make a missing or unknown public project a failing pull-request check rather than a visual-review
@@ -235,7 +263,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 |---|---|---|
 | OD-LAND-01 — Hotfix before generator | Accepted for this cycle | LAND-01 precedes LAND-03 so the missing ParaBank card is not delayed |
 | OD-LAND-02 — Meta-project presentation | Accepted for this cycle | `portfolio-prompts` appears as methodology/tooling, not as the tenth showcase card |
-| OD-LAND-03 — Durable data ownership | Pending LAND-02 | Recommended hybrid: registry owns membership/role; landing owns public copy/order |
+| OD-LAND-03 — Durable data ownership | Accepted 2026-08-01 | Hybrid boundary recorded in decision 001: registry owns membership/role; landing owns public copy/order |
 | OD-LAND-04 — ParaBank public artefact | Pending candidate promotion | Repository + CI now; consider a static Serenity snapshot later, never the Docker SUT |
 
 ## Maintenance rules

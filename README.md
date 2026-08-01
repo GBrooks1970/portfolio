@@ -21,6 +21,8 @@ Before changing the landing page, read these repository-owned control records:
    criteria.
 3. [`docs/portfolio-page-audit-2026-08-01.md`](docs/portfolio-page-audit-2026-08-01.md) — evidence
    behind the current remediation cycle.
+4. [`docs/decisions/001-presentation-ownership.md`](docs/decisions/001-presentation-ownership.md) —
+   ownership of portfolio membership, public copy and generated output.
 
 Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
 closing its backlog item. These documents use ordinary Markdown and repository-relative paths so

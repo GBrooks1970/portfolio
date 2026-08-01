@@ -8,6 +8,7 @@ own portfolio membership, project health or the behaviour of linked projects.
 ## Source boundaries
 
 - `docs/backlog.md` is the source of truth for approved work and completion.
+- Accepted records in `docs/decisions/` define architectural choices and ownership boundaries.
 - `portfolio-prompts/registry.yml` is the source of truth for portfolio membership.
 - This repository owns public copy, layout, presentation metadata and Pages deployment.
 - A GitHub Pages deployment proves publication only; it does not prove inventory or content
