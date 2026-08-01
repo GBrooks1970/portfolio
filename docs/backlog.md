@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 1
+**Version:** 2
 **Last updated:** 2026-08-01
-**Status:** ACTIVE — governance baseline staged; no landing-page remediation implemented
+**Status:** ACTIVE — LAND-01 implemented locally; review and post-merge publication evidence pending
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -40,6 +40,7 @@ Do not promote a candidate improvement into required work without recording the 
 - **P1:** recurrence prevention or publication-quality control.
 - **P2:** useful enhancement after the required control path exists.
 - **READY:** approved and unblocked.
+- **IN REVIEW:** implemented on a branch; owner merge and/or post-merge evidence is pending.
 - **BLOCKED:** dependency or owner decision must be completed first.
 - **PROPOSED:** unscheduled candidate; not authority to implement.
 - **DONE:** acceptance criteria and completion evidence are recorded.
@@ -48,7 +49,7 @@ Do not promote a candidate improvement into required work without recording the 
 
 | ID | Priority | Status | Depends on | Outcome |
 |---|---|---|---|---|
-| LAND-01 | P0 | READY | — | Restore public inventory and factual accuracy |
+| LAND-01 | P0 | IN REVIEW | — | Restore public inventory and factual accuracy |
 | LAND-02 | P0 | READY | LAND-01 evidence may inform the decision | Define durable presentation ownership |
 | LAND-03 | P1 | BLOCKED | LAND-02 | Generate cards and counts from structured data |
 | LAND-04 | P1 | BLOCKED | LAND-02, LAND-03 | Enforce registry-to-landing inventory parity in CI |
@@ -58,7 +59,7 @@ Do not promote a candidate improvement into required work without recording the 
 ### LAND-01 — Restore public inventory and factual accuracy
 
 **Priority:** P0
-**Status:** READY
+**Status:** IN REVIEW
 **Type:** HTML, documentation and repository metadata
 
 Add the missing ParaBank showcase and reconcile every public claim affected by the ninth showcase
@@ -66,18 +67,22 @@ project. This is an accuracy hotfix; do not wait for the future generator.
 
 Acceptance criteria:
 
-- [ ] A **ParaBank Bank Automation** card links to the repository and default-branch CI.
-- [ ] The card describes the Docker-backed SUT, UI and stateful API BDD lanes, OpenAPI validation
+- [x] A **ParaBank Bank Automation** card links to the repository and default-branch CI.
+- [x] The card describes the Docker-backed SUT, UI and stateful API BDD lanes, OpenAPI validation
       and REST–SOAP parity without claiming a Pages demo that does not exist.
-- [ ] Header, footer, README and metadata say **nine showcase projects**, not eight.
-- [ ] The Sudoku card states the current **48-scenario** three-stack baseline.
-- [ ] `portfolio-prompts` is linked from a methodology/tooling area and is not counted as a showcase
+- [x] Header, footer, README and metadata say **nine showcase projects**, not eight.
+- [x] The Sudoku card states the current **48-scenario** three-stack baseline.
+- [x] `portfolio-prompts` is linked from a methodology/tooling area and is not counted as a showcase
       card.
-- [ ] The GitHub repository homepage is set to `https://gbrooks1970.github.io/portfolio/`.
-- [ ] Desktop and 390px mobile checks show every card, no horizontal overflow and no console errors.
+- [x] The GitHub repository homepage is set to `https://gbrooks1970.github.io/portfolio/`.
+- [x] Desktop and 390px mobile checks show every card, no horizontal overflow and no console errors.
 - [ ] GitHub Pages deploys the merged commit successfully and the live page matches the source.
 
-Completion evidence: **Not yet implemented.** Record commit, PR and Pages run here when DONE.
+Completion evidence: implementation branch `codex/land-01-portfolio-accuracy`; local browser checks
+passed at 1280 × 720 (3 columns) and 390 × 844 (1 column), both with 9 cards, no horizontal
+overflow and no console warnings/errors. Repository, workflow and methodology destinations resolve;
+the repository homepage was verified through GitHub. Commit and PR references are pending the
+publication workflow. Pages and live-source evidence remain pending owner merge.
 
 ### LAND-02 — Define durable presentation ownership
 
