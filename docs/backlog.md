@@ -81,8 +81,9 @@ Acceptance criteria:
 Completion evidence: implementation branch `codex/land-01-portfolio-accuracy`; local browser checks
 passed at 1280 × 720 (3 columns) and 390 × 844 (1 column), both with 9 cards, no horizontal
 overflow and no console warnings/errors. Repository, workflow and methodology destinations resolve;
-the repository homepage was verified through GitHub. Commit and PR references are pending the
-publication workflow. Pages and live-source evidence remain pending owner merge.
+the repository homepage was verified through GitHub. Implementation commit `fe30c92` is in draft
+[PR #5](https://github.com/GBrooks1970/portfolio/pull/5). Pages and live-source evidence remain
+pending owner merge.
 
 ### LAND-02 — Define durable presentation ownership
 

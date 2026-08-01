@@ -4,8 +4,8 @@
 **Backlog item:** `LAND-01`
 **Repository:** `GBrooks1970/portfolio`
 **Branch:** `codex/land-01-portfolio-accuracy`
-**Commit:** Pending initial commit
-**Pull request:** Pending publication workflow
+**Commit:** `fe30c92058317564ac2bf07a0c96e29b75701e28`
+**Pull request:** https://github.com/GBrooks1970/portfolio/pull/5
 **Pages run:** Pending owner merge
 
 ## Outcome
