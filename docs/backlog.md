@@ -158,6 +158,8 @@ are in draft [portfolio-prompts PR #50](https://github.com/NeoCognitus70/portfol
 The local self-gate passed with 13 tests; current-head PR integrity
 [run 30710503211](https://github.com/NeoCognitus70/portfolio-prompts/actions/runs/30710503211)
 also passed. Owner merge, the merged registry commit and post-merge `main` CI remain pending.
+See the immutable
+[LAND-02 closure / LAND-02R review log](implementation-logs/2026-08-01_land-02-closure_land-02r-review.md).
 
 ### LAND-03 — Generate cards and counts from structured data
 
