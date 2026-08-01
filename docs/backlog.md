@@ -86,7 +86,8 @@ The live URL returned HTTP 200 and its line-ending-normalised HTML exactly match
 (SHA-256 `CE1EA5B76D73058D0CAD75798025C11E9B838B43038DE5D8E03CC141149D21DB`). Live browser checks at
 1280 × 720 (3 columns) and 390 × 844 (1 column) found 9 cards, no horizontal overflow and no console
 warnings/errors. See the original
-[implementation log](implementation-logs/2026-08-01_land-01_portfolio-accuracy.md).
+[implementation log](implementation-logs/2026-08-01_land-01_portfolio-accuracy.md) and immutable
+[publication closure](implementation-logs/2026-08-01_land-01_publication-closure.md).
 
 ### LAND-02 — Define durable presentation ownership
 
