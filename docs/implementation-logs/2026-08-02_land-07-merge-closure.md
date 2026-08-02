@@ -5,7 +5,7 @@
 **Repository:** `GBrooks1970/portfolio`
 **Branch:** `codex/land-07-closure`
 **Commit:** `b6a35360c699a930103545ea7218bd78b255a94b`
-**Pull request:** Pending
+**Pull request:** https://github.com/GBrooks1970/portfolio/pull/16
 **Pages run:** https://github.com/GBrooks1970/portfolio/actions/runs/30734099813
 
 ## Outcome
