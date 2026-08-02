@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 17
+**Version:** 18
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-07 closed; LAND-08 is IN REVIEW
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; candidates await owner promotion
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -60,7 +60,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
-| LAND-08 | P2 | IN REVIEW | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
+| LAND-08 | P2 | DONE | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -414,7 +414,7 @@ remain reconciled. See the immutable
 ### LAND-08 — Information architecture and portfolio narrative
 
 **Priority:** P2
-**Status:** IN REVIEW — implementation and local/browser evidence complete; PR, merge and publication pending
+**Status:** DONE
 **Type:** Presentation data, generated HTML, CSS, validation and documentation
 **Origin:** Promoted from LAND-C02 by owner decision on 2026-08-02
 
@@ -471,7 +471,7 @@ Acceptance criteria:
       statistics and failure cases while retaining all LAND-03 through LAND-07 controls.
 - [x] README and data-contract documentation explain presentation ownership, the grouping model and
       how statistics are calculated without presenting the taxonomy as a canonical registry field.
-- [ ] The complete local quality gate and current-head pull-request CI pass. After owner merge, the
+- [x] The complete local quality gate and current-head pull-request CI pass. After owner merge, the
       exact-merge quality and Pages runs pass and the live page matches the committed generated
       output.
 
@@ -482,6 +482,17 @@ contrast pairs and 43/43 tests. Desktop rendering preserves the accepted 3/2/2/2
 overflow. At a 390px override, all cards and 22 actions remain in-bounds, action targets remain at
 least 44px high, keyboard focus is visible and the console is clean. See the immutable
 [implementation log](implementation-logs/2026-08-02_land-08-information-architecture.md).
+
+Completion evidence: [PR #18](https://github.com/GBrooks1970/portfolio/pull/18) merged as
+`728182e41cab2c062b270a228508fde4446bc7be`. Exact-merge
+[Portfolio quality run 30747708908](https://github.com/GBrooks1970/portfolio/actions/runs/30747708908)
+and [Pages run 30747708632](https://github.com/GBrooks1970/portfolio/actions/runs/30747708632)
+both passed. The public HTML returned HTTP 200, was 23,218 bytes and exactly matched `main` at
+SHA-256 `B76F032FD98408CD58C9E23B594039799FD1AEB877AFB36E2D66E48F6DC1CD3C`.
+It contained 9 showcase cards, 4 capability groups, 9 card `h4`s, the generated 9/4/4 summary and
+one methodology entry. Published desktop and 390px checks found no document, card, block or action
+overflow; all 22 actions remained at least 44px high and the console was clean. See the immutable
+[merge closure](implementation-logs/2026-08-02_land-08-merge-closure.md).
 
 Out of scope:
 
