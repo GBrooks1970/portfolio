@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 12
-**Last updated:** 2026-08-01
-**Status:** ACTIVE — LAND-01 through LAND-06 closed; candidates await owner promotion
+**Version:** 13
+**Last updated:** 2026-08-02
+**Status:** ACTIVE — LAND-01 through LAND-06 closed; LAND-07 is READY
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -59,6 +59,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
+| LAND-07 | P2 | READY | LAND-05, LAND-06 | Add search and social discoverability |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -330,15 +331,69 @@ this is an accepted inference, not a fresh viewport pass. See the immutable
 [implementation log](implementation-logs/2026-08-01_land-06-navigation-accessibility.md) and
 [merge closure](implementation-logs/2026-08-01_land-06-merge-closure.md).
 
+### LAND-07 — Search and social discoverability
+
+**Priority:** P2
+**Status:** READY — promoted by the owner from LAND-C01 on 2026-08-02
+**Type:** Generated HTML metadata, static assets, validation and repository settings
+
+Give the portfolio one consistent, evidence-backed identity for search engines, link previews,
+browsers and its GitHub repository. Preserve the static, dependency-free visitor experience: this
+item must not add analytics, cookies, client-side API calls or runtime service dependencies.
+
+Accepted design:
+
+- Add a versioned `data/site.json` as the landing repository's single source for the canonical URL,
+  site title, public description, author identity and social-image metadata. Keep site identity
+  separate from project presentation data.
+- Generate an absolute HTTPS canonical URL, Open Graph metadata and minimal Twitter/X compatibility
+  metadata from that source.
+- Describe the visible site with a JSON-LD `WebSite` and `Person` graph. Do not claim `ProfilePage`
+  while the page is primarily a project catalogue, and do not add employers, qualifications,
+  locations or other identity claims that are absent from visible, verified content.
+- Use an evergreen, solid-background design without a project count. Export a 1200 × 630 webpage
+  preview and a separate 1280 × 640 GitHub repository preview from the same visual design.
+- Publish a concise sitemap and robots policy for the one canonical public page.
+
+Acceptance criteria:
+
+- [ ] `data/site.json` has a documented, validated schema and is the authoritative source for site
+      identity metadata used by generated output.
+- [ ] Generated HTML contains exactly one HTTPS canonical link, and its URL agrees with `og:url`,
+      the JSON-LD website URL, sitemap and configured public homepage.
+- [ ] Open Graph includes `og:type=website`, title, description, URL, site name, `en_GB` locale and
+      an absolute image URL with MIME type, actual dimensions and meaningful alternative text.
+- [ ] Minimal Twitter/X compatibility metadata uses a large-image card and agrees with the Open
+      Graph title, description, image and image alternative text.
+- [ ] Valid JSON-LD links a `WebSite` to a `Person` whose name, role, URL and `sameAs` values are
+      supported by visible portfolio content; automated validation rejects malformed or drifting
+      data.
+- [ ] A simple branded SVG favicon, 32 × 32 PNG fallback and Apple touch icon are committed,
+      generated into the document head and validated as resolvable internal assets.
+- [ ] `assets/portfolio-social-preview-1200x630.png` and
+      `assets/github-social-preview-1280x640.png` exist at their declared dimensions, remain legible
+      at preview size and contain no dynamic project count or stale CI evidence.
+- [ ] `sitemap.xml` contains the canonical page without a fabricated freshness date; `robots.txt`
+      allows public crawling and points to the sitemap.
+- [ ] The deterministic generator and publication-quality gate cover missing or duplicate
+      canonicals, URL disagreement, required preview fields, asset existence and dimensions,
+      malformed structured data, icons, sitemap and robots policy. Before merge, absolute URLs
+      under the canonical site map back to local assets instead of requiring the asset to exist on
+      the current public `main` deployment.
+- [ ] The GitHub repository description is reconciled to “Static portfolio of test-automation
+      projects spanning UI, API, mobile web, WebSocket and multi-stack parity.”; the homepage stays
+      `https://gbrooks1970.github.io/portfolio/`; discoverability topics include
+      `test-automation`, `quality-engineering`, `portfolio`, `playwright`, `serenity-js`, `bdd` and
+      `github-pages`; and the dedicated GitHub social-preview image is uploaded and verified.
+- [ ] The documented local gate and current-head pull-request CI pass. After owner merge, exact-merge
+      quality and Pages runs pass, the live HTML matches `main`, and canonical, favicon, sitemap and
+      social-image URLs return successfully.
+
 ## Candidate improvements — unscheduled
 
 The following items are **PROPOSED**. They are not part of the current required cycle and must not be
-implemented until promoted here by the owner.
-
-### LAND-C01 — Search and social discoverability
-
-Add a canonical URL, Open Graph/Twitter metadata, social-preview image, favicon and appropriate
-structured data. Reconcile the GitHub repository description and homepage with the live site.
+implemented until promoted here by the owner. LAND-C01 was promoted as LAND-07 on 2026-08-02; its
+accepted scope and provenance are retained above.
 
 ### LAND-C02 — Information architecture and portfolio narrative
 
@@ -367,6 +422,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 | OD-LAND-04 — ParaBank public artefact | Pending candidate promotion | Repository + CI now; consider a static Serenity snapshot later, never the Docker SUT |
 | OD-LAND-05 — Public methodology target | Accepted 2026-08-01 | Make `NeoCognitus70/portfolio-prompts` public after a repository/history/log scan; unauthenticated access now returns 200 and secret scanning/push protection are enabled |
 | OD-LAND-06 — Browser evidence exception | Accepted 2026-08-01 | Merge LAND-06 with no fresh 390px render or reliable keyboard-only Enter dispatch; retain the gaps and inherited-evidence rationale permanently |
+| OD-LAND-07 — Search/social scope | Accepted 2026-08-02 | Promote LAND-C01 as LAND-07/P2 with `data/site.json`, `WebSite` + `Person`, evergreen dual preview assets, favicons, sitemap/robots, repository metadata/topics and automated plus post-merge live verification |
 
 ## Maintenance rules
 
