@@ -7,7 +7,8 @@
 **Implementation commit:** `9e79ee645e99773ae2f7f8f8f9f947fb208ab911`
 **Implementation pull request:** https://github.com/GBrooks1970/portfolio/pull/18
 **Merge commit:** `728182e41cab2c062b270a228508fde4446bc7be`
-**Closure pull request:** Pending
+**Closure evidence commit:** `0f352e0a1a550ffdee249a34809f6e3e9d1fd92b`
+**Closure pull request:** https://github.com/GBrooks1970/portfolio/pull/19
 **Pages run:** https://github.com/GBrooks1970/portfolio/actions/runs/30747708632
 
 ## Outcome
