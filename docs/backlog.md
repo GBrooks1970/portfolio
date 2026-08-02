@@ -395,7 +395,8 @@ for 9 showcase / 1 methodology projects, 35 named controls, 5 internal reference
 20 contrast pairs and 36/36 tests. Repository description, homepage and seven topics match
 `data/site.json`; the 1280 × 640 repository preview was uploaded and visually verified in GitHub
 settings. See the immutable
-[implementation log](implementation-logs/2026-08-02_land-07-discoverability.md). Current-head PR CI,
+[implementation log](implementation-logs/2026-08-02_land-07-discoverability.md). Implementation is
+under review in [draft PR #15](https://github.com/GBrooks1970/portfolio/pull/15). Current-head PR CI,
 owner merge, exact-merge quality/Pages and live canonical-asset verification remain pending.
 
 ## Candidate improvements — unscheduled

@@ -5,7 +5,7 @@
 **Repository:** `GBrooks1970/portfolio`
 **Branch:** `codex/land-07-implementation`
 **Commit:** `00f827a2cbdaf81241f8ab1029000e9acdc141cc`
-**Pull request:** Pending
+**Pull request:** https://github.com/GBrooks1970/portfolio/pull/15
 **Pages run:** Pending — public metadata and assets require owner merge, exact-merge quality, Pages
 and live verification
 
@@ -70,7 +70,7 @@ pairs and 36 deterministic tests.
 | Repository metadata | PASS | Description and homepage exactly match `data/site.json`; topics are `bdd`, `github-pages`, `playwright`, `portfolio`, `quality-engineering`, `serenity-js`, `test-automation` |
 | Repository social preview | PASS | 1280 × 640 preview uploaded through GitHub settings and visually verified after upload |
 | Whitespace | PASS | `git diff --check` clean |
-| Pull-request CI | PENDING | Branch has not yet been pushed or opened for review |
+| Pull-request CI | PENDING | Draft PR #15 is open; current-head CI must pass before merge |
 | Owner merge / `main` / Pages / live assets | PENDING | Required before LAND-07 can move from IN REVIEW to DONE |
 
 ## Failures and recovery
