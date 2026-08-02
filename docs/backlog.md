@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 13
+**Version:** 14
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-06 closed; LAND-07 is READY
+**Status:** ACTIVE — LAND-01 through LAND-06 closed; LAND-07 is IN REVIEW
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -59,7 +59,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
-| LAND-07 | P2 | READY | LAND-05, LAND-06 | Add search and social discoverability |
+| LAND-07 | P2 | IN REVIEW | LAND-05, LAND-06 | Add search and social discoverability |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -334,7 +334,7 @@ this is an accepted inference, not a fresh viewport pass. See the immutable
 ### LAND-07 — Search and social discoverability
 
 **Priority:** P2
-**Status:** READY — promoted by the owner from LAND-C01 on 2026-08-02
+**Status:** IN REVIEW — implementation/settings complete; PR and publication evidence pending
 **Type:** Generated HTML metadata, static assets, validation and repository settings
 
 Give the portfolio one consistent, evidence-backed identity for search engines, link previews,
@@ -357,30 +357,30 @@ Accepted design:
 
 Acceptance criteria:
 
-- [ ] `data/site.json` has a documented, validated schema and is the authoritative source for site
+- [x] `data/site.json` has a documented, validated schema and is the authoritative source for site
       identity metadata used by generated output.
-- [ ] Generated HTML contains exactly one HTTPS canonical link, and its URL agrees with `og:url`,
+- [x] Generated HTML contains exactly one HTTPS canonical link, and its URL agrees with `og:url`,
       the JSON-LD website URL, sitemap and configured public homepage.
-- [ ] Open Graph includes `og:type=website`, title, description, URL, site name, `en_GB` locale and
+- [x] Open Graph includes `og:type=website`, title, description, URL, site name, `en_GB` locale and
       an absolute image URL with MIME type, actual dimensions and meaningful alternative text.
-- [ ] Minimal Twitter/X compatibility metadata uses a large-image card and agrees with the Open
+- [x] Minimal Twitter/X compatibility metadata uses a large-image card and agrees with the Open
       Graph title, description, image and image alternative text.
-- [ ] Valid JSON-LD links a `WebSite` to a `Person` whose name, role, URL and `sameAs` values are
+- [x] Valid JSON-LD links a `WebSite` to a `Person` whose name, role, URL and `sameAs` values are
       supported by visible portfolio content; automated validation rejects malformed or drifting
       data.
-- [ ] A simple branded SVG favicon, 32 × 32 PNG fallback and Apple touch icon are committed,
+- [x] A simple branded SVG favicon, 32 × 32 PNG fallback and Apple touch icon are committed,
       generated into the document head and validated as resolvable internal assets.
-- [ ] `assets/portfolio-social-preview-1200x630.png` and
+- [x] `assets/portfolio-social-preview-1200x630.png` and
       `assets/github-social-preview-1280x640.png` exist at their declared dimensions, remain legible
       at preview size and contain no dynamic project count or stale CI evidence.
-- [ ] `sitemap.xml` contains the canonical page without a fabricated freshness date; `robots.txt`
+- [x] `sitemap.xml` contains the canonical page without a fabricated freshness date; `robots.txt`
       allows public crawling and points to the sitemap.
-- [ ] The deterministic generator and publication-quality gate cover missing or duplicate
+- [x] The deterministic generator and publication-quality gate cover missing or duplicate
       canonicals, URL disagreement, required preview fields, asset existence and dimensions,
       malformed structured data, icons, sitemap and robots policy. Before merge, absolute URLs
       under the canonical site map back to local assets instead of requiring the asset to exist on
       the current public `main` deployment.
-- [ ] The GitHub repository description is reconciled to “Static portfolio of test-automation
+- [x] The GitHub repository description is reconciled to “Static portfolio of test-automation
       projects spanning UI, API, mobile web, WebSocket and multi-stack parity.”; the homepage stays
       `https://gbrooks1970.github.io/portfolio/`; discoverability topics include
       `test-automation`, `quality-engineering`, `portfolio`, `playwright`, `serenity-js`, `bdd` and
@@ -388,6 +388,15 @@ Acceptance criteria:
 - [ ] The documented local gate and current-head pull-request CI pass. After owner merge, exact-merge
       quality and Pages runs pass, the live HTML matches `main`, and canonical, favicon, sitemap and
       social-image URLs return successfully.
+
+Implementation evidence: commit `00f827a2cbdaf81241f8ab1029000e9acdc141cc` on branch
+`codex/land-07-implementation`; byte-stable HTML/sitemap/robots check PASS; complete local gate PASS
+for 9 showcase / 1 methodology projects, 35 named controls, 5 internal references, 34 external URLs,
+20 contrast pairs and 36/36 tests. Repository description, homepage and seven topics match
+`data/site.json`; the 1280 × 640 repository preview was uploaded and visually verified in GitHub
+settings. See the immutable
+[implementation log](implementation-logs/2026-08-02_land-07-discoverability.md). Current-head PR CI,
+owner merge, exact-merge quality/Pages and live canonical-asset verification remain pending.
 
 ## Candidate improvements — unscheduled
 
