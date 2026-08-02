@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "canonicalUrl": "https://gbrooks1970.github.io/portfolio/",
+  "title": "Gary Brooks — Test Automation Portfolio",
+  "description": "A test-automation engineering portfolio spanning UI, API, mobile web, WebSocket, BDD, Screenplay and multi-stack parity.",
+  "language": "en-GB",
+  "locale": "en_GB",
+  "siteName": "Gary Brooks — Test Automation Portfolio",
+  "author": {
+    "name": "Gary Brooks",
+    "role": "QA / Test Automation Engineer",
+    "url": "https://gbrooks1970.github.io/portfolio/",
+    "sameAs": [
+      "https://github.com/GBrooks1970"
+    ]
+  },
+  "socialImage": {
+    "path": "assets/portfolio-social-preview-1200x630.png",
+    "width": 1200,
+    "height": 630,
+    "type": "image/png",
+    "alt": "Gary Brooks test automation portfolio with connected quality-gate illustration"
+  },
+  "repository": {
+    "slug": "GBrooks1970/portfolio",
+    "description": "Static portfolio of test-automation projects spanning UI, API, mobile web, WebSocket and multi-stack parity.",
+    "homepage": "https://gbrooks1970.github.io/portfolio/",
+    "topics": [
+      "test-automation",
+      "quality-engineering",
+      "portfolio",
+      "playwright",
+      "serenity-js",
+      "bdd",
+      "github-pages"
+    ],
+    "socialImagePath": "assets/github-social-preview-1280x640.png"
+  }
+}

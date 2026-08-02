@@ -11,10 +11,15 @@ from generate_site import (
     DEFAULT_MANIFEST,
     DEFAULT_OUTPUT,
     DEFAULT_REGISTRY_LOCK,
+    DEFAULT_ROBOTS_OUTPUT,
+    DEFAULT_SITE,
+    DEFAULT_SITEMAP_OUTPUT,
     DEFAULT_TEMPLATE,
     SourceError,
     load_json,
+    render_robots,
     render_site,
+    render_sitemap,
     validate_sources,
 )
 from lock_registry import SOURCE_PATH, SOURCE_REPOSITORY, build_lock
@@ -140,11 +145,15 @@ def check_registry_parity(
     registry_repository: Path,
     manifest_path: Path = DEFAULT_MANIFEST,
     registry_lock_path: Path = DEFAULT_REGISTRY_LOCK,
+    site_path: Path = DEFAULT_SITE,
     template_path: Path = DEFAULT_TEMPLATE,
     output_path: Path = DEFAULT_OUTPUT,
+    sitemap_path: Path = DEFAULT_SITEMAP_OUTPUT,
+    robots_path: Path = DEFAULT_ROBOTS_OUTPUT,
 ) -> tuple[int, int]:
     manifest = load_json(manifest_path)
     committed_lock = load_json(registry_lock_path)
+    site = load_json(site_path)
 
     # Validate the committed pair first so local authoring errors remain specific and actionable.
     validate_sources(manifest, committed_lock)
@@ -161,11 +170,15 @@ def check_registry_parity(
     _, registry = validate_sources(manifest, canonical_lock)
 
     rendered = render_site(
-        template_path.read_text(encoding="utf-8"), manifest, canonical_lock
+        template_path.read_text(encoding="utf-8"), manifest, canonical_lock, site
     )
     validate_rendered_inventory(rendered, registry)
     if output_path.read_bytes() != rendered.encode("utf-8"):
         raise ParityError("index.html is stale; run python tools/generate_site.py")
+    if sitemap_path.read_bytes() != render_sitemap(site).encode("utf-8"):
+        raise ParityError("sitemap.xml is stale; run python tools/generate_site.py")
+    if robots_path.read_bytes() != render_robots(site).encode("utf-8"):
+        raise ParityError("robots.txt is stale; run python tools/generate_site.py")
 
     showcase_count = sum(
         row["presentation_role"] == "showcase" for row in registry.values()
@@ -188,8 +201,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--registry-lock", type=Path, default=DEFAULT_REGISTRY_LOCK)
+    parser.add_argument("--site", type=Path, default=DEFAULT_SITE)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--sitemap", type=Path, default=DEFAULT_SITEMAP_OUTPUT)
+    parser.add_argument("--robots", type=Path, default=DEFAULT_ROBOTS_OUTPUT)
     return parser.parse_args()
 
 
@@ -200,8 +216,11 @@ def main() -> int:
             args.registry_repository,
             args.manifest,
             args.registry_lock,
+            args.site,
             args.template,
             args.output,
+            args.sitemap,
+            args.robots,
         )
     except (
         OSError,

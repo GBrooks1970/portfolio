@@ -1,2 +1,7 @@
-# The generated artefact is compared byte-for-byte and is always emitted with LF endings.
+# Generated text artefacts are compared byte-for-byte and always emitted with LF endings.
 index.html text eol=lf
+sitemap.xml text eol=lf
+robots.txt text eol=lf
+
+# Preview and icon raster assets must never undergo text conversion.
+*.png binary

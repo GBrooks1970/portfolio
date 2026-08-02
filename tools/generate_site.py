@@ -7,18 +7,31 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+from urllib.parse import urljoin, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "data" / "presentation.json"
 DEFAULT_REGISTRY_LOCK = ROOT / "data" / "registry-lock.json"
+DEFAULT_SITE = ROOT / "data" / "site.json"
 DEFAULT_TEMPLATE = ROOT / "index.template.html"
 DEFAULT_OUTPUT = ROOT / "index.html"
+DEFAULT_SITEMAP_OUTPUT = ROOT / "sitemap.xml"
+DEFAULT_ROBOTS_OUTPUT = ROOT / "robots.txt"
 PUBLIC_ROLES = {"showcase", "methodology"}
 ALLOWED_ROLES = PUBLIC_ROLES | {"hidden"}
 ENTRY_FIELDS = {"title", "discipline", "summary", "order", "tags", "actions"}
 ACTION_FIELDS = {"workflow", "demo", "report"}
 LINK_FIELDS = {"label", "url"}
+SITE_FIELDS = {
+    "schemaVersion", "canonicalUrl", "title", "description", "language", "locale",
+    "siteName", "author", "socialImage", "repository",
+}
+AUTHOR_FIELDS = {"name", "role", "url", "sameAs"}
+SOCIAL_IMAGE_FIELDS = {"path", "width", "height", "type", "alt"}
+REPOSITORY_FIELDS = {
+    "slug", "description", "homepage", "topics", "socialImagePath",
+}
 
 
 class SourceError(ValueError):
@@ -62,6 +75,170 @@ def _validate_link(value: Any, field: str, project: str) -> None:
     url = _require_text(value["url"], f"actions.{field}.url", project)
     if not url.startswith("https://"):
         raise SourceError(f"{project}: actions.{field}.url must use https")
+
+
+def _require_https_url(value: Any, field: str, context: str) -> str:
+    url = _require_text(value, field, context)
+    parsed = urlsplit(url)
+    if parsed.scheme != "https" or not parsed.netloc or parsed.query or parsed.fragment:
+        raise SourceError(f"{context}: {field} must be an absolute HTTPS URL without query or fragment")
+    return url
+
+
+def _validate_asset_path(value: Any, field: str) -> str:
+    path = _require_text(value, field, "site")
+    candidate = Path(path)
+    if candidate.is_absolute() or "\\" in path or not path.startswith("assets/") or ".." in candidate.parts:
+        raise SourceError(f"site: {field} must be a safe repository-relative assets/ path")
+    return path
+
+
+def validate_site(site: dict[str, Any]) -> dict[str, Any]:
+    if set(site) != SITE_FIELDS or site.get("schemaVersion") != 1:
+        raise SourceError(
+            f"site manifest must use schemaVersion 1 and contain exactly {sorted(SITE_FIELDS)}"
+        )
+    canonical = _require_https_url(site["canonicalUrl"], "canonicalUrl", "site")
+    if not canonical.endswith("/"):
+        raise SourceError("site: canonicalUrl must end with /")
+    for field in ("title", "description", "siteName"):
+        _require_text(site[field], field, "site")
+    if site["language"] != "en-GB" or site["locale"] != "en_GB":
+        raise SourceError("site: language and locale must be en-GB and en_GB")
+
+    author = site["author"]
+    if not isinstance(author, dict) or set(author) != AUTHOR_FIELDS:
+        raise SourceError(f"site: author must contain exactly {sorted(AUTHOR_FIELDS)}")
+    for field in ("name", "role"):
+        _require_text(author[field], field, "site.author")
+    if _require_https_url(author["url"], "url", "site.author") != canonical:
+        raise SourceError("site.author: url must equal canonicalUrl")
+    same_as = author["sameAs"]
+    if not isinstance(same_as, list) or not same_as:
+        raise SourceError("site.author: sameAs must be a non-empty list")
+    checked_same_as = [
+        _require_https_url(value, "sameAs", "site.author") for value in same_as
+    ]
+    if len(checked_same_as) != len(set(checked_same_as)):
+        raise SourceError("site.author: sameAs URLs must be unique")
+
+    image = site["socialImage"]
+    if not isinstance(image, dict) or set(image) != SOCIAL_IMAGE_FIELDS:
+        raise SourceError(
+            f"site: socialImage must contain exactly {sorted(SOCIAL_IMAGE_FIELDS)}"
+        )
+    _validate_asset_path(image["path"], "socialImage.path")
+    for field in ("width", "height"):
+        value = image[field]
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise SourceError(f"site.socialImage: {field} must be a positive integer")
+    if image["type"] != "image/png":
+        raise SourceError("site.socialImage: type must be image/png")
+    _require_text(image["alt"], "alt", "site.socialImage")
+
+    repository = site["repository"]
+    if not isinstance(repository, dict) or set(repository) != REPOSITORY_FIELDS:
+        raise SourceError(
+            f"site: repository must contain exactly {sorted(REPOSITORY_FIELDS)}"
+        )
+    slug = _require_text(repository["slug"], "slug", "site.repository")
+    if re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", slug) is None:
+        raise SourceError("site.repository: slug must be an owner/repository pair")
+    _require_text(repository["description"], "description", "site.repository")
+    if _require_https_url(repository["homepage"], "homepage", "site.repository") != canonical:
+        raise SourceError("site.repository: homepage must equal canonicalUrl")
+    topics = repository["topics"]
+    if (
+        not isinstance(topics, list)
+        or not topics
+        or any(not isinstance(topic, str) or re.fullmatch(r"[a-z0-9-]{1,50}", topic) is None for topic in topics)
+        or len(topics) != len(set(topics))
+    ):
+        raise SourceError("site.repository: topics must be unique lowercase topic names")
+    _validate_asset_path(repository["socialImagePath"], "repository.socialImagePath")
+    return site
+
+
+def _social_image_url(site: dict[str, Any]) -> str:
+    return urljoin(site["canonicalUrl"], site["socialImage"]["path"])
+
+
+def render_metadata(site: dict[str, Any]) -> str:
+    validate_site(site)
+    canonical = site["canonicalUrl"]
+    image = site["socialImage"]
+    image_url = _social_image_url(site)
+    person_id = f"{canonical}#person"
+    website_id = f"{canonical}#website"
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": person_id,
+                "name": site["author"]["name"],
+                "jobTitle": site["author"]["role"],
+                "url": site["author"]["url"],
+                "sameAs": site["author"]["sameAs"],
+            },
+            {
+                "@type": "WebSite",
+                "@id": website_id,
+                "url": canonical,
+                "name": site["siteName"],
+                "description": site["description"],
+                "inLanguage": site["language"],
+                "creator": {"@id": person_id},
+                "image": {
+                    "@type": "ImageObject",
+                    "url": image_url,
+                    "width": image["width"],
+                    "height": image["height"],
+                },
+            },
+        ],
+    }
+    json_ld = json.dumps(graph, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    values = {
+        "title": _escape(site["title"]),
+        "description": _escape(site["description"]),
+        "canonical": _escape(canonical),
+        "site_name": _escape(site["siteName"]),
+        "locale": _escape(site["locale"]),
+        "author": _escape(site["author"]["name"]),
+        "image_url": _escape(image_url),
+        "image_type": _escape(image["type"]),
+        "image_width": str(image["width"]),
+        "image_height": str(image["height"]),
+        "image_alt": _escape(image["alt"]),
+    }
+    return f'''<title>{values["title"]}</title>
+<meta name="description" content="{values["description"]}">
+<meta name="author" content="{values["author"]}">
+<link rel="canonical" href="{values["canonical"]}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{values["title"]}">
+<meta property="og:description" content="{values["description"]}">
+<meta property="og:url" content="{values["canonical"]}">
+<meta property="og:site_name" content="{values["site_name"]}">
+<meta property="og:locale" content="{values["locale"]}">
+<meta property="og:image" content="{values["image_url"]}">
+<meta property="og:image:secure_url" content="{values["image_url"]}">
+<meta property="og:image:type" content="{values["image_type"]}">
+<meta property="og:image:width" content="{values["image_width"]}">
+<meta property="og:image:height" content="{values["image_height"]}">
+<meta property="og:image:alt" content="{values["image_alt"]}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{values["title"]}">
+<meta name="twitter:description" content="{values["description"]}">
+<meta name="twitter:image" content="{values["image_url"]}">
+<meta name="twitter:image:alt" content="{values["image_alt"]}">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32x32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
+<script type="application/ld+json">
+{json_ld}
+</script>'''
 
 
 def validate_sources(
@@ -203,7 +380,13 @@ def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
 </section>'''.format(paragraphs="\n".join(paragraphs))
 
 
-def render_site(template: str, manifest: dict[str, Any], registry_lock: dict[str, Any]) -> str:
+def render_site(
+    template: str,
+    manifest: dict[str, Any],
+    registry_lock: dict[str, Any],
+    site: dict[str, Any],
+) -> str:
+    validate_site(site)
     projects, registry = validate_sources(manifest, registry_lock)
     showcase = sorted(
         (
@@ -223,6 +406,7 @@ def render_site(template: str, manifest: dict[str, Any], registry_lock: dict[str
     )
 
     replacements = {
+        "{{SITE_METADATA}}": render_metadata(site),
         "{{SHOWCASE_COUNT}}": str(len(showcase)),
         "{{SHOWCASE_COUNT_WORD}}": _number_word(len(showcase)).capitalize(),
         "{{SHOWCASE_COUNT_WORD_LOWER}}": _number_word(len(showcase)),
@@ -242,12 +426,33 @@ def render_site(template: str, manifest: dict[str, Any], registry_lock: dict[str
     return rendered.rstrip() + "\n"
 
 
+def render_sitemap(site: dict[str, Any]) -> str:
+    validate_site(site)
+    canonical = _escape(site["canonicalUrl"])
+    return f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{canonical}</loc>
+  </url>
+</urlset>
+'''
+
+
+def render_robots(site: dict[str, Any]) -> str:
+    validate_site(site)
+    sitemap_url = urljoin(site["canonicalUrl"], "sitemap.xml")
+    return f"User-agent: *\nAllow: /\n\nSitemap: {sitemap_url}\n"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate the static portfolio page deterministically.")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--registry-lock", type=Path, default=DEFAULT_REGISTRY_LOCK)
+    parser.add_argument("--site", type=Path, default=DEFAULT_SITE)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--sitemap-output", type=Path, default=DEFAULT_SITEMAP_OUTPUT)
+    parser.add_argument("--robots-output", type=Path, default=DEFAULT_ROBOTS_OUTPUT)
     parser.add_argument("--check", action="store_true", help="Fail if the committed output is stale.")
     return parser.parse_args()
 
@@ -255,28 +460,42 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        rendered = render_site(
-            args.template.read_text(encoding="utf-8"),
-            load_json(args.manifest),
-            load_json(args.registry_lock),
-        )
+        site = load_json(args.site)
+        outputs = {
+            args.output: render_site(
+                args.template.read_text(encoding="utf-8"),
+                load_json(args.manifest),
+                load_json(args.registry_lock),
+                site,
+            ).encode("utf-8"),
+            args.sitemap_output: render_sitemap(site).encode("utf-8"),
+            args.robots_output: render_robots(site).encode("utf-8"),
+        }
     except (OSError, SourceError) as exc:
         print(f"generate-site: ERROR — {exc}", file=sys.stderr)
         return 2
-    expected = rendered.encode("utf-8")
     if args.check:
-        try:
-            actual = args.output.read_bytes()
-        except OSError as exc:
-            print(f"generate-site: ERROR — cannot read {args.output}: {exc}", file=sys.stderr)
-            return 2
-        if actual != expected:
-            print("generate-site: FAIL — index.html is stale; run python tools/generate_site.py")
+        stale: list[str] = []
+        for path, expected in outputs.items():
+            try:
+                actual = path.read_bytes()
+            except OSError:
+                stale.append(str(path))
+            else:
+                if actual != expected:
+                    stale.append(str(path))
+        if stale:
+            print(
+                "generate-site: FAIL — generated output is missing or stale: "
+                + ", ".join(stale)
+                + "; run python tools/generate_site.py"
+            )
             return 1
-        print("generate-site: PASS — committed output is current")
+        print("generate-site: PASS — committed HTML, sitemap and robots output is current")
         return 0
-    args.output.write_bytes(expected)
-    print(f"generate-site: wrote {args.output} ({len(expected)} bytes)")
+    for path, content in outputs.items():
+        path.write_bytes(content)
+        print(f"generate-site: wrote {path} ({len(content)} bytes)")
     return 0
 
 

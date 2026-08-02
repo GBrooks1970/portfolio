@@ -19,9 +19,10 @@ class RegistryParityTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.manifest = GENERATE.load_json(ROOT / "data" / "presentation.json")
         cls.registry_lock = GENERATE.load_json(ROOT / "data" / "registry-lock.json")
+        cls.site = GENERATE.load_json(ROOT / "data" / "site.json")
         cls.template = (ROOT / "index.template.html").read_text(encoding="utf-8")
         cls.rendered = GENERATE.render_site(
-            cls.template, cls.manifest, cls.registry_lock
+            cls.template, cls.manifest, cls.registry_lock, cls.site
         )
 
     def test_missing_public_project_is_rejected(self) -> None:
@@ -54,7 +55,9 @@ class RegistryParityTests(unittest.TestCase):
             }
         )
         _, registry = GENERATE.validate_sources(self.manifest, registry_lock)
-        rendered = GENERATE.render_site(self.template, self.manifest, registry_lock)
+        rendered = GENERATE.render_site(
+            self.template, self.manifest, registry_lock, self.site
+        )
         PARITY.validate_rendered_inventory(rendered, registry)
         self.assertNotIn("private-evidence", rendered)
 

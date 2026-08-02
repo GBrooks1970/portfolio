@@ -22,8 +22,11 @@ checkout/setup actions.
    committed bytes.
 2. **HTML structure:** require one HTML5 document, head/body, header/main/footer and H1; balanced
    explicit tags; unique attributes/identifiers; and project articles inside the main landmark.
-3. **Metadata and internal links:** require `en-GB`, UTF-8, responsive viewport, title and
-   description; resolve every local target and same-document fragment inside the repository root.
+3. **Metadata, discoverability and internal links:** require `en-GB`, UTF-8, responsive viewport,
+   title and description; enforce one matching HTTPS canonical, complete Open Graph and Twitter/X
+   compatibility fields, a source-aligned `WebSite` + `Person` JSON-LD graph, favicon contracts,
+   real PNG dimensions, a canonical one-URL sitemap and its robots policy; resolve every local
+   target and same-document fragment inside the repository root.
 4. **Static accessibility:** require a working skip target; a visible, labelled project collection;
    coherent H1/H2/H3 structure; resolvable `aria-labelledby` references; non-empty image alt text;
    project-specific CI names; keyboard-focusable anchors and natural focus order; a 44px minimum
@@ -33,7 +36,9 @@ checkout/setup actions.
    relative luminance. This remains a targeted automated baseline, not a claim of full WCAG
    conformance or a substitute for rendered keyboard and responsive review.
 5. **External evidence:** verify every unique HTTPS `href` and `src`, including repositories,
-   workflow pages, badges, demos and reports.
+   workflow pages, badges, demos, reports and the public canonical page. Absolute social-image URLs
+   under the canonical site are mapped back to their local committed assets during pull-request
+   validation, because a new asset cannot exist on the public `main` deployment before merge.
 6. **Deterministic tests:** run every `tools/tests/test_*.py` test after the production checks.
 
 ## External-link policy
@@ -63,4 +68,6 @@ This mode is deliberately labelled incomplete and is never used by CI.
 The quality workflow runs on pull requests and `main`; GitHub Pages deployment remains a separate
 post-merge signal. A green gate proves the committed artefact meets the source and static quality
 contracts. A green Pages run proves deployment succeeded. Closing public-output work requires both,
-plus an unauthenticated check of the live page when rendered content changed.
+plus an unauthenticated check of the live page and newly published canonical assets when rendered
+content changed. GitHub's repository description, homepage, topics and repository social preview
+are settings-side evidence and must be verified separately from the committed HTML contract.
