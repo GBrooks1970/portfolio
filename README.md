@@ -10,9 +10,11 @@ with their repositories, live demos, and CI status. The supporting
 repository is linked separately and is not counted as a showcase.
 
 `index.html` is the committed, generated site — it has no visitor-side build step, dependency or
-runtime data fetch. Public copy and display order live in `data/presentation.json`; canonical
-membership, GitHub slugs and presentation roles come from the exact registry commit recorded in
-`data/registry-lock.json`. The static output is generated from `index.template.html`:
+runtime data fetch. Public copy and display order live in `data/presentation.json`; canonical site,
+author, preview and repository metadata live in `data/site.json`; canonical project membership,
+GitHub slugs and presentation roles come from the exact registry commit recorded in
+`data/registry-lock.json`. The generator produces `index.html`, `sitemap.xml` and `robots.txt` from
+these sources and `index.template.html`:
 
 ```powershell
 python tools/generate_site.py
@@ -38,9 +40,10 @@ Pull requests run that same command with read-only permissions and no repository
 [`docs/quality-gate.md`](docs/quality-gate.md) for its coverage, live-URL retry policy and offline
 diagnostic mode.
 
-Do not edit `index.html` directly. See [`docs/generation.md`](docs/generation.md) for the schema,
-registry-lock refresh and reproducibility contract. Merge changes to `main` through a pull request;
-Pages redeploys the committed output automatically.
+Do not edit generated HTML, sitemap or robots output directly. See
+[`docs/generation.md`](docs/generation.md) for the schemas, registry-lock refresh and reproducibility
+contract. Merge changes to `main` through a pull request; Pages redeploys the committed output
+automatically.
 
 ## Contributor entry point
 

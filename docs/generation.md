@@ -10,8 +10,10 @@ tool.
 |---|---|---|
 | `data/presentation.json` | Landing-owned public title, discipline, summary, order, tags and optional actions | Edit by hand and review as public copy |
 | `data/registry-lock.json` | Generated snapshot of registry-owned project ID, GitHub slug and `presentation_role` | Never hand-edit; refresh from an exact canonical commit |
+| `data/site.json` | Landing-owned canonical identity, author, social image and desired GitHub repository metadata | Edit by hand; keep claims aligned with visible evidence and repository settings |
 | `index.template.html` | Landing-owned static layout, styling and count-bearing prose | Edit by hand; use generator tokens for derived content |
-| `index.html` | Generated deployable output | Never hand-edit; commit with its source changes |
+| `assets/` | Branded favicon and fixed-dimension preview assets | Commit reviewed source assets; do not substitute stale counts, badges or runtime evidence |
+| `index.html`, `sitemap.xml`, `robots.txt` | Generated deployable output | Never hand-edit; commit with source changes |
 
 This implements [decision 001](decisions/001-presentation-ownership.md). The lock is a reproducible
 build input, not a second authority: its `source` object names the canonical repository, full commit
@@ -57,6 +59,22 @@ Rules enforced by `tools/generate_site.py`:
 Showcase cards, their numeric/text counts and the methodology section are all derived. Display order
 comes only from `order`; JSON object order has no public meaning.
 
+## Site manifest schema
+
+`data/site.json` uses `schemaVersion: 1` and separates site identity from project presentation.
+It owns the canonical HTTPS URL, title, description, `en-GB` language/`en_GB` Open Graph locale,
+visible author identity, webpage social image and the desired public GitHub repository metadata.
+
+The author record is deliberately evidence-limited: its URL equals the canonical page and each
+`sameAs` value is an absolute HTTPS identity URL. The generated JSON-LD contains exactly one
+`Person` and one `WebSite`; it does not claim `ProfilePage` while the visible product is primarily a
+project catalogue. Social images use safe repository-relative `assets/` paths and positive declared
+dimensions. Repository topics are lowercase, unique GitHub topic names.
+
+The generator emits one consistent metadata block containing the document title/description,
+canonical, Open Graph, minimal Twitter/X compatibility metadata, favicon links and JSON-LD. It also
+emits a one-URL sitemap without a fabricated `lastmod` and a robots policy pointing to that sitemap.
+
 ## Generate and verify
 
 From the repository root:
@@ -68,10 +86,10 @@ python -B -m unittest discover -s tools/tests -p test_*.py
 ```
 
 The generator uses only the Python standard library. It writes UTF-8 with LF endings and orders
-projects deterministically. `--check` compares exact bytes and exits non-zero when committed output
-is stale, so an unchanged input produces unchanged output on every platform. `.gitattributes`
-forces `index.html` to remain LF-normalised in Windows working trees so this byte-level contract is
-preserved after a fresh checkout.
+projects deterministically. `--check` compares `index.html`, `sitemap.xml` and `robots.txt` byte for
+byte and exits non-zero when any committed output is missing or stale, so unchanged input produces
+unchanged output on every platform. `.gitattributes` keeps all three generated text files
+LF-normalised in Windows working trees and marks PNG assets as binary.
 
 ## Refresh the canonical registry lock
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -34,21 +35,98 @@ class SiteQualityTests(unittest.TestCase):
         cls.document = ROOT / "index.html"
         cls.html = cls.document.read_text(encoding="utf-8")
 
-    def audit_variant(self, html: str) -> list[str]:
+    def audit_variant(
+        self,
+        html: str,
+        *,
+        omit: tuple[str, ...] = (),
+        text_overrides: dict[str, str] | None = None,
+        file_replacements: dict[str, str] | None = None,
+    ) -> list[str]:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "index.html").write_text(html, encoding="utf-8", newline="\n")
-            (root / "LICENSE").write_text("test", encoding="utf-8")
+            shutil.copy(ROOT / "LICENSE", root / "LICENSE")
+            shutil.copytree(ROOT / "assets", root / "assets")
+            shutil.copytree(ROOT / "data", root / "data")
+            shutil.copy(ROOT / "sitemap.xml", root / "sitemap.xml")
+            shutil.copy(ROOT / "robots.txt", root / "robots.txt")
+            for relative in omit:
+                (root / relative).unlink()
+            for relative, content in (text_overrides or {}).items():
+                (root / relative).write_text(content, encoding="utf-8", newline="\n")
+            for target, source in (file_replacements or {}).items():
+                shutil.copy(ROOT / source, root / target)
             _, errors = SITE.audit_document(root / "index.html", root)
             return errors
 
     def test_current_document_passes_static_quality_contract(self) -> None:
         summary, errors = SITE.audit_document(self.document, ROOT)
         self.assertEqual(errors, [])
-        self.assertEqual(summary.external_urls, 33)
+        self.assertEqual(summary.external_urls, 34)
         self.assertEqual(summary.interactive_elements, 35)
-        self.assertEqual(summary.internal_references, 2)
+        self.assertEqual(summary.internal_references, 5)
         self.assertEqual(summary.contrast_pairs, 20)
+
+    def test_duplicate_canonical_is_rejected(self) -> None:
+        canonical = '<link rel="canonical" href="https://gbrooks1970.github.io/portfolio/">'
+        html = self.html.replace(canonical, f"{canonical}\n{canonical}", 1)
+        self.assertTrue(
+            any("exactly one canonical link" in error for error in self.audit_variant(html))
+        )
+
+    def test_open_graph_url_drift_is_rejected(self) -> None:
+        html = self.html.replace(
+            '<meta property="og:url" content="https://gbrooks1970.github.io/portfolio/">',
+            '<meta property="og:url" content="https://example.test/portfolio/">',
+            1,
+        )
+        self.assertTrue(
+            any("meta property='og:url' must match" in error for error in self.audit_variant(html))
+        )
+
+    def test_missing_social_preview_asset_is_rejected(self) -> None:
+        errors = self.audit_variant(
+            self.html, omit=("assets/portfolio-social-preview-1200x630.png",)
+        )
+        self.assertTrue(any("social-preview image does not exist" in error for error in errors))
+
+    def test_social_preview_dimensions_are_verified_from_png(self) -> None:
+        errors = self.audit_variant(
+            self.html,
+            file_replacements={
+                "assets/portfolio-social-preview-1200x630.png": "assets/favicon-32x32.png"
+            },
+        )
+        self.assertTrue(any("dimensions are 32x32" in error for error in errors))
+
+    def test_malformed_structured_data_is_rejected(self) -> None:
+        html = self.html.replace('"@context": "https://schema.org",', '"@context" "broken",', 1)
+        self.assertTrue(any("JSON-LD is malformed" in error for error in self.audit_variant(html)))
+
+    def test_profile_page_structured_data_is_rejected(self) -> None:
+        html = self.html.replace('"@type": "WebSite"', '"@type": "ProfilePage"', 1)
+        self.assertTrue(
+            any("exactly one Person and one WebSite" in error for error in self.audit_variant(html))
+        )
+
+    def test_required_favicon_contract_is_enforced(self) -> None:
+        errors = self.audit_variant(self.html.replace(
+            'href="assets/favicon.svg"', 'href="assets/favicon-v2.svg"', 1
+        ))
+        self.assertTrue(any("exactly one icon link" in error for error in errors))
+
+    def test_sitemap_and_robots_must_agree_with_canonical(self) -> None:
+        errors = self.audit_variant(
+            self.html,
+            text_overrides={
+                "sitemap.xml": "<?xml version=\"1.0\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://example.test/</loc><lastmod>2026-08-02</lastmod></url></urlset>\n",
+                "robots.txt": "User-agent: *\nDisallow: /\n",
+            },
+        )
+        self.assertTrue(any("canonical portfolio URL" in error for error in errors))
+        self.assertTrue(any("unverified lastmod" in error for error in errors))
+        self.assertTrue(any("robots.txt must allow" in error for error in errors))
 
     def test_duplicate_identifier_is_rejected(self) -> None:
         html = self.html.replace(

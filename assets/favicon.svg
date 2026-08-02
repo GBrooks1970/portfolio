@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Gary Brooks portfolio</title>
+  <rect width="64" height="64" rx="12" fill="#0f151b"/>
+  <path d="M18 17h28a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H18a5 5 0 0 1-5-5V22a5 5 0 0 1 5-5Z"
+    fill="none" stroke="#5b9bd5" stroke-width="4"/>
+  <path d="m22 32 7 7 14-16" fill="none" stroke="#ffd166" stroke-linecap="round"
+    stroke-linejoin="round" stroke-width="5"/>
+</svg>
