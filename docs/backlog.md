@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 15
+**Version:** 16
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-07 closed; candidates await owner promotion
+**Status:** ACTIVE — LAND-01 through LAND-07 closed; LAND-08 is READY
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -60,6 +60,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
+| LAND-08 | P2 | READY | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -410,17 +411,82 @@ contained exactly one canonical, matching Open Graph URL/image, one `Person`, on
 remain reconciled. See the immutable
 [merge closure](implementation-logs/2026-08-02_land-07-merge-closure.md).
 
+### LAND-08 — Information architecture and portfolio narrative
+
+**Priority:** P2
+**Status:** READY
+**Type:** Presentation data, generated HTML, CSS, validation and documentation
+**Origin:** Promoted from LAND-C02 by owner decision on 2026-08-02
+
+Make the nine-showcase catalogue easier to understand by grouping every showcase under one primary
+capability and presenting a small set of generated portfolio statistics. Preserve a static,
+dependency-free page: nine cards do not justify client-side filters, search controls, analytics or
+runtime API calls.
+
+Accepted design:
+
+- The landing repository owns group labels, descriptions, display order and project-to-group
+  assignments because these are public presentation choices, not canonical registry facts.
+- Advance the presentation manifest to a validated schema that defines ordered capability groups
+  and assigns exactly one group key to every showcase project. Methodology/tooling entries remain
+  outside the showcase taxonomy.
+- Use these four primary groups and assignments:
+  - **Web UI and end-to-end:** Magento Checkout Automation, OrangeHRM PIM Automation and ParaBank
+    Bank Automation. ParaBank's tags and copy continue to expose its API scope.
+  - **APIs, BDD and real-time protocols:** Bitfinex WebSocket Screenplay and Calculator Screenplay
+    BDD.
+  - **Multi-stack and framework design:** Hand-Baked Screenplay Pattern and Sudoku Multi-Stack
+    Parity POC.
+  - **Mobile and shipped products:** Markdown Renderer and Mobile Forex Automation.
+- Generate a concise summary from structured data: showcase-project count, capability-group count
+  and public demo/report count. Each statistic must state what it counts and must not imply live CI
+  health, project freshness or evidence that the source data does not support.
+- Keep the existing project cards and their primary actions. Group headings and short descriptions
+  provide the narrative; do not duplicate a card across groups to represent secondary capabilities.
+- Use semantic nested sections with an accessible heading hierarchy: the showcase area remains an
+  `h2`, capability groups use `h3`, and card titles move to `h4`. Methodology/tooling remains a
+  separate `h2` section.
+
+Acceptance criteria:
+
+- [ ] The presentation source defines four ordered capability groups with stable keys, en-GB labels
+      and concise descriptions, and assigns each of the nine showcase projects to exactly one group.
+- [ ] Generated output renders all four non-empty groups in the accepted order and every showcase
+      card exactly once; methodology/tooling is not counted or grouped as a showcase.
+- [ ] Within each group, existing landing-owned project order remains deterministic and no project
+      identifier, public copy, evidence action or canonical registry role drifts unintentionally.
+- [ ] A compact statistics summary derives the showcase count, group count and number of non-null
+      public demo/report actions from structured source data; no duplicate numeric source is added to
+      the template or generated HTML.
+- [ ] Group and card markup follows the accepted heading hierarchy, exposes programmatic section
+      names, preserves the skip-link target and gives assistive technology an understandable reading
+      order.
+- [ ] Layout and card actions remain usable at desktop and 390px widths with no horizontal overflow,
+      clipped content, obscured focus or console errors; all changed interactive paths work by
+      keyboard.
+- [ ] The generator and automated gates reject unknown or duplicate group keys, missing assignments,
+      empty groups, duplicate/missing showcase cards, unstable ordering and statistics that disagree
+      with their source data.
+- [ ] Generator, parity and site-quality tests cover the new schema, taxonomy, rendered structure,
+      statistics and failure cases while retaining all LAND-03 through LAND-07 controls.
+- [ ] README and data-contract documentation explain presentation ownership, the grouping model and
+      how statistics are calculated without presenting the taxonomy as a canonical registry field.
+- [ ] The complete local quality gate and current-head pull-request CI pass. After owner merge, the
+      exact-merge quality and Pages runs pass and the live page matches the committed generated
+      output.
+
+Out of scope:
+
+- client-side filtering, free-text search, sorting controls or browser-side GitHub API calls;
+- new demos, report snapshots or documentation hosted by showcase repositories (LAND-C03);
+- generated freshness or CI-health summaries (LAND-C04); and
+- changes to registry membership or `presentation_role` values.
+
 ## Candidate improvements — unscheduled
 
 The following items are **PROPOSED**. They are not part of the current required cycle and must not be
-implemented until promoted here by the owner. LAND-C01 was promoted as LAND-07 on 2026-08-02; its
-accepted scope and provenance are retained above.
-
-### LAND-C02 — Information architecture and portfolio narrative
-
-Evaluate grouping showcases by capability—UI/E2E, API/protocols, multi-stack/libraries and
-products—and add concise, generated portfolio statistics. Avoid filters until the number of cards
-creates a real navigation problem.
+implemented until promoted here by the owner. LAND-C01 and LAND-C02 were promoted as LAND-07 and
+LAND-08 respectively on 2026-08-02; their accepted scope and provenance are retained above.
 
 ### LAND-C03 — Expand public evidence
 
@@ -444,6 +510,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 | OD-LAND-05 — Public methodology target | Accepted 2026-08-01 | Make `NeoCognitus70/portfolio-prompts` public after a repository/history/log scan; unauthenticated access now returns 200 and secret scanning/push protection are enabled |
 | OD-LAND-06 — Browser evidence exception | Accepted 2026-08-01 | Merge LAND-06 with no fresh 390px render or reliable keyboard-only Enter dispatch; retain the gaps and inherited-evidence rationale permanently |
 | OD-LAND-07 — Search/social scope | Accepted 2026-08-02 | Promote LAND-C01 as LAND-07/P2 with `data/site.json`, `WebSite` + `Person`, evergreen dual preview assets, favicons, sitemap/robots, repository metadata/topics and automated plus post-merge live verification |
+| OD-LAND-08 — Information architecture scope | Accepted 2026-08-02 | Promote LAND-C02 as LAND-08/P2 with four landing-owned primary capability groups, generated showcase/group/public-evidence statistics and semantic grouped sections; defer filters, new evidence and freshness/CI summaries |
 
 ## Maintenance rules
 
