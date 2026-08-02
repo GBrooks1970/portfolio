@@ -54,11 +54,11 @@ class RegistryParityTests(unittest.TestCase):
                 "presentation_role": "hidden",
             }
         )
-        _, registry = GENERATE.validate_sources(self.manifest, registry_lock)
+        _, _, registry = GENERATE.validate_sources(self.manifest, registry_lock)
         rendered = GENERATE.render_site(
             self.template, self.manifest, registry_lock, self.site
         )
-        PARITY.validate_rendered_inventory(rendered, registry)
+        PARITY.validate_rendered_inventory(rendered, registry, self.manifest)
         self.assertNotIn("private-evidence", rendered)
 
         manifest = copy.deepcopy(self.manifest)
@@ -69,8 +69,8 @@ class RegistryParityTests(unittest.TestCase):
             GENERATE.validate_sources(manifest, registry_lock)
 
     def test_methodology_project_is_not_counted_as_showcase(self) -> None:
-        _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
-        PARITY.validate_rendered_inventory(self.rendered, registry)
+        _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
+        PARITY.validate_rendered_inventory(self.rendered, registry, self.manifest)
         self.assertNotIn(
             '<article class="card" data-project="portfolio-prompts">', self.rendered
         )
@@ -82,15 +82,50 @@ class RegistryParityTests(unittest.TestCase):
             1,
         )
         with self.assertRaisesRegex(PARITY.ParityError, "showcase projects differ"):
-            PARITY.validate_rendered_inventory(incorrectly_counted, registry)
+            PARITY.validate_rendered_inventory(incorrectly_counted, registry, self.manifest)
 
     def test_displayed_showcase_count_must_match_manifest_roles(self) -> None:
-        _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
+        _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
         wrong_count = self.rendered.replace(
             'data-showcase-count="9"', 'data-showcase-count="8"', 1
         )
         with self.assertRaisesRegex(PARITY.ParityError, "manifest requires 9"):
-            PARITY.validate_rendered_inventory(wrong_count, registry)
+            PARITY.validate_rendered_inventory(wrong_count, registry, self.manifest)
+
+    def test_rendered_capability_group_order_must_match_manifest(self) -> None:
+        _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
+        wrong_order = self.rendered.replace(
+            'data-capability-group="web-ui-e2e"',
+            'data-capability-group="api-bdd-protocols"',
+            1,
+        )
+        with self.assertRaisesRegex(PARITY.ParityError, "capability groups differ"):
+            PARITY.validate_rendered_inventory(wrong_order, registry, self.manifest)
+
+    def test_rendered_capability_assignment_must_match_manifest(self) -> None:
+        _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
+        changed_manifest = copy.deepcopy(self.manifest)
+        changed_manifest["projects"]["calculator-screenplay-bdd"]["group"] = (
+            "multi-stack-frameworks"
+        )
+        with self.assertRaisesRegex(PARITY.ParityError, "assignments differ"):
+            PARITY.validate_rendered_inventory(
+                self.rendered, registry, changed_manifest
+            )
+
+    def test_rendered_generated_counts_must_match_manifest(self) -> None:
+        _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
+        wrong_group_count = self.rendered.replace(
+            'data-capability-group-count="4"', 'data-capability-group-count="3"', 1
+        )
+        with self.assertRaisesRegex(PARITY.ParityError, "capability group count is 3"):
+            PARITY.validate_rendered_inventory(wrong_group_count, registry, self.manifest)
+
+        wrong_evidence_count = self.rendered.replace(
+            'data-public-evidence-count="4"', 'data-public-evidence-count="5"', 1
+        )
+        with self.assertRaisesRegex(PARITY.ParityError, "public evidence count is 5"):
+            PARITY.validate_rendered_inventory(wrong_evidence_count, registry, self.manifest)
 
     def test_registry_lock_drift_is_rejected(self) -> None:
         committed_lock = copy.deepcopy(self.registry_lock)

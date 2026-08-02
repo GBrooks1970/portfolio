@@ -6,6 +6,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from textwrap import indent
 from typing import Any
 from urllib.parse import urljoin, urlsplit
 
@@ -20,7 +21,9 @@ DEFAULT_SITEMAP_OUTPUT = ROOT / "sitemap.xml"
 DEFAULT_ROBOTS_OUTPUT = ROOT / "robots.txt"
 PUBLIC_ROLES = {"showcase", "methodology"}
 ALLOWED_ROLES = PUBLIC_ROLES | {"hidden"}
-ENTRY_FIELDS = {"title", "discipline", "summary", "order", "tags", "actions"}
+MANIFEST_FIELDS = {"schemaVersion", "capabilityGroups", "projects"}
+GROUP_FIELDS = {"label", "description", "order"}
+ENTRY_FIELDS = {"title", "discipline", "summary", "order", "group", "tags", "actions"}
 ACTION_FIELDS = {"workflow", "demo", "report"}
 LINK_FIELDS = {"label", "url"}
 SITE_FIELDS = {
@@ -243,11 +246,47 @@ def render_metadata(site: dict[str, Any]) -> str:
 
 def validate_sources(
     manifest: dict[str, Any], registry_lock: dict[str, Any]
-) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, str]]]:
-    if manifest.get("schemaVersion") != 1 or not isinstance(manifest.get("projects"), dict):
-        raise SourceError("presentation manifest must use schemaVersion 1 and a projects object")
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, str]],
+]:
+    if (
+        set(manifest) != MANIFEST_FIELDS
+        or manifest.get("schemaVersion") != 2
+        or not isinstance(manifest.get("capabilityGroups"), dict)
+        or not isinstance(manifest.get("projects"), dict)
+    ):
+        raise SourceError(
+            "presentation manifest must use schemaVersion 2 and contain exactly "
+            "capabilityGroups and projects"
+        )
     if registry_lock.get("schemaVersion") != 1:
         raise SourceError("registry lock must use schemaVersion 1")
+
+    groups = manifest["capabilityGroups"]
+    if not groups:
+        raise SourceError("presentation manifest must define at least one capability group")
+    group_orders: set[int] = set()
+    group_labels: set[str] = set()
+    for key, group in groups.items():
+        if not isinstance(key, str) or re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", key) is None:
+            raise SourceError(f"invalid capability group key: {key!r}")
+        if not isinstance(group, dict) or set(group) != GROUP_FIELDS:
+            raise SourceError(
+                f"{key}: capability group must contain exactly {sorted(GROUP_FIELDS)}"
+            )
+        label = _require_text(group["label"], "label", f"capability group {key}")
+        _require_text(group["description"], "description", f"capability group {key}")
+        order = group["order"]
+        if isinstance(order, bool) or not isinstance(order, int) or order < 0:
+            raise SourceError(f"{key}: capability group order must be a non-negative integer")
+        if order in group_orders:
+            raise SourceError(f"{key}: capability group order {order} is duplicated")
+        if label in group_labels:
+            raise SourceError(f"{key}: capability group label {label!r} is duplicated")
+        group_orders.add(order)
+        group_labels.add(label)
 
     source = registry_lock.get("source")
     if not isinstance(source, dict):
@@ -287,6 +326,7 @@ def validate_sources(
         raise SourceError("; ".join(parts))
 
     orders: set[tuple[str, int]] = set()
+    group_members: dict[str, list[str]] = {key: [] for key in groups}
     for project, entry in projects.items():
         if not isinstance(entry, dict) or set(entry) != ENTRY_FIELDS:
             raise SourceError(f"{project}: manifest entry must contain exactly {sorted(ENTRY_FIELDS)}")
@@ -299,6 +339,16 @@ def validate_sources(
         if role_order in orders:
             raise SourceError(f"{project}: order {order} is duplicated within its presentation role")
         orders.add(role_order)
+        group = entry["group"]
+        role = registry[project]["presentation_role"]
+        if role == "showcase":
+            if not isinstance(group, str) or not group.strip():
+                raise SourceError(f"{project}: showcase project must have a capability group")
+            if group not in groups:
+                raise SourceError(f"{project}: unknown capability group {group!r}")
+            group_members[group].append(project)
+        elif group is not None:
+            raise SourceError(f"{project}: methodology project must use group null")
         tags = entry["tags"]
         if not isinstance(tags, list) or not tags or any(not isinstance(tag, str) or not tag for tag in tags):
             raise SourceError(f"{project}: tags must be a non-empty string list")
@@ -313,7 +363,11 @@ def validate_sources(
         _validate_link(actions["demo"], "demo", project)
         _validate_link(actions["report"], "report", project)
 
-    return projects, registry
+    empty_groups = sorted(key for key, members in group_members.items() if not members)
+    if empty_groups:
+        raise SourceError("empty capability groups: " + ", ".join(empty_groups))
+
+    return groups, projects, registry
 
 
 def _escape(value: str) -> str:
@@ -355,16 +409,48 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
             f'src="{_escape(workflow_url)}/badge.svg?branch=main"></a>'
         )
     action_html = "\n      ".join(actions)
-    return f'''  <!-- Generated: {project} -->
-  <article class="card" data-project="{_escape(project)}">
-    <h3><a href="{_escape(repo_url)}">{title}</a></h3>
-    <p class="disc">{_escape(entry["discipline"])}</p>
-    <p class="desc">{_escape(entry["summary"])}</p>
-    <div class="chips">{chips}</div>
-    <div class="actions">
-      {action_html}
-    </div>
-  </article>'''
+    return f'''<!-- Generated: {project} -->
+<article class="card" data-project="{_escape(project)}">
+  <h4><a href="{_escape(repo_url)}">{title}</a></h4>
+  <p class="disc">{_escape(entry["discipline"])}</p>
+  <p class="desc">{_escape(entry["summary"])}</p>
+  <div class="chips">{chips}</div>
+  <div class="actions">
+    {action_html}
+  </div>
+</article>'''
+
+
+def render_capability_groups(
+    groups: dict[str, dict[str, Any]],
+    entries: list[tuple[str, dict[str, Any], str]],
+) -> str:
+    members: dict[str, list[tuple[str, dict[str, Any], str]]] = {
+        key: [] for key in groups
+    }
+    for entry in entries:
+        members[entry[1]["group"]].append(entry)
+
+    rendered_groups = []
+    for key, group in sorted(groups.items(), key=lambda item: (item[1]["order"], item[0])):
+        cards = "\n\n".join(
+            render_card(*entry)
+            for entry in sorted(members[key], key=lambda item: (item[1]["order"], item[0]))
+        )
+        heading_id = f"capability-{key}"
+        rendered_groups.append(
+            f'''<section class="capability-group" data-capability-group="{_escape(key)}"
+  aria-labelledby="{_escape(heading_id)}">
+  <div class="group-heading">
+    <h3 id="{_escape(heading_id)}">{_escape(group["label"])}</h3>
+    <p>{_escape(group["description"])}</p>
+  </div>
+  <div class="card-grid">
+{indent(cards, "    ")}
+  </div>
+</section>'''
+        )
+    return "\n\n".join(rendered_groups)
 
 
 def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
@@ -387,7 +473,7 @@ def render_site(
     site: dict[str, Any],
 ) -> str:
     validate_site(site)
-    projects, registry = validate_sources(manifest, registry_lock)
+    groups, projects, registry = validate_sources(manifest, registry_lock)
     showcase = sorted(
         (
             (project, entry, registry[project]["github"])
@@ -404,13 +490,20 @@ def render_site(
         ),
         key=lambda item: (item[1]["order"], item[0]),
     )
+    public_evidence_count = sum(
+        entry["actions"][field] is not None
+        for _, entry, _ in showcase
+        for field in ("demo", "report")
+    )
 
     replacements = {
         "{{SITE_METADATA}}": render_metadata(site),
         "{{SHOWCASE_COUNT}}": str(len(showcase)),
         "{{SHOWCASE_COUNT_WORD}}": _number_word(len(showcase)).capitalize(),
         "{{SHOWCASE_COUNT_WORD_LOWER}}": _number_word(len(showcase)),
-        "{{SHOWCASE_CARDS}}": "\n\n".join(render_card(*item) for item in showcase),
+        "{{CAPABILITY_GROUP_COUNT}}": str(len(groups)),
+        "{{PUBLIC_EVIDENCE_COUNT}}": str(public_evidence_count),
+        "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase),
         "{{METHODOLOGY}}": render_methodology(methodology),
     }
     rendered = template
@@ -418,7 +511,7 @@ def render_site(
         occurrences = rendered.count(token)
         if occurrences == 0:
             raise SourceError(f"template must contain {token}")
-        if token in {"{{SHOWCASE_CARDS}}", "{{METHODOLOGY}}"} and occurrences != 1:
+        if token in {"{{SHOWCASE_GROUPS}}", "{{METHODOLOGY}}"} and occurrences != 1:
             raise SourceError(f"template must contain structural block {token} exactly once")
         rendered = rendered.replace(token, value)
     if "{{" in rendered or "}}" in rendered:

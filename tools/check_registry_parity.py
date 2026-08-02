@@ -33,17 +33,30 @@ class _InventoryParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.showcase_counts: list[str | None] = []
+        self.capability_group_counts: list[str | None] = []
+        self.public_evidence_counts: list[str | None] = []
         self.showcase_projects: list[str] = []
+        self.showcase_assignments: list[tuple[str, str]] = []
+        self.capability_groups: list[str] = []
         self.methodology_projects: list[str] = []
         self._in_methodology = False
+        self._current_capability_group = ""
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
         classes = set((attributes.get("class") or "").split())
-        if tag == "main" and "grid" in classes:
+        if tag == "main" and attributes.get("id") == "projects":
             self.showcase_counts.append(attributes.get("data-showcase-count"))
+            self.capability_group_counts.append(attributes.get("data-capability-group-count"))
+            self.public_evidence_counts.append(attributes.get("data-public-evidence-count"))
+        if tag == "section" and "capability-group" in classes:
+            key = attributes.get("data-capability-group") or ""
+            self.capability_groups.append(key)
+            self._current_capability_group = key
         if tag == "article" and "card" in classes and attributes.get("data-project"):
-            self.showcase_projects.append(attributes["data-project"] or "")
+            project = attributes["data-project"] or ""
+            self.showcase_projects.append(project)
+            self.showcase_assignments.append((project, self._current_capability_group))
         if tag == "section" and "methodology" in classes:
             self._in_methodology = True
         if tag == "p" and self._in_methodology and attributes.get("data-project"):
@@ -52,13 +65,32 @@ class _InventoryParser(HTMLParser):
     def handle_endtag(self, tag: str) -> None:
         if tag == "section" and self._in_methodology:
             self._in_methodology = False
+        elif tag == "section" and self._current_capability_group:
+            self._current_capability_group = ""
 
 
 def _duplicates(values: list[str]) -> list[str]:
     return sorted(value for value in set(values) if values.count(value) > 1)
 
 
-def validate_rendered_inventory(rendered: str, registry: dict[str, dict[str, str]]) -> None:
+def _validate_single_count(
+    values: list[str | None], expected: int, label: str
+) -> None:
+    if len(values) != 1:
+        raise ParityError(f"rendered page must contain exactly one {label} count marker")
+    try:
+        displayed = int(values[0] or "")
+    except ValueError as exc:
+        raise ParityError(f"rendered {label} count marker must be an integer") from exc
+    if displayed != expected:
+        raise ParityError(f"rendered {label} count is {displayed}; manifest requires {expected}")
+
+
+def validate_rendered_inventory(
+    rendered: str,
+    registry: dict[str, dict[str, str]],
+    manifest: dict[str, Any],
+) -> None:
     parser = _InventoryParser()
     parser.feed(rendered)
 
@@ -92,17 +124,37 @@ def validate_rendered_inventory(rendered: str, registry: dict[str, dict[str, str
             f"expected {sorted(expected_methodology)}, found {sorted(actual_methodology)}"
         )
 
-    if len(parser.showcase_counts) != 1:
-        raise ParityError("rendered page must contain exactly one showcase count marker")
-    try:
-        displayed_count = int(parser.showcase_counts[0] or "")
-    except ValueError as exc:
-        raise ParityError("rendered showcase count marker must be an integer") from exc
-    if displayed_count != len(expected_showcase):
+    groups = manifest["capabilityGroups"]
+    projects = manifest["projects"]
+    expected_groups = [
+        key for key, _ in sorted(groups.items(), key=lambda item: (item[1]["order"], item[0]))
+    ]
+    if parser.capability_groups != expected_groups:
         raise ParityError(
-            f"rendered showcase count is {displayed_count}; manifest requires "
-            f"{len(expected_showcase)}"
+            "rendered capability groups differ from manifest order: "
+            f"expected {expected_groups}, found {parser.capability_groups}"
         )
+    expected_assignments = {
+        project: projects[project]["group"] for project in expected_showcase
+    }
+    actual_assignments = dict(parser.showcase_assignments)
+    if actual_assignments != expected_assignments:
+        raise ParityError(
+            "rendered capability assignments differ from manifest: "
+            f"expected {sorted(expected_assignments.items())}, "
+            f"found {sorted(actual_assignments.items())}"
+        )
+
+    public_evidence_count = sum(
+        projects[project]["actions"][field] is not None
+        for project in expected_showcase
+        for field in ("demo", "report")
+    )
+    _validate_single_count(parser.showcase_counts, len(expected_showcase), "showcase")
+    _validate_single_count(parser.capability_group_counts, len(groups), "capability group")
+    _validate_single_count(
+        parser.public_evidence_counts, public_evidence_count, "public evidence"
+    )
 
 
 def validate_registry_lock(
@@ -167,12 +219,12 @@ def check_registry_parity(
 
     canonical_lock = build_lock(registry_repository.resolve(), str(source.get("commit", "")))
     validate_registry_lock(committed_lock, canonical_lock)
-    _, registry = validate_sources(manifest, canonical_lock)
+    _, _, registry = validate_sources(manifest, canonical_lock)
 
     rendered = render_site(
         template_path.read_text(encoding="utf-8"), manifest, canonical_lock, site
     )
-    validate_rendered_inventory(rendered, registry)
+    validate_rendered_inventory(rendered, registry, manifest)
     if output_path.read_bytes() != rendered.encode("utf-8"):
         raise ParityError("index.html is stale; run python tools/generate_site.py")
     if sitemap_path.read_bytes() != render_sitemap(site).encode("utf-8"):
