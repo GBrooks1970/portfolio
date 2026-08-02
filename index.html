@@ -90,14 +90,28 @@
   header.hero .links { margin-top: 16px; display: flex; gap: 10px 18px; flex-wrap: wrap; font-size: 0.9rem; }
   header.hero .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
   header.hero .links a:hover { text-decoration: underline; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
-  .grid:focus { outline: none; }
-  .section-heading { grid-column: 1 / -1; font-size: 1.35rem; margin: 0 0 4px; }
+  .portfolio:focus { outline: none; }
+  .section-heading { font-size: 1.35rem; margin: 0 0 4px; }
+  .section-intro { max-width: 72ch; margin: 0; color: var(--muted); }
+  .portfolio-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    margin: 20px 0 38px; }
+  .portfolio-stats > div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); }
+  .portfolio-stats dt { color: var(--muted); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.03em; text-transform: uppercase; }
+  .portfolio-stats dd { margin: 2px 0 0; color: var(--ink); font-size: 1.45rem;
+    font-weight: 700; line-height: 1.2; }
+  .capability-group + .capability-group { margin-top: 38px; }
+  .group-heading { max-width: 72ch; margin-bottom: 14px; }
+  .group-heading h3 { font-size: 1.18rem; margin: 0 0 3px; }
+  .group-heading p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 18px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 20px 18px;
     display: flex; flex-direction: column; }
-  .card h3 { font-size: 1.12rem; margin: 0 0 4px; }
-  .card h3 a { color: var(--ink); text-decoration: none; }
-  .card h3 a:hover { color: var(--accent); }
+  .card h4 { font-size: 1.12rem; margin: 0 0 4px; }
+  .card h4 a { color: var(--ink); text-decoration: none; }
+  .card h4 a:hover { color: var(--accent); }
   .card .disc { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 10px; }
   .card p.desc { margin: 0 0 14px; font-size: 0.95rem; color: var(--ink); flex: 1; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
@@ -120,6 +134,12 @@
   footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
   footer a { color: var(--accent); }
   .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
+  @media (max-width: 600px) {
+    .portfolio-stats { grid-template-columns: 1fr; gap: 8px; }
+    .portfolio-stats > div { display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; }
+    .portfolio-stats dd { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -129,131 +149,184 @@
 <header class="hero">
   <h1>Test Automation Portfolio</h1>
   <p class="tag">Gary Brooks &middot; QA / Test Automation Engineer</p>
-  <p class="lede">Nine showcase projects spanning mobile-web device emulation, end-to-end and
-  banking web UI, API and BDD, multi-stack parity, real-time WebSocket testing, a dependency-free
-  Screenplay teaching library, and a shipped product &mdash; each built docs-first, gated in CI,
-  and documented with living handovers.</p>
+  <p class="lede">Nine showcase projects grouped by their primary capability
+  &mdash; each built docs-first, gated in CI, and documented with living handovers.</p>
   <div class="links">
     <a href="https://github.com/GBrooks1970">GitHub: @GBrooks1970</a>
   </div>
 </header>
 
-<main class="grid" id="projects" data-showcase-count="9" tabindex="-1"
+<main class="portfolio" id="projects" data-showcase-count="9"
+  data-capability-group-count="4"
+  data-public-evidence-count="4" tabindex="-1"
   aria-labelledby="projects-heading">
 
   <h2 class="section-heading" id="projects-heading">Showcase projects</h2>
+  <p class="section-intro">Each project appears once under the capability that best describes its
+    primary portfolio story; its tags retain the wider technical scope.</p>
 
-  <!-- Generated: magento-checkout-automation -->
-  <article class="card" data-project="magento-checkout-automation">
-    <h3><a href="https://github.com/GBrooks1970/magento-checkout-automation">Magento Checkout Automation</a></h3>
-    <p class="disc">End-to-end web UI · reference project</p>
-    <p class="desc">Guest-checkout E2E against Magento 2, the portfolio&#x27;s reference suite: profile-driven scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.</p>
-    <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">TypeScript</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/magento-checkout-automation">Repo</a>
-      <a class="btn demo" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
-      <a href="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml" aria-label="Magento Checkout Automation CI workflow"><img class="badge" alt="Magento Checkout Automation CI status" src="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+  <dl class="portfolio-stats" aria-label="Portfolio summary">
+    <div>
+      <dt>Showcase projects</dt>
+      <dd>9</dd>
     </div>
-  </article>
+    <div>
+      <dt>Capability areas</dt>
+      <dd>4</dd>
+    </div>
+    <div>
+      <dt>Public demos and reports</dt>
+      <dd>4</dd>
+    </div>
+  </dl>
 
-  <!-- Generated: orangehrm-pim-automation -->
-  <article class="card" data-project="orangehrm-pim-automation">
-    <h3><a href="https://github.com/GBrooks1970/orangehrm-pim-automation">OrangeHRM PIM Automation</a></h3>
-    <p class="disc">End-to-end web UI</p>
-    <p class="desc">Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised, seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.</p>
-    <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/orangehrm-pim-automation">Repo</a>
-      <a class="btn demo" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
-      <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml" aria-label="OrangeHRM PIM Automation CI workflow"><img class="badge" alt="OrangeHRM PIM Automation CI status" src="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+<section class="capability-group" data-capability-group="web-ui-e2e"
+  aria-labelledby="capability-web-ui-e2e">
+  <div class="group-heading">
+    <h3 id="capability-web-ui-e2e">Web UI and end-to-end</h3>
+    <p>Browser-led journeys across commerce, HR and banking systems.</p>
+  </div>
+  <div class="card-grid">
+    <!-- Generated: magento-checkout-automation -->
+    <article class="card" data-project="magento-checkout-automation">
+      <h4><a href="https://github.com/GBrooks1970/magento-checkout-automation">Magento Checkout Automation</a></h4>
+      <p class="disc">End-to-end web UI · reference project</p>
+      <p class="desc">Guest-checkout E2E against Magento 2, the portfolio&#x27;s reference suite: profile-driven scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.</p>
+      <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">TypeScript</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/magento-checkout-automation">Repo</a>
+          <a class="btn demo" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
+          <a href="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml" aria-label="Magento Checkout Automation CI workflow"><img class="badge" alt="Magento Checkout Automation CI status" src="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
 
-  <!-- Generated: parabank-bank-automation -->
-  <article class="card" data-project="parabank-bank-automation">
-    <h3><a href="https://github.com/GBrooks1970/parabank-bank-automation">ParaBank Bank Automation</a></h3>
-    <p class="disc">Banking UI + API BDD</p>
-    <p class="desc">Docker-backed ParaBank automation combining Serenity/JS and Playwright UI journeys with stateful API BDD, live OpenAPI validation, and REST–SOAP parity.</p>
-    <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">OpenAPI</span><span class="chip">Docker</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/parabank-bank-automation">Repo</a>
-      <a href="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml" aria-label="ParaBank Bank Automation CI workflow"><img class="badge" alt="ParaBank Bank Automation CI status" src="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+    <!-- Generated: orangehrm-pim-automation -->
+    <article class="card" data-project="orangehrm-pim-automation">
+      <h4><a href="https://github.com/GBrooks1970/orangehrm-pim-automation">OrangeHRM PIM Automation</a></h4>
+      <p class="disc">End-to-end web UI</p>
+      <p class="desc">Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised, seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.</p>
+      <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/orangehrm-pim-automation">Repo</a>
+          <a class="btn demo" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
+          <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml" aria-label="OrangeHRM PIM Automation CI workflow"><img class="badge" alt="OrangeHRM PIM Automation CI status" src="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
 
-  <!-- Generated: bfx-ws-screenplay -->
-  <article class="card" data-project="bfx-ws-screenplay">
-    <h3><a href="https://github.com/GBrooks1970/bfx-ws-screenplay">Bitfinex WebSocket Screenplay</a></h3>
-    <p class="disc">Real-time WebSocket testing</p>
-    <p class="desc">Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay layer — including a flagship CRC-32 order-book checksum verified against consecutive live frames. Specification-driven, one SPEC unit at a time.</p>
-    <div class="chips"><span class="chip">Cypress</span><span class="chip">Screenplay</span><span class="chip">WebSocket</span><span class="chip">TypeScript</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/bfx-ws-screenplay">Repo</a>
-      <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml" aria-label="Bitfinex WebSocket Screenplay CI workflow"><img class="badge" alt="Bitfinex WebSocket Screenplay CI status" src="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+    <!-- Generated: parabank-bank-automation -->
+    <article class="card" data-project="parabank-bank-automation">
+      <h4><a href="https://github.com/GBrooks1970/parabank-bank-automation">ParaBank Bank Automation</a></h4>
+      <p class="disc">Banking UI + API BDD</p>
+      <p class="desc">Docker-backed ParaBank automation combining Serenity/JS and Playwright UI journeys with stateful API BDD, live OpenAPI validation, and REST–SOAP parity.</p>
+      <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">OpenAPI</span><span class="chip">Docker</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/parabank-bank-automation">Repo</a>
+          <a href="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml" aria-label="ParaBank Bank Automation CI workflow"><img class="badge" alt="ParaBank Bank Automation CI status" src="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- Generated: hand-baked-screenplay-pattern -->
-  <article class="card" data-project="hand-baked-screenplay-pattern">
-    <h3><a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Hand-Baked Screenplay Pattern</a></h3>
-    <p class="disc">Framework internals · teaching library</p>
-    <p class="desc">A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.</p>
-    <div class="chips"><span class="chip">TypeScript</span><span class="chip">Vitest</span><span class="chip">Zero-deps</span><span class="chip">Library</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Repo</a>
-      <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml" aria-label="Hand-Baked Screenplay Pattern CI workflow"><img class="badge" alt="Hand-Baked Screenplay Pattern CI status" src="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+<section class="capability-group" data-capability-group="api-bdd-protocols"
+  aria-labelledby="capability-api-bdd-protocols">
+  <div class="group-heading">
+    <h3 id="capability-api-bdd-protocols">APIs, BDD and real-time protocols</h3>
+    <p>Contract, behaviour and live-protocol checks below the browser UI.</p>
+  </div>
+  <div class="card-grid">
+    <!-- Generated: bfx-ws-screenplay -->
+    <article class="card" data-project="bfx-ws-screenplay">
+      <h4><a href="https://github.com/GBrooks1970/bfx-ws-screenplay">Bitfinex WebSocket Screenplay</a></h4>
+      <p class="disc">Real-time WebSocket testing</p>
+      <p class="desc">Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay layer — including a flagship CRC-32 order-book checksum verified against consecutive live frames. Specification-driven, one SPEC unit at a time.</p>
+      <div class="chips"><span class="chip">Cypress</span><span class="chip">Screenplay</span><span class="chip">WebSocket</span><span class="chip">TypeScript</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/bfx-ws-screenplay">Repo</a>
+          <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml" aria-label="Bitfinex WebSocket Screenplay CI workflow"><img class="badge" alt="Bitfinex WebSocket Screenplay CI status" src="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
 
-  <!-- Generated: markdown-renderer -->
-  <article class="card" data-project="markdown-renderer">
-    <h3><a href="https://github.com/GBrooks1970/markdown-renderer">Markdown Renderer</a></h3>
-    <p class="disc">Shipped product</p>
-    <p class="desc">A static, offline, browser-based Markdown viewer: pick a folder, browse a drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over file://. Tested with Vitest units and Playwright E2E.</p>
-    <div class="chips"><span class="chip">JavaScript</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">Product</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/markdown-renderer">Repo</a>
-      <a class="btn demo" href="https://gbrooks1970.github.io/markdown-renderer/">Live demo</a>
-      <a href="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml" aria-label="Markdown Renderer CI workflow"><img class="badge" alt="Markdown Renderer CI status" src="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+    <!-- Generated: calculator-screenplay-bdd -->
+    <article class="card" data-project="calculator-screenplay-bdd">
+      <h4><a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Calculator Screenplay BDD</a></h4>
+      <p class="disc">API + BDD</p>
+      <p class="desc">A calculator API exercised through playwright-bdd and a Screenplay layer, with an OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and consumer-facing contract discipline.</p>
+      <div class="chips"><span class="chip">playwright-bdd</span><span class="chip">Screenplay</span><span class="chip">OpenAPI</span><span class="chip">TypeScript</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Repo</a>
+          <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml" aria-label="Calculator Screenplay BDD CI workflow"><img class="badge" alt="Calculator Screenplay BDD CI status" src="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- Generated: mobile-forex-automation -->
-  <article class="card" data-project="mobile-forex-automation">
-    <h3><a href="https://github.com/GBrooks1970/mobile-forex-automation">Mobile Forex Automation</a></h3>
-    <p class="disc">Mobile-web test automation</p>
-    <p class="desc">A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&amp;L oracles, and on-device breakpoint and overflow checks.</p>
-    <div class="chips"><span class="chip">Playwright</span><span class="chip">Screenplay</span><span class="chip">Mobile</span><span class="chip">TypeScript</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/mobile-forex-automation">Repo</a>
-      <a class="btn demo" href="https://gbrooks1970.github.io/mobile-forex-automation/">Live demo</a>
-      <a href="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml" aria-label="Mobile Forex Automation CI workflow"><img class="badge" alt="Mobile Forex Automation CI status" src="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+<section class="capability-group" data-capability-group="multi-stack-frameworks"
+  aria-labelledby="capability-multi-stack-frameworks">
+  <div class="group-heading">
+    <h3 id="capability-multi-stack-frameworks">Multi-stack and framework design</h3>
+    <p>Portable suites and framework internals that make automation design explicit.</p>
+  </div>
+  <div class="card-grid">
+    <!-- Generated: hand-baked-screenplay-pattern -->
+    <article class="card" data-project="hand-baked-screenplay-pattern">
+      <h4><a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Hand-Baked Screenplay Pattern</a></h4>
+      <p class="disc">Framework internals · teaching library</p>
+      <p class="desc">A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.</p>
+      <div class="chips"><span class="chip">TypeScript</span><span class="chip">Vitest</span><span class="chip">Zero-deps</span><span class="chip">Library</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Repo</a>
+          <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml" aria-label="Hand-Baked Screenplay Pattern CI workflow"><img class="badge" alt="Hand-Baked Screenplay Pattern CI status" src="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
 
-  <!-- Generated: calculator-screenplay-bdd -->
-  <article class="card" data-project="calculator-screenplay-bdd">
-    <h3><a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Calculator Screenplay BDD</a></h3>
-    <p class="disc">API + BDD</p>
-    <p class="desc">A calculator API exercised through playwright-bdd and a Screenplay layer, with an OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and consumer-facing contract discipline.</p>
-    <div class="chips"><span class="chip">playwright-bdd</span><span class="chip">Screenplay</span><span class="chip">OpenAPI</span><span class="chip">TypeScript</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Repo</a>
-      <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml" aria-label="Calculator Screenplay BDD CI workflow"><img class="badge" alt="Calculator Screenplay BDD CI status" src="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+    <!-- Generated: gb.automation.smoketests.sudoku.poc -->
+    <article class="card" data-project="gb.automation.smoketests.sudoku.poc">
+      <h4><a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Sudoku Multi-Stack Parity POC</a></h4>
+      <p class="disc">Multi-stack parity</p>
+      <p class="desc">The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 48-scenario contract stays in lock-step across all three. A study in test-suite portability.</p>
+      <div class="chips"><span class="chip">Cucumber.js</span><span class="chip">pytest-bdd</span><span class="chip">Reqnroll</span><span class="chip">Parity</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Repo</a>
+          <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml" aria-label="Sudoku Multi-Stack Parity POC CI workflow"><img class="badge" alt="Sudoku Multi-Stack Parity POC CI status" src="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+  </div>
+</section>
 
-  <!-- Generated: gb.automation.smoketests.sudoku.poc -->
-  <article class="card" data-project="gb.automation.smoketests.sudoku.poc">
-    <h3><a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Sudoku Multi-Stack Parity POC</a></h3>
-    <p class="disc">Multi-stack parity</p>
-    <p class="desc">The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 48-scenario contract stays in lock-step across all three. A study in test-suite portability.</p>
-    <div class="chips"><span class="chip">Cucumber.js</span><span class="chip">pytest-bdd</span><span class="chip">Reqnroll</span><span class="chip">Parity</span></div>
-    <div class="actions">
-      <a class="btn primary" href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Repo</a>
-      <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml" aria-label="Sudoku Multi-Stack Parity POC CI workflow"><img class="badge" alt="Sudoku Multi-Stack Parity POC CI status" src="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml/badge.svg?branch=main"></a>
-    </div>
-  </article>
+<section class="capability-group" data-capability-group="mobile-products"
+  aria-labelledby="capability-mobile-products">
+  <div class="group-heading">
+    <h3 id="capability-mobile-products">Mobile and shipped products</h3>
+    <p>Touch-first automation and complete browser products delivered for direct use.</p>
+  </div>
+  <div class="card-grid">
+    <!-- Generated: markdown-renderer -->
+    <article class="card" data-project="markdown-renderer">
+      <h4><a href="https://github.com/GBrooks1970/markdown-renderer">Markdown Renderer</a></h4>
+      <p class="disc">Shipped product</p>
+      <p class="desc">A static, offline, browser-based Markdown viewer: pick a folder, browse a drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over file://. Tested with Vitest units and Playwright E2E.</p>
+      <div class="chips"><span class="chip">JavaScript</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">Product</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/markdown-renderer">Repo</a>
+          <a class="btn demo" href="https://gbrooks1970.github.io/markdown-renderer/">Live demo</a>
+          <a href="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml" aria-label="Markdown Renderer CI workflow"><img class="badge" alt="Markdown Renderer CI status" src="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+
+    <!-- Generated: mobile-forex-automation -->
+    <article class="card" data-project="mobile-forex-automation">
+      <h4><a href="https://github.com/GBrooks1970/mobile-forex-automation">Mobile Forex Automation</a></h4>
+      <p class="disc">Mobile-web test automation</p>
+      <p class="desc">A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&amp;L oracles, and on-device breakpoint and overflow checks.</p>
+      <div class="chips"><span class="chip">Playwright</span><span class="chip">Screenplay</span><span class="chip">Mobile</span><span class="chip">TypeScript</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/mobile-forex-automation">Repo</a>
+          <a class="btn demo" href="https://gbrooks1970.github.io/mobile-forex-automation/">Live demo</a>
+          <a href="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml" aria-label="Mobile Forex Automation CI workflow"><img class="badge" alt="Mobile Forex Automation CI status" src="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+  </div>
+</section>
 
 </main>
 

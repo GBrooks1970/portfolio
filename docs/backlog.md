@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 16
+**Version:** 17
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-07 closed; LAND-08 is READY
+**Status:** ACTIVE — LAND-01 through LAND-07 closed; LAND-08 is IN REVIEW
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -60,7 +60,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
-| LAND-08 | P2 | READY | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
+| LAND-08 | P2 | IN REVIEW | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -414,7 +414,7 @@ remain reconciled. See the immutable
 ### LAND-08 — Information architecture and portfolio narrative
 
 **Priority:** P2
-**Status:** READY
+**Status:** IN REVIEW — implementation and local/browser evidence complete; PR, merge and publication pending
 **Type:** Presentation data, generated HTML, CSS, validation and documentation
 **Origin:** Promoted from LAND-C02 by owner decision on 2026-08-02
 
@@ -449,31 +449,39 @@ Accepted design:
 
 Acceptance criteria:
 
-- [ ] The presentation source defines four ordered capability groups with stable keys, en-GB labels
+- [x] The presentation source defines four ordered capability groups with stable keys, en-GB labels
       and concise descriptions, and assigns each of the nine showcase projects to exactly one group.
-- [ ] Generated output renders all four non-empty groups in the accepted order and every showcase
+- [x] Generated output renders all four non-empty groups in the accepted order and every showcase
       card exactly once; methodology/tooling is not counted or grouped as a showcase.
-- [ ] Within each group, existing landing-owned project order remains deterministic and no project
+- [x] Within each group, existing landing-owned project order remains deterministic and no project
       identifier, public copy, evidence action or canonical registry role drifts unintentionally.
-- [ ] A compact statistics summary derives the showcase count, group count and number of non-null
+- [x] A compact statistics summary derives the showcase count, group count and number of non-null
       public demo/report actions from structured source data; no duplicate numeric source is added to
       the template or generated HTML.
-- [ ] Group and card markup follows the accepted heading hierarchy, exposes programmatic section
+- [x] Group and card markup follows the accepted heading hierarchy, exposes programmatic section
       names, preserves the skip-link target and gives assistive technology an understandable reading
       order.
-- [ ] Layout and card actions remain usable at desktop and 390px widths with no horizontal overflow,
+- [x] Layout and card actions remain usable at desktop and 390px widths with no horizontal overflow,
       clipped content, obscured focus or console errors; all changed interactive paths work by
       keyboard.
-- [ ] The generator and automated gates reject unknown or duplicate group keys, missing assignments,
+- [x] The generator and automated gates reject unknown or duplicate group keys, missing assignments,
       empty groups, duplicate/missing showcase cards, unstable ordering and statistics that disagree
       with their source data.
-- [ ] Generator, parity and site-quality tests cover the new schema, taxonomy, rendered structure,
+- [x] Generator, parity and site-quality tests cover the new schema, taxonomy, rendered structure,
       statistics and failure cases while retaining all LAND-03 through LAND-07 controls.
-- [ ] README and data-contract documentation explain presentation ownership, the grouping model and
+- [x] README and data-contract documentation explain presentation ownership, the grouping model and
       how statistics are calculated without presenting the taxonomy as a canonical registry field.
 - [ ] The complete local quality gate and current-head pull-request CI pass. After owner merge, the
       exact-merge quality and Pages runs pass and the live page matches the committed generated
       output.
+
+Implementation evidence: commit `9e79ee645e99773ae2f7f8f8f9f947fb208ab911` on branch
+`codex/land-08-implementation`; byte-stable generation and the complete local gate pass for 9
+showcases, 1 methodology entry, 35 named controls, 5 internal references, 34 external URLs, 20
+contrast pairs and 43/43 tests. Desktop rendering preserves the accepted 3/2/2/2 grouping with no
+overflow. At a 390px override, all cards and 22 actions remain in-bounds, action targets remain at
+least 44px high, keyboard focus is visible and the console is clean. See the immutable
+[implementation log](implementation-logs/2026-08-02_land-08-information-architecture.md).
 
 Out of scope:
 

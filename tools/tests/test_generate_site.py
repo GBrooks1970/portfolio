@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -33,7 +34,12 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertIn("ParaBank Bank Automation", self.rendered)
         self.assertIn('<a class="skip-link" href="#projects">', self.rendered)
         self.assertIn('aria-labelledby="projects-heading"', self.rendered)
-        self.assertEqual(self.rendered.count("<h3><a href="), 9)
+        self.assertEqual(self.rendered.count('class="capability-group"'), 4)
+        self.assertEqual(self.rendered.count("<h4><a href="), 9)
+        self.assertIn('data-capability-group-count="4"', self.rendered)
+        self.assertIn('data-public-evidence-count="4"', self.rendered)
+        self.assertIn("<dt>Capability areas</dt>\n      <dd>4</dd>", self.rendered)
+        self.assertIn("<dt>Public demos and reports</dt>\n      <dd>4</dd>", self.rendered)
         self.assertEqual(self.rendered.count(" CI workflow\">"), 9)
         self.assertEqual(self.rendered.count(" CI status\""), 9)
 
@@ -50,20 +56,69 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertNotIn('"@type": "ProfilePage"', self.rendered)
         self.assertIn('href="assets/favicon.svg"', self.rendered)
 
-    def test_respects_explicit_showcase_order(self) -> None:
+    def test_respects_group_and_project_order(self) -> None:
         titles = [
             "Magento Checkout Automation",
             "OrangeHRM PIM Automation",
             "ParaBank Bank Automation",
             "Bitfinex WebSocket Screenplay",
+            "Calculator Screenplay BDD",
             "Hand-Baked Screenplay Pattern",
+            "Sudoku Multi-Stack Parity POC",
             "Markdown Renderer",
             "Mobile Forex Automation",
-            "Calculator Screenplay BDD",
-            "Sudoku Multi-Stack Parity POC",
         ]
         positions = [self.rendered.index(title) for title in titles]
         self.assertEqual(positions, sorted(positions))
+
+        group_labels = [
+            "Web UI and end-to-end",
+            "APIs, BDD and real-time protocols",
+            "Multi-stack and framework design",
+            "Mobile and shipped products",
+        ]
+        group_positions = [self.rendered.index(label) for label in group_labels]
+        self.assertEqual(group_positions, sorted(group_positions))
+
+    def test_rejects_invalid_capability_group_contracts(self) -> None:
+        invalid = copy.deepcopy(self.manifest)
+        invalid["projects"]["parabank-bank-automation"]["group"] = "unknown-group"
+        with self.assertRaisesRegex(GENERATE.SourceError, "unknown capability group"):
+            GENERATE.validate_sources(invalid, self.registry_lock)
+
+        invalid = copy.deepcopy(self.manifest)
+        invalid["projects"]["parabank-bank-automation"]["group"] = None
+        with self.assertRaisesRegex(GENERATE.SourceError, "must have a capability group"):
+            GENERATE.validate_sources(invalid, self.registry_lock)
+
+        invalid = copy.deepcopy(self.manifest)
+        invalid["capabilityGroups"]["unused-group"] = {
+            "label": "Unused group",
+            "description": "A group without projects.",
+            "order": 50,
+        }
+        with self.assertRaisesRegex(GENERATE.SourceError, "empty capability groups"):
+            GENERATE.validate_sources(invalid, self.registry_lock)
+
+        invalid = copy.deepcopy(self.manifest)
+        invalid["projects"]["portfolio-prompts"]["group"] = "web-ui-e2e"
+        with self.assertRaisesRegex(GENERATE.SourceError, "must use group null"):
+            GENERATE.validate_sources(invalid, self.registry_lock)
+
+    def test_rejects_duplicate_capability_group_json_keys(self) -> None:
+        duplicate = '''{
+          "schemaVersion": 2,
+          "capabilityGroups": {
+            "duplicate": {"label": "First", "description": "First.", "order": 10},
+            "duplicate": {"label": "Second", "description": "Second.", "order": 20}
+          },
+          "projects": {}
+        }'''
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "presentation.json"
+            path.write_text(duplicate, encoding="utf-8")
+            with self.assertRaisesRegex(GENERATE.SourceError, "duplicate JSON key"):
+                GENERATE.load_json(path)
 
     def test_render_is_byte_stable_and_matches_committed_output(self) -> None:
         second = GENERATE.render_site(

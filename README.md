@@ -10,11 +10,12 @@ with their repositories, live demos, and CI status. The supporting
 repository is linked separately and is not counted as a showcase.
 
 `index.html` is the committed, generated site — it has no visitor-side build step, dependency or
-runtime data fetch. Public copy and display order live in `data/presentation.json`; canonical site,
-author, preview and repository metadata live in `data/site.json`; canonical project membership,
-GitHub slugs and presentation roles come from the exact registry commit recorded in
-`data/registry-lock.json`. The generator produces `index.html`, `sitemap.xml` and `robots.txt` from
-these sources and `index.template.html`:
+runtime data fetch. Public copy, primary capability groups, group assignments and display order live
+in `data/presentation.json`; canonical site, author, preview and repository metadata live in
+`data/site.json`; canonical project membership, GitHub slugs and presentation roles come from the
+exact registry commit recorded in `data/registry-lock.json`. The generator derives the grouped
+catalogue and its project, capability-area and public-demo/report statistics, then produces
+`index.html`, `sitemap.xml` and `robots.txt` from these sources and `index.template.html`:
 
 ```powershell
 python tools/generate_site.py

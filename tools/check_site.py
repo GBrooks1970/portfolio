@@ -121,8 +121,12 @@ class SiteParser(HTMLParser):
         self._body_depth = 0
         self.visible_text: list[str] = []
         self.article_lines_outside_main: list[int] = []
+        self.article_lines_outside_capability_group: list[int] = []
         self.skip_links: list[tuple[str, int]] = []
         self.main_landmarks: list[dict[str, str | None]] = []
+        self.capability_sections: list[tuple[str, str, int]] = []
+        self.capability_headings: list[tuple[str, str, int]] = []
+        self._current_capability_group = ""
         self.project_headings: list[tuple[int, set[str], bool]] = []
         self.project_heading_text: list[str] = []
         self._project_heading_depth = 0
@@ -221,8 +225,16 @@ class SiteParser(HTMLParser):
             self._title_depth += 1
         elif tag == "style":
             self._style_depth += 1
-        elif tag == "article" and not any(open_tag == "main" for open_tag, _ in self.stack):
-            self.article_lines_outside_main.append(self.line)
+        elif tag == "section" and "capability-group" in classes:
+            key = (attributes.get("data-capability-group") or "").strip()
+            labelled_by = (attributes.get("aria-labelledby") or "").strip()
+            self.capability_sections.append((key, labelled_by, self.line))
+            self._current_capability_group = key
+        elif tag == "article":
+            if not any(open_tag == "main" for open_tag, _ in self.stack):
+                self.article_lines_outside_main.append(self.line)
+            if not self._current_capability_group:
+                self.article_lines_outside_capability_group.append(self.line)
 
         if tag == "a" and "skip-link" in classes:
             self.skip_links.append(((attributes.get("href") or "").strip(), self.line))
@@ -237,6 +249,10 @@ class SiteParser(HTMLParser):
                 )
                 self.project_headings.append((self.line, classes, hidden))
                 self._project_heading_depth += 1
+            if level == 3 and self._current_capability_group:
+                self.capability_headings.append(
+                    (self._current_capability_group, identifier, self.line)
+                )
 
         labelled_by = (attributes.get("aria-labelledby") or "").strip()
         if labelled_by:
@@ -318,6 +334,8 @@ class SiteParser(HTMLParser):
             self._body_depth -= 1
         elif tag == "h2" and self._project_heading_depth:
             self._project_heading_depth -= 1
+        elif tag == "section" and self._current_capability_group:
+            self._current_capability_group = ""
 
         if tag in INTERACTIVE_ELEMENTS:
             if not self._interactive_stack:
@@ -437,9 +455,23 @@ def _validate_navigation_contract(
         (level, line) for level, line, in_article in parser.headings if in_article
     ]
     if len(article_headings) != parser.counts["article"] or any(
-        level != 3 for level, _ in article_headings
+        level != 4 for level, _ in article_headings
     ):
-        errors.append("each project article must contain exactly one <h3> heading")
+        errors.append("each project article must contain exactly one <h4> heading")
+
+    group_keys = [key for key, _, _ in parser.capability_sections]
+    if not group_keys or any(not key for key in group_keys) or len(group_keys) != len(set(group_keys)):
+        errors.append("capability sections must use unique, non-empty data-capability-group keys")
+    for key, labelled_by, line in parser.capability_sections:
+        headings = [
+            identifier
+            for heading_group, identifier, _ in parser.capability_headings
+            if heading_group == key
+        ]
+        if len(headings) != 1 or not labelled_by or headings[0] != labelled_by:
+            errors.append(
+                f"line {line}: capability section {key!r} must be labelled by exactly one <h3>"
+            )
 
     previous_level = 0
     for level, line, _ in parser.headings:
@@ -788,6 +820,11 @@ def audit_document(
         errors.append(
             "project articles must be inside <main>; offending lines: "
             + ", ".join(map(str, parser.article_lines_outside_main))
+        )
+    if parser.article_lines_outside_capability_group:
+        errors.append(
+            "project articles must be inside a named capability section; offending lines: "
+            + ", ".join(map(str, parser.article_lines_outside_capability_group))
         )
     if parser.html_languages != ["en-GB"]:
         errors.append(f"<html> must declare lang=\"en-GB\"; found {parser.html_languages}")

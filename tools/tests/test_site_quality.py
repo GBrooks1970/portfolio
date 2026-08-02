@@ -163,7 +163,7 @@ class SiteQualityTests(unittest.TestCase):
         )
 
     def test_missing_main_landmark_is_rejected(self) -> None:
-        html = self.html.replace('<main class="grid"', '<div class="grid"', 1).replace(
+        html = self.html.replace('<main class="portfolio"', '<div class="portfolio"', 1).replace(
             '</main>', '</div>', 1
         )
         self.assertTrue(
@@ -184,10 +184,32 @@ class SiteQualityTests(unittest.TestCase):
             any("skip link must target" in error for error in self.audit_variant(html))
         )
 
-    def test_project_articles_require_level_three_headings(self) -> None:
-        html = self.html.replace("<h3>", "<h2>", 1).replace("</h3>", "</h2>", 1)
+    def test_project_articles_require_level_four_headings(self) -> None:
+        html = self.html.replace("<h4>", "<h3>", 1).replace("</h4>", "</h3>", 1)
         self.assertTrue(
-            any("exactly one <h3>" in error for error in self.audit_variant(html))
+            any("exactly one <h4>" in error for error in self.audit_variant(html))
+        )
+
+    def test_capability_section_requires_matching_level_three_heading(self) -> None:
+        html = self.html.replace(
+            'aria-labelledby="capability-web-ui-e2e"',
+            'aria-labelledby="capability-web-ui-e2e-missing"',
+            1,
+        )
+        self.assertTrue(
+            any(
+                "must be labelled by exactly one <h3>" in error
+                for error in self.audit_variant(html)
+            )
+        )
+
+    def test_project_articles_must_remain_inside_capability_sections(self) -> None:
+        html = self.html.replace('class="capability-group"', 'class="group-copy"', 1)
+        self.assertTrue(
+            any(
+                "inside a named capability section" in error
+                for error in self.audit_variant(html)
+            )
         )
 
     def test_ci_link_name_must_identify_its_project(self) -> None:

@@ -33,14 +33,28 @@
   header.hero .links { margin-top: 16px; display: flex; gap: 10px 18px; flex-wrap: wrap; font-size: 0.9rem; }
   header.hero .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
   header.hero .links a:hover { text-decoration: underline; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
-  .grid:focus { outline: none; }
-  .section-heading { grid-column: 1 / -1; font-size: 1.35rem; margin: 0 0 4px; }
+  .portfolio:focus { outline: none; }
+  .section-heading { font-size: 1.35rem; margin: 0 0 4px; }
+  .section-intro { max-width: 72ch; margin: 0; color: var(--muted); }
+  .portfolio-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    margin: 20px 0 38px; }
+  .portfolio-stats > div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); }
+  .portfolio-stats dt { color: var(--muted); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.03em; text-transform: uppercase; }
+  .portfolio-stats dd { margin: 2px 0 0; color: var(--ink); font-size: 1.45rem;
+    font-weight: 700; line-height: 1.2; }
+  .capability-group + .capability-group { margin-top: 38px; }
+  .group-heading { max-width: 72ch; margin-bottom: 14px; }
+  .group-heading h3 { font-size: 1.18rem; margin: 0 0 3px; }
+  .group-heading p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 18px; }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 20px 18px;
     display: flex; flex-direction: column; }
-  .card h3 { font-size: 1.12rem; margin: 0 0 4px; }
-  .card h3 a { color: var(--ink); text-decoration: none; }
-  .card h3 a:hover { color: var(--accent); }
+  .card h4 { font-size: 1.12rem; margin: 0 0 4px; }
+  .card h4 a { color: var(--ink); text-decoration: none; }
+  .card h4 a:hover { color: var(--accent); }
   .card .disc { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 10px; }
   .card p.desc { margin: 0 0 14px; font-size: 0.95rem; color: var(--ink); flex: 1; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
@@ -63,6 +77,12 @@
   footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
   footer a { color: var(--accent); }
   .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
+  @media (max-width: 600px) {
+    .portfolio-stats { grid-template-columns: 1fr; gap: 8px; }
+    .portfolio-stats > div { display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; }
+    .portfolio-stats dd { margin: 0; }
+  }
 </style>
 </head>
 <body>
@@ -72,21 +92,38 @@
 <header class="hero">
   <h1>Test Automation Portfolio</h1>
   <p class="tag">Gary Brooks &middot; QA / Test Automation Engineer</p>
-  <p class="lede">{{SHOWCASE_COUNT_WORD}} showcase projects spanning mobile-web device emulation, end-to-end and
-  banking web UI, API and BDD, multi-stack parity, real-time WebSocket testing, a dependency-free
-  Screenplay teaching library, and a shipped product &mdash; each built docs-first, gated in CI,
-  and documented with living handovers.</p>
+  <p class="lede">{{SHOWCASE_COUNT_WORD}} showcase projects grouped by their primary capability
+  &mdash; each built docs-first, gated in CI, and documented with living handovers.</p>
   <div class="links">
     <a href="https://github.com/GBrooks1970">GitHub: @GBrooks1970</a>
   </div>
 </header>
 
-<main class="grid" id="projects" data-showcase-count="{{SHOWCASE_COUNT}}" tabindex="-1"
+<main class="portfolio" id="projects" data-showcase-count="{{SHOWCASE_COUNT}}"
+  data-capability-group-count="{{CAPABILITY_GROUP_COUNT}}"
+  data-public-evidence-count="{{PUBLIC_EVIDENCE_COUNT}}" tabindex="-1"
   aria-labelledby="projects-heading">
 
   <h2 class="section-heading" id="projects-heading">Showcase projects</h2>
+  <p class="section-intro">Each project appears once under the capability that best describes its
+    primary portfolio story; its tags retain the wider technical scope.</p>
 
-{{SHOWCASE_CARDS}}
+  <dl class="portfolio-stats" aria-label="Portfolio summary">
+    <div>
+      <dt>Showcase projects</dt>
+      <dd>{{SHOWCASE_COUNT}}</dd>
+    </div>
+    <div>
+      <dt>Capability areas</dt>
+      <dd>{{CAPABILITY_GROUP_COUNT}}</dd>
+    </div>
+    <div>
+      <dt>Public demos and reports</dt>
+      <dd>{{PUBLIC_EVIDENCE_COUNT}}</dd>
+    </div>
+  </dl>
+
+{{SHOWCASE_GROUPS}}
 
 </main>
 

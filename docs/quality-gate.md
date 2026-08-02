@@ -18,8 +18,8 @@ checkout/setup actions.
 ## Gate layers
 
 1. **Canonical parity:** rebuild `data/registry-lock.json` from its recorded immutable registry
-   commit and compare registry roles, the presentation manifest, generated inventory/count and
-   committed bytes.
+   commit and compare registry roles, the presentation manifest, grouped project assignments,
+   generated inventory/statistics and committed bytes.
 2. **HTML structure:** require one HTML5 document, head/body, header/main/footer and H1; balanced
    explicit tags; unique attributes/identifiers; and project articles inside the main landmark.
 3. **Metadata, discoverability and internal links:** require `en-GB`, UTF-8, responsive viewport,
@@ -28,7 +28,8 @@ checkout/setup actions.
    real PNG dimensions, a canonical one-URL sitemap and its robots policy; resolve every local
    target and same-document fragment inside the repository root.
 4. **Static accessibility:** require a working skip target; a visible, labelled project collection;
-   coherent H1/H2/H3 structure; resolvable `aria-labelledby` references; non-empty image alt text;
+   coherent H1/H2/H3/H4 structure and named capability sections; resolvable `aria-labelledby`
+   references; non-empty image alt text;
    project-specific CI names; keyboard-focusable anchors and natural focus order; a 44px minimum
    project-action target; explicit `:focus-visible` styling; and a 4.5:1 minimum for 20 text/focus
    foreground/background pairs across the light and dark themes. The contrast formula follows

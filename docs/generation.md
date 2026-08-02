@@ -8,7 +8,7 @@ tool.
 
 | File | Authority | Editing rule |
 |---|---|---|
-| `data/presentation.json` | Landing-owned public title, discipline, summary, order, tags and optional actions | Edit by hand and review as public copy |
+| `data/presentation.json` | Landing-owned capability groups and assignments plus public title, discipline, summary, order, tags and optional actions | Edit by hand and review as public presentation data |
 | `data/registry-lock.json` | Generated snapshot of registry-owned project ID, GitHub slug and `presentation_role` | Never hand-edit; refresh from an exact canonical commit |
 | `data/site.json` | Landing-owned canonical identity, author, social image and desired GitHub repository metadata | Edit by hand; keep claims aligned with visible evidence and repository settings |
 | `index.template.html` | Landing-owned static layout, styling and count-bearing prose | Edit by hand; use generator tokens for derived content |
@@ -21,19 +21,28 @@ and path from which every row was extracted.
 
 ## Presentation manifest schema
 
-`data/presentation.json` uses `schemaVersion: 1` and a `projects` object keyed by the exact canonical
-registry project identifier. Every public `showcase` or `methodology` row has one entry; `hidden`
-rows have none.
+`data/presentation.json` uses `schemaVersion: 2`, a `capabilityGroups` object and a `projects` object
+keyed by the exact canonical registry project identifier. Every public `showcase` or `methodology`
+row has one entry; `hidden` rows have none. Capability taxonomy is landing-owned presentation data,
+not a canonical registry field.
 
 ```json
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "capabilityGroups": {
+    "stable-group-key": {
+      "label": "Public capability label",
+      "description": "Concise group narrative.",
+      "order": 10
+    }
+  },
   "projects": {
     "registry-project-id": {
       "title": "Public title",
       "discipline": "Public discipline",
       "summary": "Evidence-backed public summary.",
       "order": 10,
+      "group": "stable-group-key",
       "tags": ["Tag"],
       "actions": {
         "workflow": "ci.yml",
@@ -47,6 +56,10 @@ rows have none.
 
 Rules enforced by `tools/generate_site.py`:
 
+- group keys use stable lowercase kebab-case; labels and descriptions are non-empty; labels and
+  non-negative display orders are unique;
+- each showcase has exactly one known group, every group has at least one showcase, and methodology
+  entries use `group: null` so they remain outside the showcase taxonomy;
 - entries contain exactly the fields shown above and do not duplicate GitHub slug, lifecycle state,
   orchestration eligibility or presentation role;
 - `order` is a non-negative integer unique within each presentation role;
@@ -56,8 +69,11 @@ Rules enforced by `tools/generate_site.py`:
 - all public registry-lock rows have an entry and hidden/unknown rows do not; and
 - repository and workflow URLs are derived from the registry-owned GitHub slug.
 
-Showcase cards, their numeric/text counts and the methodology section are all derived. Display order
-comes only from `order`; JSON object order has no public meaning.
+Capability sections, showcase cards, project/group/public-demo-or-report statistics, numeric/text
+project counts and the methodology section are all derived. Group and project display order comes
+only from their `order` values; JSON object order has no public meaning. A public-evidence statistic
+counts each non-null `demo` or `report` action on a showcase. It does not claim CI health or project
+freshness.
 
 ## Site manifest schema
 
