@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 14
+**Version:** 15
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-06 closed; LAND-07 is IN REVIEW
+**Status:** ACTIVE — LAND-01 through LAND-07 closed; candidates await owner promotion
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -59,7 +59,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-04 | P1 | DONE | LAND-02R, LAND-03 | Enforce registry-to-landing inventory parity in CI |
 | LAND-05 | P1 | DONE | — | Add publication-quality automated gates |
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
-| LAND-07 | P2 | IN REVIEW | LAND-05, LAND-06 | Add search and social discoverability |
+| LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -334,7 +334,7 @@ this is an accepted inference, not a fresh viewport pass. See the immutable
 ### LAND-07 — Search and social discoverability
 
 **Priority:** P2
-**Status:** IN REVIEW — implementation/settings complete; PR and publication evidence pending
+**Status:** DONE
 **Type:** Generated HTML metadata, static assets, validation and repository settings
 
 Give the portfolio one consistent, evidence-backed identity for search engines, link previews,
@@ -385,7 +385,7 @@ Acceptance criteria:
       `https://gbrooks1970.github.io/portfolio/`; discoverability topics include
       `test-automation`, `quality-engineering`, `portfolio`, `playwright`, `serenity-js`, `bdd` and
       `github-pages`; and the dedicated GitHub social-preview image is uploaded and verified.
-- [ ] The documented local gate and current-head pull-request CI pass. After owner merge, exact-merge
+- [x] The documented local gate and current-head pull-request CI pass. After owner merge, exact-merge
       quality and Pages runs pass, the live HTML matches `main`, and canonical, favicon, sitemap and
       social-image URLs return successfully.
 
@@ -395,9 +395,20 @@ for 9 showcase / 1 methodology projects, 35 named controls, 5 internal reference
 20 contrast pairs and 36/36 tests. Repository description, homepage and seven topics match
 `data/site.json`; the 1280 × 640 repository preview was uploaded and visually verified in GitHub
 settings. See the immutable
-[implementation log](implementation-logs/2026-08-02_land-07-discoverability.md). Implementation is
-under review in [draft PR #15](https://github.com/GBrooks1970/portfolio/pull/15). Current-head PR CI,
-owner merge, exact-merge quality/Pages and live canonical-asset verification remain pending.
+[implementation log](implementation-logs/2026-08-02_land-07-discoverability.md). That implementation
+was reviewed in [PR #15](https://github.com/GBrooks1970/portfolio/pull/15); closure evidence follows.
+
+Completion evidence: [PR #15](https://github.com/GBrooks1970/portfolio/pull/15) merged as
+`6c71e00f7ba98572945e2acb664b45a9c5fe9945`. Exact-merge
+[Portfolio quality run 30734100251](https://github.com/GBrooks1970/portfolio/actions/runs/30734100251)
+and [Pages run 30734099813](https://github.com/GBrooks1970/portfolio/actions/runs/30734099813)
+both passed. The public HTML and six referenced supporting outputs returned HTTP 200; deployed HTML,
+social PNG, PNG icons, sitemap and robots exactly matched `main`, while the SVG exactly matched the
+commit-pinned raw blob after excluding Windows working-tree line-ending conversion. Live metadata
+contained exactly one canonical, matching Open Graph URL/image, one `Person`, one `WebSite` and no
+`ProfilePage`. Repository description, homepage, seven topics and the uploaded repository preview
+remain reconciled. See the immutable
+[merge closure](implementation-logs/2026-08-02_land-07-merge-closure.md).
 
 ## Candidate improvements — unscheduled
 
