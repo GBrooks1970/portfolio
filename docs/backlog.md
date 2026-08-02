@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 18
+**Version:** 19
 **Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; candidates await owner promotion
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A is READY; LAND-09B through LAND-09D are staged
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -61,6 +61,10 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
 | LAND-08 | P2 | DONE | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
+| LAND-09A | P2 | READY | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
+| LAND-09B | P2 | BLOCKED | LAND-09A | Publish and link a hand-baked Screenplay sample report |
+| LAND-09C | P2 | BLOCKED | LAND-09B | Publish and link generated calculator API documentation |
+| LAND-09D | P2 | BLOCKED | LAND-09C | Publish truthful browser-only Sudoku evidence |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -501,17 +505,169 @@ Out of scope:
 - generated freshness or CI-health summaries (LAND-C04); and
 - changes to registry membership or `presentation_role` values.
 
+### LAND-09 — Expand public evidence through staged, repository-owned artefacts
+
+**Priority:** P2
+**Status:** ACTIVE — LAND-09A is READY; LAND-09B through LAND-09D are blocked by the accepted sequence
+**Type:** Cross-repository planning, static publication, landing integration and validation
+**Origin:** Promoted from LAND-C03 by owner decision on 2026-08-02
+
+Turn four existing project capabilities into useful, unauthenticated public evidence without
+turning the landing repository into their build system. Delivery is deliberately serial: complete
+ParaBank first, then the hand-baked reporter, calculator documentation and Sudoku evidence. This
+keeps each change reviewable and prevents one landing item from being treated as authority to edit
+four project repositories at once.
+
+Accepted cross-repository delivery contract:
+
+1. Add and merge a planning-only item in the target project's authoritative backlog or worklist.
+   This landing backlog does not by itself authorise implementation in another repository.
+2. Implement, validate and publish the artefact from the target repository through its own branch
+   and pull request. The target repository owns source truth, generation, tests, dependencies,
+   security, workflow and Pages configuration.
+3. Observe the exact target merge commit's required CI and Pages deployment, then verify the public
+   URL as an unauthenticated visitor. Do not add a landing link to a proposed or branch-only URL.
+4. In a separate landing pull request, add the verified URL to structured presentation data,
+   regenerate committed output and pass the complete portfolio quality gate.
+5. Record target and landing merge/deployment evidence before closing the slice. Promote the next
+   blocked slice to READY only after the current slice is closed.
+
+Common acceptance criteria for every slice:
+
+- [ ] The target repository's authoritative backlog records the approved scope before code,
+      workflow or Pages changes begin.
+- [ ] The published output is deterministic or reproducibly derived from a documented source and
+      represents the latest successfully published default-branch evidence, not live CI health.
+- [ ] The artefact is static, HTTPS, usable without authentication, free of credentials and visitor-
+      side GitHub API calls, and contains no dependency on a running SUT or project backend.
+- [ ] Publication uses least-privilege GitHub Actions permissions and occurs only after the target
+      artefact's content checks pass; a failed test run must not replace the last good public output.
+- [ ] The public URL returns HTTP 200 and its internal assets, navigation and core content work in a
+      fresh unauthenticated browser session at desktop and 390px widths.
+- [ ] Public copy labels snapshots, illustrative samples and stack-specific demonstrations
+      truthfully and does not present them as current CI, whole-portfolio parity or production
+      services.
+- [ ] The landing manifest uses `report` for reports and `demo` only for interactive browser
+      content. Before calculator integration, add and document a typed `documentation` action
+      instead of disguising API documentation as a demo or report.
+- [ ] Landing generation, action semantics, accessible names, evidence statistics and link checks
+      remain derived and tested; only a genuinely interactive demo receives a play-style cue.
+- [ ] Target and landing implementation logs record what was published, the source/ref used, known
+      limitations, validation commands, pull requests, exact merge commits and Pages runs.
+
+#### LAND-09A — ParaBank static Serenity report
+
+**Status:** READY
+**Target repository:** `GBrooks1970/parabank-bank-automation`
+
+ParaBank is first because its full verification already generates `target/site/serenity`, verifies
+that the report contains the executed scenarios and uploads it as the `serenity-report` CI
+artefact. Publish that verified static report; never publish the Docker-backed ParaBank SUT.
+
+Slice-specific acceptance criteria:
+
+- [ ] A planning-only ParaBank pull request promotes a bounded Pages-publication item from the
+      repository's currently unscheduled GitHub Pages candidate.
+- [ ] A target implementation pull request deploys the same non-trivial Serenity output accepted by
+      the report-content gate after a successful full `main` verification; the deploy cannot race,
+      bypass or publish a failed run.
+- [ ] The report's entry page and required relative assets work from the repository's Pages base
+      path, and the published page identifies the source repository and tested default-branch ref.
+- [ ] Public wording describes a snapshot from the latest successful publication and does not imply
+      that the ParaBank container, REST service or SOAP service is hosted on Pages.
+- [ ] After target publication is verified, a separate landing pull request adds the ParaBank
+      `report` action, renders report semantics without a demo/play cue and updates the generated
+      public-evidence count.
+- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09A is marked DONE and LAND-09B becomes READY.
+
+#### LAND-09B — Hand-baked Screenplay sample report
+
+**Status:** BLOCKED by LAND-09A
+**Target repository:** `GBrooks1970/hand-baked-screenplay-pattern`
+
+Publish a maintained illustrative output from the existing dependency-free HTML reporter. The
+project already writes one self-contained `report/index.html` with inline CSS and JavaScript; the
+public sample must demonstrate that capability without being misrepresented as Serenity/JS output
+or as a current project test result.
+
+Slice-specific acceptance criteria:
+
+- [ ] A planning-only target pull request defines a deterministic sample generation path and the
+      sample data needed to demonstrate meaningful pass/fail reporting without making CI fail.
+- [ ] The target implementation produces one self-contained HTML document with no external assets
+      or runtime network requests, and automated checks prove meaningful scene/activity content and
+      byte-stable output for unchanged input.
+- [ ] The page prominently identifies itself as an illustrative hand-baked reporter sample, states
+      that it is independent of Serenity/JS and does not imply current CI status.
+- [ ] Target Pages publishes only after the library, reporter and sample checks pass on `main`.
+- [ ] A separate landing pull request adds a truthful `report` action and retains the generated
+      evidence count, action semantics, accessibility and external-link gates.
+- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09B is marked DONE and LAND-09C becomes READY.
+
+#### LAND-09C — Calculator generated API documentation
+
+**Status:** BLOCKED by LAND-09B
+**Target repository:** `GBrooks1970/calculator-screenplay-bdd`
+
+Publish static API documentation derived from the calculator's authoritative
+`src/openApiDocument.ts`. The public page is documentation for the contract; it is not a hosted
+calculator API and must not introduce a second hand-maintained OpenAPI source.
+
+Slice-specific acceptance criteria:
+
+- [ ] A planning-only target pull request records the static rendering approach, accessibility and
+      browser-support expectations, dependency/licence treatment and drift-prevention strategy.
+- [ ] The target implementation deterministically emits a validated OpenAPI document and a usable
+      static reference from `src/openApiDocument.ts`; endpoint, schema and example checks fail if
+      generated documentation drifts from the served `/openapi.json` contract.
+- [ ] The static output exposes the raw generated OpenAPI document, works from the Pages base path
+      and neither calls nor claims to host `/health` or `/api/calculations`.
+- [ ] Any renderer assets are committed or reproducibly bundled under a compatible recorded licence;
+      the visitor experience does not depend on an unpinned third-party CDN.
+- [ ] Before landing integration, the presentation schema, generator and quality gate gain a typed
+      optional `documentation` action with truthful styling and accessible naming. The calculator
+      card then links the verified public reference through that action.
+- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09C is marked DONE and LAND-09D becomes READY.
+
+#### LAND-09D — Sudoku browser-only evidence
+
+**Status:** BLOCKED by LAND-09C
+**Target repository:** `GBrooks1970/gb.automation.smoketests.sudoku.poc`
+
+Publish a small TypeScript-stack visualisation backed by precomputed, versioned solve payloads. The
+current DEMOAPP001 browser UI fetches `/api/puzzles` and `/api/visualise/{name}`, so it cannot be
+copied to static hosting unchanged. This item is evidence publishing, not authority to absorb the
+40–80 hour interactive tutor (`BACKLOG-015`) or to claim UI/API parity in the Python and C# stacks.
+
+Slice-specific acceptance criteria:
+
+- [ ] A planning-only target pull request reconciles this narrow evidence surface with open
+      `BACKLOG-014`, `BACKLOG-015` and `BACKLOG-016`, records a decision boundary and keeps the tutor,
+      advanced-technique and puzzle-generator outcomes separately scoped.
+- [ ] Before full implementation, a viability gate proves that the viewer can load at least one
+      meaningful precomputed solve payload from relative static assets on the Pages base path with
+      no API or server process. If the gate fails, stop and return the evidence to owner decision.
+- [ ] The implementation reuses maintained grid/player/presentation behaviour where practical,
+      validates fixture provenance and schema, and prevents fixture drift from the TypeScript
+      solver's current visualisation contract.
+- [ ] The page labels itself as a browser-only DEMOAPP001 TypeScript visualisation, not an
+      interactive tutor, hosted solver, live API or three-stack parity demonstration.
+- [ ] Accessibility, keyboard playback, error handling, desktop/390px layout and a clean browser
+      console are covered by automated and rendered checks before target Pages publication.
+- [ ] A separate landing pull request adds the verified URL as a `demo` action and retains all
+      generator, evidence-count, accessibility and external-link gates.
+- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09D and the LAND-09 programme are marked DONE.
+
 ## Candidate improvements — unscheduled
 
 The following items are **PROPOSED**. They are not part of the current required cycle and must not be
-implemented until promoted here by the owner. LAND-C01 and LAND-C02 were promoted as LAND-07 and
-LAND-08 respectively on 2026-08-02; their accepted scope and provenance are retained above.
-
-### LAND-C03 — Expand public evidence
-
-Provide consistent evidence links where useful. Candidate outputs include a static ParaBank
-Serenity report snapshot, a hand-baked Screenplay sample report, calculator API documentation and
-Sudoku interactive evidence. Do not attempt to host Docker-backed SUTs on GitHub Pages.
+implemented until promoted here by the owner. LAND-C01, LAND-C02 and LAND-C03 were promoted as
+LAND-07, LAND-08 and staged LAND-09 respectively on 2026-08-02; their accepted scope and provenance
+are retained above.
 
 ### LAND-C04 — Generated freshness information
 
@@ -525,11 +681,13 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 | OD-LAND-01 — Hotfix before generator | Accepted for this cycle | LAND-01 precedes LAND-03 so the missing ParaBank card is not delayed |
 | OD-LAND-02 — Meta-project presentation | Accepted for this cycle | `portfolio-prompts` appears as methodology/tooling, not as the tenth showcase card |
 | OD-LAND-03 — Durable data ownership | Accepted 2026-08-01 | Hybrid boundary recorded in decision 001: registry owns membership/role; landing owns public copy/order |
-| OD-LAND-04 — ParaBank public artefact | Pending candidate promotion | Repository + CI now; consider a static Serenity snapshot later, never the Docker SUT |
+| OD-LAND-04 — ParaBank public artefact | Accepted 2026-08-02 | Publish the already generated and content-verified static Serenity report as LAND-09A; never publish the Docker SUT or imply that its services run on Pages |
 | OD-LAND-05 — Public methodology target | Accepted 2026-08-01 | Make `NeoCognitus70/portfolio-prompts` public after a repository/history/log scan; unauthenticated access now returns 200 and secret scanning/push protection are enabled |
 | OD-LAND-06 — Browser evidence exception | Accepted 2026-08-01 | Merge LAND-06 with no fresh 390px render or reliable keyboard-only Enter dispatch; retain the gaps and inherited-evidence rationale permanently |
 | OD-LAND-07 — Search/social scope | Accepted 2026-08-02 | Promote LAND-C01 as LAND-07/P2 with `data/site.json`, `WebSite` + `Person`, evergreen dual preview assets, favicons, sitemap/robots, repository metadata/topics and automated plus post-merge live verification |
 | OD-LAND-08 — Information architecture scope | Accepted 2026-08-02 | Promote LAND-C02 as LAND-08/P2 with four landing-owned primary capability groups, generated showcase/group/public-evidence statistics and semantic grouped sections; defer filters, new evidence and freshness/CI summaries |
+| OD-LAND-09 — Public evidence scope and sequence | Accepted 2026-08-02 | Promote LAND-C03 as sequential LAND-09A through LAND-09D: ParaBank report, hand-baked sample report, calculator API documentation, then browser-only Sudoku evidence; each target plans, implements and publishes before the landing integrates its verified URL |
+| OD-LAND-10 — Public evidence ownership boundary | Accepted 2026-08-02 | Target repositories own artefact truth, tests, dependencies and Pages; the landing repository owns link semantics and presentation only; no Pages output may claim to host a Docker SUT, backend or live CI status |
 
 ## Maintenance rules
 
