@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 20
-**Last updated:** 2026-08-03
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A is DONE; LAND-09B is now READY; LAND-09C–09D staged
+**Version:** 21
+**Last updated:** 2026-08-04
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A and LAND-09B are DONE; LAND-09C is now READY; LAND-09D staged
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -62,8 +62,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
 | LAND-08 | P2 | DONE | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
 | LAND-09A | P2 | DONE | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
-| LAND-09B | P2 | READY | LAND-09A | Publish and link a hand-baked Screenplay sample report |
-| LAND-09C | P2 | BLOCKED | LAND-09B | Publish and link generated calculator API documentation |
+| LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
+| LAND-09C | P2 | READY | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | BLOCKED | LAND-09C | Publish truthful browser-only Sudoku evidence |
 
 ### LAND-01 — Restore public inventory and factual accuracy
@@ -508,7 +508,7 @@ Out of scope:
 ### LAND-09 — Expand public evidence through staged, repository-owned artefacts
 
 **Priority:** P2
-**Status:** ACTIVE — LAND-09A is DONE; LAND-09B is now READY; LAND-09C–09D remain blocked by the accepted sequence
+**Status:** ACTIVE — LAND-09A and LAND-09B are DONE; LAND-09C is now READY; LAND-09D remains blocked by the accepted sequence
 **Type:** Cross-repository planning, static publication, landing integration and validation
 **Origin:** Promoted from LAND-C03 by owner decision on 2026-08-02
 
@@ -602,8 +602,10 @@ LAND-09B is now READY.
 
 #### LAND-09B — Hand-baked Screenplay sample report
 
-**Status:** READY
-**Target repository:** `GBrooks1970/hand-baked-screenplay-pattern`
+**Status:** DONE
+**Target repository:** `NeoCognitus70/hand-baked-screenplay-pattern`
+(corrected from `GBrooks1970/...`; the repository is owned by `NeoCognitus70`, so its Pages base is
+`https://neocognitus70.github.io/hand-baked-screenplay-pattern/`.)
 
 Publish a maintained illustrative output from the existing dependency-free HTML reporter. The
 project already writes one self-contained `report/index.html` with inline CSS and JavaScript; the
@@ -612,23 +614,42 @@ or as a current project test result.
 
 Slice-specific acceptance criteria:
 
-- [ ] A planning-only target pull request defines a deterministic sample generation path and the
+- [x] A planning-only target pull request defines a deterministic sample generation path and the
       sample data needed to demonstrate meaningful pass/fail reporting without making CI fail.
-- [ ] The target implementation produces one self-contained HTML document with no external assets
+      **Hand-baked HBSP-27 planning [PR #42](https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/pull/42) merged as `be03329`.**
+- [x] The target implementation produces one self-contained HTML document with no external assets
       or runtime network requests, and automated checks prove meaningful scene/activity content and
-      byte-stable output for unchanged input.
-- [ ] The page prominently identifies itself as an illustrative hand-baked reporter sample, states
-      that it is independent of Serenity/JS and does not imply current CI status.
-- [ ] Target Pages publishes only after the library, reporter and sample checks pass on `main`.
-- [ ] A separate landing pull request adds a truthful `report` action and retains the generated
-      evidence count, action semantics, accessibility and external-link gates.
-- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
-      before LAND-09B is marked DONE and LAND-09C becomes READY.
+      byte-stable output for unchanged input. **HBSP-27 impl [PR #43](https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/pull/43)
+      merged as `ae33a66`: `renderSampleReport()` (injected monotonic clock → byte-stable), gated by
+      `spec/sample-report.spec.ts` in `npm run verify`.**
+- [x] The page prominently identifies itself as an illustrative hand-baked reporter sample, states
+      that it is independent of Serenity/JS and does not imply current CI status. **The banner reads
+      "Illustrative sample — not a live test run … independent of Serenity/JS".**
+- [x] Target Pages publishes only after the library, reporter and sample checks pass on `main`.
+      **`pages.yml` runs `npm run verify` before generating/deploying, `push`-to-`main` only, with
+      deploy-only Pages permissions; [Pages run 30863382627](https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/runs/30863382627) green.**
+- [x] A separate landing pull request adds a truthful `report` action and retains the generated
+      evidence count, action semantics, accessibility and external-link gates. **Landing PR #23
+      merged as `d94787b`: "Sample report" action added, public-evidence count 5 → 6, full quality
+      gate green.**
+- [x] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09B is marked DONE and LAND-09C becomes READY. **See Completion evidence below.**
+
+Completion evidence: landing PR [#23](https://github.com/GBrooks1970/portfolio/pull/23) merged as
+`d94787b`; exact-merge [Portfolio quality run 30863597028](https://github.com/GBrooks1970/portfolio/actions/runs/30863597028)
+and [Pages deployment 30863596646](https://github.com/GBrooks1970/portfolio/actions/runs/30863596646)
+both succeeded. The live portfolio page returned HTTP 200 with `data-public-evidence-count="6"`, the
+"Public demos and reports" statistic at 6 and the Hand-Baked Screenplay Pattern card's "Sample
+report" action linking the verified target URL. Target side: hand-baked HBSP-27 PRs #42 (`be03329`)
+and #43 (`ae33a66`), Pages [run 30863382627](https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/runs/30863382627)
+green; `https://neocognitus70.github.io/hand-baked-screenplay-pattern/` returns HTTP 200, self-
+contained, banner + three scenes (2 pass / 1 fail), no console errors. See the immutable
+[implementation log](implementation-logs/2026-08-03_land-09b-hand-baked-report.md). LAND-09C is now READY.
 
 #### LAND-09C — Calculator generated API documentation
 
-**Status:** BLOCKED by LAND-09B
-**Target repository:** `GBrooks1970/calculator-screenplay-bdd`
+**Status:** READY
+**Target repository:** `NeoCognitus70/calculator-screenplay-bdd`
 
 Publish static API documentation derived from the calculator's authoritative
 `src/openApiDocument.ts`. The public page is documentation for the contract; it is not a hosted
