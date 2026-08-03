@@ -65,7 +65,10 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null
+        "report": {
+          "label": "Serenity report",
+          "url": "https://gbrooks1970.github.io/parabank-bank-automation/"
+        }
       }
     },
     "bfx-ws-screenplay": {
