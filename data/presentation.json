@@ -94,7 +94,10 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null
+        "report": {
+          "label": "Sample report",
+          "url": "https://neocognitus70.github.io/hand-baked-screenplay-pattern/"
+        }
       }
     },
     "markdown-renderer": {
