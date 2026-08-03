@@ -122,9 +122,9 @@ class RegistryParityTests(unittest.TestCase):
             PARITY.validate_rendered_inventory(wrong_group_count, registry, self.manifest)
 
         wrong_evidence_count = self.rendered.replace(
-            'data-public-evidence-count="5"', 'data-public-evidence-count="6"', 1
+            'data-public-evidence-count="6"', 'data-public-evidence-count="7"', 1
         )
-        with self.assertRaisesRegex(PARITY.ParityError, "public evidence count is 6"):
+        with self.assertRaisesRegex(PARITY.ParityError, "public evidence count is 7"):
             PARITY.validate_rendered_inventory(wrong_evidence_count, registry, self.manifest)
 
     def test_registry_lock_drift_is_rejected(self) -> None:
