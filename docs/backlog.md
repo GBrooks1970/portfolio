@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 19
-**Last updated:** 2026-08-02
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A is READY; LAND-09B through LAND-09D are staged
+**Version:** 20
+**Last updated:** 2026-08-03
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A is DONE; LAND-09B is now READY; LAND-09C–09D staged
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -61,8 +61,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-06 | P1 | DONE WITH EXCEPTION | LAND-01 | Strengthen navigation and accessibility contracts |
 | LAND-07 | P2 | DONE | LAND-05, LAND-06 | Add search and social discoverability |
 | LAND-08 | P2 | DONE | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
-| LAND-09A | P2 | READY | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
-| LAND-09B | P2 | BLOCKED | LAND-09A | Publish and link a hand-baked Screenplay sample report |
+| LAND-09A | P2 | DONE | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
+| LAND-09B | P2 | READY | LAND-09A | Publish and link a hand-baked Screenplay sample report |
 | LAND-09C | P2 | BLOCKED | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | BLOCKED | LAND-09C | Publish truthful browser-only Sudoku evidence |
 
@@ -508,7 +508,7 @@ Out of scope:
 ### LAND-09 — Expand public evidence through staged, repository-owned artefacts
 
 **Priority:** P2
-**Status:** ACTIVE — LAND-09A is READY; LAND-09B through LAND-09D are blocked by the accepted sequence
+**Status:** ACTIVE — LAND-09A is DONE; LAND-09B is now READY; LAND-09C–09D remain blocked by the accepted sequence
 **Type:** Cross-repository planning, static publication, landing integration and validation
 **Origin:** Promoted from LAND-C03 by owner decision on 2026-08-02
 
@@ -557,7 +557,7 @@ Common acceptance criteria for every slice:
 
 #### LAND-09A — ParaBank static Serenity report
 
-**Status:** READY
+**Status:** DONE
 **Target repository:** `GBrooks1970/parabank-bank-automation`
 
 ParaBank is first because its full verification already generates `target/site/serenity`, verifies
@@ -566,24 +566,43 @@ artefact. Publish that verified static report; never publish the Docker-backed P
 
 Slice-specific acceptance criteria:
 
-- [ ] A planning-only ParaBank pull request promotes a bounded Pages-publication item from the
-      repository's currently unscheduled GitHub Pages candidate.
-- [ ] A target implementation pull request deploys the same non-trivial Serenity output accepted by
+- [x] A planning-only ParaBank pull request promotes a bounded Pages-publication item from the
+      repository's currently unscheduled GitHub Pages candidate. **ParaBank PR #26 (planning,
+      PB-EVID-01) merged as `6e79db0`.**
+- [x] A target implementation pull request deploys the same non-trivial Serenity output accepted by
       the report-content gate after a successful full `main` verification; the deploy cannot race,
-      bypass or publish a failed run.
-- [ ] The report's entry page and required relative assets work from the repository's Pages base
+      bypass or publish a failed run. **ParaBank PR #27 merged as `d9aba95`; the `check:pages` gate
+      runs after `npm run verify` and the deploy job is `push`-on-`main` only.**
+- [x] The report's entry page and required relative assets work from the repository's Pages base
       path, and the published page identifies the source repository and tested default-branch ref.
-- [ ] Public wording describes a snapshot from the latest successful publication and does not imply
-      that the ParaBank container, REST service or SOAP service is hosted on Pages.
-- [ ] After target publication is verified, a separate landing pull request adds the ParaBank
+      **`https://gbrooks1970.github.io/parabank-bank-automation/` and `/serenity/index.html` return
+      HTTP 200; `evidence.json` names the repository and `sourceRef`.**
+- [x] Public wording describes a snapshot from the latest successful publication and does not imply
+      that the ParaBank container, REST service or SOAP service is hosted on Pages. **The landing
+      action is labelled "Serenity report" (snapshot semantics); the evidence page states the
+      Docker SUT/APIs are not hosted.**
+- [x] After target publication is verified, a separate landing pull request adds the ParaBank
       `report` action, renders report semantics without a demo/play cue and updates the generated
-      public-evidence count.
-- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
-      before LAND-09A is marked DONE and LAND-09B becomes READY.
+      public-evidence count. **Landing PR #21 merged as `9b4be69`: `report` action added, no
+      demo/play cue, generated public-evidence count 4 → 5.**
+- [x] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09A is marked DONE and LAND-09B becomes READY. **See Completion evidence below.**
+
+Completion evidence: landing PR [#21](https://github.com/GBrooks1970/portfolio/pull/21) merged as
+`9b4be69`; exact-merge [Portfolio quality run 30840610612](https://github.com/GBrooks1970/portfolio/actions/runs/30840610612)
+and [Pages deployment 30840601153](https://github.com/GBrooks1970/portfolio/actions/runs/30840601153)
+both succeeded. The live portfolio page returned HTTP 200 with `data-public-evidence-count="5"`, the
+"Public demos and reports" statistic at 5 and the ParaBank card's "Serenity report" action linking
+the verified target URL; no console errors on render. Target side: ParaBank PR #27 merged as
+`d9aba95`, post-merge `main` CI [run 30755372150](https://github.com/GBrooks1970/parabank-bank-automation/actions/runs/30755372150)
+green with Pages deploy; `https://gbrooks1970.github.io/parabank-bank-automation/`,
+`/serenity/index.html` and `/evidence.json` all HTTP 200 with `sourceRef` = the merged commit.
+See the immutable [implementation log](implementation-logs/2026-08-03_land-09a-parabank-report.md).
+LAND-09B is now READY.
 
 #### LAND-09B — Hand-baked Screenplay sample report
 
-**Status:** BLOCKED by LAND-09A
+**Status:** READY
 **Target repository:** `GBrooks1970/hand-baked-screenplay-pattern`
 
 Publish a maintained illustrative output from the existing dependency-free HTML reporter. The
