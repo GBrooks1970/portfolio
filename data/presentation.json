@@ -36,7 +36,8 @@
         "report": {
           "label": "Live report",
           "url": "https://gbrooks1970.github.io/magento-checkout-automation/"
-        }
+        },
+        "documentation": null
       }
     },
     "orangehrm-pim-automation": {
@@ -52,7 +53,8 @@
         "report": {
           "label": "Live report",
           "url": "https://gbrooks1970.github.io/orangehrm-pim-automation/"
-        }
+        },
+        "documentation": null
       }
     },
     "parabank-bank-automation": {
@@ -68,7 +70,8 @@
         "report": {
           "label": "Serenity report",
           "url": "https://gbrooks1970.github.io/parabank-bank-automation/"
-        }
+        },
+        "documentation": null
       }
     },
     "bfx-ws-screenplay": {
@@ -81,7 +84,8 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null
+        "report": null,
+        "documentation": null
       }
     },
     "hand-baked-screenplay-pattern": {
@@ -97,7 +101,8 @@
         "report": {
           "label": "Sample report",
           "url": "https://neocognitus70.github.io/hand-baked-screenplay-pattern/"
-        }
+        },
+        "documentation": null
       }
     },
     "markdown-renderer": {
@@ -113,7 +118,8 @@
           "label": "Live demo",
           "url": "https://gbrooks1970.github.io/markdown-renderer/"
         },
-        "report": null
+        "report": null,
+        "documentation": null
       }
     },
     "mobile-forex-automation": {
@@ -129,7 +135,8 @@
           "label": "Live demo",
           "url": "https://gbrooks1970.github.io/mobile-forex-automation/"
         },
-        "report": null
+        "report": null,
+        "documentation": null
       }
     },
     "calculator-screenplay-bdd": {
@@ -142,7 +149,11 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null
+        "report": null,
+        "documentation": {
+          "label": "API reference",
+          "url": "https://neocognitus70.github.io/calculator-screenplay-bdd/"
+        }
       }
     },
     "gb.automation.smoketests.sudoku.poc": {
@@ -155,7 +166,8 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null
+        "report": null,
+        "documentation": null
       }
     },
     "portfolio-prompts": {
@@ -168,7 +180,8 @@
       "actions": {
         "workflow": null,
         "demo": null,
-        "report": null
+        "report": null,
+        "documentation": null
       }
     }
   }

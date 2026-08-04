@@ -125,6 +125,9 @@
   .btn:hover { border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .btn.demo::before { content: "\25B6  "; font-size: 0.7em; }
+  /* Static evidence links (report, documentation) get no play cue; docs carry a
+     small doc glyph so the action type reads at a glance. */
+  .btn.documentation::before { content: "\1F4C4  "; font-size: 0.85em; }
   .badge { height: 20px; vertical-align: middle; }
   .methodology { margin-top: 34px; padding: 20px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--card); }
@@ -158,7 +161,7 @@
 
 <main class="portfolio" id="projects" data-showcase-count="9"
   data-capability-group-count="4"
-  data-public-evidence-count="6" tabindex="-1"
+  data-public-evidence-count="7" tabindex="-1"
   aria-labelledby="projects-heading">
 
   <h2 class="section-heading" id="projects-heading">Showcase projects</h2>
@@ -175,8 +178,8 @@
       <dd>4</dd>
     </div>
     <div>
-      <dt>Public demos and reports</dt>
-      <dd>6</dd>
+      <dt>Public demos, reports and docs</dt>
+      <dd>7</dd>
     </div>
   </dl>
 
@@ -195,7 +198,7 @@
       <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">TypeScript</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/magento-checkout-automation">Repo</a>
-          <a class="btn demo" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
           <a href="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml" aria-label="Magento Checkout Automation CI workflow"><img class="badge" alt="Magento Checkout Automation CI status" src="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -208,7 +211,7 @@
       <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/orangehrm-pim-automation">Repo</a>
-          <a class="btn demo" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
           <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml" aria-label="OrangeHRM PIM Automation CI workflow"><img class="badge" alt="OrangeHRM PIM Automation CI status" src="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -221,7 +224,7 @@
       <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">OpenAPI</span><span class="chip">Docker</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/parabank-bank-automation">Repo</a>
-          <a class="btn demo" href="https://gbrooks1970.github.io/parabank-bank-automation/">Serenity report</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/parabank-bank-automation/">Serenity report</a>
           <a href="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml" aria-label="ParaBank Bank Automation CI workflow"><img class="badge" alt="ParaBank Bank Automation CI status" src="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -255,6 +258,7 @@
       <div class="chips"><span class="chip">playwright-bdd</span><span class="chip">Screenplay</span><span class="chip">OpenAPI</span><span class="chip">TypeScript</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Repo</a>
+          <a class="btn documentation" href="https://neocognitus70.github.io/calculator-screenplay-bdd/">API reference</a>
           <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml" aria-label="Calculator Screenplay BDD CI workflow"><img class="badge" alt="Calculator Screenplay BDD CI status" src="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -276,7 +280,7 @@
       <div class="chips"><span class="chip">TypeScript</span><span class="chip">Vitest</span><span class="chip">Zero-deps</span><span class="chip">Library</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Repo</a>
-          <a class="btn demo" href="https://neocognitus70.github.io/hand-baked-screenplay-pattern/">Sample report</a>
+          <a class="btn report" href="https://neocognitus70.github.io/hand-baked-screenplay-pattern/">Sample report</a>
           <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml" aria-label="Hand-Baked Screenplay Pattern CI workflow"><img class="badge" alt="Hand-Baked Screenplay Pattern CI status" src="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
