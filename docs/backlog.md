@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 22
+**Version:** 23
 **Last updated:** 2026-08-04
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A, LAND-09B and LAND-09C are DONE; LAND-09D is now READY (final slice)
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. No required cycle items remain open.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -64,7 +64,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09A | P2 | DONE | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
 | LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
-| LAND-09D | P2 | READY | LAND-09C | Publish truthful browser-only Sudoku evidence |
+| LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -508,7 +508,7 @@ Out of scope:
 ### LAND-09 — Expand public evidence through staged, repository-owned artefacts
 
 **Priority:** P2
-**Status:** ACTIVE — LAND-09A, LAND-09B and LAND-09C are DONE; LAND-09D is now READY (the final slice)
+**Status:** DONE — all four slices LAND-09A–09D are complete; the LAND-09 programme is closed
 **Type:** Cross-repository planning, static publication, landing integration and validation
 **Origin:** Promoted from LAND-C03 by owner decision on 2026-08-02
 
@@ -697,7 +697,7 @@ LAND-09D is now READY.
 
 #### LAND-09D — Sudoku browser-only evidence
 
-**Status:** READY (final slice; unblocked by LAND-09C on 2026-08-04)
+**Status:** DONE — this also completes the LAND-09 programme
 **Target repository:** `GBrooks1970/gb.automation.smoketests.sudoku.poc`
 
 Publish a small TypeScript-stack visualisation backed by precomputed, versioned solve payloads. The
@@ -707,23 +707,49 @@ copied to static hosting unchanged. This item is evidence publishing, not author
 
 Slice-specific acceptance criteria:
 
-- [ ] A planning-only target pull request reconciles this narrow evidence surface with open
+- [x] A planning-only target pull request reconciles this narrow evidence surface with open
       `BACKLOG-014`, `BACKLOG-015` and `BACKLOG-016`, records a decision boundary and keeps the tutor,
-      advanced-technique and puzzle-generator outcomes separately scoped.
-- [ ] Before full implementation, a viability gate proves that the viewer can load at least one
+      advanced-technique and puzzle-generator outcomes separately scoped. **Sudoku BACKLOG-071 +
+      **DR-040** ([PR #52](https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/pull/52),
+      merged `619016f`) record the boundary: a single-Stack evidence surface that does not absorb
+      BACKLOG-014/015/016 or claim parity.**
+- [x] Before full implementation, a viability gate proves that the viewer can load at least one
       meaningful precomputed solve payload from relative static assets on the Pages base path with
       no API or server process. If the gate fails, stop and return the evidence to owner decision.
-- [ ] The implementation reuses maintained grid/player/presentation behaviour where practical,
+      **Viability gate PASSED 2026-08-04 (recorded in DR-040): payloads precomputed offline via
+      `SolveStepTracker`; the viewer rendered grid + full playback from static files, no server.**
+- [x] The implementation reuses maintained grid/player/presentation behaviour where practical,
       validates fixture provenance and schema, and prevents fixture drift from the TypeScript
-      solver's current visualisation contract.
-- [ ] The page labels itself as a browser-only DEMOAPP001 TypeScript visualisation, not an
-      interactive tutor, hosted solver, live API or three-stack parity demonstration.
-- [ ] Accessibility, keyboard playback, error handling, desktop/390px layout and a clean browser
+      solver's current visualisation contract. **Impl [PR #53](https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/pull/53)
+      (merged `4e504b3`): `build-pages` reuses `grid.js`/`player.js` verbatim and precomputes payloads
+      via the maintained solve/visualise logic; `check-pages` fails on non-determinism, malformed
+      payloads or drift.**
+- [x] The page labels itself as a browser-only DEMOAPP001 TypeScript visualisation, not an
+      interactive tutor, hosted solver, live API or three-stack parity demonstration. **A prominent
+      provenance banner states exactly this; `check-pages` fails without it.**
+- [x] Accessibility, keyboard playback, error handling, desktop/390px layout and a clean browser
       console are covered by automated and rendered checks before target Pages publication.
-- [ ] A separate landing pull request adds the verified URL as a `demo` action and retains all
-      generator, evidence-count, accessibility and external-link gates.
-- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
-      before LAND-09D and the LAND-09 programme are marked DONE.
+      **`check-pages` enforces self-containment; the live viewer was browser-verified (5 puzzles,
+      "✓ SOLVED", full step playback filling all 81 cells, no console errors).**
+- [x] A separate landing pull request adds the verified URL as a `demo` action and retains all
+      generator, evidence-count, accessibility and external-link gates. **Landing PR #27 merged as
+      `19a8797`: `demo` action added (interactive viewer → play cue), evidence count 7 → 8, full
+      quality gate green.**
+- [x] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09D and the LAND-09 programme are marked DONE. **See Completion evidence below.**
+
+Completion evidence: landing PR [#27](https://github.com/GBrooks1970/portfolio/pull/27) merged as
+`19a8797`; exact-merge [Portfolio quality run 30927279911](https://github.com/GBrooks1970/portfolio/actions/runs/30927279911)
+and [Pages deployment 30927332426](https://github.com/GBrooks1970/portfolio/actions/runs/30927332426)
+both succeeded. The live portfolio page returned HTTP 200 with `data-public-evidence-count="8"`, the
+"Public demos, reports and docs" statistic at 8 and the Sudoku card's "Solver visualisation" demo
+action. Target side: sudoku BACKLOG-071 PRs #52 (`619016f`) and #53 (`4e504b3`), Pages
+[run 30926946232](https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/runs/30926946232)
+green; `https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/` returns HTTP 200 and the
+live viewer was verified on the real base path (banner, 5 puzzles, SOLVED, full playback, no console
+errors). See the immutable [implementation log](implementation-logs/2026-08-04_land-09d-sudoku-evidence.md).
+
+**🏁 The LAND-09 public-evidence programme is COMPLETE — all four slices (09A–09D) DONE.**
 
 ## Candidate improvements — unscheduled
 
