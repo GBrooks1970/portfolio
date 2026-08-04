@@ -101,6 +101,8 @@
     letter-spacing: 0.03em; text-transform: uppercase; }
   .portfolio-stats dd { margin: 2px 0 0; color: var(--ink); font-size: 1.45rem;
     font-weight: 700; line-height: 1.2; }
+  .portfolio-stats .stat-detail { margin: 6px 0 0; color: var(--muted); font-size: 0.8rem;
+    font-weight: 600; line-height: 1.35; }
   .capability-group + .capability-group { margin-top: 38px; }
   .group-heading { max-width: 72ch; margin-bottom: 14px; }
   .group-heading h3 { font-size: 1.18rem; margin: 0 0 3px; }
@@ -139,9 +141,10 @@
   .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
   @media (max-width: 600px) {
     .portfolio-stats { grid-template-columns: 1fr; gap: 8px; }
-    .portfolio-stats > div { display: flex; align-items: baseline; justify-content: space-between;
-      gap: 16px; }
+    .portfolio-stats > div { display: flex; flex-wrap: wrap; align-items: baseline;
+      justify-content: space-between; gap: 4px 16px; }
     .portfolio-stats dd { margin: 0; }
+    .portfolio-stats .stat-detail { flex-basis: 100%; margin: 0; }
   }
 </style>
 </head>
@@ -176,6 +179,7 @@
     <div>
       <dt>Capability areas</dt>
       <dd>4</dd>
+      <p class="stat-detail">Web UI and end-to-end · APIs, BDD and real-time protocols · Multi-stack and framework design · Mobile and shipped products</p>
     </div>
     <div>
       <dt>Public demos, reports and docs</dt>
