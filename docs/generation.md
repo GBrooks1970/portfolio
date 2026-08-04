@@ -47,7 +47,8 @@ not a canonical registry field.
       "actions": {
         "workflow": "ci.yml",
         "demo": {"label": "Live demo", "url": "https://example.test/"},
-        "report": null
+        "report": null,
+        "documentation": null
       }
     }
   }
@@ -65,15 +66,20 @@ Rules enforced by `tools/generate_site.py`:
 - `order` is a non-negative integer unique within each presentation role;
 - tags are non-empty and unique within an entry;
 - `workflow` is a repository workflow filename or `null`;
-- `demo` and `report` are `null` or an HTTPS URL with a truthful label;
+- `demo`, `report` and `documentation` are each `null` or an HTTPS URL with a truthful label. The
+  three action types are distinct by design: `demo` is a genuinely interactive browser experience and
+  is the **only** type that receives a play-style cue (the `.btn.demo::before` glyph); `report` links a
+  static test/evidence report; `documentation` links static reference documentation (e.g. a rendered
+  API contract) and carries a small document glyph. Reports and documentation must not be styled as
+  demos;
 - all public registry-lock rows have an entry and hidden/unknown rows do not; and
 - repository and workflow URLs are derived from the registry-owned GitHub slug.
 
 Capability sections, showcase cards, project/group/public-demo-or-report statistics, numeric/text
 project counts and the methodology section are all derived. Group and project display order comes
 only from their `order` values; JSON object order has no public meaning. A public-evidence statistic
-counts each non-null `demo` or `report` action on a showcase. It does not claim CI health or project
-freshness.
+counts each non-null `demo`, `report` or `documentation` action on a showcase. It does not claim CI
+health or project freshness.
 
 ## Site manifest schema
 

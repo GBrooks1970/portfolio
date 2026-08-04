@@ -37,11 +37,32 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertEqual(self.rendered.count('class="capability-group"'), 4)
         self.assertEqual(self.rendered.count("<h4><a href="), 9)
         self.assertIn('data-capability-group-count="4"', self.rendered)
-        self.assertIn('data-public-evidence-count="6"', self.rendered)
+        self.assertIn('data-public-evidence-count="7"', self.rendered)
         self.assertIn("<dt>Capability areas</dt>\n      <dd>4</dd>", self.rendered)
-        self.assertIn("<dt>Public demos and reports</dt>\n      <dd>6</dd>", self.rendered)
+        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>7</dd>", self.rendered)
         self.assertEqual(self.rendered.count(" CI workflow\">"), 9)
         self.assertEqual(self.rendered.count(" CI status\""), 9)
+
+    def test_action_types_are_rendered_with_distinct_classes(self) -> None:
+        # Only a genuinely interactive `demo` carries the play cue (the
+        # `.btn.demo::before` glyph); static `report` and `documentation` links
+        # use their own classes and must not be rendered as demos.
+        self.assertIn(
+            '<a class="btn documentation" '
+            'href="https://neocognitus70.github.io/calculator-screenplay-bdd/">API reference</a>',
+            self.rendered,
+        )
+        self.assertIn(
+            '<a class="btn report" '
+            'href="https://gbrooks1970.github.io/parabank-bank-automation/">Serenity report</a>',
+            self.rendered,
+        )
+        self.assertIn(
+            '<a class="btn demo" href="https://gbrooks1970.github.io/markdown-renderer/">Live demo</a>',
+            self.rendered,
+        )
+        # No report or documentation link is styled as a demo (no false play cue).
+        self.assertNotIn('class="btn demo" href="https://gbrooks1970.github.io/parabank', self.rendered)
 
     def test_renders_consistent_search_and_social_metadata(self) -> None:
         canonical = self.site["canonicalUrl"]

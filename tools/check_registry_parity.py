@@ -148,7 +148,7 @@ def validate_rendered_inventory(
     public_evidence_count = sum(
         projects[project]["actions"][field] is not None
         for project in expected_showcase
-        for field in ("demo", "report")
+        for field in ("demo", "report", "documentation")
     )
     _validate_single_count(parser.showcase_counts, len(expected_showcase), "showcase")
     _validate_single_count(parser.capability_group_counts, len(groups), "capability group")

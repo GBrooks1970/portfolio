@@ -24,7 +24,7 @@ ALLOWED_ROLES = PUBLIC_ROLES | {"hidden"}
 MANIFEST_FIELDS = {"schemaVersion", "capabilityGroups", "projects"}
 GROUP_FIELDS = {"label", "description", "order"}
 ENTRY_FIELDS = {"title", "discipline", "summary", "order", "group", "tags", "actions"}
-ACTION_FIELDS = {"workflow", "demo", "report"}
+ACTION_FIELDS = {"workflow", "demo", "report", "documentation"}
 LINK_FIELDS = {"label", "url"}
 SITE_FIELDS = {
     "schemaVersion", "canonicalUrl", "title", "description", "language", "locale",
@@ -356,12 +356,15 @@ def validate_sources(
             raise SourceError(f"{project}: tags must be unique")
         actions = entry["actions"]
         if not isinstance(actions, dict) or set(actions) != ACTION_FIELDS:
-            raise SourceError(f"{project}: actions must contain workflow, demo and report")
+            raise SourceError(
+                f"{project}: actions must contain workflow, demo, report and documentation"
+            )
         workflow = actions["workflow"]
         if workflow is not None:
             _require_text(workflow, "actions.workflow", project)
         _validate_link(actions["demo"], "demo", project)
         _validate_link(actions["report"], "report", project)
+        _validate_link(actions["documentation"], "documentation", project)
 
     empty_groups = sorted(key for key, members in group_members.items() if not members)
     if empty_groups:
@@ -384,9 +387,12 @@ def _number_word(value: int) -> str:
     return words.get(value, str(value))
 
 
-def _action_link(action: dict[str, str]) -> str:
+def _action_link(action: dict[str, str], css_class: str) -> str:
+    # Only a genuinely interactive `demo` carries the play-style cue (added by the
+    # `.btn.demo::before` CSS). Static `report` and `documentation` links use their
+    # own classes so they do not imply an interactive experience.
     return (
-        f'<a class="btn demo" href="{_escape(action["url"])}">'
+        f'<a class="btn {css_class}" href="{_escape(action["url"])}">'
         f'{_escape(action["label"])}</a>'
     )
 
@@ -397,9 +403,11 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
     chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
     actions = [f'<a class="btn primary" href="{_escape(repo_url)}">Repo</a>']
     if entry["actions"]["demo"] is not None:
-        actions.append(_action_link(entry["actions"]["demo"]))
+        actions.append(_action_link(entry["actions"]["demo"], "demo"))
     if entry["actions"]["report"] is not None:
-        actions.append(_action_link(entry["actions"]["report"]))
+        actions.append(_action_link(entry["actions"]["report"], "report"))
+    if entry["actions"]["documentation"] is not None:
+        actions.append(_action_link(entry["actions"]["documentation"], "documentation"))
     workflow = entry["actions"]["workflow"]
     if workflow is not None:
         workflow_url = f"{repo_url}/actions/workflows/{workflow}"
@@ -493,7 +501,7 @@ def render_site(
     public_evidence_count = sum(
         entry["actions"][field] is not None
         for _, entry, _ in showcase
-        for field in ("demo", "report")
+        for field in ("demo", "report", "documentation")
     )
 
     replacements = {

@@ -68,6 +68,9 @@
   .btn:hover { border-color: var(--accent); }
   .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .btn.demo::before { content: "\25B6  "; font-size: 0.7em; }
+  /* Static evidence links (report, documentation) get no play cue; docs carry a
+     small doc glyph so the action type reads at a glance. */
+  .btn.documentation::before { content: "\1F4C4  "; font-size: 0.85em; }
   .badge { height: 20px; vertical-align: middle; }
   .methodology { margin-top: 34px; padding: 20px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--card); }
@@ -118,7 +121,7 @@
       <dd>{{CAPABILITY_GROUP_COUNT}}</dd>
     </div>
     <div>
-      <dt>Public demos and reports</dt>
+      <dt>Public demos, reports and docs</dt>
       <dd>{{PUBLIC_EVIDENCE_COUNT}}</dd>
     </div>
   </dl>
