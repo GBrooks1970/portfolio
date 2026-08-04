@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 21
+**Version:** 22
 **Last updated:** 2026-08-04
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A and LAND-09B are DONE; LAND-09C is now READY; LAND-09D staged
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; LAND-09A, LAND-09B and LAND-09C are DONE; LAND-09D is now READY (final slice)
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -63,8 +63,8 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-08 | P2 | DONE | LAND-03, LAND-06 | Group showcases by primary capability and generate portfolio statistics |
 | LAND-09A | P2 | DONE | LAND-03, LAND-05 | Publish and link a static ParaBank Serenity report |
 | LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
-| LAND-09C | P2 | READY | LAND-09B | Publish and link generated calculator API documentation |
-| LAND-09D | P2 | BLOCKED | LAND-09C | Publish truthful browser-only Sudoku evidence |
+| LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
+| LAND-09D | P2 | READY | LAND-09C | Publish truthful browser-only Sudoku evidence |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -508,7 +508,7 @@ Out of scope:
 ### LAND-09 — Expand public evidence through staged, repository-owned artefacts
 
 **Priority:** P2
-**Status:** ACTIVE — LAND-09A and LAND-09B are DONE; LAND-09C is now READY; LAND-09D remains blocked by the accepted sequence
+**Status:** ACTIVE — LAND-09A, LAND-09B and LAND-09C are DONE; LAND-09D is now READY (the final slice)
 **Type:** Cross-repository planning, static publication, landing integration and validation
 **Origin:** Promoted from LAND-C03 by owner decision on 2026-08-02
 
@@ -648,7 +648,7 @@ contained, banner + three scenes (2 pass / 1 fail), no console errors. See the i
 
 #### LAND-09C — Calculator generated API documentation
 
-**Status:** READY
+**Status:** DONE
 **Target repository:** `NeoCognitus70/calculator-screenplay-bdd`
 
 Publish static API documentation derived from the calculator's authoritative
@@ -657,24 +657,47 @@ calculator API and must not introduce a second hand-maintained OpenAPI source.
 
 Slice-specific acceptance criteria:
 
-- [ ] A planning-only target pull request records the static rendering approach, accessibility and
+- [x] A planning-only target pull request records the static rendering approach, accessibility and
       browser-support expectations, dependency/licence treatment and drift-prevention strategy.
-- [ ] The target implementation deterministically emits a validated OpenAPI document and a usable
+      **Calculator CAL-21 planning [PR #30](https://github.com/NeoCognitus70/calculator-screenplay-bdd/pull/30) merged as `faee931`.**
+- [x] The target implementation deterministically emits a validated OpenAPI document and a usable
       static reference from `src/openApiDocument.ts`; endpoint, schema and example checks fail if
-      generated documentation drifts from the served `/openapi.json` contract.
-- [ ] The static output exposes the raw generated OpenAPI document, works from the Pages base path
-      and neither calls nor claims to host `/health` or `/api/calculations`.
-- [ ] Any renderer assets are committed or reproducibly bundled under a compatible recorded licence;
-      the visitor experience does not depend on an unpinned third-party CDN.
-- [ ] Before landing integration, the presentation schema, generator and quality gate gain a typed
+      generated documentation drifts from the served `/openapi.json` contract. **CAL-21 impl
+      [PR #31](https://github.com/NeoCognitus70/calculator-screenplay-bdd/pull/31) merged as `cd74df0`:
+      pure `renderApiReference()` + emitted `openapi.json`; `check-api-docs` (in `npm run verify`)
+      fails on any missing path/operation/response/schema/property, non-deep-equal `openapi.json`, or
+      non-determinism.**
+- [x] The static output exposes the raw generated OpenAPI document, works from the Pages base path
+      and neither calls nor claims to host `/health` or `/api/calculations`. **The page links its
+      relative `openapi.json`, states it is a static reference and not a running service, and the
+      check fails on any `fetch`/XHR/WebSocket.**
+- [x] Any renderer assets are committed or reproducibly bundled under a compatible recorded licence;
+      the visitor experience does not depend on an unpinned third-party CDN. **The renderer is
+      dependency-free and in-repo (inline CSS only); the check fails on any external asset ref — no
+      third-party renderer or CDN is used.**
+- [x] Before landing integration, the presentation schema, generator and quality gate gain a typed
       optional `documentation` action with truthful styling and accessible naming. The calculator
-      card then links the verified public reference through that action.
-- [ ] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
-      before LAND-09C is marked DONE and LAND-09D becomes READY.
+      card then links the verified public reference through that action. **Landing PR #25 added the
+      `documentation` action type (evidence count + validation + gate), made the play cue demo-only
+      (fixing report buttons), and linked the calculator "API reference".**
+- [x] Exact target and landing merge CI/Pages evidence and the verified public URL are recorded
+      before LAND-09C is marked DONE and LAND-09D becomes READY. **See Completion evidence below.**
+
+Completion evidence: landing PR [#25](https://github.com/GBrooks1970/portfolio/pull/25) merged as
+`a4f991c`; exact-merge [Portfolio quality run 30885016294](https://github.com/GBrooks1970/portfolio/actions/runs/30885016294)
+and [Pages deployment 30885015716](https://github.com/GBrooks1970/portfolio/actions/runs/30885015716)
+both succeeded. The live portfolio page returned HTTP 200 with `data-public-evidence-count="7"`, the
+"Public demos, reports and docs" statistic at 7 and the Calculator card's "API reference"
+`documentation` action linking the verified target URL; browser-verified computed cues are
+demo → "▶", documentation → "📄", report → none. Target side: calculator CAL-21 PRs #30 (`faee931`)
+and #31 (`cd74df0`), Pages [run 30884443647](https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/runs/30884443647)
+green; `https://neocognitus70.github.io/calculator-screenplay-bdd/` and its `openapi.json` both return
+HTTP 200. See the immutable [implementation log](implementation-logs/2026-08-04_land-09c-calculator-docs.md).
+LAND-09D is now READY.
 
 #### LAND-09D — Sudoku browser-only evidence
 
-**Status:** BLOCKED by LAND-09C
+**Status:** READY (final slice; unblocked by LAND-09C on 2026-08-04)
 **Target repository:** `GBrooks1970/gb.automation.smoketests.sudoku.poc`
 
 Publish a small TypeScript-stack visualisation backed by precomputed, versioned solve payloads. The
