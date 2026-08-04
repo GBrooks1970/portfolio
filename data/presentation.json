@@ -165,7 +165,10 @@
       "tags": ["Cucumber.js", "pytest-bdd", "Reqnroll", "Parity"],
       "actions": {
         "workflow": "ci.yml",
-        "demo": null,
+        "demo": {
+          "label": "Solver visualisation",
+          "url": "https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/"
+        },
         "report": null,
         "documentation": null
       }
