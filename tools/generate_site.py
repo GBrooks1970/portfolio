@@ -504,12 +504,18 @@ def render_site(
         for field in ("demo", "report", "documentation")
     )
 
+    group_labels = [
+        group["label"]
+        for _, group in sorted(groups.items(), key=lambda item: (item[1]["order"], item[0]))
+    ]
+
     replacements = {
         "{{SITE_METADATA}}": render_metadata(site),
         "{{SHOWCASE_COUNT}}": str(len(showcase)),
         "{{SHOWCASE_COUNT_WORD}}": _number_word(len(showcase)).capitalize(),
         "{{SHOWCASE_COUNT_WORD_LOWER}}": _number_word(len(showcase)),
         "{{CAPABILITY_GROUP_COUNT}}": str(len(groups)),
+        "{{CAPABILITY_GROUP_NAMES}}": " · ".join(_escape(label) for label in group_labels),
         "{{PUBLIC_EVIDENCE_COUNT}}": str(public_evidence_count),
         "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase),
         "{{METHODOLOGY}}": render_methodology(methodology),
