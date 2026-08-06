@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "78a7a3e40c3ea614674dee106d78854471cee571",
+    "commit": "9c2bf60df0e24c424a0d70893666b787536b8402",
     "path": "registry.yml"
   },
   "projects": [
@@ -24,6 +24,11 @@
     {
       "project": "hand-baked-screenplay-pattern",
       "github": "NeoCognitus70/hand-baked-screenplay-pattern",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "juice-shop-dast-automation",
+      "github": "GBrooks1970/juice-shop-dast-automation",
       "presentation_role": "showcase"
     },
     {

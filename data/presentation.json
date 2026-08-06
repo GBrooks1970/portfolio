@@ -20,6 +20,11 @@
       "label": "Mobile and shipped products",
       "description": "Touch-first automation and complete browser products delivered for direct use.",
       "order": 40
+    },
+    "security-dast": {
+      "label": "Security and DAST",
+      "description": "Dynamic application security testing against intentionally-vulnerable targets.",
+      "order": 50
     }
   },
   "projects": {
@@ -29,7 +34,12 @@
       "summary": "Guest-checkout E2E against Magento 2, the portfolio's reference suite: profile-driven scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.",
       "order": 10,
       "group": "web-ui-e2e",
-      "tags": ["Serenity/JS", "Playwright", "Cucumber", "TypeScript"],
+      "tags": [
+        "Serenity/JS",
+        "Playwright",
+        "Cucumber",
+        "TypeScript"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -46,7 +56,12 @@
       "summary": "Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised, seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.",
       "order": 20,
       "group": "web-ui-e2e",
-      "tags": ["Serenity/JS", "Playwright", "Cucumber", "Docker"],
+      "tags": [
+        "Serenity/JS",
+        "Playwright",
+        "Cucumber",
+        "Docker"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -63,7 +78,12 @@
       "summary": "Docker-backed ParaBank automation combining Serenity/JS and Playwright UI journeys with stateful API BDD, live OpenAPI validation, and REST–SOAP parity.",
       "order": 30,
       "group": "web-ui-e2e",
-      "tags": ["Serenity/JS", "Playwright", "OpenAPI", "Docker"],
+      "tags": [
+        "Serenity/JS",
+        "Playwright",
+        "OpenAPI",
+        "Docker"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -80,7 +100,12 @@
       "summary": "Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay layer — including a flagship CRC-32 order-book checksum verified against consecutive live frames. Specification-driven, one SPEC unit at a time.",
       "order": 40,
       "group": "api-bdd-protocols",
-      "tags": ["Cypress", "Screenplay", "WebSocket", "TypeScript"],
+      "tags": [
+        "Cypress",
+        "Screenplay",
+        "WebSocket",
+        "TypeScript"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -94,7 +119,12 @@
       "summary": "A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.",
       "order": 50,
       "group": "multi-stack-frameworks",
-      "tags": ["TypeScript", "Vitest", "Zero-deps", "Library"],
+      "tags": [
+        "TypeScript",
+        "Vitest",
+        "Zero-deps",
+        "Library"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -111,7 +141,12 @@
       "summary": "A static, offline, browser-based Markdown viewer: pick a folder, browse a drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over file://. Tested with Vitest units and Playwright E2E.",
       "order": 60,
       "group": "mobile-products",
-      "tags": ["JavaScript", "Vitest", "Playwright", "Product"],
+      "tags": [
+        "JavaScript",
+        "Vitest",
+        "Playwright",
+        "Product"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": {
@@ -128,7 +163,12 @@
       "summary": "A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&L oracles, and on-device breakpoint and overflow checks.",
       "order": 70,
       "group": "mobile-products",
-      "tags": ["Playwright", "Screenplay", "Mobile", "TypeScript"],
+      "tags": [
+        "Playwright",
+        "Screenplay",
+        "Mobile",
+        "TypeScript"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": {
@@ -145,7 +185,12 @@
       "summary": "A calculator API exercised through playwright-bdd and a Screenplay layer, with an OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and consumer-facing contract discipline.",
       "order": 80,
       "group": "api-bdd-protocols",
-      "tags": ["playwright-bdd", "Screenplay", "OpenAPI", "TypeScript"],
+      "tags": [
+        "playwright-bdd",
+        "Screenplay",
+        "OpenAPI",
+        "TypeScript"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
@@ -162,7 +207,12 @@
       "summary": "The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 48-scenario contract stays in lock-step across all three. A study in test-suite portability.",
       "order": 90,
       "group": "multi-stack-frameworks",
-      "tags": ["Cucumber.js", "pytest-bdd", "Reqnroll", "Parity"],
+      "tags": [
+        "Cucumber.js",
+        "pytest-bdd",
+        "Reqnroll",
+        "Parity"
+      ],
       "actions": {
         "workflow": "ci.yml",
         "demo": {
@@ -179,11 +229,37 @@
       "summary": "provides the shared registry, lifecycle prompts, templates, and agent-agnostic handover conventions behind these showcases.",
       "order": 10,
       "group": null,
-      "tags": ["Registry", "Lifecycle", "Handover"],
+      "tags": [
+        "Registry",
+        "Lifecycle",
+        "Handover"
+      ],
       "actions": {
         "workflow": null,
         "demo": null,
         "report": null,
+        "documentation": null
+      }
+    },
+    "juice-shop-dast-automation": {
+      "title": "OWASP Juice Shop DAST",
+      "discipline": "Security / DAST",
+      "summary": "OWASP ZAP passive baseline scan plus BDD exploit-confirmation scenarios against a pinned, intentionally-vulnerable OWASP Juice Shop training target, with a positive-detection gate.",
+      "order": 100,
+      "group": "security-dast",
+      "tags": [
+        "OWASP ZAP",
+        "DAST",
+        "Cucumber",
+        "Docker"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": {
+          "label": "DAST scan report",
+          "url": "https://gbrooks1970.github.io/juice-shop-dast-automation/"
+        },
         "documentation": null
       }
     }
