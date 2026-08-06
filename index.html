@@ -365,7 +365,18 @@
 
 <section class="methodology" aria-labelledby="methodology-heading">
   <h2 id="methodology-heading">Methodology &amp; tooling</h2>
-  <p data-project="portfolio-prompts"><a href="https://github.com/NeoCognitus70/portfolio-prompts">portfolio-prompts</a> provides the shared registry, lifecycle prompts, templates, and agent-agnostic handover conventions behind these showcases.</p>
+  <p>These projects are not built ad hoc. A shared library of agent-agnostic session prompts carries
+  every one of them through the same specification-driven lifecycle &mdash; onboard, resume, derive a
+  worklist, loop through it, log the work, review, hand over, and close. Each stage is a discrete,
+  gated prompt, so work is planned and structured into a backlog and an ordered worklist <em>before</em>
+  any code is written, and validated against the project's own gates before it lands.</p>
+  <p>The workflow is self-documenting and safeguarded by design. Every project keeps a single-source
+  backlog, append-only implementation logs, and versioned <em>session-notes</em> handovers, so any
+  engineer &mdash; or agent &mdash; can resume it cold. Every change moves through a branch and pull
+  request that is never auto-merged; portfolio-wide runs open with a read-only workspace-safety
+  preflight and pause at owner checkpoints. A machine-readable registry, shared templates, and a
+  validation-gate cascade keep the showcases above consistent.</p>
+  <p data-project="portfolio-prompts"><a href="https://github.com/NeoCognitus70/portfolio-prompts">portfolio-prompts</a> is the open-source prompt library behind this workflow; its README documents every lifecycle prompt in full.</p>
 </section>
 
 <footer>
