@@ -155,16 +155,16 @@
 <header class="hero">
   <h1>Test Automation Portfolio</h1>
   <p class="tag">Gary Brooks &middot; QA / Test Automation Engineer</p>
-  <p class="lede">Nine showcase projects grouped by their primary capability
+  <p class="lede">Ten showcase projects grouped by their primary capability
   &mdash; each built docs-first, gated in CI, and documented with living handovers.</p>
   <div class="links">
     <a href="https://github.com/GBrooks1970">GitHub: @GBrooks1970</a>
   </div>
 </header>
 
-<main class="portfolio" id="projects" data-showcase-count="9"
-  data-capability-group-count="4"
-  data-public-evidence-count="8" tabindex="-1"
+<main class="portfolio" id="projects" data-showcase-count="10"
+  data-capability-group-count="5"
+  data-public-evidence-count="9" tabindex="-1"
   aria-labelledby="projects-heading">
 
   <h2 class="section-heading" id="projects-heading">Showcase projects</h2>
@@ -174,16 +174,16 @@
   <dl class="portfolio-stats" aria-label="Portfolio summary">
     <div>
       <dt>Showcase projects</dt>
-      <dd>9</dd>
+      <dd>10</dd>
     </div>
     <div>
       <dt>Capability areas</dt>
-      <dd>4</dd>
-      <p class="stat-detail">Web UI and end-to-end · APIs, BDD and real-time protocols · Multi-stack and framework design · Mobile and shipped products</p>
+      <dd>5</dd>
+      <p class="stat-detail">Web UI and end-to-end · APIs, BDD and real-time protocols · Multi-stack and framework design · Mobile and shipped products · Security and DAST</p>
     </div>
     <div>
       <dt>Public demos, reports and docs</dt>
-      <dd>8</dd>
+      <dd>9</dd>
     </div>
   </dl>
 
@@ -339,6 +339,28 @@
   </div>
 </section>
 
+<section class="capability-group" data-capability-group="security-dast"
+  aria-labelledby="capability-security-dast">
+  <div class="group-heading">
+    <h3 id="capability-security-dast">Security and DAST</h3>
+    <p>Dynamic application security testing against intentionally-vulnerable targets.</p>
+  </div>
+  <div class="card-grid">
+    <!-- Generated: juice-shop-dast-automation -->
+    <article class="card" data-project="juice-shop-dast-automation">
+      <h4><a href="https://github.com/GBrooks1970/juice-shop-dast-automation">OWASP Juice Shop DAST</a></h4>
+      <p class="disc">Security / DAST</p>
+      <p class="desc">OWASP ZAP passive baseline scan plus BDD exploit-confirmation scenarios against a pinned, intentionally-vulnerable OWASP Juice Shop training target, with a positive-detection gate.</p>
+      <div class="chips"><span class="chip">OWASP ZAP</span><span class="chip">DAST</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/GBrooks1970/juice-shop-dast-automation">Repo</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/juice-shop-dast-automation/">DAST scan report</a>
+          <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/actions/workflows/ci.yml" aria-label="OWASP Juice Shop DAST CI workflow"><img class="badge" alt="OWASP Juice Shop DAST CI status" src="https://github.com/GBrooks1970/juice-shop-dast-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+      </div>
+    </article>
+  </div>
+</section>
+
 </main>
 
 <section class="methodology" aria-labelledby="methodology-heading">
@@ -350,7 +372,7 @@
   <p><strong>How these are built.</strong> Every project is documented docs-first, gated by CI, and
   carries versioned <em>session-notes</em> handovers so any engineer &mdash; or agent &mdash; can
   resume it cold. Shared methodology, prompts, and templates back the whole portfolio.</p>
-  <p class="note">All nine showcase project repositories are public with live CI. &middot;
+  <p class="note">All ten showcase project repositories are public with live CI. &middot;
   <a href="LICENSE">Landing-page source: MIT</a>. Project licences vary; each repository is
   authoritative. &middot; This page is static and self-contained.</p>
 </footer>

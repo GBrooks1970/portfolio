@@ -27,21 +27,21 @@ class GenerateSiteTests(unittest.TestCase):
         )
 
     def test_renders_current_public_inventory_and_counts(self) -> None:
-        self.assertEqual(self.rendered.count('<article class="card" data-project='), 9)
+        self.assertEqual(self.rendered.count('<article class="card" data-project='), 10)
         self.assertIn('data-project="portfolio-prompts"', self.rendered)
-        self.assertIn("Nine showcase projects", self.rendered)
-        self.assertIn("All nine showcase project repositories", self.rendered)
+        self.assertIn("Ten showcase projects", self.rendered)
+        self.assertIn("All ten showcase project repositories", self.rendered)
         self.assertIn("ParaBank Bank Automation", self.rendered)
         self.assertIn('<a class="skip-link" href="#projects">', self.rendered)
         self.assertIn('aria-labelledby="projects-heading"', self.rendered)
-        self.assertEqual(self.rendered.count('class="capability-group"'), 4)
-        self.assertEqual(self.rendered.count("<h4><a href="), 9)
-        self.assertIn('data-capability-group-count="4"', self.rendered)
-        self.assertIn('data-public-evidence-count="8"', self.rendered)
-        self.assertIn("<dt>Capability areas</dt>\n      <dd>4</dd>", self.rendered)
-        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>8</dd>", self.rendered)
-        self.assertEqual(self.rendered.count(" CI workflow\">"), 9)
-        self.assertEqual(self.rendered.count(" CI status\""), 9)
+        self.assertEqual(self.rendered.count('class="capability-group"'), 5)
+        self.assertEqual(self.rendered.count("<h4><a href="), 10)
+        self.assertIn('data-capability-group-count="5"', self.rendered)
+        self.assertIn('data-public-evidence-count="9"', self.rendered)
+        self.assertIn("<dt>Capability areas</dt>\n      <dd>5</dd>", self.rendered)
+        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>9</dd>", self.rendered)
+        self.assertEqual(self.rendered.count(" CI workflow\">"), 10)
+        self.assertEqual(self.rendered.count(" CI status\""), 10)
 
     def test_action_types_are_rendered_with_distinct_classes(self) -> None:
         # Only a genuinely interactive `demo` carries the play cue (the
@@ -116,7 +116,7 @@ class GenerateSiteTests(unittest.TestCase):
         invalid["capabilityGroups"]["unused-group"] = {
             "label": "Unused group",
             "description": "A group without projects.",
-            "order": 50,
+            "order": 60,  # a free order (50 is now the security-dast group) to isolate this check
         }
         with self.assertRaisesRegex(GENERATE.SourceError, "empty capability groups"):
             GENERATE.validate_sources(invalid, self.registry_lock)
