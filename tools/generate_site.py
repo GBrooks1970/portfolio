@@ -462,16 +462,15 @@ def render_capability_groups(
 
 
 def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
+    # The section shell and its landing-owned narrative live in index.template.html; this token
+    # injects only the per-methodology-project attribution line (with its repository link).
     paragraphs = []
     for project, entry, github in entries:
         paragraphs.append(
             f'  <p data-project="{_escape(project)}"><a href="https://github.com/{_escape(github)}">'
             f'{_escape(entry["title"])}</a> {_escape(entry["summary"])}</p>'
         )
-    return '''<section class="methodology" aria-labelledby="methodology-heading">
-  <h2 id="methodology-heading">Methodology &amp; tooling</h2>
-{paragraphs}
-</section>'''.format(paragraphs="\n".join(paragraphs))
+    return "\n".join(paragraphs)
 
 
 def render_site(

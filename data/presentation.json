@@ -226,7 +226,7 @@
     "portfolio-prompts": {
       "title": "portfolio-prompts",
       "discipline": "Methodology and tooling",
-      "summary": "provides the shared registry, lifecycle prompts, templates, and agent-agnostic handover conventions behind these showcases.",
+      "summary": "is the open-source prompt library behind this workflow; its README documents every lifecycle prompt in full.",
       "order": 10,
       "group": null,
       "tags": [
