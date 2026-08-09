@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Code Reviews — Central Index</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --green: #22c55e;
+      --yellow: #eab308;
+    }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .nav-header { margin-bottom: 1.5rem; }
+    .nav-header a { font-weight: 600; text-decoration: none; color: var(--accent); }
+    h1 { color: #fff; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-top: 0; }
+    h2 { color: var(--accent); margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+    h3 { color: #e2e8f0; margin-top: 1.5rem; }
+    p, li { color: #cbd5e1; }
+    a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; color: var(--accent-hover); }
+    .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+    .badge-active { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+    .badge-resting { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: var(--panel); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: #0f172a; color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    details { background: #0f172a; border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin-top: 1rem; }
+    summary { font-weight: 600; cursor: pointer; color: var(--accent); }
+    summary:hover { color: #fff; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; background: rgba(255,255,255,0.1); padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-header"><a href="index.html">&larr; Back to Portfolio Showcase</a></div>
+    <h1>Portfolio Code Reviews — Central Index</h1>
+    <p>Authoritative summary of the latest code review findings across all showcase projects in the test-automation portfolio.</p>
+    
+    <h2>Latest Reviews Matrix</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Status</th>
+          <th>Latest Review</th>
+          <th>Date</th>
+          <th>Reviewer</th>
+          <th>Grade</th>
+          <th>Drill-Down Links</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>magento-checkout-automation</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code></td>
+          <td>2026-08-07T14:09Z</td>
+          <td>AI assistant (Gemini 2.5 Flash)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/magento-checkout-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/magento-checkout-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>hand-baked-screenplay-pattern</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z</code></td>
+          <td>2026-08-07T14:09Z</td>
+          <td>AI assistant (Gemini 2.5 Pro)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/blob/main/.review/CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z.md">Full Review</a> &bull; <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/blob/main/.review/CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>calculator-screenplay-bdd</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code></td>
+          <td>2026-08-07T14:09Z</td>
+          <td>AI assistant (Gemini 2.5 Flash)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Full Review</a> &bull; <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>gb.automation.smoketests.sudoku.poc</code></td>
+          <td><span class="badge badge-active">active</span></td>
+          <td><code>CODE_REVIEW_GEMINI_v1_20260807T1409Z</code></td>
+          <td>2026-08-07T14:09Z</td>
+          <td>AI assistant (Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/blob/main/DOCS/.review/CODE_REVIEW_GEMINI_v1_20260807T1409Z/00_CODE_REVIEW_GEMINI_v1_20260807T1409Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/blob/main/DOCS/.review/CODE_REVIEW_GEMINI_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>bfx-ws-screenplay</code></td>
+          <td><span class="badge badge-active">active</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code></td>
+          <td>2026-08-07T14:10Z</td>
+          <td>AI assistant (Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_3_5_SONNET_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>orangehrm-pim-automation</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code></td>
+          <td>2026-08-07T14:10Z</td>
+          <td>AI assistant (Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/orangehrm-pim-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_3_7_SONNET_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>markdown-renderer</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code></td>
+          <td>2026-08-07T14:10Z</td>
+          <td>AI assistant (CLAUDE Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>mobile-forex-automation</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code></td>
+          <td>2026-08-07T14:10Z</td>
+          <td>AI assistant (Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/mobile-forex-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/mobile-forex-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>parabank-bank-automation</code></td>
+          <td><span class="badge badge-active">active</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code></td>
+          <td>2026-08-07T14:09Z</td>
+          <td>AI assistant (Gemini 2.5 Pro)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>juice-shop-dast-automation</code></td>
+          <td><span class="badge badge-active">active</span></td>
+          <td><code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code></td>
+          <td>2026-08-07T14:10Z</td>
+          <td>AI assistant (Gemini)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h2>Detailed Executive Summaries per Project</h2>
+    <div class="card">
+      <h3>magento-checkout-automation <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini 2.5 Flash) | 
+        <strong>Date:</strong> 2026-08-07T14:09Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/magento-checkout-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/magento-checkout-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/magento-checkout-automation/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
+
+## Design Quality
+- **Screenplay Pattern Fidelity:** Exceptional implementation of Serenity/JS Screenplay principles. Tasks (`ProvideShippingDetails`), Questions (`CartTotalQuantity`), and Interactions (`CheckoutPage`) are single-purpose and highly composable.
+- **API Pre-condition Seeding:** Strategic use of `MagentoApiClient` to seed cart state and verify inventory via REST API prior to executing UI steps (&quot;API setup, UI assertion&quot; per ADR-0003).
+- **Resilient Element Scoping:** Page element selectors are carefully scoped (e.g., `#checkout .message-error`) to prevent UI overlays or header components from false-positive matching.
+- **Multi-Browser Matrix Architecture:** Clean abstraction allowing seamless engine selection (`chromium`, `firefox`, `webkit`) with engine-aware step timeout ceilings.
+
+## Code Quality
+- **Strict TypeScript Usage:** Strongly typed tasks, questions, and responses throughout `src/`.
+- **ASCII and en-GB Compliance:** Clear, standard formatting and consistent en-GB spelling across documentation and code comments.
+- **Resilient Audit Utilities:** Node.js native script (`scripts/audit-ci.mjs`) handles transient npm security endpoint failures gracefully without extra dependencies.
+
+## Main Highlights
+- **100% Backlog Resolution:** All 15 core backlog items delivered, verified by living Serenity reports and GitHub Pages artifacts.
+- **Zero Vulnerability Baseline:** `npm audit` sits at 0 vulnerabilities following the major bump to `@cucumber/cucumber@12.9.0`.
+- **Trace and Video Handling:** Artifact retention logic (`src/config/artifact-retention.ts`) preserves traces and webm recordings strictly for failing runs when enabled.
+
+## Pedagogical Value
+- Exemplary reference repository for mid-level and senior test automation engineers demonstrating professional Screenplay BDD practices, living documentation, and CI integration.
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>hand-baked-screenplay-pattern <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini 2.5 Pro) | 
+        <strong>Date:</strong> 2026-08-07T14:09Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/blob/main/.review/CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/blob/main/.review/CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/tree/main/.review/CODE_REVIEW_Gemini_2_5_Pro_v1_20260807T1409Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">## Role and Objective
+This review evaluates `hand-baked-screenplay-pattern` from the perspective of a Senior Test Automation Architect / Senior Software Engineer. The repository serves as an educational framework demonstrating the Screenplay Pattern in pure TypeScript without external framework dependencies.
+
+## Design Quality
+- **Screenplay Pattern Fidelity:** Accurately implements core Screenplay Pattern building blocks (`Actor`, `Ability`, `Task`, `Interaction`, `Question`, `Cast`, `Stage`, `Outcome`) mirroring Serenity/JS semantics without external dependencies.
+- **Event-Driven Reporting Architecture:** Decouples execution from observation through an immutable domain event model (`DomainEventInput` -&gt; `DomainEvent`) announced via `Stage.announce`.
+- **Pure Functional Transformation:** Reporting logic (`ReportModel.ts` and `renderHtml.ts`) transforms event streams into self-contained HTML documents using pure functions without filesystem side effects.
+- **Least-Privilege CI Design:** GitHub Actions workflows (`ci.yml` and `pages.yml`) strictly partition verification and deployment permissions, granting `pages: write` / `id-token: write` only to main branch deployment jobs.
+
+## Code Quality
+- **Strict Type System Configuration:** Configured with strict TypeScript compiler flags (`strict: true`, `noUnusedLocals`, `noUnusedParameters`, `noImplicitOverride`, `NodeNext` module resolution).
+- **Comprehensive Test Suite:** 109 Vitest tests across 14 spec files covering unit primitives, integration flows, reporter formatting, byte-stability, and public API surface retention.
+- **Security &amp; Input Sanitization:** `renderHtml.ts` explicitly escapes all 5 HTML-significant characters (`&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#x27;`) for dynamic strings, mitigating XSS risks in generated reports.
+- **Zero Runtime Dependencies:** Production footprint has 0 external runtime dependencies, relying exclusively on Node standard library capabilities (`node:fs` injected cleanly for filesystem outputs).
+
+## Main Highlights
+- **HBSP-27 Delivery:** Complete delivery of deterministic sample report generation published to GitHub Pages (`https://neocognitus70.github.io/hand-baked-screenplay-pattern/`).
+- **Public API Stability Canary:** `spec/public-api.spec.ts` ensures runtime exports remain backwards compatible for sibling consumers (`calculator-screenplay-bdd`).
+- **Crash-Resilient Reporting:** `ReportModel.ts` accurately marks interrupted scenes and activities as failed if runs crash or terminate unexpectedly.
+
+## Pedagogical Value
+- High educational value for QA engineers and software developers learning how to build clean, maintainable test automation frameworks from first principles.
+- Exemplary documentation including step-by-step guides in `docs/` (`01-screenplay-flow.md`, `02-writing-your-own-building-blocks.md`, `03-event-notification-layer.md`, `releasing.md`).
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>calculator-screenplay-bdd <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini 2.5 Flash) | 
+        <strong>Date:</strong> 2026-08-07T14:09Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
+
+## Design Quality
+
+- **Clean Layered Architecture:** Excellent separation of domain rules (`calculatorDomain.ts`), HTTP transport (`calculatorHttpServer.ts`), frontend controller (`uiController.ts`), and static API documentation renderer (`src/apidocs/`).
+- **Zero-Dependency Core:** Implements a complete HTTP REST server using Node.js native `node:http` and `node:fs` modules without Express or external microframeworks.
+- **Contract-First Specification:** OpenAPI 3.1.0 contract (`openApiDocument.ts`) acts as the authoritative REST interface description, complete with contract-drift unit checks.
+- **Screenplay Pattern Abstraction:** Clean separation between Screenplay Tasks (`calculatorTasks.ts`), Interactions (`calculatorInteractions.ts`), Questions (`calculatorQuestions.ts`), and Steps (`calculatorSteps.ts`).
+
+## Code Quality
+
+- **Strict TypeScript Configuration:** `tsconfig.json` enforces `strict: true`, `noUnusedLocals`, `noUnusedParameters`, and `exactOptionalPropertyTypes`.
+- **Defensive HTTP Request Handling:** `calculatorHttpServer.ts` enforces a 10 KiB payload limit, validates JSON media types before reading streams, and returns distinct 400, 413, 415, and 422 error status codes.
+- **Explicit Port &amp; Environment Parsing:** `parsePort.ts` validates integer ports strictly in `[1, 65535]`, rejecting numeric prefixes, floats, and invalid characters.
+- **Deterministic Static Documentation:** Static API reference generator (`src/apidocs/`) produces byte-stable, self-contained HTML documents with no external CDN or network dependencies.
+
+## Main Highlights
+
+- **Complete Backlog Resolution:** Backlog `docs/backlog.md` (v15) reflects zero outstanding required risks; all CAL-01 through CAL-21 items are resolved and verified.
+- **Comprehensive Verification Gate:** `npm run verify` runs preflight checks, TypeScript typechecking, production build, static API docs validation, and Playwright test suites serially.
+- **Pedagogical Clarity:** High ratio of inline commentary explaining *why* structural choices (such as sibling dependency loading via `file:../`) were made.
+
+## Pedagogical Value
+
+- Demonstrates how to build an end-to-end Screenplay pattern test suite without third-party framework overhead.
+- Illustrates how Gherkin feature files (`calculator-api.feature`, `calculator-ui.feature`) remain business-focused while technical details stay in Screenplay tasks.
+- Teaches proper test pyramid balance: unit tests for math rules, integration tests for HTTP contracts, and Playwright BDD for browser UI workflows.
+- Demonstrates stateful scenario memory via `Remember.that()` and `Recall.the()` round-trips without global mutable state.
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>gb.automation.smoketests.sudoku.poc <span class="badge badge-active">active</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_GEMINI_v1_20260807T1409Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:09Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/blob/main/DOCS/.review/CODE_REVIEW_GEMINI_v1_20260807T1409Z/00_CODE_REVIEW_GEMINI_v1_20260807T1409Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/blob/main/DOCS/.review/CODE_REVIEW_GEMINI_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/tree/main/DOCS/.review/CODE_REVIEW_GEMINI_v1_20260807T1409Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)  
+**Date:** 2026-08-07T14:09Z  
+
+## Design Quality
+
+- **Specification-Driven Architecture:** The repository adheres strictly to [sudoku-solver-platform-specification.md](../gb.automation.smoketests.sudoku.poc/DOCS/.design/sudoku-solver-platform-specification.md) (v1.1), maintaining a single source of truth for core algorithms, data models, and BDD contracts.
+- **Screenplay Pattern Parity:** Implements Screenplay pattern concepts (Abilities, Tasks, Questions, Actor Memory) consistently across TypeScript, Python, and C# stacks.
+- **Clear Separation of Concerns:** Domain logic (Solver/Orchestrator), input validation (PuzzleLoader), representation (Display), and external interfaces (Express API) are cleanly decoupled.
+- **Layered Validation Boundaries:** Loader enforces structural/JSON rules, while the Solver/API enforces Sudoku constraint rules per DR-035.
+
+## Code Quality
+
+- **Type Safety &amp; Strictness:** Strong type checking across TypeScript (strict tsconfig), Python (type hints and type-aware loader checks), and C# (.NET 10 strong typing).
+- **Clean Code &amp; Self-Documentation:** Code is self-documenting with minimal clutter, supplemented by targeted pedagogical comments explaining algorithmic logic.
+- **Linting &amp; Code Formatting:** Automated linting and formatting enforced in CI for TypeScript (`eslint`, `prettier`), Python (`pytest`), and C# (`dotnet format` / Roslyn analyzers).
+- **Immutable State Safeguards:** Loader and solver methods return deep-copied grid snapshots to prevent unintended state mutation during execution.
+
+## Main Highlights
+
+- **Multi-Stack Parity Automation:** Automated PowerShell scripts in `.batch/` verify memory key constants, Gherkin step text, and Reference Architecture header currency across all three implementations.
+- **Measured Test Pyramid:** Lower-level component test suites protect internal seams with strict coverage floors (DR-038: TS 70/85/75%, Python 85%, C# 80/80%), backed by a 10/10 killed mutation trial in TypeScript.
+- **OpenAPI Executable Contract:** DEMOAPP001 validates live Express HTTP responses against `docs/openapi.yaml` using Redocly and Supertest (DR-035).
+- **Robust Security &amp; Audit Policy:** Automated dependency vulnerability scans block CI on unexcepted high/critical findings with a 14-day bounded exception policy (DR-039).
+
+## Pedagogical Value
+
+- **Ideal Teaching Platform:** Serves as a reference implementation for mid-level QA automation engineers and software developers learning BDD, Screenplay pattern, and multi-stack parity strategies.
+- **Incremental Algorithmic Progression:** Solving techniques progress naturally from simple (Unit Completion) to advanced basic logic (Hidden Singles, Naked Singles).
+- **Executable Specification Transparency:** Shared Gherkin feature files in `features-shared/` provide readable, business-focused documentation of system behavior.
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>bfx-ws-screenplay <span class="badge badge-active">active</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:10Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_3_5_SONNET_v1_20260807T1410Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Project:** bfx-ws-screenplay
+**Reviewer:** AI assistant (Gemini)
+**Date:** 2026-08-07T14:10Z
+
+## Overview
+
+`bfx-ws-screenplay` is an active showcase repository in Gary Brooks&#x27;s test-automation portfolio. It demonstrates real-time WebSocket API test automation against the public Bitfinex WebSocket API v2 using Cypress, TypeScript, Cucumber BDD, and a custom in-house Screenplay pattern.
+
+The repository operates under Specification Driven Development (SDD), with `SPECIFICATION.md` serving as the normative contract.
+
+## Portfolio Evaluation Summary
+
+### Design Quality (5/5)
+- Exceptional architectural isolation: the browser context delegates all socket transport to a Node driver via `cy.task` ([CommunicateOverWebSocket.ts](../bfx-ws-screenplay/cypress/support/screenplay/abilities/CommunicateOverWebSocket.ts) line 41).
+- BDD step definitions ([cypress/support/step_definitions/](../bfx-ws-screenplay/cypress/support/step_definitions/)) contain zero direct transport or assertions, delegating strictly to Screenplay Tasks, Questions, and Abilities.
+- Invariant-based assertions handle non-deterministic real-time financial market streams gracefully.
+
+### Code Quality (4.5/5)
+- Strong TypeScript strictness throughout.
+- High unit test coverage (80%+ branch coverage requirement enforced on pure driver and schema code via `npm run test:unit:coverage`).
+- Zero security vulnerabilities following the PR #34 `js-yaml` override.
+- Minor friction: `--experimental-test-coverage` requires Node 22+, causing friction for developers running Node 20.
+
+### Main Highlights
+1. **Flagship Order Book Checksum Verification:** SPEC-004 calculates real-time CRC-32 checksums over local order book state and matches Bitfinex checksum frames.
+2. **Environment-Blocked Outage Shielding:** Network or platform maintenance during live testing triggers `EnvironmentBlockedError`, insulating CI builds from false failures.
+3. **Pure Schema &amp; Predicate Isolation:** Transport frames are validated using runtime type guards before state mutations occur.
+
+### Pedagogical Value (5/5)
+- Outstanding teaching example for test automation architects building real-time WebSocket test frameworks.
+- Clearly illustrates how to adapt Cypress (traditionally an HTTP/DOM runner) to non-HTTP asynchronous push protocols.
+```
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>orangehrm-pim-automation <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:10Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_3_7_SONNET_v1_20260807T1410Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
+
+## Design Quality
+
+- **Faithful Screenplay Pattern:** Strict decoupling of Tasks, Questions, and Interactions ensures high readability and reuse across E2E journeys.
+- **API-Driven Preconditions:** Test setup utilizes REST API v2 (`OrangeHrmApiClient.ts`) to seed employee fixtures, reducing scenario execution time while keeping UI assertions focused.
+- **Fail-Fast Safety Boundary:** Execution guard (`assertLocalExecutionTarget`) prevents test runs against external/public instances when scenarios perform mutating actions.
+- **Multi-Layered Validation:** CI pipeline incorporates static type checking, fast unit tests, API contract checks, and target safety contracts before launching browser journeys.
+
+## Code Quality
+
+- **Strict Type System:** Clean TypeScript interfaces and custom guard functions (`OrangeHrmApiPolicy.ts`) ensure runtime payload safety.
+- **Deterministic Teardown:** Scenario ownership tracking (`ScenarioOwnership.ts`) ensures strict post-scenario cleanup of created employees and issued user accounts in `After` hooks.
+- **Isolated State Management:** `Before` hooks reset local and session storage while clearing browser cookies to prevent cross-scenario state leakage.
+- **Clean Configuration Seams:** Screenshot behavior, execution targets, and browser launch settings are managed via clear environment configurations.
+
+## Main Highlights
+
+- **Complete Remediation History:** All 13 CODEX code review remediation items (CODEX-01 to CODEX-13) are fully implemented and verified in `docs/backlog.md`.
+- **Fast Lower-Level Test Lane:** 14 deterministic unit tests (`npm run test:unit`) exercise API policies, cookie parsing, and target safety without requiring a running SUT or browser.
+- **Living Documentation:** Automated generation of Serenity BDD HTML reports published directly to GitHub Pages.
+
+## Pedagogical Value
+
+The repository serves as an exemplary portfolio reference for senior QA automation engineering:
+- Illustrates modern BDD with Serenity/JS, Playwright, and Cucumber.
+- Demonstrates hybrid API/UI test automation strategies.
+- Enforces production-grade safety boundaries and CI gating.
+
+---
+
+```
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>markdown-renderer <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (CLAUDE Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:10Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/markdown-renderer/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
+
+## Role and Objective
+
+**Reviewer:** AI assistant (CLAUDE Gemini)
+**Role:** Senior Test Automation Architect / Senior Software Engineer
+**Scope:** Evaluation of `markdown-renderer` portfolio project
+
+---
+
+## Design Quality
+
+- **Zero-Build Runtime Architecture:** Cleanly delivers a self-contained, offline-first HTML5 application that operates directly in the browser via classic scripts ([index.html](../markdown-renderer/index.html) (lines 58-62)). Third-party rendering libraries (Marked, DOMPurify, highlight.js) are locally vendored under [vendor/](../markdown-renderer/vendor/), enforcing full offline availability without reliance on runtime package bundling or external CDNs.
+- **Strict Layering and Modularity:** Enforces clear single-responsibility separation in [app.js](../markdown-renderer/app.js) (lines 20-443) across modular IIFE namespaces (`FolderAccess`, `Enumeration`, `Resolve`, `Render`, `UI`), while isolating pure mathematical path logic in [src/paths.js](../markdown-renderer/src/paths.js) (lines 15-157).
+- **Graceful API Fallbacks:** Seamlessly falls back from the Chromium File System Access API (`showDirectoryPicker`) to standard `&lt;input webkitdirectory&gt;` on Firefox and Safari, preserving folder browsing capability across browser engines.
+- **Robust XSS Defense Pipeline:** Markdown HTML output is parsed by Marked, strictly sanitized through DOMPurify, manipulated inside an inert `&lt;template&gt;` DOM fragment, and populated with safe `blob:` URLs before insertion into the document tree ([app.js](../markdown-renderer/app.js) (lines 183-215)).
+
+---
+
+## Code Quality
+
+- **Clean Vanilla JavaScript (ES2020):** High-readability prose using modern syntax (`const`/`let`, `async`/`await`, `Map`, `Set`, destructuring) without external runtime frameworks or heavy abstractions.
+- **Deterministic Navigation Data Structures:** Tree construction in [src/paths.js](../markdown-renderer/src/paths.js) (lines 85-119) guarantees directory nodes precede files and applies case-insensitive sorting with codepoint tiebreakers for consistent cross-platform behavior.
+- **Memory Safety and Object URL Lifecycle:** Properly revokes stale Object URLs via `URL.revokeObjectURL()` inside `Render.revoke()` ([app.js](../markdown-renderer/app.js) (lines 185-187)) whenever a document is refreshed or closed, preventing memory leaks during extended browsing sessions.
+- **Semantic HTML5 Accessibility:** Folder navigation uses native `&lt;details&gt;` and `&lt;summary&gt;` elements with state tracking ([app.js](../markdown-renderer/app.js) (lines 280-307)), and file list items use native `&lt;button type=&quot;button&quot;&gt;` controls ([app.js](../markdown-renderer/app.js) (lines 252-277)) to ensure default keyboard focus and activation semantics.
+
+---
+
+## Main Highlights
+
+- **Automated Accessibility Testing (MR-09):** Automated axe-core accessibility suite in [e2e/accessibility.spec.ts](../markdown-renderer/e2e/accessibility.spec.ts) (lines 1-100) tests four critical UI states against WCAG 2.0/2.1 A/AA rules with zero waivers, integrated directly into the `npm run verify` gate.
+- **Zero-Dependency Local Dev Server:** Includes a lightweight, zero-dependency Node static server ([scripts/dev-server.mjs](../markdown-renderer/scripts/dev-server.mjs) (lines 1-63)) that provides localhost origin serving for File System Access API security context requirements during development and testing.
+- **Faultless Document Traceability:** Fully aligns backlog state ([docs/backlog.md](../markdown-renderer/docs/backlog.md) (lines 1-137)), architectural design decision records ([docs/design-document.md](../markdown-renderer/docs/design-document.md)), and PR history for code review findings R-01 through R-06.
+
+---
+
+## Pedagogical Value
+
+- **Ideal Teaching Example for Offline-First Architecture:** Demonstrates how to design client-side web tools with zero runtime build steps, proving that modern vanilla JS can achieve high performance and maintainability without build complexity.
+- **Exemplary Security and DOM Sanitisation Blueprint:** Serves as a textbook reference for safe Markdown rendering, illustrating defense-in-depth with DOMPurify and inert `&lt;template&gt;` manipulation.
+- **Pragmatic Dual-Runner Test Pyramid Strategy:** Models how to split fast, lightweight unit tests (Vitest for pure algorithms) from end-to-end user flow verification (Playwright for browser automation).
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>mobile-forex-automation <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:10Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/mobile-forex-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/mobile-forex-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/mobile-forex-automation/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
+
+## Design Quality
+
+- **Layered Architecture:** Clear decoupling between pure mathematical domain logic (`src/core/`), stateful application lifecycle (`src/app/`), DOM presentation (`src/ui/`), and execution specs (`tests/`).
+- **Integer Money Scheme:** Strict integer representation for all domain units (pence for cash/P&amp;L, points for exchange rates, lots2 for volumes), eliminating floating-point rounding inaccuracies.
+- **Deterministic Seeded Feed:** Per-pair PRNG streams (FNV-1a hash + mulberry32) ensure tick sequences are completely reproducible and polling-order independent (NFR-1).
+- **Responsive Layout Strategy:** Clean CSS grid layout combined with `layoutFor(width)` viewport classification (`mobile`, `tablet`, `desktop`), backed by explicit layout geometry assertions in E2E tests.
+
+## Code Quality
+
+- **Strict Type System:** TypeScript configuration enables strict type-checking, `noUncheckedIndexedAccess`, and exact optional property types with zero compilation warnings.
+- **Zero Framework Runtime:** SUT UI built with modern vanilla TypeScript and minimal template literals, avoiding external UI framework overhead while maintaining fast rendering.
+- **HTML Sanitisation:** HTML template interpolations for dynamic user input (email, login errors) are escaped via a dedicated `escapeHtml()` helper, mitigating XSS risks.
+- **Server Ownership Verification:** Node.js preflight script (`scripts/probe-playwright-server-ownership.mjs`) ensures Playwright never silently reuses an unrelated server on port 4173.
+
+## Main Highlights
+
+- **Faithful Screenplay Implementation:** Hand-rolled Screenplay pattern under `tests/screenplay/` provides high-level business readability (`Actor.named(&#x27;Ada&#x27;).whoCan(BrowseTheWeb.using(page))`) without external framework dependencies.
+- **Dual Mobile Device Emulation:** Mobile E2E specs run concurrently on Pixel 7 (Chromium engine, Android attributes) and iPhone 14 (WebKit engine, iOS attributes) using real touch viewports.
+- **Comprehensive Review Remediation:** Successfully resolved all findings from prior reviews (FABLE v1 and CODEX v1), delivering items MF-01..MF-14, TRIAGE-01..06, and CODEX-01..10.
+
+## Pedagogical Value
+
+- **Ideal Teaching Showcase:** Serves as a reference model for mid-level automation engineers learning mobile-web testing,Screenplay architecture, integer money modeling, and deterministic E2E test design.
+- **Clear Documentation:** Exhaustive design specification (`docs/design-document.md`), explicit Architecture Decision Records (`ADR-0001`, `ADR-0002`), and structured backlog history (`docs/backlog.md`).
+
+---
+
+```
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>parabank-bank-automation <span class="badge badge-active">active</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini 2.5 Pro) | 
+        <strong>Date:</strong> 2026-08-07T14:09Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/00_CODE_REVIEW_Gemini_v1_20260807T1409Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/parabank-bank-automation/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1409Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini 2.5 Pro)  
+**Date:** 2026-08-07T14:09Z  
+**Project:** parabank-bank-automation  
+
+---
+
+## Design Quality
+
+- **Exceptional Architectural Separation:** Clean decoupling between the SUT container management (`scripts/build-sut.ps1`), API client (`src/api/client.ts`), Screenplay elements (`src/screenplay/`), and Gherkin specifications (`features/`).
+- **Deterministic Boot-Seed-Use Lifecycle:** Robust database state initialization (`POST /parabank/services/bank/initializeDB`) enforced via hooks and pre-flight gates, preventing cross-test pollution.
+- **Dual-Protocol Parity:** Comprehensive test coverage verifying consistency between REST (`/parabank/services/bank/*`) and SOAP (`/parabank/services/ParaBank`) interfaces.
+- **Fail-Fast Single Entry Point:** Unified `npm run verify` command executing typecheck, unit tests, tag linting, smoke safety checks, API tests, UI tests, and report integrity verification in sequence.
+
+---
+
+## Code Quality
+
+- **Strict TypeScript Typing:** High-quality TypeScript configuration ([tsconfig.json](../parabank-bank-automation/tsconfig.json) line 7: `&quot;strict&quot;: true`) with zero explicit `any` usage across core domain modules.
+- **Resilient UI Selectors:** Web UI elements ([src/screenplay/ui/pages.ts](../parabank-bank-automation/src/screenplay/ui/pages.ts)) strictly avoid brittle CSS structures, using scoped `#rightPanel` containers and standard attributes.
+- **Contextual Request Deadlines:** Centralized timeout policy ([src/api/request-deadline.ts](../parabank-bank-automation/src/api/request-deadline.ts) line 14) protecting network operations against hanging sockets.
+- **Zero Raw Sleeps:** Synchronisation relies entirely on polling mechanisms (`seedDatabase` readiness wait) and Serenity/JS web assertions.
+
+---
+
+## Main Highlights
+
+- **Complete Backlog &amp; Decision Tracking:** Fully documented backlog ([docs/backlog.md](../parabank-bank-automation/docs/backlog.md)) tracking phases PB-P0 to PB-P5, review remediation PB-CODEX-01 to PB-CODEX-10, public evidence PB-EVID-01, and decision records DR-PB-01 to DR-PB-10.
+- **Automated Public Evidence Pipeline:** Staged, deterministic Serenity HTML report generation published to GitHub Pages with secret-redaction scans ([scripts/check-pages-report.ts](../parabank-bank-automation/scripts/check-pages-report.ts)).
+- **Unit-Tested Test Infrastructure:** 12 unit tests ([tests/unit/](../parabank-bank-automation/tests/unit/)) validating tag inheritance, SOAP envelope escaping, deadline timeouts, and OpenAPI spec parsing without live network I/O.
+
+---
+
+## Pedagogical Value
+
+- **Gold Standard Portfolio Benchmark:** Exemplary demonstration of modern Senior Automation Architect practices, illustrating Screenplay pattern implementation, OpenAPI contract testing, containerized SUT pinning, and living BDD documentation.
+```
+
+---</div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>juice-shop-dast-automation <span class="badge badge-active">active</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1410Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Gemini) | 
+        <strong>Date:</strong> 2026-08-07T14:10Z | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/tree/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
+**Date:** 2026-08-07T14:10Z
+**Project:** juice-shop-dast-automation
+
+---
+
+## Design Quality
+
+- **Clear Separation of Concerns:** The project cleanly isolates scanner orchestration ([`scripts/run-scan.mjs`](../juice-shop-dast-automation/scripts/run-scan.mjs)), findings evaluation ([`src/findings/`](../juice-shop-dast-automation/src/findings/)), and BDD active exploitation ([`src/screenplay/`](../juice-shop-dast-automation/src/screenplay/)).
+- **Honest Scope Distinction:** Explicitly distinguishes between passive baseline scanning (which detects misconfigurations/disclosures but zero injection) and active BDD exploitation (which proves SQLi and IDOR vulnerabilities are real).
+- **Strict Safety Boundaries:** Scanner and BDD targets are hard-coded to local private Docker networks, preventing accidental external target scanning.
+- **Pure Verdict Function:** The verdict evaluator ([`src/findings/verdict.ts`](../juice-shop-dast-automation/src/findings/verdict.ts)) is a pure function tested against committed JSON fixtures without requiring Docker runtime dependencies.
+- **Mandatory Framing Discipline:** Ubiquitous framing banner across README, GitHub Pages index, and unit tests ensures security findings on an intentionally vulnerable target are never misconstrued as real product flaws.
+
+---
+
+## Code Quality
+
+- **TypeScript Type Safety:** Modern ES2023 / ESNext ESM configuration with strict type checking enabled in [`tsconfig.json`](../juice-shop-dast-automation/tsconfig.json).
+- **Comprehensive Unit Testing:** 21 Vitest unit tests covering verdict logic, missing/unexpected class detection, and HTML report framing rendering in [`tests/`](../juice-shop-dast-automation/tests/).
+- **Minimal Dependencies:** Lightweight dependency tree (`@cucumber/cucumber`, `tsx`, `typescript`, `vitest`) keeping `npm audit` at zero vulnerabilities.
+- **Clean Code Style:** Standardised ES module imports with `.js` extensions, consistent formatting, and descriptive function naming.
+- **Minor Script Duplication:** Container startup and polling routines are repeated across orchestration scripts rather than shared via a common module.
+
+---
+
+## Main Highlights
+
+- **Positive Detection Gate Pattern:** Replaces naïve &quot;fail on any alert&quot; logic with a contract asserting that expected vulnerability classes *must* be detected, catching scanner regressions or broken target setups.
+- **Hand-Rolled Screenplay HTTP Adapter:** Elegant, zero-dependency Screenplay pattern implementation (`Actor`, `Ability`, `Task`, `Question`) tailored specifically for HTTP API exploitation.
+- **Deterministic CI Pipeline:** GitHub Actions workflow ([`.github/workflows/ci.yml`](../juice-shop-dast-automation/.github/workflows/ci.yml)) with SHA-pinned action steps, fast verify gating, container execution, artifact uploading, and GitHub Pages deployment.
+
+---
+
+## Pedagogical Value
+
+- **Outstanding Educational Blueprint:** Demonstrates how to integrate DAST into CI/CD pipelines safely and deterministically.
+- **BDD Inverted Polarity Teaching:** Exemplifies how BDD scenarios can be structured with inverted polarity to assert exploit success on vulnerable targets.
+- **Design-First Methodology:** Accompanied by a comprehensive Software Design Document ([`docs/dast-lane-design.md`](../juice-shop-dast-automation/docs/dast-lane-design.md)) and phased delivery backlog ([`docs/backlog.md`](../juice-shop-dast-automation/docs/backlog.md)).
+
+---
+
+```
+
+---</div>
+      </details>
+    </div>
+  </div>
+</body>
+</html>
