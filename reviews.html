@@ -170,28 +170,31 @@
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
-
-## Design Quality
-- **Screenplay Pattern Fidelity:** Exceptional implementation of Serenity/JS Screenplay principles. Tasks (`ProvideShippingDetails`), Questions (`CartTotalQuantity`), and Interactions (`CheckoutPage`) are single-purpose and highly composable.
-- **API Pre-condition Seeding:** Strategic use of `MagentoApiClient` to seed cart state and verify inventory via REST API prior to executing UI steps (&quot;API setup, UI assertion&quot; per ADR-0003).
-- **Resilient Element Scoping:** Page element selectors are carefully scoped (e.g., `#checkout .message-error`) to prevent UI overlays or header components from false-positive matching.
-- **Multi-Browser Matrix Architecture:** Clean abstraction allowing seamless engine selection (`chromium`, `firefox`, `webkit`) with engine-aware step timeout ceilings.
-
-## Code Quality
-- **Strict TypeScript Usage:** Strongly typed tasks, questions, and responses throughout `src/`.
-- **ASCII and en-GB Compliance:** Clear, standard formatting and consistent en-GB spelling across documentation and code comments.
-- **Resilient Audit Utilities:** Node.js native script (`scripts/audit-ci.mjs`) handles transient npm security endpoint failures gracefully without extra dependencies.
-
-## Main Highlights
-- **100% Backlog Resolution:** All 15 core backlog items delivered, verified by living Serenity reports and GitHub Pages artifacts.
-- **Zero Vulnerability Baseline:** `npm audit` sits at 0 vulnerabilities following the major bump to `@cucumber/cucumber@12.9.0`.
-- **Trace and Video Handling:** Artifact retention logic (`src/config/artifact-retention.ts`) preserves traces and webm recordings strictly for failing runs when enabled.
-
-## Pedagogical Value
-- Exemplary reference repository for mid-level and senior test automation engineers demonstrating professional Screenplay BDD practices, living documentation, and CI integration.
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Screenplay Pattern Fidelity:</strong> Exceptional implementation of Serenity/JS Screenplay principles. Tasks (<code>ProvideShippingDetails</code>), Questions (<code>CartTotalQuantity</code>), and Interactions (<code>CheckoutPage</code>) are single-purpose and highly composable.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>API Pre-condition Seeding:</strong> Strategic use of <code>MagentoApiClient</code> to seed cart state and verify inventory via REST API prior to executing UI steps (&quot;API setup, UI assertion&quot; per ADR-0003).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Resilient Element Scoping:</strong> Page element selectors are carefully scoped (e.g., <code>#checkout .message-error</code>) to prevent UI overlays or header components from false-positive matching.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Multi-Browser Matrix Architecture:</strong> Clean abstraction allowing seamless engine selection (<code>chromium</code>, <code>firefox</code>, <code>webkit</code>) with engine-aware step timeout ceilings.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict TypeScript Usage:</strong> Strongly typed tasks, questions, and responses throughout <code>src/</code>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>ASCII and en-GB Compliance:</strong> Clear, standard formatting and consistent en-GB spelling across documentation and code comments.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Resilient Audit Utilities:</strong> Node.js native script (<code>scripts/audit-ci.mjs</code>) handles transient npm security endpoint failures gracefully without extra dependencies.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>100% Backlog Resolution:</strong> All 15 core backlog items delivered, verified by living Serenity reports and GitHub Pages artifacts.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero Vulnerability Baseline:</strong> <code>npm audit</code> sits at 0 vulnerabilities following the major bump to <code>@cucumber/cucumber@12.9.0</code>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Trace and Video Handling:</strong> Artifact retention logic (<code>src/config/artifact-retention.ts</code>) preserves traces and webm recordings strictly for failing runs when enabled.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Exemplary reference repository for mid-level and senior test automation engineers demonstrating professional Screenplay BDD practices, living documentation, and CI integration.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -209,31 +212,34 @@
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">## Role and Objective
-This review evaluates `hand-baked-screenplay-pattern` from the perspective of a Senior Test Automation Architect / Senior Software Engineer. The repository serves as an educational framework demonstrating the Screenplay Pattern in pure TypeScript without external framework dependencies.
-
-## Design Quality
-- **Screenplay Pattern Fidelity:** Accurately implements core Screenplay Pattern building blocks (`Actor`, `Ability`, `Task`, `Interaction`, `Question`, `Cast`, `Stage`, `Outcome`) mirroring Serenity/JS semantics without external dependencies.
-- **Event-Driven Reporting Architecture:** Decouples execution from observation through an immutable domain event model (`DomainEventInput` -&gt; `DomainEvent`) announced via `Stage.announce`.
-- **Pure Functional Transformation:** Reporting logic (`ReportModel.ts` and `renderHtml.ts`) transforms event streams into self-contained HTML documents using pure functions without filesystem side effects.
-- **Least-Privilege CI Design:** GitHub Actions workflows (`ci.yml` and `pages.yml`) strictly partition verification and deployment permissions, granting `pages: write` / `id-token: write` only to main branch deployment jobs.
-
-## Code Quality
-- **Strict Type System Configuration:** Configured with strict TypeScript compiler flags (`strict: true`, `noUnusedLocals`, `noUnusedParameters`, `noImplicitOverride`, `NodeNext` module resolution).
-- **Comprehensive Test Suite:** 109 Vitest tests across 14 spec files covering unit primitives, integration flows, reporter formatting, byte-stability, and public API surface retention.
-- **Security &amp; Input Sanitization:** `renderHtml.ts` explicitly escapes all 5 HTML-significant characters (`&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#x27;`) for dynamic strings, mitigating XSS risks in generated reports.
-- **Zero Runtime Dependencies:** Production footprint has 0 external runtime dependencies, relying exclusively on Node standard library capabilities (`node:fs` injected cleanly for filesystem outputs).
-
-## Main Highlights
-- **HBSP-27 Delivery:** Complete delivery of deterministic sample report generation published to GitHub Pages (`https://neocognitus70.github.io/hand-baked-screenplay-pattern/`).
-- **Public API Stability Canary:** `spec/public-api.spec.ts` ensures runtime exports remain backwards compatible for sibling consumers (`calculator-screenplay-bdd`).
-- **Crash-Resilient Reporting:** `ReportModel.ts` accurately marks interrupted scenes and activities as failed if runs crash or terminate unexpectedly.
-
-## Pedagogical Value
-- High educational value for QA engineers and software developers learning how to build clean, maintainable test automation frameworks from first principles.
-- Exemplary documentation including step-by-step guides in `docs/` (`01-screenplay-flow.md`, `02-writing-your-own-building-blocks.md`, `03-event-notification-layer.md`, `releasing.md`).
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Role and Objective</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">This review evaluates <code>hand-baked-screenplay-pattern</code> from the perspective of a Senior Test Automation Architect / Senior Software Engineer. The repository serves as an educational framework demonstrating the Screenplay Pattern in pure TypeScript without external framework dependencies.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Screenplay Pattern Fidelity:</strong> Accurately implements core Screenplay Pattern building blocks (<code>Actor</code>, <code>Ability</code>, <code>Task</code>, <code>Interaction</code>, <code>Question</code>, <code>Cast</code>, <code>Stage</code>, <code>Outcome</code>) mirroring Serenity/JS semantics without external dependencies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Event-Driven Reporting Architecture:</strong> Decouples execution from observation through an immutable domain event model (<code>DomainEventInput</code> -&gt; <code>DomainEvent</code>) announced via <code>Stage.announce</code>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Pure Functional Transformation:</strong> Reporting logic (<code>ReportModel.ts</code> and <code>renderHtml.ts</code>) transforms event streams into self-contained HTML documents using pure functions without filesystem side effects.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Least-Privilege CI Design:</strong> GitHub Actions workflows (<code>ci.yml</code> and <code>pages.yml</code>) strictly partition verification and deployment permissions, granting <code>pages: write</code> / <code>id-token: write</code> only to main branch deployment jobs.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict Type System Configuration:</strong> Configured with strict TypeScript compiler flags (<code>strict: true</code>, <code>noUnusedLocals</code>, <code>noUnusedParameters</code>, <code>noImplicitOverride</code>, <code>NodeNext</code> module resolution).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comprehensive Test Suite:</strong> 109 Vitest tests across 14 spec files covering unit primitives, integration flows, reporter formatting, byte-stability, and public API surface retention.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Security &amp; Input Sanitization:</strong> <code>renderHtml.ts</code> explicitly escapes all 5 HTML-significant characters (<code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&quot;</code>, <code>&#x27;</code>) for dynamic strings, mitigating XSS risks in generated reports.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero Runtime Dependencies:</strong> Production footprint has 0 external runtime dependencies, relying exclusively on Node standard library capabilities (<code>node:fs</code> injected cleanly for filesystem outputs).</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>HBSP-27 Delivery:</strong> Complete delivery of deterministic sample report generation published to GitHub Pages (<code>https://neocognitus70.github.io/hand-baked-screenplay-pattern/</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Public API Stability Canary:</strong> <code>spec/public-api.spec.ts</code> ensures runtime exports remain backwards compatible for sibling consumers (<code>calculator-screenplay-bdd</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Crash-Resilient Reporting:</strong> <code>ReportModel.ts</code> accurately marks interrupted scenes and activities as failed if runs crash or terminate unexpectedly.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">High educational value for QA engineers and software developers learning how to build clean, maintainable test automation frameworks from first principles.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Exemplary documentation including step-by-step guides in <code>docs/</code> (<code>01-screenplay-flow.md</code>, <code>02-writing-your-own-building-blocks.md</code>, <code>03-event-notification-layer.md</code>, <code>releasing.md</code>).</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -251,36 +257,35 @@ This review evaluates `hand-baked-screenplay-pattern` from the perspective of a 
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
-
-## Design Quality
-
-- **Clean Layered Architecture:** Excellent separation of domain rules (`calculatorDomain.ts`), HTTP transport (`calculatorHttpServer.ts`), frontend controller (`uiController.ts`), and static API documentation renderer (`src/apidocs/`).
-- **Zero-Dependency Core:** Implements a complete HTTP REST server using Node.js native `node:http` and `node:fs` modules without Express or external microframeworks.
-- **Contract-First Specification:** OpenAPI 3.1.0 contract (`openApiDocument.ts`) acts as the authoritative REST interface description, complete with contract-drift unit checks.
-- **Screenplay Pattern Abstraction:** Clean separation between Screenplay Tasks (`calculatorTasks.ts`), Interactions (`calculatorInteractions.ts`), Questions (`calculatorQuestions.ts`), and Steps (`calculatorSteps.ts`).
-
-## Code Quality
-
-- **Strict TypeScript Configuration:** `tsconfig.json` enforces `strict: true`, `noUnusedLocals`, `noUnusedParameters`, and `exactOptionalPropertyTypes`.
-- **Defensive HTTP Request Handling:** `calculatorHttpServer.ts` enforces a 10 KiB payload limit, validates JSON media types before reading streams, and returns distinct 400, 413, 415, and 422 error status codes.
-- **Explicit Port &amp; Environment Parsing:** `parsePort.ts` validates integer ports strictly in `[1, 65535]`, rejecting numeric prefixes, floats, and invalid characters.
-- **Deterministic Static Documentation:** Static API reference generator (`src/apidocs/`) produces byte-stable, self-contained HTML documents with no external CDN or network dependencies.
-
-## Main Highlights
-
-- **Complete Backlog Resolution:** Backlog `docs/backlog.md` (v15) reflects zero outstanding required risks; all CAL-01 through CAL-21 items are resolved and verified.
-- **Comprehensive Verification Gate:** `npm run verify` runs preflight checks, TypeScript typechecking, production build, static API docs validation, and Playwright test suites serially.
-- **Pedagogical Clarity:** High ratio of inline commentary explaining *why* structural choices (such as sibling dependency loading via `file:../`) were made.
-
-## Pedagogical Value
-
-- Demonstrates how to build an end-to-end Screenplay pattern test suite without third-party framework overhead.
-- Illustrates how Gherkin feature files (`calculator-api.feature`, `calculator-ui.feature`) remain business-focused while technical details stay in Screenplay tasks.
-- Teaches proper test pyramid balance: unit tests for math rules, integration tests for HTTP contracts, and Playwright BDD for browser UI workflows.
-- Demonstrates stateful scenario memory via `Remember.that()` and `Recall.the()` round-trips without global mutable state.
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clean Layered Architecture:</strong> Excellent separation of domain rules (<code>calculatorDomain.ts</code>), HTTP transport (<code>calculatorHttpServer.ts</code>), frontend controller (<code>uiController.ts</code>), and static API documentation renderer (<code>src/apidocs/</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero-Dependency Core:</strong> Implements a complete HTTP REST server using Node.js native <code>node:http</code> and <code>node:fs</code> modules without Express or external microframeworks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Contract-First Specification:</strong> OpenAPI 3.1.0 contract (<code>openApiDocument.ts</code>) acts as the authoritative REST interface description, complete with contract-drift unit checks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Screenplay Pattern Abstraction:</strong> Clean separation between Screenplay Tasks (<code>calculatorTasks.ts</code>), Interactions (<code>calculatorInteractions.ts</code>), Questions (<code>calculatorQuestions.ts</code>), and Steps (<code>calculatorSteps.ts</code>).</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict TypeScript Configuration:</strong> <code>tsconfig.json</code> enforces <code>strict: true</code>, <code>noUnusedLocals</code>, <code>noUnusedParameters</code>, and <code>exactOptionalPropertyTypes</code>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Defensive HTTP Request Handling:</strong> <code>calculatorHttpServer.ts</code> enforces a 10 KiB payload limit, validates JSON media types before reading streams, and returns distinct 400, 413, 415, and 422 error status codes.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Explicit Port &amp; Environment Parsing:</strong> <code>parsePort.ts</code> validates integer ports strictly in <code>[1, 65535]</code>, rejecting numeric prefixes, floats, and invalid characters.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Static Documentation:</strong> Static API reference generator (<code>src/apidocs/</code>) produces byte-stable, self-contained HTML documents with no external CDN or network dependencies.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Complete Backlog Resolution:</strong> Backlog <code>docs/backlog.md</code> (v15) reflects zero outstanding required risks; all CAL-01 through CAL-21 items are resolved and verified.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comprehensive Verification Gate:</strong> <code>npm run verify</code> runs preflight checks, TypeScript typechecking, production build, static API docs validation, and Playwright test suites serially.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Pedagogical Clarity:</strong> High ratio of inline commentary explaining <em>why</em> structural choices (such as sibling dependency loading via <code>file:../</code>) were made.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Demonstrates how to build an end-to-end Screenplay pattern test suite without third-party framework overhead.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Illustrates how Gherkin feature files (<code>calculator-api.feature</code>, <code>calculator-ui.feature</code>) remain business-focused while technical details stay in Screenplay tasks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Teaches proper test pyramid balance: unit tests for math rules, integration tests for HTTP contracts, and Playwright BDD for browser UI workflows.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Demonstrates stateful scenario memory via <code>Remember.that()</code> and <code>Recall.the()</code> round-trips without global mutable state.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -298,37 +303,36 @@ This review evaluates `hand-baked-screenplay-pattern` from the perspective of a 
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)  
-**Date:** 2026-08-07T14:09Z  
-
-## Design Quality
-
-- **Specification-Driven Architecture:** The repository adheres strictly to [sudoku-solver-platform-specification.md](../gb.automation.smoketests.sudoku.poc/DOCS/.design/sudoku-solver-platform-specification.md) (v1.1), maintaining a single source of truth for core algorithms, data models, and BDD contracts.
-- **Screenplay Pattern Parity:** Implements Screenplay pattern concepts (Abilities, Tasks, Questions, Actor Memory) consistently across TypeScript, Python, and C# stacks.
-- **Clear Separation of Concerns:** Domain logic (Solver/Orchestrator), input validation (PuzzleLoader), representation (Display), and external interfaces (Express API) are cleanly decoupled.
-- **Layered Validation Boundaries:** Loader enforces structural/JSON rules, while the Solver/API enforces Sudoku constraint rules per DR-035.
-
-## Code Quality
-
-- **Type Safety &amp; Strictness:** Strong type checking across TypeScript (strict tsconfig), Python (type hints and type-aware loader checks), and C# (.NET 10 strong typing).
-- **Clean Code &amp; Self-Documentation:** Code is self-documenting with minimal clutter, supplemented by targeted pedagogical comments explaining algorithmic logic.
-- **Linting &amp; Code Formatting:** Automated linting and formatting enforced in CI for TypeScript (`eslint`, `prettier`), Python (`pytest`), and C# (`dotnet format` / Roslyn analyzers).
-- **Immutable State Safeguards:** Loader and solver methods return deep-copied grid snapshots to prevent unintended state mutation during execution.
-
-## Main Highlights
-
-- **Multi-Stack Parity Automation:** Automated PowerShell scripts in `.batch/` verify memory key constants, Gherkin step text, and Reference Architecture header currency across all three implementations.
-- **Measured Test Pyramid:** Lower-level component test suites protect internal seams with strict coverage floors (DR-038: TS 70/85/75%, Python 85%, C# 80/80%), backed by a 10/10 killed mutation trial in TypeScript.
-- **OpenAPI Executable Contract:** DEMOAPP001 validates live Express HTTP responses against `docs/openapi.yaml` using Redocly and Supertest (DR-035).
-- **Robust Security &amp; Audit Policy:** Automated dependency vulnerability scans block CI on unexcepted high/critical findings with a 14-day bounded exception policy (DR-039).
-
-## Pedagogical Value
-
-- **Ideal Teaching Platform:** Serves as a reference implementation for mid-level QA automation engineers and software developers learning BDD, Screenplay pattern, and multi-stack parity strategies.
-- **Incremental Algorithmic Progression:** Solving techniques progress naturally from simple (Unit Completion) to advanced basic logic (Hidden Singles, Naked Singles).
-- **Executable Specification Transparency:** Shared Gherkin feature files in `features-shared/` provide readable, business-focused documentation of system behavior.
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini)</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Date:</strong> 2026-08-07T14:09Z</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Specification-Driven Architecture:</strong> The repository adheres strictly to <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/blob/main/DOCS/.design/sudoku-solver-platform-specification.md">sudoku-solver-platform-specification.md</a> (v1.1), maintaining a single source of truth for core algorithms, data models, and BDD contracts.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Screenplay Pattern Parity:</strong> Implements Screenplay pattern concepts (Abilities, Tasks, Questions, Actor Memory) consistently across TypeScript, Python, and C# stacks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clear Separation of Concerns:</strong> Domain logic (Solver/Orchestrator), input validation (PuzzleLoader), representation (Display), and external interfaces (Express API) are cleanly decoupled.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Layered Validation Boundaries:</strong> Loader enforces structural/JSON rules, while the Solver/API enforces Sudoku constraint rules per DR-035.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Type Safety &amp; Strictness:</strong> Strong type checking across TypeScript (strict tsconfig), Python (type hints and type-aware loader checks), and C# (.NET 10 strong typing).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clean Code &amp; Self-Documentation:</strong> Code is self-documenting with minimal clutter, supplemented by targeted pedagogical comments explaining algorithmic logic.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Linting &amp; Code Formatting:</strong> Automated linting and formatting enforced in CI for TypeScript (<code>eslint</code>, <code>prettier</code>), Python (<code>pytest</code>), and C# (<code>dotnet format</code> / Roslyn analyzers).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Immutable State Safeguards:</strong> Loader and solver methods return deep-copied grid snapshots to prevent unintended state mutation during execution.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Multi-Stack Parity Automation:</strong> Automated PowerShell scripts in <code>.batch/</code> verify memory key constants, Gherkin step text, and Reference Architecture header currency across all three implementations.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Measured Test Pyramid:</strong> Lower-level component test suites protect internal seams with strict coverage floors (DR-038: TS 70/85/75%, Python 85%, C# 80/80%), backed by a 10/10 killed mutation trial in TypeScript.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>OpenAPI Executable Contract:</strong> DEMOAPP001 validates live Express HTTP responses against <code>docs/openapi.yaml</code> using Redocly and Supertest (DR-035).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Robust Security &amp; Audit Policy:</strong> Automated dependency vulnerability scans block CI on unexcepted high/critical findings with a 14-day bounded exception policy (DR-039).</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Ideal Teaching Platform:</strong> Serves as a reference implementation for mid-level QA automation engineers and software developers learning BDD, Screenplay pattern, and multi-stack parity strategies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Incremental Algorithmic Progression:</strong> Solving techniques progress naturally from simple (Unit Completion) to advanced basic logic (Hidden Singles, Naked Singles).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Executable Specification Transparency:</strong> Shared Gherkin feature files in <code>features-shared/</code> provide readable, business-focused documentation of system behavior.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -346,40 +350,37 @@ This review evaluates `hand-baked-screenplay-pattern` from the perspective of a 
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Project:** bfx-ws-screenplay
-**Reviewer:** AI assistant (Gemini)
-**Date:** 2026-08-07T14:10Z
-
-## Overview
-
-`bfx-ws-screenplay` is an active showcase repository in Gary Brooks&#x27;s test-automation portfolio. It demonstrates real-time WebSocket API test automation against the public Bitfinex WebSocket API v2 using Cypress, TypeScript, Cucumber BDD, and a custom in-house Screenplay pattern.
-
-The repository operates under Specification Driven Development (SDD), with `SPECIFICATION.md` serving as the normative contract.
-
-## Portfolio Evaluation Summary
-
-### Design Quality (5/5)
-- Exceptional architectural isolation: the browser context delegates all socket transport to a Node driver via `cy.task` ([CommunicateOverWebSocket.ts](../bfx-ws-screenplay/cypress/support/screenplay/abilities/CommunicateOverWebSocket.ts) line 41).
-- BDD step definitions ([cypress/support/step_definitions/](../bfx-ws-screenplay/cypress/support/step_definitions/)) contain zero direct transport or assertions, delegating strictly to Screenplay Tasks, Questions, and Abilities.
-- Invariant-based assertions handle non-deterministic real-time financial market streams gracefully.
-
-### Code Quality (4.5/5)
-- Strong TypeScript strictness throughout.
-- High unit test coverage (80%+ branch coverage requirement enforced on pure driver and schema code via `npm run test:unit:coverage`).
-- Zero security vulnerabilities following the PR #34 `js-yaml` override.
-- Minor friction: `--experimental-test-coverage` requires Node 22+, causing friction for developers running Node 20.
-
-### Main Highlights
-1. **Flagship Order Book Checksum Verification:** SPEC-004 calculates real-time CRC-32 checksums over local order book state and matches Bitfinex checksum frames.
-2. **Environment-Blocked Outage Shielding:** Network or platform maintenance during live testing triggers `EnvironmentBlockedError`, insulating CI builds from false failures.
-3. **Pure Schema &amp; Predicate Isolation:** Transport frames are validated using runtime type guards before state mutations occur.
-
-### Pedagogical Value (5/5)
-- Outstanding teaching example for test automation architects building real-time WebSocket test frameworks.
-- Clearly illustrates how to adapt Cypress (traditionally an HTTP/DOM runner) to non-HTTP asynchronous push protocols.
-```
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Project:</strong> bfx-ws-screenplay</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini)</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Date:</strong> 2026-08-07T14:10Z</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Overview</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><code>bfx-ws-screenplay</code> is an active showcase repository in Gary Brooks&#x27;s test-automation portfolio. It demonstrates real-time WebSocket API test automation against the public Bitfinex WebSocket API v2 using Cypress, TypeScript, Cucumber BDD, and a custom in-house Screenplay pattern.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">The repository operates under Specification Driven Development (SDD), with <code>SPECIFICATION.md</code> serving as the normative contract.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Portfolio Evaluation Summary</h3>
+<h4 style="color: var(--accent); margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality (5/5)</h4>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Exceptional architectural isolation: the browser context delegates all socket transport to a Node driver via <code>cy.task</code> (<a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/cypress/support/screenplay/abilities/CommunicateOverWebSocket.ts">CommunicateOverWebSocket.ts</a> line 41).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">BDD step definitions (<a href="https://github.com/GBrooks1970/bfx-ws-screenplay/blob/main/cypress/support/step_definitions/">cypress/support/step_definitions/</a>) contain zero direct transport or assertions, delegating strictly to Screenplay Tasks, Questions, and Abilities.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Invariant-based assertions handle non-deterministic real-time financial market streams gracefully.</li>
+</ul>
+<h4 style="color: var(--accent); margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality (4.5/5)</h4>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Strong TypeScript strictness throughout.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">High unit test coverage (80%+ branch coverage requirement enforced on pure driver and schema code via <code>npm run test:unit:coverage</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Zero security vulnerabilities following the PR #34 <code>js-yaml</code> override.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Minor friction: <code>--experimental-test-coverage</code> requires Node 22+, causing friction for developers running Node 20.</li>
+</ul>
+<h4 style="color: var(--accent); margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h4>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">1. <strong>Flagship Order Book Checksum Verification:</strong> SPEC-004 calculates real-time CRC-32 checksums over local order book state and matches Bitfinex checksum frames.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">2. <strong>Environment-Blocked Outage Shielding:</strong> Network or platform maintenance during live testing triggers <code>EnvironmentBlockedError</code>, insulating CI builds from false failures.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">3. <strong>Pure Schema &amp; Predicate Isolation:</strong> Transport frames are validated using runtime type guards before state mutations occur.</p>
+<h4 style="color: var(--accent); margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value (5/5)</h4>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Outstanding teaching example for test automation architects building real-time WebSocket test frameworks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Clearly illustrates how to adapt Cypress (traditionally an HTTP/DOM runner) to non-HTTP asynchronous push protocols.</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -397,40 +398,37 @@ The repository operates under Specification Driven Development (SDD), with `SPEC
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
-
-## Design Quality
-
-- **Faithful Screenplay Pattern:** Strict decoupling of Tasks, Questions, and Interactions ensures high readability and reuse across E2E journeys.
-- **API-Driven Preconditions:** Test setup utilizes REST API v2 (`OrangeHrmApiClient.ts`) to seed employee fixtures, reducing scenario execution time while keeping UI assertions focused.
-- **Fail-Fast Safety Boundary:** Execution guard (`assertLocalExecutionTarget`) prevents test runs against external/public instances when scenarios perform mutating actions.
-- **Multi-Layered Validation:** CI pipeline incorporates static type checking, fast unit tests, API contract checks, and target safety contracts before launching browser journeys.
-
-## Code Quality
-
-- **Strict Type System:** Clean TypeScript interfaces and custom guard functions (`OrangeHrmApiPolicy.ts`) ensure runtime payload safety.
-- **Deterministic Teardown:** Scenario ownership tracking (`ScenarioOwnership.ts`) ensures strict post-scenario cleanup of created employees and issued user accounts in `After` hooks.
-- **Isolated State Management:** `Before` hooks reset local and session storage while clearing browser cookies to prevent cross-scenario state leakage.
-- **Clean Configuration Seams:** Screenshot behavior, execution targets, and browser launch settings are managed via clear environment configurations.
-
-## Main Highlights
-
-- **Complete Remediation History:** All 13 CODEX code review remediation items (CODEX-01 to CODEX-13) are fully implemented and verified in `docs/backlog.md`.
-- **Fast Lower-Level Test Lane:** 14 deterministic unit tests (`npm run test:unit`) exercise API policies, cookie parsing, and target safety without requiring a running SUT or browser.
-- **Living Documentation:** Automated generation of Serenity BDD HTML reports published directly to GitHub Pages.
-
-## Pedagogical Value
-
-The repository serves as an exemplary portfolio reference for senior QA automation engineering:
-- Illustrates modern BDD with Serenity/JS, Playwright, and Cucumber.
-- Demonstrates hybrid API/UI test automation strategies.
-- Enforces production-grade safety boundaries and CI gating.
-
----
-
-```
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini)</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Faithful Screenplay Pattern:</strong> Strict decoupling of Tasks, Questions, and Interactions ensures high readability and reuse across E2E journeys.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>API-Driven Preconditions:</strong> Test setup utilizes REST API v2 (<code>OrangeHrmApiClient.ts</code>) to seed employee fixtures, reducing scenario execution time while keeping UI assertions focused.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Fail-Fast Safety Boundary:</strong> Execution guard (<code>assertLocalExecutionTarget</code>) prevents test runs against external/public instances when scenarios perform mutating actions.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Multi-Layered Validation:</strong> CI pipeline incorporates static type checking, fast unit tests, API contract checks, and target safety contracts before launching browser journeys.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict Type System:</strong> Clean TypeScript interfaces and custom guard functions (<code>OrangeHrmApiPolicy.ts</code>) ensure runtime payload safety.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Teardown:</strong> Scenario ownership tracking (<code>ScenarioOwnership.ts</code>) ensures strict post-scenario cleanup of created employees and issued user accounts in <code>After</code> hooks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Isolated State Management:</strong> <code>Before</code> hooks reset local and session storage while clearing browser cookies to prevent cross-scenario state leakage.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clean Configuration Seams:</strong> Screenshot behavior, execution targets, and browser launch settings are managed via clear environment configurations.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Complete Remediation History:</strong> All 13 CODEX code review remediation items (CODEX-01 to CODEX-13) are fully implemented and verified in <code>docs/backlog.md</code>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Fast Lower-Level Test Lane:</strong> 14 deterministic unit tests (<code>npm run test:unit</code>) exercise API policies, cookie parsing, and target safety without requiring a running SUT or browser.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Living Documentation:</strong> Automated generation of Serenity BDD HTML reports published directly to GitHub Pages.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">The repository serves as an exemplary portfolio reference for senior QA automation engineering:</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Illustrates modern BDD with Serenity/JS, Playwright, and Cucumber.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Demonstrates hybrid API/UI test automation strategies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Enforces production-grade safety boundaries and CI gating.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -448,49 +446,42 @@ The repository serves as an exemplary portfolio reference for senior QA automati
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">---
-
-## Role and Objective
-
-**Reviewer:** AI assistant (CLAUDE Gemini)
-**Role:** Senior Test Automation Architect / Senior Software Engineer
-**Scope:** Evaluation of `markdown-renderer` portfolio project
-
----
-
-## Design Quality
-
-- **Zero-Build Runtime Architecture:** Cleanly delivers a self-contained, offline-first HTML5 application that operates directly in the browser via classic scripts ([index.html](../markdown-renderer/index.html) (lines 58-62)). Third-party rendering libraries (Marked, DOMPurify, highlight.js) are locally vendored under [vendor/](../markdown-renderer/vendor/), enforcing full offline availability without reliance on runtime package bundling or external CDNs.
-- **Strict Layering and Modularity:** Enforces clear single-responsibility separation in [app.js](../markdown-renderer/app.js) (lines 20-443) across modular IIFE namespaces (`FolderAccess`, `Enumeration`, `Resolve`, `Render`, `UI`), while isolating pure mathematical path logic in [src/paths.js](../markdown-renderer/src/paths.js) (lines 15-157).
-- **Graceful API Fallbacks:** Seamlessly falls back from the Chromium File System Access API (`showDirectoryPicker`) to standard `&lt;input webkitdirectory&gt;` on Firefox and Safari, preserving folder browsing capability across browser engines.
-- **Robust XSS Defense Pipeline:** Markdown HTML output is parsed by Marked, strictly sanitized through DOMPurify, manipulated inside an inert `&lt;template&gt;` DOM fragment, and populated with safe `blob:` URLs before insertion into the document tree ([app.js](../markdown-renderer/app.js) (lines 183-215)).
-
----
-
-## Code Quality
-
-- **Clean Vanilla JavaScript (ES2020):** High-readability prose using modern syntax (`const`/`let`, `async`/`await`, `Map`, `Set`, destructuring) without external runtime frameworks or heavy abstractions.
-- **Deterministic Navigation Data Structures:** Tree construction in [src/paths.js](../markdown-renderer/src/paths.js) (lines 85-119) guarantees directory nodes precede files and applies case-insensitive sorting with codepoint tiebreakers for consistent cross-platform behavior.
-- **Memory Safety and Object URL Lifecycle:** Properly revokes stale Object URLs via `URL.revokeObjectURL()` inside `Render.revoke()` ([app.js](../markdown-renderer/app.js) (lines 185-187)) whenever a document is refreshed or closed, preventing memory leaks during extended browsing sessions.
-- **Semantic HTML5 Accessibility:** Folder navigation uses native `&lt;details&gt;` and `&lt;summary&gt;` elements with state tracking ([app.js](../markdown-renderer/app.js) (lines 280-307)), and file list items use native `&lt;button type=&quot;button&quot;&gt;` controls ([app.js](../markdown-renderer/app.js) (lines 252-277)) to ensure default keyboard focus and activation semantics.
-
----
-
-## Main Highlights
-
-- **Automated Accessibility Testing (MR-09):** Automated axe-core accessibility suite in [e2e/accessibility.spec.ts](../markdown-renderer/e2e/accessibility.spec.ts) (lines 1-100) tests four critical UI states against WCAG 2.0/2.1 A/AA rules with zero waivers, integrated directly into the `npm run verify` gate.
-- **Zero-Dependency Local Dev Server:** Includes a lightweight, zero-dependency Node static server ([scripts/dev-server.mjs](../markdown-renderer/scripts/dev-server.mjs) (lines 1-63)) that provides localhost origin serving for File System Access API security context requirements during development and testing.
-- **Faultless Document Traceability:** Fully aligns backlog state ([docs/backlog.md](../markdown-renderer/docs/backlog.md) (lines 1-137)), architectural design decision records ([docs/design-document.md](../markdown-renderer/docs/design-document.md)), and PR history for code review findings R-01 through R-06.
-
----
-
-## Pedagogical Value
-
-- **Ideal Teaching Example for Offline-First Architecture:** Demonstrates how to design client-side web tools with zero runtime build steps, proving that modern vanilla JS can achieve high performance and maintainability without build complexity.
-- **Exemplary Security and DOM Sanitisation Blueprint:** Serves as a textbook reference for safe Markdown rendering, illustrating defense-in-depth with DOMPurify and inert `&lt;template&gt;` manipulation.
-- **Pragmatic Dual-Runner Test Pyramid Strategy:** Models how to split fast, lightweight unit tests (Vitest for pure algorithms) from end-to-end user flow verification (Playwright for browser automation).
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Role and Objective</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (CLAUDE Gemini)</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Role:</strong> Senior Test Automation Architect / Senior Software Engineer</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Scope:</strong> Evaluation of <code>markdown-renderer</code> portfolio project</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero-Build Runtime Architecture:</strong> Cleanly delivers a self-contained, offline-first HTML5 application that operates directly in the browser via classic scripts (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/index.html">index.html</a> (lines 58-62)). Third-party rendering libraries (Marked, DOMPurify, highlight.js) are locally vendored under <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/vendor/">vendor/</a>, enforcing full offline availability without reliance on runtime package bundling or external CDNs.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict Layering and Modularity:</strong> Enforces clear single-responsibility separation in <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/app.js">app.js</a> (lines 20-443) across modular IIFE namespaces (<code>FolderAccess</code>, <code>Enumeration</code>, <code>Resolve</code>, <code>Render</code>, <code>UI</code>), while isolating pure mathematical path logic in <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/src/paths.js">src/paths.js</a> (lines 15-157).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Graceful API Fallbacks:</strong> Seamlessly falls back from the Chromium File System Access API (<code>showDirectoryPicker</code>) to standard <code>&lt;input webkitdirectory&gt;</code> on Firefox and Safari, preserving folder browsing capability across browser engines.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Robust XSS Defense Pipeline:</strong> Markdown HTML output is parsed by Marked, strictly sanitized through DOMPurify, manipulated inside an inert <code>&lt;template&gt;</code> DOM fragment, and populated with safe <code>blob:</code> URLs before insertion into the document tree (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/app.js">app.js</a> (lines 183-215)).</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clean Vanilla JavaScript (ES2020):</strong> High-readability prose using modern syntax (<code>const</code>/<code>let</code>, <code>async</code>/<code>await</code>, <code>Map</code>, <code>Set</code>, destructuring) without external runtime frameworks or heavy abstractions.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Navigation Data Structures:</strong> Tree construction in <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/src/paths.js">src/paths.js</a> (lines 85-119) guarantees directory nodes precede files and applies case-insensitive sorting with codepoint tiebreakers for consistent cross-platform behavior.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Memory Safety and Object URL Lifecycle:</strong> Properly revokes stale Object URLs via <code>URL.revokeObjectURL()</code> inside <code>Render.revoke()</code> (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/app.js">app.js</a> (lines 185-187)) whenever a document is refreshed or closed, preventing memory leaks during extended browsing sessions.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Semantic HTML5 Accessibility:</strong> Folder navigation uses native <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> elements with state tracking (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/app.js">app.js</a> (lines 280-307)), and file list items use native <code>&lt;button type=&quot;button&quot;&gt;</code> controls (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/app.js">app.js</a> (lines 252-277)) to ensure default keyboard focus and activation semantics.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Automated Accessibility Testing (MR-09):</strong> Automated axe-core accessibility suite in <a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/e2e/accessibility.spec.ts">e2e/accessibility.spec.ts</a> (lines 1-100) tests four critical UI states against WCAG 2.0/2.1 A/AA rules with zero waivers, integrated directly into the <code>npm run verify</code> gate.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero-Dependency Local Dev Server:</strong> Includes a lightweight, zero-dependency Node static server (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/scripts/dev-server.mjs">scripts/dev-server.mjs</a> (lines 1-63)) that provides localhost origin serving for File System Access API security context requirements during development and testing.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Faultless Document Traceability:</strong> Fully aligns backlog state (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/docs/backlog.md">docs/backlog.md</a> (lines 1-137)), architectural design decision records (<a href="https://github.com/GBrooks1970/markdown-renderer/blob/main/docs/design-document.md">docs/design-document.md</a>), and PR history for code review findings R-01 through R-06.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Ideal Teaching Example for Offline-First Architecture:</strong> Demonstrates how to design client-side web tools with zero runtime build steps, proving that modern vanilla JS can achieve high performance and maintainability without build complexity.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Exemplary Security and DOM Sanitisation Blueprint:</strong> Serves as a textbook reference for safe Markdown rendering, illustrating defense-in-depth with DOMPurify and inert <code>&lt;template&gt;</code> manipulation.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Pragmatic Dual-Runner Test Pyramid Strategy:</strong> Models how to split fast, lightweight unit tests (Vitest for pure algorithms) from end-to-end user flow verification (Playwright for browser automation).</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -508,38 +499,35 @@ The repository serves as an exemplary portfolio reference for senior QA automati
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
-
-## Design Quality
-
-- **Layered Architecture:** Clear decoupling between pure mathematical domain logic (`src/core/`), stateful application lifecycle (`src/app/`), DOM presentation (`src/ui/`), and execution specs (`tests/`).
-- **Integer Money Scheme:** Strict integer representation for all domain units (pence for cash/P&amp;L, points for exchange rates, lots2 for volumes), eliminating floating-point rounding inaccuracies.
-- **Deterministic Seeded Feed:** Per-pair PRNG streams (FNV-1a hash + mulberry32) ensure tick sequences are completely reproducible and polling-order independent (NFR-1).
-- **Responsive Layout Strategy:** Clean CSS grid layout combined with `layoutFor(width)` viewport classification (`mobile`, `tablet`, `desktop`), backed by explicit layout geometry assertions in E2E tests.
-
-## Code Quality
-
-- **Strict Type System:** TypeScript configuration enables strict type-checking, `noUncheckedIndexedAccess`, and exact optional property types with zero compilation warnings.
-- **Zero Framework Runtime:** SUT UI built with modern vanilla TypeScript and minimal template literals, avoiding external UI framework overhead while maintaining fast rendering.
-- **HTML Sanitisation:** HTML template interpolations for dynamic user input (email, login errors) are escaped via a dedicated `escapeHtml()` helper, mitigating XSS risks.
-- **Server Ownership Verification:** Node.js preflight script (`scripts/probe-playwright-server-ownership.mjs`) ensures Playwright never silently reuses an unrelated server on port 4173.
-
-## Main Highlights
-
-- **Faithful Screenplay Implementation:** Hand-rolled Screenplay pattern under `tests/screenplay/` provides high-level business readability (`Actor.named(&#x27;Ada&#x27;).whoCan(BrowseTheWeb.using(page))`) without external framework dependencies.
-- **Dual Mobile Device Emulation:** Mobile E2E specs run concurrently on Pixel 7 (Chromium engine, Android attributes) and iPhone 14 (WebKit engine, iOS attributes) using real touch viewports.
-- **Comprehensive Review Remediation:** Successfully resolved all findings from prior reviews (FABLE v1 and CODEX v1), delivering items MF-01..MF-14, TRIAGE-01..06, and CODEX-01..10.
-
-## Pedagogical Value
-
-- **Ideal Teaching Showcase:** Serves as a reference model for mid-level automation engineers learning mobile-web testing,Screenplay architecture, integer money modeling, and deterministic E2E test design.
-- **Clear Documentation:** Exhaustive design specification (`docs/design-document.md`), explicit Architecture Decision Records (`ADR-0001`, `ADR-0002`), and structured backlog history (`docs/backlog.md`).
-
----
-
-```
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini)</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Layered Architecture:</strong> Clear decoupling between pure mathematical domain logic (<code>src/core/</code>), stateful application lifecycle (<code>src/app/</code>), DOM presentation (<code>src/ui/</code>), and execution specs (<code>tests/</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Integer Money Scheme:</strong> Strict integer representation for all domain units (pence for cash/P&amp;L, points for exchange rates, lots2 for volumes), eliminating floating-point rounding inaccuracies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Seeded Feed:</strong> Per-pair PRNG streams (FNV-1a hash + mulberry32) ensure tick sequences are completely reproducible and polling-order independent (NFR-1).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Responsive Layout Strategy:</strong> Clean CSS grid layout combined with <code>layoutFor(width)</code> viewport classification (<code>mobile</code>, <code>tablet</code>, <code>desktop</code>), backed by explicit layout geometry assertions in E2E tests.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict Type System:</strong> TypeScript configuration enables strict type-checking, <code>noUncheckedIndexedAccess</code>, and exact optional property types with zero compilation warnings.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero Framework Runtime:</strong> SUT UI built with modern vanilla TypeScript and minimal template literals, avoiding external UI framework overhead while maintaining fast rendering.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>HTML Sanitisation:</strong> HTML template interpolations for dynamic user input (email, login errors) are escaped via a dedicated <code>escapeHtml()</code> helper, mitigating XSS risks.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Server Ownership Verification:</strong> Node.js preflight script (<code>scripts/probe-playwright-server-ownership.mjs</code>) ensures Playwright never silently reuses an unrelated server on port 4173.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Faithful Screenplay Implementation:</strong> Hand-rolled Screenplay pattern under <code>tests/screenplay/</code> provides high-level business readability (<code>Actor.named(&#x27;Ada&#x27;).whoCan(BrowseTheWeb.using(page))</code>) without external framework dependencies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Dual Mobile Device Emulation:</strong> Mobile E2E specs run concurrently on Pixel 7 (Chromium engine, Android attributes) and iPhone 14 (WebKit engine, iOS attributes) using real touch viewports.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comprehensive Review Remediation:</strong> Successfully resolved all findings from prior reviews (FABLE v1 and CODEX v1), delivering items MF-01..MF-14, TRIAGE-01..06, and CODEX-01..10.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Ideal Teaching Showcase:</strong> Serves as a reference model for mid-level automation engineers learning mobile-web testing,Screenplay architecture, integer money modeling, and deterministic E2E test design.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clear Documentation:</strong> Exhaustive design specification (<code>docs/design-document.md</code>), explicit Architecture Decision Records (<code>ADR-0001</code>, <code>ADR-0002</code>), and structured backlog history (<code>docs/backlog.md</code>).</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -557,44 +545,39 @@ The repository serves as an exemplary portfolio reference for senior QA automati
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini 2.5 Pro)  
-**Date:** 2026-08-07T14:09Z  
-**Project:** parabank-bank-automation  
-
----
-
-## Design Quality
-
-- **Exceptional Architectural Separation:** Clean decoupling between the SUT container management (`scripts/build-sut.ps1`), API client (`src/api/client.ts`), Screenplay elements (`src/screenplay/`), and Gherkin specifications (`features/`).
-- **Deterministic Boot-Seed-Use Lifecycle:** Robust database state initialization (`POST /parabank/services/bank/initializeDB`) enforced via hooks and pre-flight gates, preventing cross-test pollution.
-- **Dual-Protocol Parity:** Comprehensive test coverage verifying consistency between REST (`/parabank/services/bank/*`) and SOAP (`/parabank/services/ParaBank`) interfaces.
-- **Fail-Fast Single Entry Point:** Unified `npm run verify` command executing typecheck, unit tests, tag linting, smoke safety checks, API tests, UI tests, and report integrity verification in sequence.
-
----
-
-## Code Quality
-
-- **Strict TypeScript Typing:** High-quality TypeScript configuration ([tsconfig.json](../parabank-bank-automation/tsconfig.json) line 7: `&quot;strict&quot;: true`) with zero explicit `any` usage across core domain modules.
-- **Resilient UI Selectors:** Web UI elements ([src/screenplay/ui/pages.ts](../parabank-bank-automation/src/screenplay/ui/pages.ts)) strictly avoid brittle CSS structures, using scoped `#rightPanel` containers and standard attributes.
-- **Contextual Request Deadlines:** Centralized timeout policy ([src/api/request-deadline.ts](../parabank-bank-automation/src/api/request-deadline.ts) line 14) protecting network operations against hanging sockets.
-- **Zero Raw Sleeps:** Synchronisation relies entirely on polling mechanisms (`seedDatabase` readiness wait) and Serenity/JS web assertions.
-
----
-
-## Main Highlights
-
-- **Complete Backlog &amp; Decision Tracking:** Fully documented backlog ([docs/backlog.md](../parabank-bank-automation/docs/backlog.md)) tracking phases PB-P0 to PB-P5, review remediation PB-CODEX-01 to PB-CODEX-10, public evidence PB-EVID-01, and decision records DR-PB-01 to DR-PB-10.
-- **Automated Public Evidence Pipeline:** Staged, deterministic Serenity HTML report generation published to GitHub Pages with secret-redaction scans ([scripts/check-pages-report.ts](../parabank-bank-automation/scripts/check-pages-report.ts)).
-- **Unit-Tested Test Infrastructure:** 12 unit tests ([tests/unit/](../parabank-bank-automation/tests/unit/)) validating tag inheritance, SOAP envelope escaping, deadline timeouts, and OpenAPI spec parsing without live network I/O.
-
----
-
-## Pedagogical Value
-
-- **Gold Standard Portfolio Benchmark:** Exemplary demonstration of modern Senior Automation Architect practices, illustrating Screenplay pattern implementation, OpenAPI contract testing, containerized SUT pinning, and living BDD documentation.
-```
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini 2.5 Pro)</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Date:</strong> 2026-08-07T14:09Z</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Project:</strong> parabank-bank-automation</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Exceptional Architectural Separation:</strong> Clean decoupling between the SUT container management (<code>scripts/build-sut.ps1</code>), API client (<code>src/api/client.ts</code>), Screenplay elements (<code>src/screenplay/</code>), and Gherkin specifications (<code>features/</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Boot-Seed-Use Lifecycle:</strong> Robust database state initialization (<code>POST /parabank/services/bank/initializeDB</code>) enforced via hooks and pre-flight gates, preventing cross-test pollution.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Dual-Protocol Parity:</strong> Comprehensive test coverage verifying consistency between REST (<code>/parabank/services/bank/*</code>) and SOAP (<code>/parabank/services/ParaBank</code>) interfaces.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Fail-Fast Single Entry Point:</strong> Unified <code>npm run verify</code> command executing typecheck, unit tests, tag linting, smoke safety checks, API tests, UI tests, and report integrity verification in sequence.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict TypeScript Typing:</strong> High-quality TypeScript configuration (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/tsconfig.json">tsconfig.json</a> line 7: <code>&quot;strict&quot;: true</code>) with zero explicit <code>any</code> usage across core domain modules.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Resilient UI Selectors:</strong> Web UI elements (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/src/screenplay/ui/pages.ts">src/screenplay/ui/pages.ts</a>) strictly avoid brittle CSS structures, using scoped <code>#rightPanel</code> containers and standard attributes.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Contextual Request Deadlines:</strong> Centralized timeout policy (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/src/api/request-deadline.ts">src/api/request-deadline.ts</a> line 14) protecting network operations against hanging sockets.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Zero Raw Sleeps:</strong> Synchronisation relies entirely on polling mechanisms (<code>seedDatabase</code> readiness wait) and Serenity/JS web assertions.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Complete Backlog &amp; Decision Tracking:</strong> Fully documented backlog (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/docs/backlog.md">docs/backlog.md</a>) tracking phases PB-P0 to PB-P5, review remediation PB-CODEX-01 to PB-CODEX-10, public evidence PB-EVID-01, and decision records DR-PB-01 to DR-PB-10.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Automated Public Evidence Pipeline:</strong> Staged, deterministic Serenity HTML report generation published to GitHub Pages with secret-redaction scans (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/scripts/check-pages-report.ts">scripts/check-pages-report.ts</a>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Unit-Tested Test Infrastructure:</strong> 12 unit tests (<a href="https://github.com/GBrooks1970/parabank-bank-automation/blob/main/tests/unit/">tests/unit/</a>) validating tag inheritance, SOAP envelope escaping, deadline timeouts, and OpenAPI spec parsing without live network I/O.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Gold Standard Portfolio Benchmark:</strong> Exemplary demonstration of modern Senior Automation Architect practices, illustrating Screenplay pattern implementation, OpenAPI contract testing, containerized SUT pinning, and living BDD documentation.</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
     <div class="card">
@@ -612,51 +595,44 @@ The repository serves as an exemplary portfolio reference for senior QA automati
       </p>
       <details>
         <summary>Click to view Executive Summary text</summary>
-        <div style="margin-top: 1rem; color: #cbd5e1; font-size: 0.95rem; white-space: pre-wrap;">**Reviewer:** AI assistant (Gemini)
-**Date:** 2026-08-07T14:10Z
-**Project:** juice-shop-dast-automation
-
----
-
-## Design Quality
-
-- **Clear Separation of Concerns:** The project cleanly isolates scanner orchestration ([`scripts/run-scan.mjs`](../juice-shop-dast-automation/scripts/run-scan.mjs)), findings evaluation ([`src/findings/`](../juice-shop-dast-automation/src/findings/)), and BDD active exploitation ([`src/screenplay/`](../juice-shop-dast-automation/src/screenplay/)).
-- **Honest Scope Distinction:** Explicitly distinguishes between passive baseline scanning (which detects misconfigurations/disclosures but zero injection) and active BDD exploitation (which proves SQLi and IDOR vulnerabilities are real).
-- **Strict Safety Boundaries:** Scanner and BDD targets are hard-coded to local private Docker networks, preventing accidental external target scanning.
-- **Pure Verdict Function:** The verdict evaluator ([`src/findings/verdict.ts`](../juice-shop-dast-automation/src/findings/verdict.ts)) is a pure function tested against committed JSON fixtures without requiring Docker runtime dependencies.
-- **Mandatory Framing Discipline:** Ubiquitous framing banner across README, GitHub Pages index, and unit tests ensures security findings on an intentionally vulnerable target are never misconstrued as real product flaws.
-
----
-
-## Code Quality
-
-- **TypeScript Type Safety:** Modern ES2023 / ESNext ESM configuration with strict type checking enabled in [`tsconfig.json`](../juice-shop-dast-automation/tsconfig.json).
-- **Comprehensive Unit Testing:** 21 Vitest unit tests covering verdict logic, missing/unexpected class detection, and HTML report framing rendering in [`tests/`](../juice-shop-dast-automation/tests/).
-- **Minimal Dependencies:** Lightweight dependency tree (`@cucumber/cucumber`, `tsx`, `typescript`, `vitest`) keeping `npm audit` at zero vulnerabilities.
-- **Clean Code Style:** Standardised ES module imports with `.js` extensions, consistent formatting, and descriptive function naming.
-- **Minor Script Duplication:** Container startup and polling routines are repeated across orchestration scripts rather than shared via a common module.
-
----
-
-## Main Highlights
-
-- **Positive Detection Gate Pattern:** Replaces naïve &quot;fail on any alert&quot; logic with a contract asserting that expected vulnerability classes *must* be detected, catching scanner regressions or broken target setups.
-- **Hand-Rolled Screenplay HTTP Adapter:** Elegant, zero-dependency Screenplay pattern implementation (`Actor`, `Ability`, `Task`, `Question`) tailored specifically for HTTP API exploitation.
-- **Deterministic CI Pipeline:** GitHub Actions workflow ([`.github/workflows/ci.yml`](../juice-shop-dast-automation/.github/workflows/ci.yml)) with SHA-pinned action steps, fast verify gating, container execution, artifact uploading, and GitHub Pages deployment.
-
----
-
-## Pedagogical Value
-
-- **Outstanding Educational Blueprint:** Demonstrates how to integrate DAST into CI/CD pipelines safely and deterministically.
-- **BDD Inverted Polarity Teaching:** Exemplifies how BDD scenarios can be structured with inverted polarity to assert exploit success on vulnerable targets.
-- **Design-First Methodology:** Accompanied by a comprehensive Software Design Document ([`docs/dast-lane-design.md`](../juice-shop-dast-automation/docs/dast-lane-design.md)) and phased delivery backlog ([`docs/backlog.md`](../juice-shop-dast-automation/docs/backlog.md)).
-
----
-
-```
-
----</div>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Reviewer:</strong> AI assistant (Gemini)</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Date:</strong> 2026-08-07T14:10Z</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>Project:</strong> juice-shop-dast-automation</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clear Separation of Concerns:</strong> The project cleanly isolates scanner orchestration (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/scripts/run-scan.mjs"><code>scripts/run-scan.mjs</code></a>), findings evaluation (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/src/findings/"><code>src/findings/</code></a>), and BDD active exploitation (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/src/screenplay/"><code>src/screenplay/</code></a>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Honest Scope Distinction:</strong> Explicitly distinguishes between passive baseline scanning (which detects misconfigurations/disclosures but zero injection) and active BDD exploitation (which proves SQLi and IDOR vulnerabilities are real).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Strict Safety Boundaries:</strong> Scanner and BDD targets are hard-coded to local private Docker networks, preventing accidental external target scanning.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Pure Verdict Function:</strong> The verdict evaluator (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/src/findings/verdict.ts"><code>src/findings/verdict.ts</code></a>) is a pure function tested against committed JSON fixtures without requiring Docker runtime dependencies.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Mandatory Framing Discipline:</strong> Ubiquitous framing banner across README, GitHub Pages index, and unit tests ensures security findings on an intentionally vulnerable target are never misconstrued as real product flaws.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>TypeScript Type Safety:</strong> Modern ES2023 / ESNext ESM configuration with strict type checking enabled in <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/tsconfig.json"><code>tsconfig.json</code></a>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comprehensive Unit Testing:</strong> 21 Vitest unit tests covering verdict logic, missing/unexpected class detection, and HTML report framing rendering in <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/tests/"><code>tests/</code></a>.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Minimal Dependencies:</strong> Lightweight dependency tree (<code>@cucumber/cucumber</code>, <code>tsx</code>, <code>typescript</code>, <code>vitest</code>) keeping <code>npm audit</code> at zero vulnerabilities.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Clean Code Style:</strong> Standardised ES module imports with <code>.js</code> extensions, consistent formatting, and descriptive function naming.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Minor Script Duplication:</strong> Container startup and polling routines are repeated across orchestration scripts rather than shared via a common module.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Positive Detection Gate Pattern:</strong> Replaces naïve &quot;fail on any alert&quot; logic with a contract asserting that expected vulnerability classes <em>must</em> be detected, catching scanner regressions or broken target setups.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Hand-Rolled Screenplay HTTP Adapter:</strong> Elegant, zero-dependency Screenplay pattern implementation (<code>Actor</code>, <code>Ability</code>, <code>Task</code>, <code>Question</code>) tailored specifically for HTTP API exploitation.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic CI Pipeline:</strong> GitHub Actions workflow (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.github/workflows/ci.yml"><code>.github/workflows/ci.yml</code></a>) with SHA-pinned action steps, fast verify gating, container execution, artifact uploading, and GitHub Pages deployment.</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Outstanding Educational Blueprint:</strong> Demonstrates how to integrate DAST into CI/CD pipelines safely and deterministically.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>BDD Inverted Polarity Teaching:</strong> Exemplifies how BDD scenarios can be structured with inverted polarity to assert exploit success on vulnerable targets.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Design-First Methodology:</strong> Accompanied by a comprehensive Software Design Document (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/docs/dast-lane-design.md"><code>docs/dast-lane-design.md</code></a>) and phased delivery backlog (<a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/docs/backlog.md"><code>docs/backlog.md</code></a>).</li>
+</ul>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
   </div>
