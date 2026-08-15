@@ -2,10 +2,15 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "9c2bf60df0e24c424a0d70893666b787536b8402",
+    "commit": "7feaefdc478177097d2e18c000b0362f73cee7f4",
     "path": "registry.yml"
   },
   "projects": [
+    {
+      "project": "auth-separation",
+      "github": "GBrooks1970/auth-separation",
+      "presentation_role": "methodology"
+    },
     {
       "project": "bfx-ws-screenplay",
       "github": "GBrooks1970/bfx-ws-screenplay",
