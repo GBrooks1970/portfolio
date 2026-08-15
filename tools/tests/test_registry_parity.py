@@ -129,7 +129,14 @@ class RegistryParityTests(unittest.TestCase):
 
     def test_registry_lock_drift_is_rejected(self) -> None:
         committed_lock = copy.deepcopy(self.registry_lock)
-        committed_lock["projects"][0]["presentation_role"] = "methodology"
+        # The lock is sorted by project id, so which role sits at index 0 changes as
+        # projects are onboarded. Derive a role that differs from the current one instead
+        # of hard-coding one, or the mutation silently becomes a no-op and the test passes
+        # without ever exercising drift detection.
+        first = committed_lock["projects"][0]
+        first["presentation_role"] = (
+            "showcase" if first["presentation_role"] != "showcase" else "methodology"
+        )
         with self.assertRaisesRegex(PARITY.ParityError, "changed fields"):
             PARITY.validate_registry_lock(committed_lock, self.registry_lock)
 
