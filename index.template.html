@@ -77,8 +77,16 @@
   .methodology { margin-top: 34px; padding: 20px; border: 1px solid var(--line); border-radius: 10px;
     background: var(--card); }
   .methodology h2 { font-size: 1.12rem; margin: 0 0 6px; }
-  .methodology p { margin: 0; }
+  .methodology > p { margin: 0 0 10px; }
   .methodology a { color: var(--accent); font-weight: 600; }
+  /* Per-project entries. Separated from the narrative above them by a rule rather than a card
+     border: these are approaches, not products, and boxing them would read as a weaker showcase
+     card sitting below the real ones. */
+  .approach { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .approach .disc { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); margin: 0 0 4px; }
+  .approach p { margin: 0 0 10px; }
+  .approach .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
   footer a { color: var(--accent); }
   .note { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
