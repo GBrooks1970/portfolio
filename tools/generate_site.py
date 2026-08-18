@@ -478,11 +478,24 @@ def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
     for project, entry, github in entries:
         chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
         link = f'<a href="https://github.com/{_escape(github)}">{_escape(entry["title"])}</a>'
+
+        # Evidence links: the same three types and the same CSS classes a card uses, so the
+        # play cue and the doc glyph mean the same thing wherever they appear. No "Repo"
+        # button — the project name above already links there, and a methodology entry with
+        # two controls pointing at the same place reads as filler.
+        actions = [
+            _action_link(entry["actions"][kind], kind)
+            for kind in ("demo", "report", "documentation")
+            if entry["actions"][kind] is not None
+        ]
+        actions_html = f'\n    <div class="actions">{"".join(actions)}</div>' if actions else ""
+
         blocks.append(
             f'  <div class="approach" data-project="{_escape(project)}">\n'
             f'    <p class="disc">{_escape(entry["discipline"])}</p>\n'
             f'    <p>{link} {_escape(entry["summary"])}</p>\n'
-            f'    <div class="chips">{chips}</div>\n'
+            f'    <div class="chips">{chips}</div>'
+            f'{actions_html}\n'
             f'  </div>'
         )
     return "\n".join(blocks)

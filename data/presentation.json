@@ -276,7 +276,10 @@
       ],
       "actions": {
         "workflow": null,
-        "demo": null,
+        "demo": {
+          "label": "Interactive Kanban board",
+          "url": "https://gbrooks1970.github.io/auth-separation/"
+        },
         "report": null,
         "documentation": null
       }
