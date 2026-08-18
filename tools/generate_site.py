@@ -463,14 +463,29 @@ def render_capability_groups(
 
 def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
     # The section shell and its landing-owned narrative live in index.template.html; this token
-    # injects only the per-methodology-project attribution line (with its repository link).
-    paragraphs = []
+    # injects the per-methodology-project entries.
+    #
+    # These entries carry the same `discipline` and `tags` a showcase card does, and used to render
+    # as a bare paragraph of running text — so the two most identifying facts about each project sat
+    # in presentation.json and never reached the page, and each entry fused visually into the
+    # narrative above it. They are structured blocks now: still prose rather than cards, because a
+    # methodology project is an approach rather than something to demo, but with its discipline and
+    # its stack legible at a glance.
+    #
+    # `data-project` stays on the outer element: check_registry_parity.py reads it to confirm the
+    # page and the canonical registry agree on which projects are methodology.
+    blocks = []
     for project, entry, github in entries:
-        paragraphs.append(
-            f'  <p data-project="{_escape(project)}"><a href="https://github.com/{_escape(github)}">'
-            f'{_escape(entry["title"])}</a> {_escape(entry["summary"])}</p>'
+        chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
+        link = f'<a href="https://github.com/{_escape(github)}">{_escape(entry["title"])}</a>'
+        blocks.append(
+            f'  <div class="approach" data-project="{_escape(project)}">\n'
+            f'    <p class="disc">{_escape(entry["discipline"])}</p>\n'
+            f'    <p>{link} {_escape(entry["summary"])}</p>\n'
+            f'    <div class="chips">{chips}</div>\n'
+            f'  </div>'
         )
-    return "\n".join(paragraphs)
+    return "\n".join(blocks)
 
 
 def render_site(

@@ -59,8 +59,13 @@ class _InventoryParser(HTMLParser):
             self.showcase_assignments.append((project, self._current_capability_group))
         if tag == "section" and "methodology" in classes:
             self._in_methodology = True
-        if tag == "p" and self._in_methodology and attributes.get("data-project"):
-            self.methodology_projects.append(attributes["data-project"] or "")
+        # Methodology entries are `div.approach`, mirroring how a showcase entry is
+        # `article.card`. Keyed on the class rather than on "any element carrying
+        # data-project inside the section", so a stray attribute cannot quietly
+        # register a project the registry never classified.
+        if tag == "div" and "approach" in classes and self._in_methodology:
+            if attributes.get("data-project"):
+                self.methodology_projects.append(attributes["data-project"] or "")
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "section" and self._in_methodology:

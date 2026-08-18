@@ -74,10 +74,10 @@ class RegistryParityTests(unittest.TestCase):
         self.assertNotIn(
             '<article class="card" data-project="portfolio-prompts">', self.rendered
         )
-        self.assertIn('<p data-project="portfolio-prompts">', self.rendered)
+        self.assertIn('<div class="approach" data-project="portfolio-prompts">', self.rendered)
 
         incorrectly_counted = self.rendered.replace(
-            '<p data-project="portfolio-prompts">',
+            '<div class="approach" data-project="portfolio-prompts">',
             '<article class="card" data-project="portfolio-prompts">',
             1,
         )
