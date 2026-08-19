@@ -81,7 +81,7 @@
         </tr>
         <tr>
           <td><code>calculator-screenplay-bdd</code></td>
-          <td><span class="badge badge-resting">resting</span></td>
+          <td><span class="badge badge-active">active</span></td>
           <td><code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code></td>
           <td>2026-08-07T14:09Z</td>
           <td>AI assistant (Gemini 2.5 Flash)</td>
@@ -150,6 +150,24 @@
           <td>AI assistant (Gemini)</td>
           <td><code>N/A</code></td>
           <td><a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/00_CODE_REVIEW_CLAUDE_v1_20260807T1410Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/blob/main/.review/CODE_REVIEW_Gemini_v1_20260807T1410Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>auth-separation</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z</code></td>
+          <td>2026-08-18</td>
+          <td>AI assistant (CLAUDE Opus 5)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/auth-separation/blob/main/.review/CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z/00_CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/auth-separation/blob/main/.review/CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
+        </tr>
+        <tr>
+          <td><code>auth-separation-screenplay-poc</code></td>
+          <td><span class="badge badge-resting">resting</span></td>
+          <td><code>CODE_REVIEW_Antigravity_v1_20260819T1000Z</code></td>
+          <td>2026-08-19</td>
+          <td>AI assistant (Antigravity)</td>
+          <td><code>N/A</code></td>
+          <td><a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/blob/main/.review/CODE_REVIEW_Antigravity_v1_20260819T1000Z/00_CODE_REVIEW_Antigravity_v1_20260819T1000Z.md">Full Review</a> &bull; <a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/blob/main/.review/CODE_REVIEW_Antigravity_v1_20260819T1000Z/01_EXECUTIVE_SUMMARY.md">Executive Summary</a></td>
         </tr>
       </tbody>
     </table>
@@ -243,7 +261,7 @@
       </details>
     </div>
     <div class="card">
-      <h3>calculator-screenplay-bdd <span class="badge badge-resting">resting</span></h3>
+      <h3>calculator-screenplay-bdd <span class="badge badge-active">active</span></h3>
       <p>
         <strong>Latest Review:</strong> <code>CODE_REVIEW_Gemini_v1_20260807T1409Z</code> | 
         <strong>Reviewer:</strong> AI assistant (Gemini 2.5 Flash) | 
@@ -632,6 +650,172 @@
 </ul>
 <hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
 <p style="margin: 0.5rem 0; color: #cbd5e1;">```</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>auth-separation <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (CLAUDE Opus 5) | 
+        <strong>Date:</strong> 2026-08-18 | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/auth-separation/blob/main/.review/CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z/00_CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/auth-separation/blob/main/.review/CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/auth-separation/tree/main/.review/CODE_REVIEW_CLAUDE_Opus_5_v1_20260818T1017Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Verdict</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>A strong, unusually honest repository with one real hole in its own enforcement story.</strong></p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><code>auth-separation</code> sets out to prove a single claim: that a technology-agnostic specification set can be</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">complete and coherent enough to build from, and that the specification demonstrably preceded the code. It</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">proves that claim, and it proves it in the one way a contracts-only repository cannot - by generating three</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">compiling, serving service skeletons from the contracts alone, reproducibly, with no hand-written code</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">inside the generated output.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">What lifts it above a documentation exercise is that almost every claim it makes is machine-checked. Six</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><code>npm run verify</code> legs validate the specifications, the acceptance criteria, committed secrets, and the</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">planning board&#x27;s status <em>and</em> content. A seventh command regenerates the stubs and fails on drift. The</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">project repeatedly noticed that a claim could rot and built a gate for it.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">The gap is that the most important of those gates cannot actually stop anything, and three files say it can.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>The scope decision is the best thing in the repository.</strong> <code>ADR-0005</code> bounds the project to three</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">generated stubs and parks 46 tickets, with an explicit reopening trigger. Deciding what <em>not</em> to build,</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">recording why, and then enforcing that decision in tooling is senior judgement, and rare in a portfolio.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Authority is split deliberately and documented.</strong> <code>docs/backlog.md</code> owns ticket status, the Kanban owns</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">ticket content, and Ready-versus-Backlog is owned by neither - it is derived from the dependency graph</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">(<code>ADR-0004</code>). Most projects would have let these drift; this one made the overlap a computed value.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>The generated boundary is drawn correctly.</strong> <code>Program.cs</code> is hand-written and thin; everything</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">describing the API surface is generated. Where NSwag emitted only an abstract base,</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><a href="https://github.com/GBrooks1970/auth-separation/blob/main/scripts/generate-stub-impl.mjs">generate-stub-impl.mjs</a> derives the concrete subclass mechanically rather</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">than letting twelve hand-written overrides sit inside a stub whose acceptance criteria forbid them.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Stack choice was argued from a criterion, not taste.</strong> <code>ADR-0006</code> picks C# / .NET 9 because</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><code>dotnet build</code> and <code>dotnet test</code> discharge an inherited acceptance criterion unambiguously and ASP.NET</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">Core returns 501 by default - and it was then proven by a spike before anything was built on it.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Weakness:</strong> the three services are near-clones at every level - configuration, host wiring, and tests -</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">and only the contract reader was extracted. See R-05 and R-06.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Tests derive their expectations from the contracts</strong>, not from copied lists. Adding an operation to a</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">specification without regenerating fails the suite. That coupling is the point of the repository, and it</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">is implemented rather than asserted.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comments explain decisions, not mechanics.</strong> The scripts are unusually well annotated: each says what</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">it does <em>not</em> cover, which is the harder and more useful half.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><a href="https://github.com/GBrooks1970/auth-separation/blob/main/scripts/check-generated.mjs">check-generated.mjs</a> (lines 29-38) explains why <code>git diff</code> is used instead</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">of <code>git status</code>, and why the path filter lives in JavaScript rather than in a git pathspec.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Two tests pin surprising real behaviour instead of asserting an assumption</strong> - notably</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><a href="https://github.com/GBrooks1970/auth-separation/blob/main/services/authz/tests/AuthSeparation.AuthZ.Tests/StubServesContractTests.cs">StubServesContractTests.cs</a></p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">(lines 93-113), which records that a non-GUID path segment still reaches the action because NSwag emits no</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">route constraint. That is more valuable than a test that quietly encodes a guess.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Gates were negative-tested before being trusted</strong>, and the repository says so in its ADRs and commit</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">messages. This is the difference between a green build and a meaningful one.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Weakness:</strong> 574 lines of test code across six files are close to triplicated; the per-service</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">assertions differ only in counts and type names.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">1. **36 routed operations across three services, all returning 501, generated from three OpenAPI 3.1</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">contracts** - 101 tests, 0 failures, verified on the Linux runner as well as locally.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">2. <strong>A drift gate that enforces &quot;never hand-edit generated files&quot;</strong> rather than asking reviewers to spot it,</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">with the honest note that review cannot distinguish a regenerated file from an edited one.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">3. <strong>A planning board that is published, interactive and offline-safe</strong> - 51 tickets, vendored runtime, zero</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">external requests even when served from GitHub Pages.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">4. <strong>Six ADRs that record refusals as well as decisions</strong> - <code>ADR-0003</code> explicitly declines a build-failing</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">house-style ruleset and says why, rather than quietly not doing it.</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">5. <strong>A project contract</strong> (<code>docs/project-contract.md</code>) that survives handover rotation and states the scope</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">boundary in <em>both</em> directions, including what the repository must not be described as.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>High, and unusually so for a repository with no business logic.</strong></p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">It teaches something most portfolios cannot: how to bound scope deliberately, record the boundary, and</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">make tooling enforce it. The <code>Parked</code> status - which never derives to <code>Ready</code> however its blockers</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">resolve - is a small idea with a large lesson attached.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">It demonstrates the difference between validating a specification and <em>proving</em> it, and shows the reader</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">the difference in evidence terms.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">The generator traps documented in <code>docs/project-contract.md</code> (NSwag&#x27;s asymmetric path resolution, the</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">runner&#x27;s .NET 10 shadowing a pinned 9.x runtime, CRLF versus LF defeating a drift check) are exactly the</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">sort of hard-won specifics that are usually lost when a project ends.</p>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>The main pedagogical risk is R-01</strong>: a reader who trusts the service READMEs will learn that a</li>
+</ul>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">non-required CI job blocks merges, which is untrue. A teaching repository that overstates its own</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">enforcement teaches the wrong lesson twice.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Portfolio Credibility</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">Credible, with one correction needed. The repository does not overclaim in the places that usually tempt</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">people - it says plainly and repeatedly that 36 endpoints returning 501 are not a working auth system, and</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">the backlog, README and closure record all state both halves. The single overclaim is narrow, technical, and</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">fixable in either of two ways described in R-01.</p>
+<hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
+      </details>
+    </div>
+    <div class="card">
+      <h3>auth-separation-screenplay-poc <span class="badge badge-resting">resting</span></h3>
+      <p>
+        <strong>Latest Review:</strong> <code>CODE_REVIEW_Antigravity_v1_20260819T1000Z</code> | 
+        <strong>Reviewer:</strong> AI assistant (Antigravity) | 
+        <strong>Date:</strong> 2026-08-19 | 
+        <strong>Grade:</strong> <code>N/A</code>
+      </p>
+      <p>
+        <a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/blob/main/.review/CODE_REVIEW_Antigravity_v1_20260819T1000Z/00_CODE_REVIEW_Antigravity_v1_20260819T1000Z.md">Open Full Review Index</a> &bull; 
+        <a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/blob/main/.review/CODE_REVIEW_Antigravity_v1_20260819T1000Z/01_EXECUTIVE_SUMMARY.md">Open Executive Summary Document</a> &bull; 
+        <a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/tree/main/.review/CODE_REVIEW_Antigravity_v1_20260819T1000Z">Browse Review Folder</a>
+      </p>
+      <details>
+        <summary>Click to view Executive Summary text</summary>
+        <div style="margin-top: 1rem; font-size: 0.95rem;"><hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;">
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Verdict</h3>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><strong>A high-calibre, multi-stack demonstration of contract-first Specification-Driven Development (SDD) and Screenplay BDD proving total microservice interchangeability.</strong></p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;"><code>auth-separation-screenplay-poc</code> successfully proves that rigorously authored OpenAPI 3.1 and AsyncAPI 3.0 contracts coupled with canonical BDD Gherkin specifications can serve as an absolute single source of truth across diverse language ecosystems (Node.js, Python FastAPI, and C# .NET 9).</p>
+<p style="margin: 0.5rem 0; color: #cbd5e1;">The repository delivers an end-to-end working system without simulated shortcuts: JWT RS256 token issuance and JWKS discovery, dynamic RBAC/ABAC authorization policies, full profile CRUD mutations, and asynchronous audit ledger messaging.</p>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Design Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Canonical Specification as Sole Truth</strong>: The 30 BDD Gherkin feature scenarios in <code>features/</code> define user expectations, authorization rules, and cross-service audit flows. The same suite runs against both the baseline Node.js SUT and the Polyglot multi-stack SUT without changing a single step definition.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Microservice Separation of Concerns</strong>: Clean boundaries between Authentication (port 3001, PCI scope), Authorization (port 3002, SOC 2 scope), and User Profile (port 3003, GDPR scope) ensure independent scalability and zero shared databases.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Screenplay Pattern Abstraction</strong>: Native integration of <code>hand-baked-screenplay-pattern</code> leverages Actors (<code>Alice</code>, <code>Bob</code>, <code>Charlie</code>), domain Abilities (<code>CallAnApi</code>, <code>ReceiveEvents</code>, <code>HoldTokens</code>), single-purpose Tasks (<code>AuthenticateWith</code>, <code>CheckPermission</code>, <code>ManageProfile</code>), and fluent Questions (<code>TheLastResponse</code>, <code>TheAccessDecision</code>, <code>TheEmittedEvents</code>, <code>TheProfileDetails</code>).</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Interactive Living Documentation</strong>: Every microservice renders an embedded Swagger UI at <code>/docs</code> parsing the underlying OpenAPI 3.1 YAML specifications dynamically.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Code Quality</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Type Safety &amp; Schema Validation</strong>: Node.js and TypeScript services enforce strict typing; Python utilizes Pydantic v2 schemas; C# employs strongly typed records and Minimal API endpoints in .NET 9.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Cross-Process Event Broker</strong>: Domain events (<code>UserAuthenticated</code>, <code>SessionRevoked</code>, <code>AccessDecisionLogged</code>, <code>ProfileUpdated</code>, <code>ProfileDeleted</code>) are published to an asynchronous event bus and forwarded seamlessly across OS process boundaries.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Comprehensive Quality Gates</strong>: <code>npm run verify</code> validates OpenAPI 3.1 contracts via <code>@redocly/cli</code>, AsyncAPI 3.0 via <code>@asyncapi/parser</code>, Gherkin feature ASTs via <code>@cucumber/gherkin</code>, and executes the 30-scenario BDD suite against both the Node.js baseline and the live Polyglot stack (270 total step assertions executed).</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Main Highlights</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>100% Roadmap Resolution</strong>: All 5 backlog items across Phase 0 (<code>POC-P0-01</code>, <code>POC-P0-02</code>), Phase 1 (<code>POC-P1-01</code>, <code>POC-P1-02</code>), and Phase 2 (<code>POC-P2-01</code>) delivered and closed.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Contract Interchangeability Proven</strong>: Python FastAPI AuthZ and C# .NET 9 User Profile services cleanly drop into the architecture and pass all 30 BDD scenarios on first integration without test modifications.</li>
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;"><strong>Deterministic Test Isolation</strong>: Every scenario executes against clean in-memory state via coordinated <code>/internal/reset</code> lifecycle endpoints.</li>
+</ul>
+<h3 style="color: #e2e8f0; margin-top: 1.2rem; margin-bottom: 0.5rem;">Pedagogical Value</h3>
+<ul style="padding-left: 1.2rem; margin: 0.5rem 0;">
+<li style="margin-bottom: 0.4rem; color: #cbd5e1;">Serves as the portfolio&#x27;s premier multi-stack reference implementation demonstrating how senior architects design, specify, implement, and verify distributed microservices with automated BDD contract testing.</li>
+</ul>
 <hr style="border: none; border-top: 1px solid var(--border); margin: 1rem 0;"></div>
       </details>
     </div>
