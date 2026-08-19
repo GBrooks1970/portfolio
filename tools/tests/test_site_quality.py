@@ -63,8 +63,8 @@ class SiteQualityTests(unittest.TestCase):
     def test_current_document_passes_static_quality_contract(self) -> None:
         summary, errors = SITE.audit_document(self.document, ROOT)
         self.assertEqual(errors, [])
-        self.assertEqual(summary.external_urls, 44)
-        self.assertEqual(summary.interactive_elements, 46)
+        self.assertEqual(summary.external_urls, 45)
+        self.assertEqual(summary.interactive_elements, 48)
         self.assertEqual(summary.internal_references, 6)
         self.assertEqual(summary.contrast_pairs, 20)
 
