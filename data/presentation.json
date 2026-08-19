@@ -283,6 +283,25 @@
         "report": null,
         "documentation": null
       }
+    },
+    "auth-separation-screenplay-poc": {
+      "title": "Auth Separation Screenplay POC",
+      "discipline": "Multi-stack SDD + Screenplay BDD",
+      "summary": "Demonstrates specification-driven development and Screenplay BDD proving microservice interchangeability across Node.js, Python FastAPI, and C# .NET 9 with living OpenAPI and AsyncAPI contracts.",
+      "order": 110,
+      "group": "multi-stack-frameworks",
+      "tags": [
+        "Screenplay",
+        "OpenAPI 3.1",
+        "AsyncAPI 3.0",
+        "Polyglot"
+      ],
+      "actions": {
+        "workflow": null,
+        "demo": null,
+        "report": null,
+        "documentation": null
+      }
     }
   }
 }
