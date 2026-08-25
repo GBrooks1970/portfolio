@@ -204,7 +204,7 @@
     "gb.automation.smoketests.sudoku.poc": {
       "title": "Sudoku Multi-Stack Parity POC",
       "discipline": "Multi-stack parity",
-      "summary": "The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 48-scenario contract stays in lock-step across all three. A study in test-suite portability.",
+      "summary": "The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 55-scenario contract stays in lock-step across all three. A study in test-suite portability.",
       "order": 90,
       "group": "multi-stack-frameworks",
       "tags": [
