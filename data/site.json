@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "canonicalUrl": "https://gbrooks1970.github.io/portfolio/",
   "title": "Gary Brooks — Test Automation Portfolio",
-  "description": "A test-automation engineering portfolio spanning UI, API, mobile web, WebSocket, BDD, Screenplay and multi-stack parity.",
+  "description": "A test-automation portfolio spanning UI, API, security/DAST, mobile web, WebSocket, BDD, Screenplay, multi-stack parity and specification-driven development.",
   "language": "en-GB",
   "locale": "en_GB",
   "siteName": "Gary Brooks — Test Automation Portfolio",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "slug": "GBrooks1970/portfolio",
-    "description": "Static portfolio of test-automation projects spanning UI, API, mobile web, WebSocket and multi-stack parity.",
+    "description": "Static portfolio of test-automation projects spanning UI, API, security/DAST, mobile web, WebSocket, multi-stack parity and specification-driven development.",
     "homepage": "https://gbrooks1970.github.io/portfolio/",
     "topics": [
       "test-automation",
