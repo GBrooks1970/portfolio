@@ -116,12 +116,13 @@
     "hand-baked-screenplay-pattern": {
       "title": "Hand-Baked Screenplay Pattern",
       "discipline": "Framework internals · teaching library",
-      "summary": "A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.2.0.",
+      "summary": "A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.3.0, with a Stryker mutation-testing lane that measures test-suite quality beyond code coverage.",
       "order": 50,
       "group": "multi-stack-frameworks",
       "tags": [
         "TypeScript",
         "Vitest",
+        "Mutation testing",
         "Zero-deps",
         "Library"
       ],
