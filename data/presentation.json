@@ -301,7 +301,10 @@
         "workflow": "ci.yml",
         "demo": null,
         "report": null,
-        "documentation": null
+        "documentation": {
+          "label": "API reference",
+          "url": "https://gbrooks1970.github.io/auth-separation-screenplay-poc/"
+        }
       }
     }
   }
