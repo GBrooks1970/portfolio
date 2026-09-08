@@ -298,7 +298,7 @@
         "Polyglot"
       ],
       "actions": {
-        "workflow": null,
+        "workflow": "ci.yml",
         "demo": null,
         "report": null,
         "documentation": null
