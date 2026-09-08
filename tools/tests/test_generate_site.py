@@ -41,8 +41,8 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertIn('data-public-evidence-count="9"', self.rendered)
         self.assertIn("<dt>Capability areas</dt>\n      <dd>5</dd>", self.rendered)
         self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>9</dd>", self.rendered)
-        self.assertEqual(self.rendered.count(" CI workflow\">"), 10)
-        self.assertEqual(self.rendered.count(" CI status\""), 10)
+        self.assertEqual(self.rendered.count(" CI workflow\">"), 11)
+        self.assertEqual(self.rendered.count(" CI status\""), 11)
 
     def test_action_types_are_rendered_with_distinct_classes(self) -> None:
         # Only a genuinely interactive `demo` carries the play cue (the
