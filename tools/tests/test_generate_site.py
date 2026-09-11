@@ -38,9 +38,9 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertEqual(self.rendered.count('class="capability-group"'), 5)
         self.assertEqual(self.rendered.count("<h4><a href="), 11)
         self.assertIn('data-capability-group-count="5"', self.rendered)
-        self.assertIn('data-public-evidence-count="10"', self.rendered)
+        self.assertIn('data-public-evidence-count="11"', self.rendered)
         self.assertIn("<dt>Capability areas</dt>\n      <dd>5</dd>", self.rendered)
-        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>10</dd>", self.rendered)
+        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>11</dd>", self.rendered)
         self.assertEqual(self.rendered.count(" CI workflow\">"), 11)
         self.assertEqual(self.rendered.count(" CI status\""), 11)
 
