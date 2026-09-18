@@ -87,9 +87,9 @@ class RegistryParityTests(unittest.TestCase):
     def test_displayed_showcase_count_must_match_manifest_roles(self) -> None:
         _, _, registry = GENERATE.validate_sources(self.manifest, self.registry_lock)
         wrong_count = self.rendered.replace(
-            'data-showcase-count="11"', 'data-showcase-count="9"', 1
+            'data-showcase-count="13"', 'data-showcase-count="9"', 1
         )
-        with self.assertRaisesRegex(PARITY.ParityError, "manifest requires 11"):
+        with self.assertRaisesRegex(PARITY.ParityError, "manifest requires 13"):
             PARITY.validate_rendered_inventory(wrong_count, registry, self.manifest)
 
     def test_rendered_capability_group_order_must_match_manifest(self) -> None:
@@ -122,7 +122,7 @@ class RegistryParityTests(unittest.TestCase):
             PARITY.validate_rendered_inventory(wrong_group_count, registry, self.manifest)
 
         wrong_evidence_count = self.rendered.replace(
-            'data-public-evidence-count="10"', 'data-public-evidence-count="9"', 1
+            'data-public-evidence-count="12"', 'data-public-evidence-count="9"', 1
         )
         with self.assertRaisesRegex(PARITY.ParityError, "public evidence count is 9"):
             PARITY.validate_rendered_inventory(wrong_evidence_count, registry, self.manifest)
