@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "75e5c9066937ed6518329e3db37f905f68dc758d",
+    "commit": "ee37050c61ef2439248cba95f13c97e06817fd41",
     "path": "registry.yml"
   },
   "projects": [
@@ -70,6 +70,16 @@
       "project": "portfolio-prompts",
       "github": "NeoCognitus70/portfolio-prompts",
       "presentation_role": "methodology"
+    },
+    {
+      "project": "saleor-graphql-automation",
+      "github": "GBrooks1970/saleor-graphql-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "tradeblotter-wpf-screenplay",
+      "github": "GBrooks1970/tradeblotter-wpf-screenplay",
+      "presentation_role": "showcase"
     }
   ]
 }

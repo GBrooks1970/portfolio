@@ -306,6 +306,50 @@
           "url": "https://gbrooks1970.github.io/auth-separation-screenplay-poc/"
         }
       }
+    },
+    "tradeblotter-wpf-screenplay": {
+      "title": "TradeBlotter WPF",
+      "discipline": "Windows desktop automation",
+      "summary": "A C#/.NET 9 WPF trading blotter with a FlaUI.UIA3 feasibility probe. Driver abstraction, Screenplay BDD and multi-driver comparison are planned.",
+      "order": 120,
+      "group": "multi-stack-frameworks",
+      "tags": [
+        "C#",
+        "WPF",
+        "FlaUI",
+        ".NET"
+      ],
+      "actions": {
+        "workflow": null,
+        "demo": null,
+        "report": null,
+        "documentation": {
+          "label": "Phase 0 implementation record",
+          "url": "https://github.com/GBrooks1970/tradeblotter-wpf-screenplay/blob/main/docs/implementation-logs/2026-09-18_phase-0-feasibility-probe-and-backlog-scaffolding.md"
+        }
+      }
+    },
+    "saleor-graphql-automation": {
+      "title": "Saleor GraphQL Automation",
+      "discipline": "GraphQL API and BDD",
+      "summary": "GraphQL automation for Saleor with Screenplay tasks, schema contract checks and separate deterministic and live-SUT verification paths.",
+      "order": 130,
+      "group": "api-bdd-protocols",
+      "tags": [
+        "GraphQL",
+        "Screenplay",
+        "Cucumber",
+        "TypeScript"
+      ],
+      "actions": {
+        "workflow": null,
+        "demo": null,
+        "report": null,
+        "documentation": {
+          "label": "Project documentation",
+          "url": "https://github.com/GBrooks1970/saleor-graphql-automation/blob/main/README.md"
+        }
+      }
     }
   }
 }
