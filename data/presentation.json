@@ -366,7 +366,10 @@
       "actions": {
         "workflow": "ci.yml",
         "demo": null,
-        "report": null,
+        "report": {
+          "label": "Serenity reports",
+          "url": "https://gbrooks1970.github.io/loan-origination-parity/"
+        },
         "documentation": null
       }
     }
