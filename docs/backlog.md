@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 24
+**Version:** 25
 **Last updated:** 2026-09-29
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is IN REVIEW.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -788,7 +788,7 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 
 ## LAND-10 - Publish September review snapshots
 
-**Status:** IN REVIEW
+**Status:** DONE
 **Priority:** P0
 **Authority:** Owner requested resolution of the stale public reviews page on 2026-09-29.
 
@@ -800,3 +800,10 @@ Acceptance: all three September bundles and six primary links are public; comple
 quality gate and desktop/mobile browser checks pass; exact merged Pages deployment
 succeeds and live bytes match the generated output. Publication evidence follows
 in a dated closure record after deployment.
+
+LAND-10 completion: [PR #50](https://github.com/GBrooks1970/portfolio/pull/50)
+merged as `9bfc866fecd86223a8bd9ae0e221b632f8f0f366`. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/36604272084) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/36604270554) passed.
+The live page matches merged output, includes all three September bundles and has
+six working primary links. See [publication closure](implementation-logs/2026-09-29_land-10-publication-closure.md).
