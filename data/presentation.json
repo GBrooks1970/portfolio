@@ -350,6 +350,25 @@
           "url": "https://github.com/GBrooks1970/saleor-graphql-automation/blob/main/README.md"
         }
       }
+    },
+    "loan-origination-parity": {
+      "title": "Loan Origination Parity",
+      "discipline": "Multi-surface parity SDD + Screenplay BDD",
+      "summary": "One UK loan-origination engine proven identical through an in-memory core, a Node REST API, an Angular SPA and a Next.js backend-for-frontend by a single Serenity/JS Screenplay harness, with a CI parity gate on scenario counts and step text and server-side authorisation that holds when the UI is bypassed.",
+      "order": 140,
+      "group": "multi-stack-frameworks",
+      "tags": [
+        "Screenplay",
+        "Serenity/JS",
+        "Angular",
+        "Next.js"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null,
+        "documentation": null
+      }
     }
   }
 }
