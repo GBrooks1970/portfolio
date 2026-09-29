@@ -8,6 +8,7 @@ from pathlib import Path
 from check_registry_parity import check_registry_parity
 from check_site import SiteError, check_site
 from generate_site import SourceError
+from generate_reviews import check_reviews
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
+        check_reviews()
         showcase_count, methodology_count = check_registry_parity(
             args.registry_repository
         )

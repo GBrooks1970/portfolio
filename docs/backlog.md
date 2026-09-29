@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 23
-**Last updated:** 2026-08-04
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. No required cycle items remain open.
+**Version:** 24
+**Last updated:** 2026-09-29
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is IN REVIEW.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -785,3 +785,18 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 - Record a completed development task in `docs/implementation-logs/` before marking it DONE.
 - Preserve resolved items in this file or a linked archive; do not erase the decision trail.
 - Keep en-GB spelling and avoid model-specific instructions.
+
+## LAND-10 - Publish September review snapshots
+
+**Status:** IN REVIEW
+**Priority:** P0
+**Authority:** Owner requested resolution of the stale public reviews page on 2026-09-29.
+
+Import the merged central index snapshot and convert its local links to public GitHub
+links using the registry-owned repository slugs. Keep provenance in data/reviews.json,
+provide deterministic regeneration, and fail CI if reviews.html drifts.
+
+Acceptance: all three September bundles and six primary links are public; complete
+quality gate and desktop/mobile browser checks pass; exact merged Pages deployment
+succeeds and live bytes match the generated output. Publication evidence follows
+in a dated closure record after deployment.
