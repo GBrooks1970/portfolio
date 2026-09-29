@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "ee37050c61ef2439248cba95f13c97e06817fd41",
+    "commit": "5d263fa6a4cdc55e80a973dd771385b47f8b3152",
     "path": "registry.yml"
   },
   "projects": [
@@ -39,6 +39,11 @@
     {
       "project": "juice-shop-dast-automation",
       "github": "GBrooks1970/juice-shop-dast-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "loan-origination-parity",
+      "github": "GBrooks1970/loan-origination-parity",
       "presentation_role": "showcase"
     },
     {
