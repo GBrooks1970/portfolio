@@ -220,7 +220,10 @@
           "label": "Solver visualisation",
           "url": "https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/"
         },
-        "report": null,
+        "report": {
+          "label": "Parity evidence",
+          "url": "https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/parity/"
+        },
         "documentation": null
       }
     },
