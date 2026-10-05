@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "5d263fa6a4cdc55e80a973dd771385b47f8b3152",
+    "commit": "1c191a3100a0d82302c15759355a2013da74f5bc",
     "path": "registry.yml"
   },
   "projects": [
@@ -24,6 +24,11 @@
     {
       "project": "calculator-screenplay-bdd",
       "github": "NeoCognitus70/calculator-screenplay-bdd",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "credit-dashboard-sut",
+      "github": "GBrooks1970/credit-dashboard-sut",
       "presentation_role": "showcase"
     },
     {

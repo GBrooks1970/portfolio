@@ -27,22 +27,22 @@ class GenerateSiteTests(unittest.TestCase):
         )
 
     def test_renders_current_public_inventory_and_counts(self) -> None:
-        self.assertEqual(self.rendered.count('<article class="card" data-project='), 14)
+        self.assertEqual(self.rendered.count('<article class="card" data-project='), 15)
         self.assertIn('data-project="portfolio-prompts"', self.rendered)
-        self.assertIn("Fourteen showcase projects", self.rendered)
-        self.assertIn("All fourteen showcase project repositories", self.rendered)
+        self.assertIn("Fifteen showcase projects", self.rendered)
+        self.assertIn("All fifteen showcase project repositories", self.rendered)
         self.assertIn("ParaBank Bank Automation", self.rendered)
         self.assertIn("Auth Separation Screenplay POC", self.rendered)
         self.assertIn('<a class="skip-link" href="#projects">', self.rendered)
         self.assertIn('aria-labelledby="projects-heading"', self.rendered)
         self.assertEqual(self.rendered.count('class="capability-group"'), 5)
-        self.assertEqual(self.rendered.count("<h4><a href="), 14)
+        self.assertEqual(self.rendered.count("<h4><a href="), 15)
         self.assertIn('data-capability-group-count="5"', self.rendered)
-        self.assertIn('data-public-evidence-count="14"', self.rendered)
+        self.assertIn('data-public-evidence-count="15"', self.rendered)
         self.assertIn("<dt>Capability areas</dt>\n      <dd>5</dd>", self.rendered)
-        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>14</dd>", self.rendered)
-        self.assertEqual(self.rendered.count(" CI workflow\">"), 12)
-        self.assertEqual(self.rendered.count(" CI status\""), 12)
+        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>15</dd>", self.rendered)
+        self.assertEqual(self.rendered.count(" CI workflow\">"), 13)
+        self.assertEqual(self.rendered.count(" CI status\""), 13)
 
     def test_action_types_are_rendered_with_distinct_classes(self) -> None:
         # Only a genuinely interactive `demo` carries the play cue (the
