@@ -375,6 +375,28 @@
         },
         "documentation": null
       }
+    },
+    "credit-dashboard-sut": {
+      "title": "Credit Dashboard SUT",
+      "discipline": "Specification-driven SUT design + contract-first BDD",
+      "summary": "A fictional UK credit-health dashboard specified before any code: one OpenAPI 3.1 contract, 65 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and five recorded decision briefs, all checked in CI. Phase 1 (mock server and generated client) has started; no service code exists yet.",
+      "order": 150,
+      "group": "api-bdd-protocols",
+      "tags": [
+        "OpenAPI",
+        "Specification-driven",
+        "Gherkin",
+        "Decision briefs"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null,
+        "documentation": {
+          "label": "API specification",
+          "url": "https://github.com/GBrooks1970/credit-dashboard-sut/blob/main/DOCS/.design/api-specification.md"
+        }
+      }
     }
   }
 }
