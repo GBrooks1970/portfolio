@@ -313,7 +313,7 @@
     "tradeblotter-wpf-screenplay": {
       "title": "TradeBlotter WPF",
       "discipline": "Windows desktop automation",
-      "summary": "A C#/.NET 9 WPF trading blotter with a FlaUI.UIA3 feasibility probe. Driver abstraction, Screenplay BDD and multi-driver comparison are planned.",
+      "summary": "A C#/.NET 9 WPF trading blotter automated through a vendor-neutral driver contract with FlaUI.UIA3 and WinAppDriver adapters, a C# Screenplay core and Reqnroll scenarios, gated by Windows-hosted CI. Parked at TB-08B until a licensed Ranorex SDK is available.",
       "order": 120,
       "group": "multi-stack-frameworks",
       "tags": [
@@ -327,8 +327,8 @@
         "demo": null,
         "report": null,
         "documentation": {
-          "label": "Phase 0 implementation record",
-          "url": "https://github.com/GBrooks1970/tradeblotter-wpf-screenplay/blob/main/docs/implementation-logs/2026-09-18_phase-0-feasibility-probe-and-backlog-scaffolding.md"
+          "label": "Windows CI evidence",
+          "url": "https://github.com/GBrooks1970/tradeblotter-wpf-screenplay/blob/main/docs/windows-ci.md"
         }
       }
     },

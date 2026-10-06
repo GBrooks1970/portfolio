@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 25
-**Last updated:** 2026-09-29
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE.
+**Version:** 26
+**Last updated:** 2026-10-06
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is IN REVIEW.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -65,6 +65,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
+| LAND-11 | P0 | IN REVIEW | — | Refresh the TradeBlotter card to the repository's current state |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -750,6 +751,52 @@ live viewer was verified on the real base path (banner, 5 puzzles, SOLVED, full 
 errors). See the immutable [implementation log](implementation-logs/2026-08-04_land-09d-sudoku-evidence.md).
 
 **🏁 The LAND-09 public-evidence programme is COMPLETE — all four slices (09A–09D) DONE.**
+
+### LAND-11 — Refresh the TradeBlotter card to the repository's current state
+
+**Priority:** P0
+**Status:** IN REVIEW
+**Type:** Presentation data and generated HTML
+**Authority:** Owner approved recording this item and its implementation log on 2026-10-06, after the
+change was prepared on a branch. The owner asked for the card to be brought into line with the
+repository.
+
+The `tradeblotter-wpf-screenplay` card said driver abstraction, Screenplay BDD and a multi-driver
+comparison were planned, and linked its Phase 0 implementation record. The repository's own backlog
+(v12, 2026-09-28) and changelog record TB-01 to TB-08A complete: a vendor-neutral driver contract with
+FlaUI.UIA3 and WinAppDriver adapters, a C# Screenplay core, Reqnroll scenarios and a Windows-hosted CI
+gate. TB-08B (native Ranorex adapter and three-driver comparison) is open and blocked on a licensed
+SDK, and the project is parked by owner decision of 2026-09-21. The card understated delivered work.
+
+Scope: `data/presentation.json` summary and documentation link for this one project, and the
+regenerated `index.html`. Non-goals: group, order, tags, title, discipline and every other project.
+The registry `notes` field for this project is owned by `portfolio-prompts` and is changed separately;
+`data/registry-lock.json` records only project ID, slug and role, so the two changes do not depend on
+each other.
+
+Acceptance criteria:
+
+- [x] The card summary states only what the repository's backlog and changelog record, including the
+      parked state and the blocked TB-08B.
+- [x] The documentation link resolves to a file that exists on the repository's default branch
+      (`docs/windows-ci.md`; the raw file returned HTTP 200).
+- [x] `index.html` is regenerated from `data/presentation.json`; `sitemap.xml` and `robots.txt` are
+      unchanged; `python tools/generate_site.py --check` passes.
+- [x] `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external`
+      passes with the same counts as before the change (15 showcase, 2 methodology, 53 tests, 3 skipped).
+- [ ] The external-URL check (61 URLs) passes in CI. It could not run in the authoring environment,
+      where every `github.com` page returned HTTP 403.
+- [ ] The owner merges [PR #56](https://github.com/GBrooks1970/portfolio/pull/56).
+- [ ] GitHub Pages deploys the exact merge commit successfully.
+- [ ] The live page returns the new summary and link, and its HTML matches `origin/main`.
+
+Implementation evidence: commit `89bb979` on branch `claude/busy-carson-puuex6`, based on `46209ad`;
+opened for review as [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) on 2026-10-06.
+See the [implementation log](implementation-logs/2026-10-06_land-11_tradeblotter-card-refresh.md).
+Related, not blocking: the matching `portfolio-prompts` registry notes change is commit `16dc225` on
+branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, open as
+[PR #112](https://github.com/NeoCognitus70/portfolio-prompts/pull/112) and also unmerged.
+Completion evidence (merge, Pages run, live check) will be added in a closure log when it exists.
 
 ## Candidate improvements — unscheduled
 
