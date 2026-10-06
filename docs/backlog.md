@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 26
+**Version:** 27
 **Last updated:** 2026-10-06
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is IN REVIEW.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -65,7 +65,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
-| LAND-11 | P0 | IN REVIEW | — | Refresh the TradeBlotter card to the repository's current state |
+| LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -755,7 +755,7 @@ errors). See the immutable [implementation log](implementation-logs/2026-08-04_l
 ### LAND-11 — Refresh the TradeBlotter card to the repository's current state
 
 **Priority:** P0
-**Status:** IN REVIEW
+**Status:** DONE
 **Type:** Presentation data and generated HTML
 **Authority:** Owner approved recording this item and its implementation log on 2026-10-06, after the
 change was prepared on a branch. The owner asked for the card to be brought into line with the
@@ -784,19 +784,29 @@ Acceptance criteria:
       unchanged; `python tools/generate_site.py --check` passes.
 - [x] `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external`
       passes with the same counts as before the change (15 showcase, 2 methodology, 53 tests, 3 skipped).
-- [ ] The external-URL check (61 URLs) passes in CI. It could not run in the authoring environment,
-      where every `github.com` page returned HTTP 403.
-- [ ] The owner merges [PR #56](https://github.com/GBrooks1970/portfolio/pull/56).
-- [ ] GitHub Pages deploys the exact merge commit successfully.
-- [ ] The live page returns the new summary and link, and its HTML matches `origin/main`.
+- [x] The external-URL check (61 URLs) passes in CI. It could not run in the authoring environment,
+      where every `github.com` page returned HTTP 403; CI run 37506774664 on the merge commit passed
+      with no `--skip-external`.
+- [x] The owner merges [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) (squash, `d85a358`,
+      2026-10-06T17:51:23Z).
+- [x] GitHub Pages deploys the exact merge commit successfully (run 37506772130, success).
+- [x] The live page returns the new summary and link, and its HTML matches `origin/main` (SHA-256
+      `c1be7d4ca3cdcd9ea08989e8bbaf3593c637c6d7a6a898a1b0067d5ba1dcd18b`, line-ending normalised).
 
 Implementation evidence: commit `89bb979` on branch `claude/busy-carson-puuex6`, based on `46209ad`;
 opened for review as [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) on 2026-10-06.
 See the [implementation log](implementation-logs/2026-10-06_land-11_tradeblotter-card-refresh.md).
 Related, not blocking: the matching `portfolio-prompts` registry notes change is commit `16dc225` on
-branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, open as
-[PR #112](https://github.com/NeoCognitus70/portfolio-prompts/pull/112) and also unmerged.
-Completion evidence (merge, Pages run, live check) will be added in a closure log when it exists.
+branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, merged as
+[PR #112](https://github.com/NeoCognitus70/portfolio-prompts/pull/112) (`6a61b89`,
+2026-10-06T17:52:01Z).
+
+Completion evidence: [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) squash-merged as
+`d85a3586c3610622af325267b49278e574320763` at 2026-10-06T17:51:23Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37506774664) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37506772130) runs passed. The live page
+returned HTTP 200 and its HTML matches the merged `index.html`, with the new summary and link present.
+See the [publication closure](implementation-logs/2026-10-06_land-11_publication-closure.md).
 
 ## Candidate improvements — unscheduled
 
