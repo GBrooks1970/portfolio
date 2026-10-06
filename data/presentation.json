@@ -379,7 +379,7 @@
     "credit-dashboard-sut": {
       "title": "Credit Dashboard SUT",
       "discipline": "Specification-driven SUT design + contract-first BDD",
-      "summary": "A fictional UK credit-health dashboard specified before any code: one OpenAPI 3.1 contract, 65 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and five recorded decision briefs, all checked in CI. Phase 1 (mock server and generated client) has started; no service code exists yet.",
+      "summary": "A fictional UK credit-health dashboard specified before any code: one OpenAPI 3.1 contract, 65 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Its Phase 1 exit gate is met: a pinned Prism mock serves all 36 contract operations, smoke-tested on every push; no service code exists yet.",
       "order": 150,
       "group": "api-bdd-protocols",
       "tags": [
