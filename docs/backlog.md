@@ -786,14 +786,16 @@ Acceptance criteria:
       passes with the same counts as before the change (15 showcase, 2 methodology, 53 tests, 3 skipped).
 - [ ] The external-URL check (61 URLs) passes in CI. It could not run in the authoring environment,
       where every `github.com` page returned HTTP 403.
-- [ ] The owner merges the pull request. No pull request has been opened yet.
+- [ ] The owner merges [PR #56](https://github.com/GBrooks1970/portfolio/pull/56).
 - [ ] GitHub Pages deploys the exact merge commit successfully.
 - [ ] The live page returns the new summary and link, and its HTML matches `origin/main`.
 
-Implementation evidence: commit `89bb979` on branch `claude/busy-carson-puuex6`, based on `46209ad`.
+Implementation evidence: commit `89bb979` on branch `claude/busy-carson-puuex6`, based on `46209ad`;
+opened for review as [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) on 2026-10-06.
 See the [implementation log](implementation-logs/2026-10-06_land-11_tradeblotter-card-refresh.md).
 Related, not blocking: the matching `portfolio-prompts` registry notes change is commit `16dc225` on
-branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, also unmerged.
+branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, open as
+[PR #112](https://github.com/NeoCognitus70/portfolio-prompts/pull/112) and also unmerged.
 Completion evidence (merge, Pages run, live check) will be added in a closure log when it exists.
 
 ## Candidate improvements — unscheduled
