@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 29
+**Version:** 30
 **Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is IN PROGRESS.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -67,6 +67,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
+| LAND-13 | P1 | IN PROGRESS | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -858,6 +859,44 @@ Completion evidence: [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) 
 [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37625885376) runs passed. The live
 `learning-paths.html` returned HTTP 200 and matches the merged file. See the
 [publication closure](implementation-logs/2026-10-07_land-12_publication-closure.md).
+
+### LAND-13 — Refresh the Learning Paths snapshot to the current edition
+
+**Priority:** P1
+**Status:** IN PROGRESS
+**Type:** Snapshot refresh (data, regenerated page, evidence)
+**Authority:** Owner approved the plan on 2026-10-07 with every recommended option, including P1 because the public page makes a
+stale claim. Plan: [`implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md`](implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md).
+
+LAND-12 published a pinned snapshot of the Learning Paths document (source commit `2b83c40`). The source document has changed once
+since: `GBrooks1970/test-automation-portfolio` #289 (`13d102a336d5acbdbb2267fcc0c7f84962e27e2a`) records stage 4.4 passing after a fix,
+rewrites finding 7 and corrects one bullet in section 9. The public page still says 4.4 'failed to start' and that the probe 'has no
+result', so it contradicts the source. The delta is four changed content lines; the stylesheet and the two links are unchanged.
+
+Scope: `data/learning-paths.json` (`html`, and `source.commit` set to the document's last-change commit), the regenerated
+`learning-paths.html`, this entry, the plan and its index, and an implementation log. Non-goals: cards, groups, the registry, the sitemap,
+robots, the hero link, the source repository, and automating the refresh (CI cannot read a private repository).
+
+Acceptance criteria:
+
+- [x] `data/learning-paths.json` is refreshed from the current generated HTML with a recipe that first reproduced the old snapshot exactly
+      from the old source (`html` is the stripped body plus a newline); only `html` and `source.commit` change.
+- [x] `python tools/generate_learning_paths.py --check` and `python tools/generate_site.py --check` pass; `index.html`, `sitemap.xml`
+      and `robots.txt` are unchanged.
+- [x] `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` reports 15 showcase, 2 methodology, 66 named
+      controls, 7 internal references, 61 external URLs and 20 contrast pairs. Locally 56 of 57 tests pass; the one failure,
+      `test_all_registered_showcase_projects_present` (`credit-dashboard-sut` is not in the sibling `portfolio-reviews/README.md`), is
+      unrelated and is skipped in CI, where that folder is absent.
+- [x] No horizontal page overflow at 375 px or 1280 px in Chromium; all 8 tables stay in scroll regions.
+- [ ] The pull request's quality run passes in CI.
+- [ ] The owner merges the pull request.
+- [ ] GitHub Pages deploys the exact merge commit; the live `learning-paths.html` returns HTTP 200, matches `origin/main` after
+      line-ending normalisation, and shows 'passes after a fix' and not 'has not produced a result here'.
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. The next edition of the
+document needs another deliberate refresh.
+
+Implementation evidence: see the [implementation log](implementation-logs/2026-10-07_land-13_learning-paths-refresh.md).
 
 ## Candidate improvements — unscheduled
 
