@@ -9,6 +9,7 @@ from check_registry_parity import check_registry_parity
 from check_site import SiteError, check_site
 from generate_site import SourceError
 from generate_reviews import check_reviews
+from generate_learning_paths import check_learning_paths
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +37,7 @@ def main() -> int:
     args = parse_args()
     try:
         check_reviews()
+        check_learning_paths()
         showcase_count, methodology_count = check_registry_parity(
             args.registry_repository
         )
