@@ -4,9 +4,9 @@ created: 2026-10-07T17:53Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-14
-status: approved
+status: implemented
 approved: 2026-10-07, Gary Brooks (plan LC-V1, "agreed as recommended", with the switch at the top right); the owner merges
-delivered: not yet
+delivered: PR #63, merge commit 9537d83, merged 2026-10-07T18:00:56Z by the owner
 language: en-GB
 ---
 
@@ -84,3 +84,15 @@ open pull request #46.
 |---|---|---|---|
 | Switch position, version scheme, inline script, persistence, build tool, procedure location, who does it | Set by LC-V1 | As recommended in LC-V1; the switch at the top right | Approved 2026-10-07 under LC-V1 |
 | Commit the snapshot refresh script, rather than keep a scratch one | A committed script with tests; or a scratch script as in LAND-13 | A committed script: the procedure must be findable and testable | Within LC-V1's 'procedure in findable places'; no separate decision needed |
+
+## Outcome
+
+Delivered as planned. [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) (two commits: `4a7e448` the plan, `6c234a9` the change) was merged by the owner as `9537d83e0ed962ea3dde2d103f75a541cbd571ed` on 2026-10-07 at 18:00:56Z. The logs are
+[`docs/implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md`](../implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md) and
+[`2026-10-07_land-14_publication-closure.md`](../implementation-logs/2026-10-07_land-14_publication-closure.md).
+
+- **Change:** the snapshot (`schemaVersion` 2) is rebuilt by the committed `tools/refresh_learning_paths_snapshot.py` from the source's generated page (document commit `6fe8133fea6a59accba608dfe77431f8f708b5bd`, version 10); the generator renders the top bar with the switch at the top right, the two scripts, a 'Public snapshot' row and no table wrapping of its own. `index.html`, `sitemap.xml` and `robots.txt` did not change.
+- **Verification, as planned:** the generator and site checks passed; `verify_portfolio.py --skip-external` gave the same counts as LAND-13 with 74 tests (the one failure is the known local review-index test that CI skips); real Chromium passed 13 of 13 checks locally in both themes. PR quality run `37663223836` and exact-merge run `37663545958` passed; the Pages run `37663545393` on the merge commit succeeded.
+- **The check that would have failed if the change had not published:** the live `learning-paths.html` returned HTTP 200, its SHA-256 equals `origin/main` after line-ending normalisation (`b715457b…a4ca6`), it carries the version and 'Public snapshot' rows and the switch, and the same 13 real-browser checks pass against the live URL. The live `index.html` equals `origin/main` and is byte-identical to its pre-change hash.
+- **Differences from the plan:** none in design or scope. One addition: the closure also ran the browser suite against the live URL, not only the hash and content checks.
+- **Not done, as stated in the plan:** the registry, cards, groups, the hero link, and the unrelated open pull request #46; the `portfolio-reviews` index gap (a content gap in `test-automation-portfolio`).
