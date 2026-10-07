@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 27
-**Last updated:** 2026-10-06
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE.
+**Version:** 28
+**Last updated:** 2026-10-07
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is IN REVIEW.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -66,6 +66,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
+| LAND-12 | P2 | IN REVIEW | — | Publish the Learning Paths document as a pinned page linked from the hero |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -807,6 +808,48 @@ Completion evidence: [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) 
 [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37506772130) runs passed. The live page
 returned HTTP 200 and its HTML matches the merged `index.html`, with the new summary and link present.
 See the [publication closure](implementation-logs/2026-10-06_land-11_publication-closure.md).
+
+### LAND-12 — Publish the Learning Paths document as a pinned page linked from the hero
+
+**Priority:** P2
+**Status:** IN REVIEW
+**Type:** New generated page, hero link and gate
+**Authority:** Owner asked on 2026-10-07 for Learning Paths to be added to the landing page, and chose the
+pinned-copy option when told the source repository is private.
+
+`GBrooks1970/test-automation-portfolio` holds `portfolio-docs/PORTFOLIO_LEARNING_PATHS.md`: five ordered
+routes through the portfolio's tools, with captured results from a validation run. That repository is
+private and has no Pages site (GitHub reported `private: true`, `has_pages: false`), so a link to it would
+return 404 to every visitor and fail the external-URL gate. Under OD-LAND-10 the landing repository owns
+link semantics and presentation only, so the page here is a pinned snapshot, not a second source of truth.
+
+Scope: `data/learning-paths.json` (the snapshot: source path, source commit, the HTML the source's Markdown
+generates, and its stylesheet), `tools/generate_learning_paths.py`, the generated `learning-paths.html`, one
+hero link in `index.template.html` and the regenerated `index.html`, a drift check in
+`tools/verify_portfolio.py`, tests, and the two counts in `tools/tests/test_site_quality.py` that a new
+link changes. Non-goals: cards, groups, registry, the sitemap, and any change to the source repository.
+
+Acceptance criteria:
+
+- [x] The page renders from the snapshot, wraps each table in a scrollable region, links back to the
+      landing page and states its source, commit and that it must not be edited by hand.
+- [x] Links to private documents (the Tool Atlas and the outline) become plain text, and any link form the
+      generator does not recognise fails the build.
+- [x] `learning-paths.html` is checked for drift by `tools/verify_portfolio.py` (the reviews.html pattern).
+- [x] `python3 tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` passes
+      with 15 showcase, 2 methodology, 66 named controls, 7 internal references, 61 external URLs.
+- [x] `python3 tools/generate_site.py --check` passes; `sitemap.xml` and `robots.txt` are unchanged.
+- [x] No horizontal page overflow at 375 px or 1280 px in Chromium.
+- [ ] The external-URL check passes in CI.
+- [ ] The owner merges the pull request.
+- [ ] GitHub Pages deploys the exact merge commit, and the live page and `learning-paths.html` return
+      HTTP 200 with the expected content.
+
+Known limit: the snapshot is not checked against its source, because CI cannot read a private repository.
+A new edition of the document needs a deliberate refresh of `data/learning-paths.json`.
+
+Implementation evidence: commit `a9c90a4` on branch `claude/land-12-learning-paths`, based on `6b6f252`. See the
+[implementation log](implementation-logs/2026-10-07_land-12_learning-paths-page.md).
 
 ## Candidate improvements — unscheduled
 
