@@ -5,18 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio Learning Paths</title>
 <style>
-:root {
-    --ink: #1c2530; --muted: #5a6672; --line: #e1e6ec; --bg: #ffffff;
-    --panel: #f6f8fa; --accent: #2f5d8a; --code-bg: #1f2630; --code-ink: #e8edf2;
-    --ok: #2e7d4f; --warn: #b9770a;
+:root { --ink: #1c2530; --muted: #5a6672; --line: #e1e6ec; --bg: #ffffff; --panel: #f6f8fa; --accent: #2f5d8a; --code-bg: #1f2630; --code-ink: #e8edf2; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --ink: #e6edf3; --muted: #9fb0c0; --line: #2b3a4a; --bg: #0f1720; --panel: #172230; --accent: #8ab8e8; --code-bg: #0a1118; --code-ink: #e8edf2; color-scheme: dark; }
   }
+  :root[data-theme="dark"] { --ink: #e6edf3; --muted: #9fb0c0; --line: #2b3a4a; --bg: #0f1720; --panel: #172230; --accent: #8ab8e8; --code-bg: #0a1118; --code-ink: #e8edf2; color-scheme: dark; }
+  :root[data-theme="light"] { color-scheme: light; }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--ink); background: var(--bg); line-height: 1.62;
   }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 48px 24px 96px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 24px 24px 96px; }
+  .topbar { display: flex; justify-content: flex-end; align-items: center; min-height: 40px; margin-bottom: 12px; }
+  .theme-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; padding: 4px 10px; font-size: 1.15rem; line-height: 1; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+  .theme-toggle[hidden] { display: none; }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .table-scroll { max-width: 100%; overflow-x: auto; }
+  .table-scroll > table { margin: 0; }
+  .table-scroll { margin: 18px 0; }
+  .theme-toggle:focus-visible, .table-scroll:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 14px; padding-bottom: 18px; border-bottom: 3px solid var(--accent); }
   h2 { font-size: 1.3rem; margin: 44px 0 14px; padding-top: 14px; border-top: 1px solid var(--line); }
   h3 { font-size: 1.05rem; margin: 26px 0 10px; color: var(--accent); }
@@ -33,18 +42,33 @@
   blockquote p:first-child { margin-top: 0; }
   blockquote p:last-child { margin-bottom: 0; }
   hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+  .doc-meta { margin: 0 0 28px; padding: 14px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+  .doc-meta dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px 24px; margin: 0; }
+  .doc-meta dt { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .doc-meta dd { margin: 2px 0 0; }
+  .doc-meta__links { margin: 12px 0 0; font-size: 0.9rem; }
   footer.doc { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
-
-  .table-scroll { max-width: 100%; overflow-x: auto; }
-  .table-scroll:focus-visible, a:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
-  nav.back { margin-bottom: 1.5rem; font-size: 0.9rem; }
-  @media (max-width: 600px) { .wrap { padding: 24px 16px 64px; } }
+  @media (max-width: 600px) { .wrap { padding: 16px 16px 64px; } }
+  .topbar { justify-content: space-between; gap: 12px; }
+  nav.back { font-size: 0.9rem; }
 </style>
+<script>(function () { try { var t = localStorage.getItem('portfolio-docs-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
 </head>
 <body>
 <div class="wrap">
-<nav class="back" aria-label="Portfolio"><a href="index.html">Back to portfolio</a></nav>
+<header class="topbar"><nav class="back" aria-label="Portfolio"><a href="index.html">Back to portfolio</a></nav><button type="button" id="theme-toggle" class="theme-toggle" hidden aria-label="Toggle light/dark theme" aria-pressed="false" title="Toggle light/dark theme">🌓</button></header>
 <h1>Portfolio Learning Paths</h1>
+<section class="doc-meta" aria-label="Document metadata">
+<dl>
+<div><dt>Version</dt><dd>10</dd></div>
+<div><dt>Created</dt><dd><time datetime="2026-10-06T20:47Z">6 October 2026, 20:47 UTC</time></dd></div>
+<div><dt>Last updated</dt><dd><time datetime="2026-10-07T17:45Z">7 October 2026, 17:45 UTC</time></dd></div>
+<div><dt>Evidence cut-off</dt><dd>2026-10-07T09:55Z (latest captured run: stage 4.4 on juice-shop-dast-automation main at ba76110)</dd></div>
+<div><dt>Source revision</dt><dd><code title="ed75b98ab6bde28f96fb2e4576eba5eb2a043b3b">ed75b98</code> (portfolio <code>main</code> when the evidence was last checked)</dd></div>
+<div><dt>Public snapshot</dt><dd>Pinned from document commit <code title="6fe8133fea6a59accba608dfe77431f8f708b5bd">6fe8133</code>; refreshed 7 October 2026, 17:54 UTC (LAND-14).</dd></div>
+</dl>
+<p class="doc-meta__links">Maintaining this document: maintenance guide.</p>
+</section>
 <p>Five ordered routes through the portfolio. The Tool Atlas answers &#39;what is this
 tool and where is it used?&#39; one tool at a time; these paths teach one idea at a time across several projects,
 so a reader does not have to guess which repository to open first.</p>
@@ -53,7 +77,7 @@ setup deviation, and five stages on a scratch Node 24 install; stages 1.5 and 5.
 <strong>1 stage was not run</strong> (4.2), because its Docker stack was in use by another session. It is labelled in place. Stages 5.3 and 5.4 failed in the cloud container on a browser-build mismatch and passed as written on a machine with the matching browsers.</p>
 <h2>1. How to use this</h2>
 <p>Read the paths in order 1 to 4; path 5 can be read alone. Every stage has the same parts.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="1. How to use this"><table>
 <thead>
 <tr>
 <th>Part</th>
@@ -91,7 +115,7 @@ licence and the project is parked.</p>
 <p>Each project was cloned from its local checkout into a clean directory (<code>git clone --no-hardlinks</code>), installed with
 <code>npm ci</code> (or the Python equivalent), and the <strong>Do</strong> command was run once. Commands ran sequentially, with the
 exit code and wall-clock duration recorded. Durations include only the command, not the install, unless stated.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="2. How the stages were run"><table>
 <thead>
 <tr>
 <th>Item</th>
@@ -119,7 +143,7 @@ exit code and wall-clock duration recorded. Durations include only the command, 
 <td>.NET SDK, PowerShell, k6, a running Docker daemon</td>
 </tr>
 </tbody></table></div>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="2. How the stages were run (table 2)"><table>
 <thead>
 <tr>
 <th>Project</th>
@@ -180,7 +204,7 @@ table. A stage that has moved since may give different counts.</p>
 <h2>3. Path 1. Screenplay, from the inside out</h2>
 <p><em>Why this order:</em> start with the smallest implementation, so the vocabulary is clear before a framework hides it,
 then see the same pattern under different execution models.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="3. Path 1. Screenplay, from the inside out"><table>
 <thead>
 <tr>
 <th>Stage</th>
@@ -234,7 +258,7 @@ then see the same pattern under different execution models.</p>
 </tbody></table></div>
 <h2>4. Path 2. One behaviour, many ecosystems</h2>
 <p><em>Why this order:</em> contract first, then each runtime, then the gate that checks agreement.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="4. Path 2. One behaviour, many ecosystems"><table>
 <thead>
 <tr>
 <th>Stage</th>
@@ -288,7 +312,7 @@ then see the same pattern under different execution models.</p>
 </tbody></table></div>
 <h2>5. Path 3. Contracts first</h2>
 <p><em>Why this order:</em> lint the specification, then check the things a linter cannot, then the semantics.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="5. Path 3. Contracts first"><table>
 <thead>
 <tr>
 <th>Stage</th>
@@ -343,7 +367,7 @@ then see the same pattern under different execution models.</p>
 <h2>6. Path 4. Pin the world</h2>
 <p><em>Why this order:</em> own the target, pin it, pin everything around it, learn where pinning stops, then apply the same
 discipline to documentation.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="6. Path 4. Pin the world"><table>
 <thead>
 <tr>
 <th>Stage</th>
@@ -397,7 +421,7 @@ discipline to documentation.</p>
 </tbody></table></div>
 <h2>7. Path 5. What a green result proves</h2>
 <p><em>Why last:</em> it reuses tools from the earlier paths and asks of each what it leaves unproven.</p>
-<div class="table-scroll" tabindex="0" role="region" aria-label="Learning Paths stages"><table>
+<div class="table-scroll" tabindex="0" role="region" aria-label="7. Path 5. What a green result proves"><table>
 <thead>
 <tr>
 <th>Stage</th>
@@ -484,8 +508,31 @@ discipline to documentation.</p>
 <code>docs/walkthroughs/2026-10-06_learning-paths-validation.md</code>.</p>
 
 <footer class="doc">
-Pinned snapshot of <code>portfolio-docs/PORTFOLIO_LEARNING_PATHS.md</code> in the private repository <code>GBrooks1970/test-automation-portfolio</code> at commit <code>13d102a</code>. Documents it refers to (the Tool Atlas and the outline) are in that repository and are not linked here. Edit the source and refresh <code>data/learning-paths.json</code>; never edit this page by hand.
+Pinned snapshot of <code>portfolio-docs/PORTFOLIO_LEARNING_PATHS.md</code> in the private repository <code>GBrooks1970/test-automation-portfolio</code> at commit <code>6fe8133</code>. Documents it refers to (the Tool Atlas, the outline and the maintenance guide) are in that repository and are not linked here. Edit the source and refresh <code>data/learning-paths.json</code>; never edit this page by hand.
 </footer>
 </div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function effective() {
+    var t = root.getAttribute('data-theme');
+    if (t === 'light' || t === 'dark') return t;
+    return mq && mq.matches ? 'dark' : 'light';
+  }
+  function sync() { btn.setAttribute('aria-pressed', String(effective() === 'dark')); }
+  btn.hidden = false;
+  sync();
+  btn.addEventListener('click', function () {
+    var next = effective() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('portfolio-docs-theme', next); } catch (e) {}
+    sync();
+  });
+  if (mq && mq.addEventListener) mq.addEventListener('change', sync);
+})();
+</script>
 </body>
 </html>

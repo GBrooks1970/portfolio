@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 31
+**Version:** 32
 **Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is IN PROGRESS.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -68,6 +68,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
+| LAND-14 | P1 | IN PROGRESS | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -848,7 +849,7 @@ Acceptance criteria:
       `learning-paths.html` return HTTP 200; both match `origin/main` after line-ending normalisation.
 
 Known limit: the snapshot is not checked against its source, because CI cannot read a private repository.
-A new edition of the document needs a deliberate refresh of `data/learning-paths.json`.
+A new edition of the document needs a deliberate refresh of `data/learning-paths.json`. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
 
 Implementation evidence: commit `a9c90a4` on branch `claude/land-12-learning-paths`, based on `6b6f252`. See the
 [implementation log](implementation-logs/2026-10-07_land-12_learning-paths-page.md).
@@ -894,7 +895,7 @@ Acceptance criteria:
       line-ending normalisation, and shows 'passes after a fix' and not 'has not produced a result here'.
 
 Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. The next edition of the
-document needs another deliberate refresh.
+document needs another deliberate refresh. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
 
 Implementation evidence: commit `1521ec7` on branch `chore/land-13-refresh-learning-paths-snapshot`, based on `a49da0a`, with the plan committed first as `df591be`.
 See the [implementation log](implementation-logs/2026-10-07_land-13_learning-paths-refresh.md).
@@ -903,6 +904,38 @@ Completion evidence: [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) 
 [quality](https://github.com/GBrooks1970/portfolio/actions/runs/37639969505) and
 [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37639968207) runs passed. The live `learning-paths.html` returned HTTP 200 and
 matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-13_publication-closure.md).
+
+### LAND-14 — Publish the versioned, dual-theme Learning Paths page
+
+**Priority:** P1
+**Status:** IN PROGRESS
+**Type:** Generator, snapshot and page change, with a committed refresh script and runbook
+**Authority:** Owner approved plan LC-V1 on 2026-10-07 ('agreed as recommended'; the switch at the top right, like the other house pages). Plan:
+[`implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md`](implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md).
+
+The source document (`GBrooks1970/test-automation-portfolio` #297, last-change commit `6fe8133fea6a59accba608dfe77431f8f708b5bd`, version 10) now has
+frontmatter and a generated page with a metadata block, a dark palette, the house 🌓 switch and its scripts, table scroll regions, and
+`<!-- doc:begin -->` / `<!-- doc:end -->` markers. The public page still shows the earlier light-only layout with no version or snapshot information.
+
+Scope: `tools/generate_learning_paths.py` (a snapshot built from the source's markers, style, scripts and switch; a top bar with the back link and the switch;
+a 'Public snapshot' row in the metadata block; no table wrapping of its own; relative `.html` names become text), `data/learning-paths.json`
+(`schemaVersion` 2), the regenerated `learning-paths.html`, `tools/refresh_learning_paths_snapshot.py` with tests, `docs/learning-paths-refresh.md`, and an
+implementation log. Non-goals: the registry, cards, groups, the hero link, `index.html`, `sitemap.xml`, `robots.txt`, and the source repository.
+
+Acceptance criteria:
+
+- [x] The snapshot is rebuilt from the source page by the committed refresh script, and the script's guards fail on a missing marker, a bad SHA or a bad item (9 tests; the refresh wrote commit `6fe8133`, item LAND-14, 2026-10-07T17:54Z, and `--check` reports the snapshot matches the source).
+- [x] `learning-paths.html` shows the version, the evidence cut-off and a 'Public snapshot' row (document commit, refresh time, item), and the switch at the top
+      right beside 'Back to portfolio'; private links are plain text; each table is wrapped once (8 tables, 8 wrappers).
+- [x] `python tools/generate_learning_paths.py --check`, `python tools/generate_site.py --check` and `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as LAND-13 (15 showcase, 2 methodology, 66 controls, 7 internal, 61 external, 20 contrast; 74 tests, the one failure being the known local review-index test that CI skips).
+- [x] Real Chromium: both themes by system setting, click, persistence, keyboard, JavaScript off, no overflow at 1280 px and 375 px (13 of 13 checks).
+- [ ] The pull request's quality run passes in CI.
+- [ ] The owner merges the pull request.
+- [ ] GitHub Pages deploys the exact merge commit; the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows the version block.
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
+
+Implementation evidence: see the [implementation log](implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md).
 
 ## Candidate improvements — unscheduled
 
