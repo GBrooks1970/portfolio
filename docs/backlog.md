@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 30
+**Version:** 31
 **Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is IN PROGRESS.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -67,7 +67,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
-| LAND-13 | P1 | IN PROGRESS | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
+| LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -863,7 +863,7 @@ Completion evidence: [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) 
 ### LAND-13 — Refresh the Learning Paths snapshot to the current edition
 
 **Priority:** P1
-**Status:** IN PROGRESS
+**Status:** DONE
 **Type:** Snapshot refresh (data, regenerated page, evidence)
 **Authority:** Owner approved the plan on 2026-10-07 with every recommended option, including P1 because the public page makes a
 stale claim. Plan: [`implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md`](implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md).
@@ -888,15 +888,21 @@ Acceptance criteria:
       `test_all_registered_showcase_projects_present` (`credit-dashboard-sut` is not in the sibling `portfolio-reviews/README.md`), is
       unrelated and is skipped in CI, where that folder is absent.
 - [x] No horizontal page overflow at 375 px or 1280 px in Chromium; all 8 tables stay in scroll regions.
-- [ ] The pull request's quality run passes in CI.
-- [ ] The owner merges the pull request.
-- [ ] GitHub Pages deploys the exact merge commit; the live `learning-paths.html` returns HTTP 200, matches `origin/main` after
+- [x] The pull request's quality run passes in CI: [run 37639374795](https://github.com/GBrooks1970/portfolio/actions/runs/37639374795) on `1521ec7`, success (the external-URL check is enabled; no workflow contains `--skip-external`).
+- [x] The owner merges [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) (squash, `43d6fb8`, 2026-10-07T14:49:34Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37639968207, success); the live `learning-paths.html` returns HTTP 200, matches `origin/main` after
       line-ending normalisation, and shows 'passes after a fix' and not 'has not produced a result here'.
 
 Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. The next edition of the
 document needs another deliberate refresh.
 
-Implementation evidence: see the [implementation log](implementation-logs/2026-10-07_land-13_learning-paths-refresh.md).
+Implementation evidence: commit `1521ec7` on branch `chore/land-13-refresh-learning-paths-snapshot`, based on `a49da0a`, with the plan committed first as `df591be`.
+See the [implementation log](implementation-logs/2026-10-07_land-13_learning-paths-refresh.md).
+
+Completion evidence: [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) squash-merged as `43d6fb8d23f1e66e9ba95be4d080e3880553db48` at 2026-10-07T14:49:34Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37639969505) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37639968207) runs passed. The live `learning-paths.html` returned HTTP 200 and
+matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-13_publication-closure.md).
 
 ## Candidate improvements — unscheduled
 
