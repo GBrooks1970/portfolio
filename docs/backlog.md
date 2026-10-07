@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 32
+**Version:** 33
 **Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is IN PROGRESS.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -68,7 +68,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
-| LAND-14 | P1 | IN PROGRESS | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
+| LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -908,7 +908,7 @@ matches the merged file. See the [publication closure](implementation-logs/2026-
 ### LAND-14 — Publish the versioned, dual-theme Learning Paths page
 
 **Priority:** P1
-**Status:** IN PROGRESS
+**Status:** DONE
 **Type:** Generator, snapshot and page change, with a committed refresh script and runbook
 **Authority:** Owner approved plan LC-V1 on 2026-10-07 ('agreed as recommended'; the switch at the top right, like the other house pages). Plan:
 [`implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md`](implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md).
@@ -929,13 +929,19 @@ Acceptance criteria:
       right beside 'Back to portfolio'; private links are plain text; each table is wrapped once (8 tables, 8 wrappers).
 - [x] `python tools/generate_learning_paths.py --check`, `python tools/generate_site.py --check` and `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as LAND-13 (15 showcase, 2 methodology, 66 controls, 7 internal, 61 external, 20 contrast; 74 tests, the one failure being the known local review-index test that CI skips).
 - [x] Real Chromium: both themes by system setting, click, persistence, keyboard, JavaScript off, no overflow at 1280 px and 375 px (13 of 13 checks).
-- [ ] The pull request's quality run passes in CI.
-- [ ] The owner merges the pull request.
-- [ ] GitHub Pages deploys the exact merge commit; the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows the version block.
+- [x] The pull request's quality run passes in CI: [run 37663223836](https://github.com/GBrooks1970/portfolio/actions/runs/37663223836) on `6c234a9`, success (no workflow contains `--skip-external`, so the external-URL check was enabled).
+- [x] The owner merges [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) (`9537d83`, 2026-10-07T18:00:56Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37663545393, success); the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows the version block. The same 13 real-browser checks also pass against the live URL.
 
 Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
 
-Implementation evidence: see the [implementation log](implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md).
+Implementation evidence: commit `6c234a9` on branch `chore/land-14-versioned-dual-theme-snapshot`, based on `c166e71`, with the plan committed first as `4a7e448`.
+See the [implementation log](implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md).
+
+Completion evidence: [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) merged as `9537d83e0ed962ea3dde2d103f75a541cbd571ed` at 2026-10-07T18:00:56Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37663545958) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37663545393) runs passed. The live `learning-paths.html` returned HTTP 200 and
+matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-14_publication-closure.md).
 
 ## Candidate improvements — unscheduled
 
