@@ -4,9 +4,9 @@ created: 2026-10-07T14:11Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-13
-status: approved
+status: implemented
 approved: 2026-10-07, Gary Brooks ("Approved, go with recommendations", every recommended option below); the owner merges
-delivered: not yet
+delivered: PR #61, squash commit 43d6fb8, merged 2026-10-07T14:49:34Z by the owner
 language: en-GB
 ---
 
@@ -82,3 +82,16 @@ automating the refresh (nothing can check the snapshot against a private reposit
 | The red push run on `main` | Re-run now; or leave | Re-run: a transient external 500, and a green baseline helps the pull request | Re-run, approved 2026-10-07 |
 | Pull requests | Two (change, then closure); or one | Two, as for LAND-11 and LAND-12 | Two, approved 2026-10-07 |
 | Who does it | Directly; or a subagent | Directly: it is small and touches a public site | Directly, approved 2026-10-07 |
+
+## Outcome
+
+Delivered as planned. [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) (two commits: `df591be` the plan, `1521ec7` the snapshot, page, backlog item and log) was merged by the
+owner as `43d6fb8d23f1e66e9ba95be4d080e3880553db48` on 2026-10-07 at 14:49:34Z. The logs are
+[`docs/implementation-logs/2026-10-07_land-13_learning-paths-refresh.md`](../implementation-logs/2026-10-07_land-13_learning-paths-refresh.md) and
+[`2026-10-07_land-13_publication-closure.md`](../implementation-logs/2026-10-07_land-13_publication-closure.md).
+
+- **Change:** `data/learning-paths.json` `html` and `source.commit` (now `13d102a336d5acbdbb2267fcc0c7f84962e27e2a`) refreshed; `learning-paths.html` regenerated. Only four content lines and the footer commit reference changed; `style`, `title`, the other `source` fields, `index.html`, `sitemap.xml` and `robots.txt` did not.
+- **Verification, as planned:** both recipes were proved against the old snapshot first; `generate_learning_paths.py --check` and `generate_site.py --check` passed; `verify_portfolio.py --skip-external` reported the same counts (15 showcase, 2 methodology, 66 controls, 7 internal references, 61 external URLs, 20 contrast pairs) with the one known local test failure; Chromium showed no overflow at 1280 px or 375 px. PR quality run `37639374795` and exact-merge run `37639969505` passed; Pages run `37639968207` on the merge commit succeeded.
+- **The check that would have failed if the refresh had not published:** the live page returned HTTP 200, its SHA-256 equals `origin/main` after line-ending normalisation (`dcf810d9…b31d3`), it contains 'passes after a fix' and does not contain 'has not produced a result here'.
+- **Differences from the plan:** none in design or scope. The re-run of the red `main` push run (step 0) succeeded on attempt 2, as expected from a transient external HTTP 500.
+- **Not done, as stated in the plan:** the missing `credit-dashboard-sut` entry in the sibling `portfolio-reviews/README.md` (a content gap in `test-automation-portfolio`), and any automation of the refresh.
