@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 28
+**Version:** 29
 **Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is IN REVIEW.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -66,7 +66,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
 | LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
-| LAND-12 | P2 | IN REVIEW | — | Publish the Learning Paths document as a pinned page linked from the hero |
+| LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -812,7 +812,7 @@ See the [publication closure](implementation-logs/2026-10-06_land-11_publication
 ### LAND-12 — Publish the Learning Paths document as a pinned page linked from the hero
 
 **Priority:** P2
-**Status:** IN REVIEW
+**Status:** DONE
 **Type:** New generated page, hero link and gate
 **Authority:** Owner asked on 2026-10-07 for Learning Paths to be added to the landing page, and chose the
 pinned-copy option when told the source repository is private.
@@ -840,16 +840,24 @@ Acceptance criteria:
       with 15 showcase, 2 methodology, 66 named controls, 7 internal references, 61 external URLs.
 - [x] `python3 tools/generate_site.py --check` passes; `sitemap.xml` and `robots.txt` are unchanged.
 - [x] No horizontal page overflow at 375 px or 1280 px in Chromium.
-- [ ] The external-URL check passes in CI.
-- [ ] The owner merges the pull request.
-- [ ] GitHub Pages deploys the exact merge commit, and the live page and `learning-paths.html` return
-      HTTP 200 with the expected content.
+- [x] The external-URL check passes in CI.
+- [x] The owner merges [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) (squash, `6e9907b`,
+      2026-10-07T13:06:00Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37625885376, success), and the live page and
+      `learning-paths.html` return HTTP 200; both match `origin/main` after line-ending normalisation.
 
 Known limit: the snapshot is not checked against its source, because CI cannot read a private repository.
 A new edition of the document needs a deliberate refresh of `data/learning-paths.json`.
 
 Implementation evidence: commit `a9c90a4` on branch `claude/land-12-learning-paths`, based on `6b6f252`. See the
 [implementation log](implementation-logs/2026-10-07_land-12_learning-paths-page.md).
+
+Completion evidence: [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) squash-merged as
+`6e9907b6fd619eea04735936a809d0b900c3c61f` at 2026-10-07T13:06:00Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37625886411) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37625885376) runs passed. The live
+`learning-paths.html` returned HTTP 200 and matches the merged file. See the
+[publication closure](implementation-logs/2026-10-07_land-12_publication-closure.md).
 
 ## Candidate improvements — unscheduled
 
