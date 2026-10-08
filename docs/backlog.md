@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 33
-**Last updated:** 2026-10-07
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE.
+**Version:** 34
+**Last updated:** 2026-10-08
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is IN PROGRESS.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -69,6 +69,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 | LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
+| LAND-15 | P2 | IN PROGRESS | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -942,6 +943,38 @@ Completion evidence: [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) 
 [quality](https://github.com/GBrooks1970/portfolio/actions/runs/37663545958) and
 [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37663545393) runs passed. The live `learning-paths.html` returned HTTP 200 and
 matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-14_publication-closure.md).
+
+### LAND-15 — Refresh the Learning Paths snapshot to version 11
+
+**Priority:** P2
+**Status:** IN PROGRESS
+**Type:** Snapshot refresh (data and generated page)
+**Authority:** Owner approved the plan on 2026-10-08 ('approve with recommendations'), including P2. Plan:
+[`implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md`](implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md).
+
+The pinned snapshot is the source document at version 10 (last-change commit `6fe8133fea6a59accba608dfe77431f8f708b5bd`). The document is now version 11
+(`437e27fb8c0ac00ff9191ba373eb13010593ec1c`, `GBrooks1970/test-automation-portfolio` #301): its Status counts are generated from run records and it has a new
+section 10, 'Run record', a table of the latest record for each of the 26 stages. The public page is behind, not wrong: its Status counts are the same numbers.
+
+Scope: `data/learning-paths.json` (`html`, `source.commit`, `snapshot`) and the regenerated `learning-paths.html`, by the committed refresh script, following
+[`learning-paths-refresh.md`](learning-paths-refresh.md). Non-goals: the generator and the refresh script, cards, groups, the registry, `index.html`, `sitemap.xml`,
+`robots.txt`, the source repository, and any automation of the refresh.
+
+Acceptance criteria:
+
+- [x] The snapshot is rewritten by `tools/refresh_learning_paths_snapshot.py` with `--commit 437e27f… --item LAND-15`, and its `--check` passes (it exits 1 before the refresh).
+- [x] `python tools/generate_learning_paths.py --check`, `python tools/generate_site.py --check` and `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external`
+      pass with the same counts as LAND-14; `index.html`, `sitemap.xml` and `robots.txt` do not change.
+- [x] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, the section 10 table in a scroll region with 26 rows, and the version 11 and
+      new-commit values in the metadata block and the 'Public snapshot' row.
+- [ ] The pull request's quality run passes in CI.
+- [ ] The owner merges the pull request.
+- [ ] GitHub Pages deploys the exact merge commit; the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows version 11 and the 'Run record' heading.
+
+Implementation evidence: branch `chore/land-15-refresh-learning-paths-snapshot`, based on `7e792f6`, with the plan committed first. See the
+[implementation log](implementation-logs/2026-10-08_land-15_learning-paths-refresh.md).
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository.
 
 ## Candidate improvements — unscheduled
 
