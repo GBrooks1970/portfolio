@@ -4,9 +4,9 @@ created: 2026-10-08T00:30Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-15
-status: approved
+status: implemented
 approved: 2026-10-08, Gary Brooks ("approve with recommendations", every recommended option below); the owner merges
-delivered: not yet
+delivered: PR #65, merge commit b045dd6, merged 2026-10-08T00:24:45Z by the owner
 language: en-GB
 ---
 
@@ -75,4 +75,13 @@ Branch `chore/land-15-refresh-learning-paths-snapshot`; pull request 1 carries t
 
 ## Outcome
 
-Not yet delivered.
+Delivered as planned. [PR #65](https://github.com/GBrooks1970/portfolio/pull/65) (three commits: `4f08175` the plan, `c376c3a` its approval, `d59d15b` the snapshot, page, backlog item and log) was merged by the owner as
+`b045dd63a20db9117bfba41d6a5e74f3c84bac7b` on 2026-10-08 at 00:24:45Z. The logs are
+[`docs/implementation-logs/2026-10-08_land-15_learning-paths-refresh.md`](../implementation-logs/2026-10-08_land-15_learning-paths-refresh.md) and
+[`2026-10-08_land-15_publication-closure.md`](../implementation-logs/2026-10-08_land-15_publication-closure.md).
+
+- **Change:** `data/learning-paths.json` `html`, `source.commit` (now `437e27fb8c0ac00ff9191ba373eb13010593ec1c`) and `snapshot` refreshed by the committed script; `learning-paths.html` regenerated (313 insertions, 7 deletions). `index.html`, `sitemap.xml` and `robots.txt` did not change.
+- **Verification, as planned:** the refresh script's `--check` exited 1 before and 0 after; both `generate_*` checks passed; `verify_portfolio.py --skip-external` reported the same counts (15 showcase, 2 methodology, 66 named controls, 7 internal references, 61 external URLs, 20 contrast pairs) and 74 tests OK; real Chromium passed 16 of 16 checks locally and again against the live URL.
+- **The check that would have failed if the refresh had not published:** the live page returned HTTP 200 (48,114 bytes), its SHA-256 equals `origin/main` after line-ending normalisation (`ffcbfee3…97c3b4`), it shows Version 11, the source commit `437e27f`, LAND-15 and the 'Run record' heading, and contains neither `6fe8133` nor LAND-14.
+- **Differences from the plan:** none in design or scope. Two additions: the live URL was also put through the 16 browser checks (the plan required local checks only), and the first local browser run failed 1 of 16 because my check matched `Version 11` case-sensitively while the page upper-cases it; the check, not the page, was fixed.
+- **Not done, as stated in the plan:** the generator and refresh script were not changed, the refresh is still manual (the snapshot cannot be checked against a private source), and the `test-automation-portfolio` handover v5 is a separate pull request, if the owner wants it.

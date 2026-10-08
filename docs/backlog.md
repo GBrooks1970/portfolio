@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 34
+**Version:** 35
 **Last updated:** 2026-10-08
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is IN PROGRESS.
+**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -69,7 +69,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 | LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
-| LAND-15 | P2 | IN PROGRESS | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
+| LAND-15 | P2 | DONE | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -947,7 +947,7 @@ matches the merged file. See the [publication closure](implementation-logs/2026-
 ### LAND-15 — Refresh the Learning Paths snapshot to version 11
 
 **Priority:** P2
-**Status:** IN PROGRESS
+**Status:** DONE
 **Type:** Snapshot refresh (data and generated page)
 **Authority:** Owner approved the plan on 2026-10-08 ('approve with recommendations'), including P2. Plan:
 [`implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md`](implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md).
@@ -967,14 +967,19 @@ Acceptance criteria:
       pass with the same counts as LAND-14; `index.html`, `sitemap.xml` and `robots.txt` do not change.
 - [x] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, the section 10 table in a scroll region with 26 rows, and the version 11 and
       new-commit values in the metadata block and the 'Public snapshot' row.
-- [ ] The pull request's quality run passes in CI.
-- [ ] The owner merges the pull request.
-- [ ] GitHub Pages deploys the exact merge commit; the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows version 11 and the 'Run record' heading.
+- [x] The pull request's quality run passes in CI: [run 37706850153](https://github.com/GBrooks1970/portfolio/actions/runs/37706850153) on `d59d15b`, success (no workflow contains `--skip-external`, so the external-URL check was enabled).
+- [x] The owner merges [PR #65](https://github.com/GBrooks1970/portfolio/pull/65) (`b045dd6`, 2026-10-08T00:24:45Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37707630649, success); the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows version 11 and the 'Run record' heading. The same 16 real-browser checks also pass against the live URL.
 
 Implementation evidence: branch `chore/land-15-refresh-learning-paths-snapshot`, based on `7e792f6`, with the plan committed first. See the
 [implementation log](implementation-logs/2026-10-08_land-15_learning-paths-refresh.md).
 
 Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository.
+
+Completion evidence: [PR #65](https://github.com/GBrooks1970/portfolio/pull/65) merged as `b045dd63a20db9117bfba41d6a5e74f3c84bac7b` at 2026-10-08T00:24:45Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37707631345) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37707630649) runs passed. The live `learning-paths.html` returned HTTP 200 and matches the merged file;
+`index.html` is unchanged. See the [publication closure](implementation-logs/2026-10-08_land-15_publication-closure.md).
 
 ## Candidate improvements — unscheduled
 
