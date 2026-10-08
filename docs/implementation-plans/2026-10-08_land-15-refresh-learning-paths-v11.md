@@ -4,8 +4,8 @@ created: 2026-10-08T00:30Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-15
-status: proposed
-approved: not yet
+status: approved
+approved: 2026-10-08, Gary Brooks ("approve with recommendations", every recommended option below); the owner merges
 delivered: not yet
 language: en-GB
 ---
@@ -67,11 +67,11 @@ Branch `chore/land-15-refresh-learning-paths-snapshot`; pull request 1 carries t
 
 | Decision | Options | Recommended | Owner's answer |
 |---|---|---|---|
-| Priority | P1 or P2 | P2: the public page is behind, not wrong. Its Status counts are the same numbers (25 of 26 run, 21 as written, stage 4.2 not run), and it lacks the version 11 metadata and section 10. LAND-13 was P1 because it corrected a stale claim | not yet |
-| `source.commit` | The document's last-change commit `437e27f…`; or the repository head | The document's last-change commit: it is what the snapshot contains (LAND-13's precedent) | not yet |
-| Publish section 10 as generated | Publish the whole document; or hold section 10 back | Publish: it is the evidence behind the Status counts, and it contains nothing the document or the public project repositories do not already show | not yet |
-| Pull requests | Two (change, then closure); or one | Two, as for LAND-11 to LAND-14 | not yet |
-| Who does it | Directly; or a subagent | Directly: it is small and touches a public site | not yet |
+| Priority | P1 or P2 | P2: the public page is behind, not wrong. Its Status counts are the same numbers (25 of 26 run, 21 as written, stage 4.2 not run), and it lacks the version 11 metadata and section 10. LAND-13 was P1 because it corrected a stale claim | As recommended, approved 2026-10-08 |
+| `source.commit` | The document's last-change commit `437e27f…`; or the repository head | The document's last-change commit: it is what the snapshot contains (LAND-13's precedent) | As recommended, approved 2026-10-08 |
+| Publish section 10 as generated | Publish the whole document; or hold section 10 back | Publish: it is the evidence behind the Status counts, and it contains nothing the document or the public project repositories do not already show | As recommended, approved 2026-10-08 |
+| Pull requests | Two (change, then closure); or one | Two, as for LAND-11 to LAND-14 | As recommended, approved 2026-10-08 |
+| Who does it | Directly; or a subagent | Directly: it is small and touches a public site | As recommended, approved 2026-10-08 |
 
 ## Outcome
 
