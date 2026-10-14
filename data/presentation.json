@@ -379,7 +379,7 @@
     "credit-dashboard-sut": {
       "title": "Credit Dashboard SUT",
       "discipline": "Specification-driven SUT design + contract-first BDD",
-      "summary": "A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 3 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness passes 59 API scenarios with every response validated against the contract. The React UI and its 41 browser scenarios are the next phase and not built yet.",
+      "summary": "A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 4 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness passes 59 API scenarios with every response validated against the contract. A React UI served by the same service runs all 41 browser scenarios through the same harness and Gherkin store, with 135 component tests and an axe-core scan of 37 pages and states that finds no violations. Seeded defects with the checks that catch them are the next phase.",
       "order": 150,
       "group": "api-bdd-protocols",
       "tags": [
