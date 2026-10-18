@@ -108,7 +108,10 @@
       ],
       "actions": {
         "workflow": "ci.yml",
-        "demo": null,
+        "demo": {
+          "label": "Interactive Kanban board",
+          "url": "https://gbrooks1970.github.io/bfx-ws-screenplay/"
+        },
         "report": null,
         "documentation": null
       }
