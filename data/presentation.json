@@ -223,7 +223,10 @@
           "label": "Solver visualisation",
           "url": "https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/"
         },
-        "report": null,
+        "report": {
+          "label": "Parity evidence",
+          "url": "https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/parity/"
+        },
         "documentation": null
       }
     },
@@ -307,6 +310,98 @@
         "documentation": {
           "label": "API reference",
           "url": "https://gbrooks1970.github.io/auth-separation-screenplay-poc/"
+        }
+      }
+    },
+    "tradeblotter-wpf-screenplay": {
+      "title": "TradeBlotter WPF",
+      "discipline": "Windows desktop automation",
+      "summary": "A C#/.NET 9 WPF trading blotter automated through a vendor-neutral driver contract with FlaUI.UIA3 and WinAppDriver adapters, a C# Screenplay core and Reqnroll scenarios, gated by Windows-hosted CI. Parked at TB-08B until a licensed Ranorex SDK is available.",
+      "order": 120,
+      "group": "multi-stack-frameworks",
+      "tags": [
+        "C#",
+        "WPF",
+        "FlaUI",
+        ".NET"
+      ],
+      "actions": {
+        "workflow": null,
+        "demo": null,
+        "report": null,
+        "documentation": {
+          "label": "Windows CI evidence",
+          "url": "https://github.com/GBrooks1970/tradeblotter-wpf-screenplay/blob/main/docs/windows-ci.md"
+        }
+      }
+    },
+    "saleor-graphql-automation": {
+      "title": "Saleor GraphQL Automation",
+      "discipline": "GraphQL API and BDD",
+      "summary": "Catalogue, authentication, checkout and staff fulfilment journeys with typed Screenplay tasks, published Serenity reports and daily upstream schema checks. Delivery is complete; dependency maintenance remains tracked. Deterministic reports are separate from live-SUT acceptance.",
+      "order": 130,
+      "group": "api-bdd-protocols",
+      "tags": [
+        "GraphQL",
+        "Serenity/JS",
+        "Screenplay",
+        "Cucumber",
+        "TypeScript"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": {
+          "label": "Serenity reports",
+          "url": "https://gbrooks1970.github.io/saleor-graphql-automation/"
+        },
+        "documentation": {
+          "label": "Project documentation",
+          "url": "https://github.com/GBrooks1970/saleor-graphql-automation/blob/main/README.md"
+        }
+      }
+    },
+    "loan-origination-parity": {
+      "title": "Loan Origination Parity",
+      "discipline": "Multi-surface parity SDD + Screenplay BDD",
+      "summary": "One UK loan-origination engine proven identical through an in-memory core, a Node REST API, an Angular SPA and a Next.js backend-for-frontend by a single Serenity/JS Screenplay harness, with a CI parity gate on scenario counts and step text and server-side authorisation that holds when the UI is bypassed.",
+      "order": 140,
+      "group": "multi-stack-frameworks",
+      "tags": [
+        "Screenplay",
+        "Serenity/JS",
+        "Angular",
+        "Next.js"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": {
+          "label": "Parity evidence",
+          "url": "https://gbrooks1970.github.io/loan-origination-parity/"
+        },
+        "documentation": null
+      }
+    },
+    "credit-dashboard-sut": {
+      "title": "Credit Dashboard SUT",
+      "discipline": "Specification-driven SUT design + contract-first BDD",
+      "summary": "A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 4 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness runs 59 API executions with every response validated against the contract. A React UI served by the same service runs 59 browser executions through the same harness and Gherkin store, with 198 component tests and 124 axe-core scans that find no violations. Two independent fresh-context reviews of the service, the harness and the UI, and the fixes to both, are done. Phase 5 has begun: 8 of 30 seeded defects are implemented, each shown to turn a committed check red for its stated reason.",
+      "order": 150,
+      "group": "api-bdd-protocols",
+      "tags": [
+        "OpenAPI",
+        "Specification-driven",
+        "Gherkin",
+        "Decision briefs"
+      ],
+      "actions": {
+        "workflow": "ci.yml",
+        "demo": null,
+        "report": null,
+        "documentation": {
+          "label": "API specification",
+          "url": "https://github.com/GBrooks1970/credit-dashboard-sut/blob/main/DOCS/.design/api-specification.md"
         }
       }
     }

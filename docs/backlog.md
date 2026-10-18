@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 23
-**Last updated:** 2026-08-04
-**Status:** ACTIVE — LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. No required cycle items remain open.
+**Version:** 39
+**Last updated:** 2026-10-18
+**Status:** ACTIVE — LAND-17 BFX Kanban link is IN REVIEW. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -65,6 +65,11 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-09B | P2 | DONE | LAND-09A | Publish and link a hand-baked Screenplay sample report |
 | LAND-09C | P2 | DONE | LAND-09B | Publish and link generated calculator API documentation |
 | LAND-09D | P2 | DONE | LAND-09C | Publish truthful browser-only Sudoku evidence |
+| LAND-11 | P0 | DONE | — | Refresh the TradeBlotter card to the repository's current state |
+| LAND-12 | P2 | DONE | — | Publish the Learning Paths document as a pinned page linked from the hero |
+| LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
+| LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
+| LAND-15 | P2 | DONE | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -751,6 +756,231 @@ errors). See the immutable [implementation log](implementation-logs/2026-08-04_l
 
 **🏁 The LAND-09 public-evidence programme is COMPLETE — all four slices (09A–09D) DONE.**
 
+### LAND-11 — Refresh the TradeBlotter card to the repository's current state
+
+**Priority:** P0
+**Status:** DONE
+**Type:** Presentation data and generated HTML
+**Authority:** Owner approved recording this item and its implementation log on 2026-10-06, after the
+change was prepared on a branch. The owner asked for the card to be brought into line with the
+repository.
+
+The `tradeblotter-wpf-screenplay` card said driver abstraction, Screenplay BDD and a multi-driver
+comparison were planned, and linked its Phase 0 implementation record. The repository's own backlog
+(v12, 2026-09-28) and changelog record TB-01 to TB-08A complete: a vendor-neutral driver contract with
+FlaUI.UIA3 and WinAppDriver adapters, a C# Screenplay core, Reqnroll scenarios and a Windows-hosted CI
+gate. TB-08B (native Ranorex adapter and three-driver comparison) is open and blocked on a licensed
+SDK, and the project is parked by owner decision of 2026-09-21. The card understated delivered work.
+
+Scope: `data/presentation.json` summary and documentation link for this one project, and the
+regenerated `index.html`. Non-goals: group, order, tags, title, discipline and every other project.
+The registry `notes` field for this project is owned by `portfolio-prompts` and is changed separately;
+`data/registry-lock.json` records only project ID, slug and role, so the two changes do not depend on
+each other.
+
+Acceptance criteria:
+
+- [x] The card summary states only what the repository's backlog and changelog record, including the
+      parked state and the blocked TB-08B.
+- [x] The documentation link resolves to a file that exists on the repository's default branch
+      (`docs/windows-ci.md`; the raw file returned HTTP 200).
+- [x] `index.html` is regenerated from `data/presentation.json`; `sitemap.xml` and `robots.txt` are
+      unchanged; `python tools/generate_site.py --check` passes.
+- [x] `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external`
+      passes with the same counts as before the change (15 showcase, 2 methodology, 53 tests, 3 skipped).
+- [x] The external-URL check (61 URLs) passes in CI. It could not run in the authoring environment,
+      where every `github.com` page returned HTTP 403; CI run 37506774664 on the merge commit passed
+      with no `--skip-external`.
+- [x] The owner merges [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) (squash, `d85a358`,
+      2026-10-06T17:51:23Z).
+- [x] GitHub Pages deploys the exact merge commit successfully (run 37506772130, success).
+- [x] The live page returns the new summary and link, and its HTML matches `origin/main` (SHA-256
+      `c1be7d4ca3cdcd9ea08989e8bbaf3593c637c6d7a6a898a1b0067d5ba1dcd18b`, line-ending normalised).
+
+Implementation evidence: commit `89bb979` on branch `claude/busy-carson-puuex6`, based on `46209ad`;
+opened for review as [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) on 2026-10-06.
+See the [implementation log](implementation-logs/2026-10-06_land-11_tradeblotter-card-refresh.md).
+Related, not blocking: the matching `portfolio-prompts` registry notes change is commit `16dc225` on
+branch `claude/busy-carson-puuex6` of `NeoCognitus70/portfolio-prompts`, merged as
+[PR #112](https://github.com/NeoCognitus70/portfolio-prompts/pull/112) (`6a61b89`,
+2026-10-06T17:52:01Z).
+
+Completion evidence: [PR #56](https://github.com/GBrooks1970/portfolio/pull/56) squash-merged as
+`d85a3586c3610622af325267b49278e574320763` at 2026-10-06T17:51:23Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37506774664) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37506772130) runs passed. The live page
+returned HTTP 200 and its HTML matches the merged `index.html`, with the new summary and link present.
+See the [publication closure](implementation-logs/2026-10-06_land-11_publication-closure.md).
+
+### LAND-12 — Publish the Learning Paths document as a pinned page linked from the hero
+
+**Priority:** P2
+**Status:** DONE
+**Type:** New generated page, hero link and gate
+**Authority:** Owner asked on 2026-10-07 for Learning Paths to be added to the landing page, and chose the
+pinned-copy option when told the source repository is private.
+
+`GBrooks1970/test-automation-portfolio` holds `portfolio-docs/PORTFOLIO_LEARNING_PATHS.md`: five ordered
+routes through the portfolio's tools, with captured results from a validation run. That repository is
+private and has no Pages site (GitHub reported `private: true`, `has_pages: false`), so a link to it would
+return 404 to every visitor and fail the external-URL gate. Under OD-LAND-10 the landing repository owns
+link semantics and presentation only, so the page here is a pinned snapshot, not a second source of truth.
+
+Scope: `data/learning-paths.json` (the snapshot: source path, source commit, the HTML the source's Markdown
+generates, and its stylesheet), `tools/generate_learning_paths.py`, the generated `learning-paths.html`, one
+hero link in `index.template.html` and the regenerated `index.html`, a drift check in
+`tools/verify_portfolio.py`, tests, and the two counts in `tools/tests/test_site_quality.py` that a new
+link changes. Non-goals: cards, groups, registry, the sitemap, and any change to the source repository.
+
+Acceptance criteria:
+
+- [x] The page renders from the snapshot, wraps each table in a scrollable region, links back to the
+      landing page and states its source, commit and that it must not be edited by hand.
+- [x] Links to private documents (the Tool Atlas and the outline) become plain text, and any link form the
+      generator does not recognise fails the build.
+- [x] `learning-paths.html` is checked for drift by `tools/verify_portfolio.py` (the reviews.html pattern).
+- [x] `python3 tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` passes
+      with 15 showcase, 2 methodology, 66 named controls, 7 internal references, 61 external URLs.
+- [x] `python3 tools/generate_site.py --check` passes; `sitemap.xml` and `robots.txt` are unchanged.
+- [x] No horizontal page overflow at 375 px or 1280 px in Chromium.
+- [x] The external-URL check passes in CI.
+- [x] The owner merges [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) (squash, `6e9907b`,
+      2026-10-07T13:06:00Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37625885376, success), and the live page and
+      `learning-paths.html` return HTTP 200; both match `origin/main` after line-ending normalisation.
+
+Known limit: the snapshot is not checked against its source, because CI cannot read a private repository.
+A new edition of the document needs a deliberate refresh of `data/learning-paths.json`. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
+
+Implementation evidence: commit `a9c90a4` on branch `claude/land-12-learning-paths`, based on `6b6f252`. See the
+[implementation log](implementation-logs/2026-10-07_land-12_learning-paths-page.md).
+
+Completion evidence: [PR #58](https://github.com/GBrooks1970/portfolio/pull/58) squash-merged as
+`6e9907b6fd619eea04735936a809d0b900c3c61f` at 2026-10-07T13:06:00Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37625886411) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37625885376) runs passed. The live
+`learning-paths.html` returned HTTP 200 and matches the merged file. See the
+[publication closure](implementation-logs/2026-10-07_land-12_publication-closure.md).
+
+### LAND-13 — Refresh the Learning Paths snapshot to the current edition
+
+**Priority:** P1
+**Status:** DONE
+**Type:** Snapshot refresh (data, regenerated page, evidence)
+**Authority:** Owner approved the plan on 2026-10-07 with every recommended option, including P1 because the public page makes a
+stale claim. Plan: [`implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md`](implementation-plans/2026-10-07_land-13-refresh-learning-paths-snapshot.md).
+
+LAND-12 published a pinned snapshot of the Learning Paths document (source commit `2b83c40`). The source document has changed once
+since: `GBrooks1970/test-automation-portfolio` #289 (`13d102a336d5acbdbb2267fcc0c7f84962e27e2a`) records stage 4.4 passing after a fix,
+rewrites finding 7 and corrects one bullet in section 9. The public page still says 4.4 'failed to start' and that the probe 'has no
+result', so it contradicts the source. The delta is four changed content lines; the stylesheet and the two links are unchanged.
+
+Scope: `data/learning-paths.json` (`html`, and `source.commit` set to the document's last-change commit), the regenerated
+`learning-paths.html`, this entry, the plan and its index, and an implementation log. Non-goals: cards, groups, the registry, the sitemap,
+robots, the hero link, the source repository, and automating the refresh (CI cannot read a private repository).
+
+Acceptance criteria:
+
+- [x] `data/learning-paths.json` is refreshed from the current generated HTML with a recipe that first reproduced the old snapshot exactly
+      from the old source (`html` is the stripped body plus a newline); only `html` and `source.commit` change.
+- [x] `python tools/generate_learning_paths.py --check` and `python tools/generate_site.py --check` pass; `index.html`, `sitemap.xml`
+      and `robots.txt` are unchanged.
+- [x] `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` reports 15 showcase, 2 methodology, 66 named
+      controls, 7 internal references, 61 external URLs and 20 contrast pairs. Locally 56 of 57 tests pass; the one failure,
+      `test_all_registered_showcase_projects_present` (`credit-dashboard-sut` is not in the sibling `portfolio-reviews/README.md`), is
+      unrelated and is skipped in CI, where that folder is absent.
+- [x] No horizontal page overflow at 375 px or 1280 px in Chromium; all 8 tables stay in scroll regions.
+- [x] The pull request's quality run passes in CI: [run 37639374795](https://github.com/GBrooks1970/portfolio/actions/runs/37639374795) on `1521ec7`, success (the external-URL check is enabled; no workflow contains `--skip-external`).
+- [x] The owner merges [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) (squash, `43d6fb8`, 2026-10-07T14:49:34Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37639968207, success); the live `learning-paths.html` returns HTTP 200, matches `origin/main` after
+      line-ending normalisation, and shows 'passes after a fix' and not 'has not produced a result here'.
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. The next edition of the
+document needs another deliberate refresh. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
+
+Implementation evidence: commit `1521ec7` on branch `chore/land-13-refresh-learning-paths-snapshot`, based on `a49da0a`, with the plan committed first as `df591be`.
+See the [implementation log](implementation-logs/2026-10-07_land-13_learning-paths-refresh.md).
+
+Completion evidence: [PR #61](https://github.com/GBrooks1970/portfolio/pull/61) squash-merged as `43d6fb8d23f1e66e9ba95be4d080e3880553db48` at 2026-10-07T14:49:34Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37639969505) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37639968207) runs passed. The live `learning-paths.html` returned HTTP 200 and
+matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-13_publication-closure.md).
+
+### LAND-14 — Publish the versioned, dual-theme Learning Paths page
+
+**Priority:** P1
+**Status:** DONE
+**Type:** Generator, snapshot and page change, with a committed refresh script and runbook
+**Authority:** Owner approved plan LC-V1 on 2026-10-07 ('agreed as recommended'; the switch at the top right, like the other house pages). Plan:
+[`implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md`](implementation-plans/2026-10-07_land-14-versioned-dual-theme-snapshot.md).
+
+The source document (`GBrooks1970/test-automation-portfolio` #297, last-change commit `6fe8133fea6a59accba608dfe77431f8f708b5bd`, version 10) now has
+frontmatter and a generated page with a metadata block, a dark palette, the house 🌓 switch and its scripts, table scroll regions, and
+`<!-- doc:begin -->` / `<!-- doc:end -->` markers. The public page still shows the earlier light-only layout with no version or snapshot information.
+
+Scope: `tools/generate_learning_paths.py` (a snapshot built from the source's markers, style, scripts and switch; a top bar with the back link and the switch;
+a 'Public snapshot' row in the metadata block; no table wrapping of its own; relative `.html` names become text), `data/learning-paths.json`
+(`schemaVersion` 2), the regenerated `learning-paths.html`, `tools/refresh_learning_paths_snapshot.py` with tests, `docs/learning-paths-refresh.md`, and an
+implementation log. Non-goals: the registry, cards, groups, the hero link, `index.html`, `sitemap.xml`, `robots.txt`, and the source repository.
+
+Acceptance criteria:
+
+- [x] The snapshot is rebuilt from the source page by the committed refresh script, and the script's guards fail on a missing marker, a bad SHA or a bad item (9 tests; the refresh wrote commit `6fe8133`, item LAND-14, 2026-10-07T17:54Z, and `--check` reports the snapshot matches the source).
+- [x] `learning-paths.html` shows the version, the evidence cut-off and a 'Public snapshot' row (document commit, refresh time, item), and the switch at the top
+      right beside 'Back to portfolio'; private links are plain text; each table is wrapped once (8 tables, 8 wrappers).
+- [x] `python tools/generate_learning_paths.py --check`, `python tools/generate_site.py --check` and `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as LAND-13 (15 showcase, 2 methodology, 66 controls, 7 internal, 61 external, 20 contrast; 74 tests, the one failure being the known local review-index test that CI skips).
+- [x] Real Chromium: both themes by system setting, click, persistence, keyboard, JavaScript off, no overflow at 1280 px and 375 px (13 of 13 checks).
+- [x] The pull request's quality run passes in CI: [run 37663223836](https://github.com/GBrooks1970/portfolio/actions/runs/37663223836) on `6c234a9`, success (no workflow contains `--skip-external`, so the external-URL check was enabled).
+- [x] The owner merges [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) (`9537d83`, 2026-10-07T18:00:56Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37663545393, success); the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows the version block. The same 13 real-browser checks also pass against the live URL.
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository. Refresh procedure: [`learning-paths-refresh.md`](learning-paths-refresh.md).
+
+Implementation evidence: commit `6c234a9` on branch `chore/land-14-versioned-dual-theme-snapshot`, based on `c166e71`, with the plan committed first as `4a7e448`.
+See the [implementation log](implementation-logs/2026-10-07_land-14_versioned-dual-theme-snapshot.md).
+
+Completion evidence: [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) merged as `9537d83e0ed962ea3dde2d103f75a541cbd571ed` at 2026-10-07T18:00:56Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37663545958) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37663545393) runs passed. The live `learning-paths.html` returned HTTP 200 and
+matches the merged file. See the [publication closure](implementation-logs/2026-10-07_land-14_publication-closure.md).
+
+### LAND-15 — Refresh the Learning Paths snapshot to version 11
+
+**Priority:** P2
+**Status:** DONE
+**Type:** Snapshot refresh (data and generated page)
+**Authority:** Owner approved the plan on 2026-10-08 ('approve with recommendations'), including P2. Plan:
+[`implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md`](implementation-plans/2026-10-08_land-15-refresh-learning-paths-v11.md).
+
+The pinned snapshot is the source document at version 10 (last-change commit `6fe8133fea6a59accba608dfe77431f8f708b5bd`). The document is now version 11
+(`437e27fb8c0ac00ff9191ba373eb13010593ec1c`, `GBrooks1970/test-automation-portfolio` #301): its Status counts are generated from run records and it has a new
+section 10, 'Run record', a table of the latest record for each of the 26 stages. The public page is behind, not wrong: its Status counts are the same numbers.
+
+Scope: `data/learning-paths.json` (`html`, `source.commit`, `snapshot`) and the regenerated `learning-paths.html`, by the committed refresh script, following
+[`learning-paths-refresh.md`](learning-paths-refresh.md). Non-goals: the generator and the refresh script, cards, groups, the registry, `index.html`, `sitemap.xml`,
+`robots.txt`, the source repository, and any automation of the refresh.
+
+Acceptance criteria:
+
+- [x] The snapshot is rewritten by `tools/refresh_learning_paths_snapshot.py` with `--commit 437e27f… --item LAND-15`, and its `--check` passes (it exits 1 before the refresh).
+- [x] `python tools/generate_learning_paths.py --check`, `python tools/generate_site.py --check` and `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external`
+      pass with the same counts as LAND-14; `index.html`, `sitemap.xml` and `robots.txt` do not change.
+- [x] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, the section 10 table in a scroll region with 26 rows, and the version 11 and
+      new-commit values in the metadata block and the 'Public snapshot' row.
+- [x] The pull request's quality run passes in CI: [run 37706850153](https://github.com/GBrooks1970/portfolio/actions/runs/37706850153) on `d59d15b`, success (no workflow contains `--skip-external`, so the external-URL check was enabled).
+- [x] The owner merges [PR #65](https://github.com/GBrooks1970/portfolio/pull/65) (`b045dd6`, 2026-10-08T00:24:45Z).
+- [x] GitHub Pages deploys the exact merge commit (run 37707630649, success); the live page returns HTTP 200, matches `origin/main` after line-ending normalisation, and shows version 11 and the 'Run record' heading. The same 16 real-browser checks also pass against the live URL.
+
+Implementation evidence: branch `chore/land-15-refresh-learning-paths-snapshot`, based on `7e792f6`, with the plan committed first. See the
+[implementation log](implementation-logs/2026-10-08_land-15_learning-paths-refresh.md).
+
+Known limit (unchanged): the snapshot is not checked against its source, because CI cannot read a private repository.
+
+Completion evidence: [PR #65](https://github.com/GBrooks1970/portfolio/pull/65) merged as `b045dd63a20db9117bfba41d6a5e74f3c84bac7b` at 2026-10-08T00:24:45Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/37707631345) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/37707630649) runs passed. The live `learning-paths.html` returned HTTP 200 and matches the merged file;
+`index.html` is unchanged. See the [publication closure](implementation-logs/2026-10-08_land-15_publication-closure.md).
+
 ## Candidate improvements — unscheduled
 
 The following items are **PROPOSED**. They are not part of the current required cycle and must not be
@@ -785,3 +1015,64 @@ APIs from visitors' browsers and do not imply that a stale timestamp means a pro
 - Record a completed development task in `docs/implementation-logs/` before marking it DONE.
 - Preserve resolved items in this file or a linked archive; do not erase the decision trail.
 - Keep en-GB spelling and avoid model-specific instructions.
+
+## LAND-10 - Publish September review snapshots
+
+**Status:** DONE
+**Priority:** P0
+**Authority:** Owner requested resolution of the stale public reviews page on 2026-09-29.
+
+Import the merged central index snapshot and convert its local links to public GitHub
+links using the registry-owned repository slugs. Keep provenance in data/reviews.json,
+provide deterministic regeneration, and fail CI if reviews.html drifts.
+
+Acceptance: all three September bundles and six primary links are public; complete
+quality gate and desktop/mobile browser checks pass; exact merged Pages deployment
+succeeds and live bytes match the generated output. Publication evidence follows
+in a dated closure record after deployment.
+
+LAND-10 completion: [PR #50](https://github.com/GBrooks1970/portfolio/pull/50)
+merged as `9bfc866fecd86223a8bd9ae0e221b632f8f0f366`. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/36604272084) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/36604270554) passed.
+The live page matches merged output, includes all three September bundles and has
+six working primary links. See [publication closure](implementation-logs/2026-09-29_land-10-publication-closure.md).
+
+## LAND-16 — Refresh Saleor capabilities and public report links
+
+**Priority:** P0
+**Status:** DONE
+**Authority:** Owner requested merge PRs and update the landing page after Saleor delivery on 2026-10-18.
+
+Update the Saleor card from its earlier foundation summary to the delivered capabilities. Add the published static Serenity report and CI actions. Preserve deterministic/live-SUT evidence boundaries and tracked dependency maintenance. Plan: [LAND-16](implementation-plans/2026-10-18_land-16-saleor-reports.md).
+
+Acceptance criteria:
+
+- [x] Saleor summary and report/CI actions reflect the delivered project; report is not labelled a live demo.
+- [x] Generated output and full local/PR quality gates pass, including external links and a non-vacuous wrong-count parity test.
+- [x] Desktop and 390px mobile checks pass for layout, overflow, console and keyboard/report navigation.
+- [x] Exact-merge quality and Pages runs pass; live content and report navigation are verified.
+- [x] Immutable implementation/publication evidence is recorded before closing the item.
+
+LAND-16 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-16_saleor-report-links.md). Full local gate passed with 74 tests and external URLs enabled; PR and deployment evidence are pending.
+
+LAND-16 completion: [PR #74](https://github.com/GBrooks1970/portfolio/pull/74) merged as `b8a2350b04de2b7d770b142845e9e36bb9bfe924`. Exact-merge [quality](https://github.com/GBrooks1970/portfolio/actions/runs/39139175731) and [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/39139175222) passed. The live page matches the merged output and its Saleor report action reaches the published evidence. See the [publication closure](implementation-logs/2026-10-18_land-16_publication-closure.md); the preceding pre-publication capture is retained as history.
+
+
+## LAND-17 — Publish the BFX interactive Kanban link
+
+**Priority:** P2
+**Status:** IN REVIEW
+**Authority:** Owner approved refreshing, verifying and merging existing PR #46 on 2026-10-18.
+
+Add the Interactive Kanban board action to the BFX card while retaining current landing content and inventory. Plan: [LAND-17](implementation-plans/2026-10-18_land-17-bfx-kanban.md).
+
+Acceptance criteria:
+
+- [x] Existing PR is reconciled with current main; generated output and baselines reflect the single new action.
+- [ ] Full local and PR quality gates pass with external links and an effective wrong-count rejection test.
+- [x] Desktop/mobile, keyboard, console, navigation and board interaction checks pass.
+- [ ] Exact-merge quality and Pages succeed; live landing bytes and board navigation are verified.
+- [ ] Immutable implementation and publication records are captured before closure.
+
+LAND-17 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-17_bfx-kanban-refresh.md). Full local gate passes with 74 tests and external links enabled; refreshed PR and deployment evidence remain pending.

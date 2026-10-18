@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "source": {
     "repository": "https://github.com/NeoCognitus70/portfolio-prompts",
-    "commit": "75e5c9066937ed6518329e3db37f905f68dc758d",
+    "commit": "cd628eadb26a6495ad60ea6bbb229a3feb932b7c",
     "path": "registry.yml"
   },
   "projects": [
@@ -27,6 +27,11 @@
       "presentation_role": "showcase"
     },
     {
+      "project": "credit-dashboard-sut",
+      "github": "GBrooks1970/credit-dashboard-sut",
+      "presentation_role": "showcase"
+    },
+    {
       "project": "gb.automation.smoketests.sudoku.poc",
       "github": "GBrooks1970/gb.automation.smoketests.sudoku.poc",
       "presentation_role": "showcase"
@@ -39,6 +44,11 @@
     {
       "project": "juice-shop-dast-automation",
       "github": "GBrooks1970/juice-shop-dast-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "loan-origination-parity",
+      "github": "GBrooks1970/loan-origination-parity",
       "presentation_role": "showcase"
     },
     {
@@ -70,6 +80,16 @@
       "project": "portfolio-prompts",
       "github": "NeoCognitus70/portfolio-prompts",
       "presentation_role": "methodology"
+    },
+    {
+      "project": "saleor-graphql-automation",
+      "github": "GBrooks1970/saleor-graphql-automation",
+      "presentation_role": "showcase"
+    },
+    {
+      "project": "tradeblotter-wpf-screenplay",
+      "github": "GBrooks1970/tradeblotter-wpf-screenplay",
+      "presentation_role": "showcase"
     }
   ]
 }

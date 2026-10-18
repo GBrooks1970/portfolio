@@ -63,6 +63,8 @@ Before changing the landing page, read these repository-owned control records:
    pinning/parity procedure.
 7. [`docs/quality-gate.md`](docs/quality-gate.md) — reproducible PR gate, accessibility scope and
    external-link failure policy.
+8. [`docs/learning-paths-refresh.md`](docs/learning-paths-refresh.md) — how to refresh the pinned Learning Paths
+   page when its private source document changes.
 
 Record completed development in [`docs/implementation-logs/`](docs/implementation-logs/) before
 closing its backlog item. These documents use ordinary Markdown and repository-relative paths so

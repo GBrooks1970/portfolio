@@ -63,9 +63,9 @@ class SiteQualityTests(unittest.TestCase):
     def test_current_document_passes_static_quality_contract(self) -> None:
         summary, errors = SITE.audit_document(self.document, ROOT)
         self.assertEqual(errors, [])
-        self.assertEqual(summary.external_urls, 49)
-        self.assertEqual(summary.interactive_elements, 51)
-        self.assertEqual(summary.internal_references, 6)
+        self.assertEqual(summary.external_urls, 65)
+        self.assertEqual(summary.interactive_elements, 69)
+        self.assertEqual(summary.internal_references, 7)
         self.assertEqual(summary.contrast_pairs, 20)
 
     def test_duplicate_canonical_is_rejected(self) -> None:
