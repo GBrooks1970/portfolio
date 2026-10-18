@@ -4,9 +4,9 @@ created: 2026-10-18
 project: portfolio-landing
 type: implementation-plan
 item: LAND-17
-status: approved
+status: implemented
 approved: Owner approved updating PR 46, verification, merge and deployment on 2026-10-18
-delivered: pending
+delivered: PR 46, 61af8cb4f28454860e87ee2c4dd5a58e55f1a810, 2026-10-18
 language: en-GB
 ---
 
@@ -34,3 +34,7 @@ Run `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts
 ## Delivery and owner decision
 
 Continue `feat/link-bfx-kanban-board` and PR #46 without rewriting history. Owner's “continue as recommended” authorises refresh, verification and merge. Preserve all recent Saleor and other landing changes. No BFX code, board content, registry or notification changes are included.
+
+## Outcome
+
+Delivered in [PR #46](https://github.com/GBrooks1970/portfolio/pull/46), merge `61af8cb4f28454860e87ee2c4dd5a58e55f1a810`. All 74 local tests, external checks, browser checks and refreshed PR CI passed. Exact-merge quality and Pages succeeded, live HTML matched and the board action navigated correctly. [Publication evidence](../implementation-logs/2026-10-18_land-17_publication-closure.md) closes LAND-17. No scope change was required.
