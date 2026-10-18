@@ -335,19 +335,23 @@
     "saleor-graphql-automation": {
       "title": "Saleor GraphQL Automation",
       "discipline": "GraphQL API and BDD",
-      "summary": "GraphQL automation for Saleor with Screenplay tasks, schema contract checks and separate deterministic and live-SUT verification paths.",
+      "summary": "Catalogue, authentication, checkout and staff fulfilment journeys with typed Screenplay tasks, published Serenity reports and daily upstream schema checks. Delivery is complete; dependency maintenance remains tracked. Deterministic reports are separate from live-SUT acceptance.",
       "order": 130,
       "group": "api-bdd-protocols",
       "tags": [
         "GraphQL",
+        "Serenity/JS",
         "Screenplay",
         "Cucumber",
         "TypeScript"
       ],
       "actions": {
-        "workflow": null,
+        "workflow": "ci.yml",
         "demo": null,
-        "report": null,
+        "report": {
+          "label": "Serenity reports",
+          "url": "https://gbrooks1970.github.io/saleor-graphql-automation/"
+        },
         "documentation": {
           "label": "Project documentation",
           "url": "https://github.com/GBrooks1970/saleor-graphql-automation/blob/main/README.md"
