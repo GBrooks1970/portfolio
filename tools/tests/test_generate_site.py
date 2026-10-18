@@ -38,11 +38,11 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertEqual(self.rendered.count('class="capability-group"'), 5)
         self.assertEqual(self.rendered.count("<h4><a href="), 15)
         self.assertIn('data-capability-group-count="5"', self.rendered)
-        self.assertIn('data-public-evidence-count="15"', self.rendered)
+        self.assertIn('data-public-evidence-count="16"', self.rendered)
         self.assertIn("<dt>Capability areas</dt>\n      <dd>5</dd>", self.rendered)
-        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>15</dd>", self.rendered)
-        self.assertEqual(self.rendered.count(" CI workflow\">"), 13)
-        self.assertEqual(self.rendered.count(" CI status\""), 13)
+        self.assertIn("<dt>Public demos, reports and docs</dt>\n      <dd>16</dd>", self.rendered)
+        self.assertEqual(self.rendered.count(" CI workflow\">"), 14)
+        self.assertEqual(self.rendered.count(" CI status\""), 14)
 
     def test_action_types_are_rendered_with_distinct_classes(self) -> None:
         # Only a genuinely interactive `demo` carries the play cue (the
