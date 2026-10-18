@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 39
+**Version:** 40
 **Last updated:** 2026-10-18
-**Status:** ACTIVE — LAND-17 BFX Kanban link is IN REVIEW. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
+**Status:** ACTIVE — LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -1062,7 +1062,7 @@ LAND-16 completion: [PR #74](https://github.com/GBrooks1970/portfolio/pull/74) m
 ## LAND-17 — Publish the BFX interactive Kanban link
 
 **Priority:** P2
-**Status:** IN REVIEW
+**Status:** DONE
 **Authority:** Owner approved refreshing, verifying and merging existing PR #46 on 2026-10-18.
 
 Add the Interactive Kanban board action to the BFX card while retaining current landing content and inventory. Plan: [LAND-17](implementation-plans/2026-10-18_land-17-bfx-kanban.md).
@@ -1070,9 +1070,11 @@ Add the Interactive Kanban board action to the BFX card while retaining current 
 Acceptance criteria:
 
 - [x] Existing PR is reconciled with current main; generated output and baselines reflect the single new action.
-- [ ] Full local and PR quality gates pass with external links and an effective wrong-count rejection test.
+- [x] Full local and PR quality gates pass with external links and an effective wrong-count rejection test.
 - [x] Desktop/mobile, keyboard, console, navigation and board interaction checks pass.
-- [ ] Exact-merge quality and Pages succeed; live landing bytes and board navigation are verified.
-- [ ] Immutable implementation and publication records are captured before closure.
+- [x] Exact-merge quality and Pages succeed; live landing bytes and board navigation are verified.
+- [x] Immutable implementation and publication records are captured before closure.
 
 LAND-17 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-17_bfx-kanban-refresh.md). Full local gate passes with 74 tests and external links enabled; refreshed PR and deployment evidence remain pending.
+
+LAND-17 completion: [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) merged as `61af8cb4f28454860e87ee2c4dd5a58e55f1a810`. Exact-merge [quality](https://github.com/GBrooks1970/portfolio/actions/runs/39173135247) and [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/39173135151) passed. Live HTML matches the merge and board navigation works. See the [publication closure](implementation-logs/2026-10-18_land-17_publication-closure.md); earlier pre-publication evidence is retained as history.

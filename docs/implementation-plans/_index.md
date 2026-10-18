@@ -18,4 +18,4 @@ Every implementation plan is written to a file here before implementation starts
 
 | [`2026-10-18_land-16-saleor-reports.md`](2026-10-18_land-16-saleor-reports.md) | LAND-16 Saleor report and capability refresh | 2026-10-18 | implemented | [PR #74](https://github.com/GBrooks1970/portfolio/pull/74) (`b8a2350`, 2026-10-18) |
 
-| [`2026-10-18_land-17-bfx-kanban.md`](2026-10-18_land-17-bfx-kanban.md) | LAND-17 BFX interactive Kanban link | 2026-10-18 | approved | PR #46 pending |
+| [`2026-10-18_land-17-bfx-kanban.md`](2026-10-18_land-17-bfx-kanban.md) | LAND-17 BFX interactive Kanban link | 2026-10-18 | implemented | [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) (`61af8cb`, 2026-10-18) |
