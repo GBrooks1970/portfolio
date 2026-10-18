@@ -4,9 +4,9 @@ created: 2026-10-18
 project: portfolio-landing
 type: implementation-plan
 item: LAND-16
-status: approved
+status: implemented
 approved: Owner requested merge PRs and update the landing page for the completed Saleor work on 2026-10-18
-delivered: pending publication
+delivered: PR 74, b8a2350b04de2b7d770b142845e9e36bb9bfe924, 2026-10-18
 language: en-GB
 ---
 
@@ -35,3 +35,7 @@ Run `python tools/verify_portfolio.py --registry-repository ../portfolio-prompts
 ## Delivery
 
 Branch: `codex/land-16-saleor-reports`. Use exact-path staging. Keep initial implementation and post-deployment closure evidence separate, preserving history.
+
+## Outcome
+
+Delivered in [PR #74](https://github.com/GBrooks1970/portfolio/pull/74), merge `b8a2350b04de2b7d770b142845e9e36bb9bfe924`. Full local and PR gates passed, followed by exact-merge quality and Pages success. Live HTML matches the generated output and the report action opens the expected Saleor evidence. The [publication closure](../implementation-logs/2026-10-18_land-16_publication-closure.md) records run URLs, byte/hash verification and browser observations. LAND-16 is DONE.
