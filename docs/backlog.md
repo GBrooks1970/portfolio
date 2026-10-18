@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 37
+**Version:** 38
 **Last updated:** 2026-10-18
-**Status:** ACTIVE — LAND-16 Saleor report/card refresh is IN REVIEW.  LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
+**Status:** ACTIVE — LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -1041,7 +1041,7 @@ six working primary links. See [publication closure](implementation-logs/2026-09
 ## LAND-16 — Refresh Saleor capabilities and public report links
 
 **Priority:** P0
-**Status:** IN REVIEW
+**Status:** DONE
 **Authority:** Owner requested merge PRs and update the landing page after Saleor delivery on 2026-10-18.
 
 Update the Saleor card from its earlier foundation summary to the delivered capabilities. Add the published static Serenity report and CI actions. Preserve deterministic/live-SUT evidence boundaries and tracked dependency maintenance. Plan: [LAND-16](implementation-plans/2026-10-18_land-16-saleor-reports.md).
@@ -1049,9 +1049,11 @@ Update the Saleor card from its earlier foundation summary to the delivered capa
 Acceptance criteria:
 
 - [x] Saleor summary and report/CI actions reflect the delivered project; report is not labelled a live demo.
-- [ ] Generated output and full local/PR quality gates pass, including external links and a non-vacuous wrong-count parity test.
+- [x] Generated output and full local/PR quality gates pass, including external links and a non-vacuous wrong-count parity test.
 - [x] Desktop and 390px mobile checks pass for layout, overflow, console and keyboard/report navigation.
-- [ ] Exact-merge quality and Pages runs pass; live content and report navigation are verified.
-- [ ] Immutable implementation/publication evidence is recorded before closing the item.
+- [x] Exact-merge quality and Pages runs pass; live content and report navigation are verified.
+- [x] Immutable implementation/publication evidence is recorded before closing the item.
 
 LAND-16 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-16_saleor-report-links.md). Full local gate passed with 74 tests and external URLs enabled; PR and deployment evidence are pending.
+
+LAND-16 completion: [PR #74](https://github.com/GBrooks1970/portfolio/pull/74) merged as `b8a2350b04de2b7d770b142845e9e36bb9bfe924`. Exact-merge [quality](https://github.com/GBrooks1970/portfolio/actions/runs/39139175731) and [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/39139175222) passed. The live page matches the merged output and its Saleor report action reaches the published evidence. See the [publication closure](implementation-logs/2026-10-18_land-16_publication-closure.md); the preceding pre-publication capture is retained as history.

@@ -16,4 +16,4 @@ Every implementation plan is written to a file here before implementation starts
 | [`2026-10-07_land-14-versioned-dual-theme-snapshot.md`](2026-10-07_land-14-versioned-dual-theme-snapshot.md) | LAND-14 Publish the versioned, dual-theme Learning Paths page | 2026-10-07 | implemented | [PR #63](https://github.com/GBrooks1970/portfolio/pull/63) (`9537d83`, 2026-10-07) |
 | [`2026-10-08_land-15-refresh-learning-paths-v11.md`](2026-10-08_land-15-refresh-learning-paths-v11.md) | LAND-15 Refresh the Learning Paths snapshot to version 11 | 2026-10-08 | implemented | PR #65 |
 
-| [`2026-10-18_land-16-saleor-reports.md`](2026-10-18_land-16-saleor-reports.md) | LAND-16 Saleor report and capability refresh | 2026-10-18 | approved | Pending |
+| [`2026-10-18_land-16-saleor-reports.md`](2026-10-18_land-16-saleor-reports.md) | LAND-16 Saleor report and capability refresh | 2026-10-18 | implemented | [PR #74](https://github.com/GBrooks1970/portfolio/pull/74) (`b8a2350`, 2026-10-18) |
