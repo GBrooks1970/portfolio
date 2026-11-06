@@ -4,9 +4,9 @@ created: 2026-11-06
 project: portfolio-landing
 type: implementation-plan
 item: LAND-18
-status: approved
+status: implemented
 approved: 2026-11-06
-delivered: not yet
+delivered: 2026-11-06; PR 82; 69e4fdc410d73b5c6e54567bd1113973d48df702
 language: en-GB
 ---
 
@@ -121,3 +121,11 @@ Not implemented. This file is the proposed plan. The separately requested worksp
 The owner approved implementation and explicitly instructed: “implement, commit, push, PR and merge”. This accepts the recommended decisions above and authorises the three-repository publication sequence. The proposal and its original planning outcome are preserved as historical context. LAND-18 tracks implementation; publication closure will be appended after exact-merge Pages verification.
 
 For the standalone published plan, source links were rebased to the inspected project commits and the central-index link now targets the public reviews page. Proposal wording and historical findings are retained.
+
+## Implementation and publication outcome — 6 November 2026
+
+LAND-18 is complete. Generator PR #136 and central-index PR #354 merged before landing [PR #82](https://github.com/GBrooks1970/portfolio/pull/82), merge `69e4fdc410d73b5c6e54567bd1113973d48df702`. Exact-merge quality and Pages succeeded. Unauthenticated live main/reviews HTML matches the merged files byte-for-byte, and the deployed Credit review action was exercised in the browser.
+
+All 17 public entries were audited; 15 review actions cover 18 indexed bundles, including all eight new November bundles and six focused records. The complete local gate ran 79 tests (76 passed, three optional workspace checks skipped), plus 105 review URLs and 66 existing external URLs. Desktop/mobile, both palettes, keyboard scrolling, all new bundle/focused destinations and project anchors were inspected. Shared working files were preserved.
+
+Evidence: [implementation](../implementation-logs/2026-11-06_land-18_implementation.md), [project-data audit](../implementation-logs/2026-11-06_land-18_project-data-audit.md), and [publication closure](../implementation-logs/2026-11-06_land-18_publication-closure.md). The original proposal and planning outcome above remain historical records; this outcome supersedes their delivery status.
