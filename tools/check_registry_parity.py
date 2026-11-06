@@ -226,8 +226,10 @@ def check_registry_parity(
     validate_registry_lock(committed_lock, canonical_lock)
     _, _, registry = validate_sources(manifest, canonical_lock)
 
+    from generate_reviews import load_snapshot
     rendered = render_site(
-        template_path.read_text(encoding="utf-8"), manifest, canonical_lock, site
+        template_path.read_text(encoding="utf-8"), manifest, canonical_lock, site,
+        load_snapshot(registry_lock=canonical_lock)["reviewProjects"]
     )
     validate_rendered_inventory(rendered, registry, manifest)
     if output_path.read_bytes() != rendered.encode("utf-8"):

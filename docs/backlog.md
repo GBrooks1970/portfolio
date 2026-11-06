@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 40
-**Last updated:** 2026-10-18
-**Status:** ACTIVE — LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
+**Version:** 41
+**Last updated:** 2026-11-06
+**Status:** ACTIVE — LAND-18 project data and reviews refresh is IN REVIEW.  LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -30,9 +30,7 @@ Do not promote a candidate improvement into required work without recording the 
   `https://github.com/NeoCognitus70/portfolio-prompts`.
 - Registry classification: `portfolio-landing` is a support repository, not a portfolio lifecycle
   `PROJECT=` value and not an orchestration target.
-- Public presentation model accepted for this cycle: nine showcase projects; the registered
-  `portfolio-prompts` meta-project appears under methodology/tooling rather than as a peer showcase
-  card.
+- Public presentation: 15 showcase projects and two methodology entries, derived from the pinned public registry projection.
 - All changes to `main`, including documentation-only changes, go through a branch and pull request.
 
 ## Priority and status model
@@ -1078,3 +1076,18 @@ Acceptance criteria:
 LAND-17 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-17_bfx-kanban-refresh.md). Full local gate passes with 74 tests and external links enabled; refreshed PR and deployment evidence remain pending.
 
 LAND-17 completion: [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) merged as `61af8cb4f28454860e87ee2c4dd5a58e55f1a810`. Exact-merge [quality](https://github.com/GBrooks1970/portfolio/actions/runs/39173135247) and [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/39173135151) passed. Live HTML matches the merge and board navigation works. See the [publication closure](implementation-logs/2026-10-18_land-17_publication-closure.md); earlier pre-publication evidence is retained as history.
+
+## LAND-18 — Project data and review publication
+
+**Priority:** P1. **Status:** IN REVIEW. Owner approved implementation, commits, pushes, PRs and merges on 6 November 2026.
+
+Plan: [project data and review refresh](implementation-plans/2026-11-06_project-data-and-review-refresh.md).
+
+- [x] Audit all 17 public entries and update evidence-bounded summaries.
+- [x] Preserve all eight November bundles and six focused records in the central public export.
+- [x] Isolate central generation, pin published sources and derive per-project review actions.
+- [ ] Complete local/PR gates and browser checks.
+- [ ] Merge landing implementation and verify exact-merge Pages and live bytes.
+- [ ] Append immutable publication evidence and close this item.
+
+Product findings, audit exceptions and pending owner rehearsals remain with their owning projects.

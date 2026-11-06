@@ -170,3 +170,16 @@ branch name—is the reproducible registry reference checked by the gate.
   moved or rewritten. With owner approval, select a reachable merged canonical commit, refresh the
   lock and regenerate all dependent output in one PR; never silently fall back to an unpinned
   branch tip.
+
+## Review snapshot and public registry projection (LAND-18)
+
+The registry lock now contains only `showcase` and `methodology` rows. Its source
+commit still names the complete canonical registry; `lock_registry.py` defines the
+filtered projection so private identifiers are not shipped in public snapshot data.
+
+`data/reviews.json` is generated from the merged central public HTML/manifest pair,
+with full source and registry SHAs, hashes and review inventories. See
+[review publication](review-publication.md). `generate_site.py` derives the local
+Code reviews actions from its validated `reviewProjects`; editorial actions remain
+owned by `presentation.json`. The generator and parity gate consume the same IDs.
+No action is inferred for a project without a comprehensive published bundle.

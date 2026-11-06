@@ -40,7 +40,8 @@ checkout/setup actions.
    workflow pages, badges, demos, reports and the public canonical page. Absolute social-image URLs
    under the canonical site are mapped back to their local committed assets during pull-request
    validation, because a new asset cannot exist on the public `main` deployment before merge.
-6. **Deterministic tests:** run every `tools/tests/test_*.py` test after the production checks.
+6. **Review publication:** validate the public snapshot hashes, registry/review inventories, stable project anchors and pinned source URLs; check all review URLs and reject stale generated HTML. Tests cover parallel-review omission, private-entry injection, corrupt anchors and unpublished central imports.
+7. **Deterministic tests:** run every `tools/tests/test_*.py` test after the production checks.
 
 ## External-link policy
 

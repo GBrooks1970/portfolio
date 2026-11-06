@@ -31,7 +31,7 @@
     "magento-checkout-automation": {
       "title": "Magento Checkout Automation",
       "discipline": "End-to-end web UI · reference project",
-      "summary": "Guest-checkout E2E against Magento 2, the portfolio's reference suite: profile-driven scenarios, store-safe smoke tagging, and living Serenity reports published to Pages.",
+      "summary": "Guest-checkout journeys against Magento 2 with Serenity/JS Screenplay, profile-driven scenarios and store-safe smoke tags. Published reports record earlier runs; workflow badges show current CI status.",
       "order": 10,
       "group": "web-ui-e2e",
       "tags": [
@@ -44,7 +44,7 @@
         "workflow": "ci.yml",
         "demo": null,
         "report": {
-          "label": "Live report",
+          "label": "Published report",
           "url": "https://gbrooks1970.github.io/magento-checkout-automation/"
         },
         "documentation": null
@@ -53,7 +53,7 @@
     "orangehrm-pim-automation": {
       "title": "OrangeHRM PIM Automation",
       "discipline": "End-to-end web UI",
-      "summary": "Add-employee journeys through the OrangeHRM PIM module, driven against a Dockerised, seeded instance so the suite is deterministic in CI, with Serenity living docs on Pages.",
+      "summary": "Add-employee journeys through OrangeHRM PIM using Serenity/JS and Playwright against a Dockerised, seeded instance. Published Serenity reports provide run evidence; the November review records remaining limitations.",
       "order": 20,
       "group": "web-ui-e2e",
       "tags": [
@@ -66,7 +66,7 @@
         "workflow": "ci.yml",
         "demo": null,
         "report": {
-          "label": "Live report",
+          "label": "Published report",
           "url": "https://gbrooks1970.github.io/orangehrm-pim-automation/"
         },
         "documentation": null
@@ -75,7 +75,7 @@
     "parabank-bank-automation": {
       "title": "ParaBank Bank Automation",
       "discipline": "Banking UI + API BDD",
-      "summary": "Docker-backed ParaBank automation combining Serenity/JS and Playwright UI journeys with stateful API BDD, live OpenAPI validation, and REST–SOAP parity.",
+      "summary": "Docker-backed banking automation combining Serenity/JS and Playwright UI journeys, stateful API BDD, live OpenAPI validation and REST–SOAP parity. Alternative Playwright test styles and a non-blocking k6 smoke lane broaden the teaching examples.",
       "order": 30,
       "group": "web-ui-e2e",
       "tags": [
@@ -97,7 +97,7 @@
     "bfx-ws-screenplay": {
       "title": "Bitfinex WebSocket Screenplay",
       "discipline": "Real-time WebSocket testing",
-      "summary": "Tests the live Bitfinex public WebSocket API v2 with an in-house, chainable Screenplay layer — including a flagship CRC-32 order-book checksum verified against consecutive live frames. Specification-driven, one SPEC unit at a time.",
+      "summary": "Exercises the live Bitfinex public WebSocket API v2 through an in-house Screenplay layer, including CRC-32 order-book checksum checks and bounded replay diagnostics. An intermittent checksum discrepancy remains under investigation.",
       "order": 40,
       "group": "api-bdd-protocols",
       "tags": [
@@ -119,7 +119,7 @@
     "hand-baked-screenplay-pattern": {
       "title": "Hand-Baked Screenplay Pattern",
       "discipline": "Framework internals · teaching library",
-      "summary": "A dependency-free TypeScript implementation of the Screenplay Pattern, following the Serenity/JS design model from scratch — actors, abilities, tasks, questions — with a pure event-fold static HTML reporter. A teaching reference, released as 0.3.0, with a Stryker mutation-testing lane that measures test-suite quality beyond code coverage.",
+      "summary": "A dependency-free TypeScript Screenplay teaching library: actors, abilities, tasks and questions, plus a static HTML event-fold reporter. Release 0.3.0 supplies provider and conformance seams; Stryker reports mutation scores without a blocking score threshold.",
       "order": 50,
       "group": "multi-stack-frameworks",
       "tags": [
@@ -142,7 +142,7 @@
     "markdown-renderer": {
       "title": "Markdown Renderer",
       "discipline": "Shipped product",
-      "summary": "A static, offline, browser-based Markdown viewer: pick a folder, browse a drilldown tree, read the rendered pane. Vendored dependencies, sanitised render, works over file://. Tested with Vitest units and Playwright E2E.",
+      "summary": "A static, offline Markdown viewer with folder navigation, vendored dependencies and sanitised rendering. Vitest and Playwright cover its own product behaviour, including keyboard and accessibility checks.",
       "order": 60,
       "group": "mobile-products",
       "tags": [
@@ -164,7 +164,7 @@
     "mobile-forex-automation": {
       "title": "Mobile Forex Automation",
       "discipline": "Mobile-web test automation",
-      "summary": "A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&L oracles, and on-device breakpoint and overflow checks.",
+      "summary": "A responsive forex demo with a deterministic seeded price feed, exercised through Playwright Pixel 7 and iPhone 14 browser emulation. Screenplay journeys check prices, P&L, touch interaction, breakpoints and overflow.",
       "order": 70,
       "group": "mobile-products",
       "tags": [
@@ -186,7 +186,7 @@
     "calculator-screenplay-bdd": {
       "title": "Calculator Screenplay BDD",
       "discipline": "API + BDD",
-      "summary": "A calculator API exercised through playwright-bdd and a Screenplay layer, with an OpenAPI contract exposed by the service. Demonstrates BDD at the API tier and consumer-facing contract discipline.",
+      "summary": "A compact calculator with domain, REST and browser tests, an OpenAPI contract and playwright-bdd Screenplay scenarios. A versioned provider boundary supports bounded conformance checks against a second adapter.",
       "order": 80,
       "group": "api-bdd-protocols",
       "tags": [
@@ -208,7 +208,7 @@
     "gb.automation.smoketests.sudoku.poc": {
       "title": "Sudoku Multi-Stack Parity POC",
       "discipline": "Multi-stack parity",
-      "summary": "The same Sudoku smoke suite implemented three ways — TypeScript/Cucumber.js, Python/pytest-bdd, C#/Reqnroll — with automated cross-stack parity checks proving the same 55-scenario contract stays in lock-step across all three. A study in test-suite portability.",
+      "summary": "A common 55-scenario Sudoku contract implemented in TypeScript/Cucumber.js, Python/pytest-bdd and C#/Reqnroll. Source and execution checks compare the stacks; the November reviews document assertion, dependency-policy and evidence limitations.",
       "order": 90,
       "group": "multi-stack-frameworks",
       "tags": [
@@ -233,7 +233,7 @@
     "portfolio-prompts": {
       "title": "portfolio-prompts",
       "discipline": "Methodology and tooling",
-      "summary": "is the open-source prompt library behind this workflow; its README documents every lifecycle prompt in full.",
+      "summary": "provides the registry, lifecycle prompts and evidence tooling behind this workflow, including code reviews, handovers and worklists. Its public review index preserves dated assessments and parallel reviews.",
       "order": 10,
       "group": null,
       "tags": [
@@ -251,7 +251,7 @@
     "juice-shop-dast-automation": {
       "title": "OWASP Juice Shop DAST",
       "discipline": "Security / DAST",
-      "summary": "OWASP ZAP passive baseline scan plus BDD exploit-confirmation scenarios against a pinned, intentionally-vulnerable OWASP Juice Shop training target, with a positive-detection gate.",
+      "summary": "OWASP ZAP passive scanning and separately controlled BDD exploit-confirmation scenarios against a pinned, intentionally vulnerable Juice Shop training target. Its gate checks expected vulnerability detection.",
       "order": 100,
       "group": "security-dast",
       "tags": [
@@ -273,7 +273,7 @@
     "auth-separation": {
       "title": "auth-separation",
       "discipline": "Specification Driven Development",
-      "summary": "is a technology-agnostic specification set for separating authentication, authorisation and user information into three independent services: three OpenAPI 3.1 contracts, an AsyncAPI 3.0 event contract and 21 Gherkin acceptance scenarios, all validated in CI — and then proven, by generating all three service skeletons from the contracts alone, to be complete enough to build from.",
+      "summary": "defines technology-agnostic authentication, authorisation and user-information services through OpenAPI, AsyncAPI and Gherkin specifications. Generated service skeletons return 501 responses; they demonstrate contract generation rather than implemented authentication behaviour.",
       "order": 20,
       "group": null,
       "tags": [
@@ -294,7 +294,7 @@
     "auth-separation-screenplay-poc": {
       "title": "Auth Separation Screenplay POC",
       "discipline": "Multi-stack SDD + Screenplay BDD",
-      "summary": "Demonstrates specification-driven development and Screenplay BDD proving microservice interchangeability across Node.js, Python FastAPI, and C# .NET 9 with living OpenAPI and AsyncAPI contracts.",
+      "summary": "Exercises separated authentication, authorisation and profile APIs across Node.js, Python FastAPI and C# .NET 9. Shared Gherkin, Screenplay and OpenAPI/AsyncAPI contracts demonstrate interchangeability within the POC’s tested behaviours.",
       "order": 110,
       "group": "multi-stack-frameworks",
       "tags": [
@@ -364,7 +364,7 @@
     "loan-origination-parity": {
       "title": "Loan Origination Parity",
       "discipline": "Multi-surface parity SDD + Screenplay BDD",
-      "summary": "One UK loan-origination engine proven identical through an in-memory core, a Node REST API, an Angular SPA and a Next.js backend-for-frontend by a single Serenity/JS Screenplay harness, with a CI parity gate on scenario counts and step text and server-side authorisation that holds when the UI is bypassed.",
+      "summary": "One UK loan-origination engine exercised through an in-memory core, Node REST API, Angular SPA and Next.js backend-for-frontend by a shared Serenity/JS Screenplay harness. Gates compare executed scenario counts and step text; dedicated checks exercise server-side authorisation.",
       "order": 140,
       "group": "multi-stack-frameworks",
       "tags": [
@@ -386,7 +386,7 @@
     "credit-dashboard-sut": {
       "title": "Credit Dashboard SUT",
       "discipline": "Specification-driven SUT design + contract-first BDD",
-      "summary": "A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 4 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness runs 60 API executions with every response validated against the contract. A React UI served by the same service runs 59 browser executions through the same harness and Gherkin store, with 216 component tests and 128 axe-core scans that find no violations. Two independent fresh-context reviews of the service, the harness and the UI, and the fixes to both, are done. Phase 5 is complete: all 30 seeded defects are implemented, each shown to turn a committed check red for its stated reason, and 34 screenshots (eight pages at two widths in the light and dark theme, and the tab bar) are compared with baselines made on Linux CI. The Serenity report of the scenario runs is published beside the Kanban board on GitHub Pages. An independent review of the Phase 5 additions, its fixes and a confirmation pass are done, with the limits that remain recorded, and the project was closed on 23 October 2026.",
+      "summary": "A fictional UK credit-health dashboard built specification first: an ASP.NET Core API and React UI share contract-validated Serenity/JS scenarios, with seeded-defect, accessibility and visual checks. Delivery closed on 23 October 2026 with recorded residual limits; independent November reviews remain available.",
       "order": 150,
       "group": "api-bdd-protocols",
       "tags": [

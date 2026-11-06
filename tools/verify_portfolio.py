@@ -6,9 +6,9 @@ import unittest
 from pathlib import Path
 
 from check_registry_parity import check_registry_parity
-from check_site import SiteError, check_site
+from check_site import SiteError, check_site, check_external_urls
 from generate_site import SourceError
-from generate_reviews import check_reviews
+from generate_reviews import check_reviews, load_snapshot, validate
 from generate_learning_paths import check_learning_paths
 
 
@@ -37,6 +37,10 @@ def main() -> int:
     args = parse_args()
     try:
         check_reviews()
+        review_urls = validate(load_snapshot()).links
+        if not args.skip_external:
+            check_external_urls(review_urls)
+        print(f"portfolio-verify: review sources PASS — {len(review_urls)} pinned URLs")
         check_learning_paths()
         showcase_count, methodology_count = check_registry_parity(
             args.registry_repository

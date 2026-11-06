@@ -11,6 +11,7 @@ TOOLS = ROOT / "tools"
 sys.path.insert(0, str(TOOLS))
 
 import check_registry_parity as PARITY  # noqa: E402
+from generate_reviews import load_snapshot
 import generate_site as GENERATE  # noqa: E402
 
 
@@ -22,8 +23,18 @@ class RegistryParityTests(unittest.TestCase):
         cls.site = GENERATE.load_json(ROOT / "data" / "site.json")
         cls.template = (ROOT / "index.template.html").read_text(encoding="utf-8")
         cls.rendered = GENERATE.render_site(
-            cls.template, cls.manifest, cls.registry_lock, cls.site
+            cls.template, cls.manifest, cls.registry_lock, cls.site, load_snapshot()["reviewProjects"]
         )
+
+    def test_registry_lock_does_not_ship_private_rows(self) -> None:
+        import yaml
+        from unittest.mock import patch
+        from lock_registry import build_lock
+        rows = copy.deepcopy(self.registry_lock['projects'])
+        rows.append({'project': 'private-evidence', 'github': 'example/private-evidence', 'presentation_role': 'hidden'})
+        with patch('lock_registry.git', side_effect=['a' * 40, yaml.safe_dump({'projects': rows})]):
+            lock = build_lock(ROOT, 'HEAD')
+        self.assertEqual(lock['projects'], self.registry_lock['projects'])
 
     def test_missing_public_project_is_rejected(self) -> None:
         manifest = copy.deepcopy(self.manifest)

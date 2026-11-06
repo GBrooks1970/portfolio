@@ -44,6 +44,8 @@ def build_lock(repository: Path, commit: str) -> dict[str, Any]:
     data = yaml.safe_load(registry_text)
     projects = []
     for row in data["projects"]:
+        if row["presentation_role"] not in {"showcase", "methodology"}:
+            continue
         projects.append(
             {
                 "project": row["project"],
