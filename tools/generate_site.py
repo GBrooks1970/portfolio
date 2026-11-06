@@ -397,7 +397,11 @@ def _action_link(action: dict[str, str], css_class: str) -> str:
     )
 
 
-def render_card(project: str, entry: dict[str, Any], github: str) -> str:
+def review_action(project: str) -> str:
+    return f'<a class="btn review" href="reviews.html#review-{_escape(project)}">Code reviews</a>'
+
+
+def render_card(project: str, entry: dict[str, Any], github: str, review_projects=()) -> str:
     repo_url = f"https://github.com/{github}"
     title = _escape(entry["title"])
     chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
@@ -408,6 +412,8 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
         actions.append(_action_link(entry["actions"]["report"], "report"))
     if entry["actions"]["documentation"] is not None:
         actions.append(_action_link(entry["actions"]["documentation"], "documentation"))
+    if project in review_projects:
+        actions.append(review_action(project))
     workflow = entry["actions"]["workflow"]
     if workflow is not None:
         workflow_url = f"{repo_url}/actions/workflows/{workflow}"
@@ -432,6 +438,7 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
 def render_capability_groups(
     groups: dict[str, dict[str, Any]],
     entries: list[tuple[str, dict[str, Any], str]],
+    review_projects=(),
 ) -> str:
     members: dict[str, list[tuple[str, dict[str, Any], str]]] = {
         key: [] for key in groups
@@ -442,7 +449,7 @@ def render_capability_groups(
     rendered_groups = []
     for key, group in sorted(groups.items(), key=lambda item: (item[1]["order"], item[0])):
         cards = "\n\n".join(
-            render_card(*entry)
+            render_card(*entry, review_projects=review_projects)
             for entry in sorted(members[key], key=lambda item: (item[1]["order"], item[0]))
         )
         heading_id = f"capability-{key}"
@@ -461,7 +468,7 @@ def render_capability_groups(
     return "\n\n".join(rendered_groups)
 
 
-def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
+def render_methodology(entries: list[tuple[str, dict[str, Any], str]], review_projects=()) -> str:
     # The section shell and its landing-owned narrative live in index.template.html; this token
     # injects the per-methodology-project entries.
     #
@@ -488,6 +495,8 @@ def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
             for kind in ("demo", "report", "documentation")
             if entry["actions"][kind] is not None
         ]
+        if project in review_projects:
+            actions.append(review_action(project))
         actions_html = f'\n    <div class="actions">{"".join(actions)}</div>' if actions else ""
 
         blocks.append(
@@ -506,9 +515,12 @@ def render_site(
     manifest: dict[str, Any],
     registry_lock: dict[str, Any],
     site: dict[str, Any],
+    review_projects=(),
 ) -> str:
     validate_site(site)
     groups, projects, registry = validate_sources(manifest, registry_lock)
+    if len(review_projects) != len(set(review_projects)) or not set(review_projects) <= projects.keys():
+        raise SourceError("Review project inventory contains duplicates or unknown public projects")
     showcase = sorted(
         (
             (project, entry, registry[project]["github"])
@@ -544,8 +556,8 @@ def render_site(
         "{{CAPABILITY_GROUP_COUNT}}": str(len(groups)),
         "{{CAPABILITY_GROUP_NAMES}}": " · ".join(_escape(label) for label in group_labels),
         "{{PUBLIC_EVIDENCE_COUNT}}": str(public_evidence_count),
-        "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase),
-        "{{METHODOLOGY}}": render_methodology(methodology),
+        "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase, review_projects),
+        "{{METHODOLOGY}}": render_methodology(methodology, review_projects),
     }
     rendered = template
     for token, value in replacements.items():
@@ -593,6 +605,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    from generate_reviews import load_snapshot
     try:
         site = load_json(args.site)
         outputs = {
@@ -601,11 +614,12 @@ def main() -> int:
                 load_json(args.manifest),
                 load_json(args.registry_lock),
                 site,
+                load_snapshot(registry_lock=load_json(args.registry_lock))["reviewProjects"],
             ).encode("utf-8"),
             args.sitemap_output: render_sitemap(site).encode("utf-8"),
             args.robots_output: render_robots(site).encode("utf-8"),
         }
-    except (OSError, SourceError) as exc:
+    except (OSError, SourceError, ValueError) as exc:
         print(f"generate-site: ERROR — {exc}", file=sys.stderr)
         return 2
     if args.check:

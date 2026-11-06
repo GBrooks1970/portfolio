@@ -8,6 +8,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+import sys
+sys.path.insert(0, str(ROOT / "tools"))
+from generate_reviews import load_snapshot
 MODULE_PATH = ROOT / "tools" / "generate_site.py"
 SPEC = importlib.util.spec_from_file_location("generate_site", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
@@ -23,8 +26,19 @@ class GenerateSiteTests(unittest.TestCase):
         cls.site = GENERATE.load_json(ROOT / "data" / "site.json")
         cls.template = (ROOT / "index.template.html").read_text(encoding="utf-8")
         cls.rendered = GENERATE.render_site(
-            cls.template, cls.manifest, cls.registry_lock, cls.site
+            cls.template, cls.manifest, cls.registry_lock, cls.site, load_snapshot()["reviewProjects"]
         )
+
+    def test_review_actions_match_published_snapshot_and_coverage_gaps(self) -> None:
+        import re
+        expected = set(load_snapshot()["reviewProjects"])
+        actual = re.findall(r'href="reviews.html#review-([^"]+)"', self.rendered)
+        self.assertEqual(set(actual), expected)
+        self.assertEqual(len(actual), len(expected))
+        for project in ['tradeblotter-wpf-screenplay', 'loan-origination-parity']:
+            self.assertNotIn(project, actual)
+        self.assertIn('portfolio-prompts', actual)
+        self.assertIn('auth-separation', actual)
 
     def test_renders_current_public_inventory_and_counts(self) -> None:
         self.assertEqual(self.rendered.count('<article class="card" data-project='), 15)
@@ -149,7 +163,7 @@ class GenerateSiteTests(unittest.TestCase):
 
     def test_render_is_byte_stable_and_matches_committed_output(self) -> None:
         second = GENERATE.render_site(
-            self.template, self.manifest, self.registry_lock, self.site
+            self.template, self.manifest, self.registry_lock, self.site, load_snapshot()["reviewProjects"]
         )
         self.assertEqual(self.rendered.encode("utf-8"), second.encode("utf-8"))
         self.assertEqual(self.rendered.encode("utf-8"), (ROOT / "index.html").read_bytes())
