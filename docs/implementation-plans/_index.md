@@ -20,4 +20,4 @@ Every implementation plan is written to a file here before implementation starts
 
 | [`2026-10-18_land-17-bfx-kanban.md`](2026-10-18_land-17-bfx-kanban.md) | LAND-17 BFX interactive Kanban link | 2026-10-18 | implemented | [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) (`61af8cb`, 2026-10-18) |
 
-| [`2026-11-06_project-data-and-review-refresh.md`](2026-11-06_project-data-and-review-refresh.md) | LAND-18 Project data and review publication | 2026-11-06 | approved; implementation in review | Pending publication |
+| [`2026-11-06_project-data-and-review-refresh.md`](2026-11-06_project-data-and-review-refresh.md) | LAND-18 Project data and review publication | 2026-11-06 | implemented | [PR #82](https://github.com/GBrooks1970/portfolio/pull/82) (`69e4fdc`, 2026-11-06) |

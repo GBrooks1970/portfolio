@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 41
+**Version:** 42
 **Last updated:** 2026-11-06
-**Status:** ACTIVE — LAND-18 project data and reviews refresh is IN REVIEW.  LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
+**Status:** ACTIVE — LAND-18 project data and reviews refresh is DONE.  LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -1079,15 +1079,17 @@ LAND-17 completion: [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) m
 
 ## LAND-18 — Project data and review publication
 
-**Priority:** P1. **Status:** IN REVIEW. Owner approved implementation, commits, pushes, PRs and merges on 6 November 2026.
+**Priority:** P1. **Status:** DONE (2026-11-06). Owner approved implementation, commits, pushes, PRs and merges on 6 November 2026.
 
 Plan: [project data and review refresh](implementation-plans/2026-11-06_project-data-and-review-refresh.md).
 
 - [x] Audit all 17 public entries and update evidence-bounded summaries.
 - [x] Preserve all eight November bundles and six focused records in the central public export.
 - [x] Isolate central generation, pin published sources and derive per-project review actions.
-- [ ] Complete local/PR gates and browser checks.
-- [ ] Merge landing implementation and verify exact-merge Pages and live bytes.
-- [ ] Append immutable publication evidence and close this item.
+- [x] Complete local/PR gates and browser checks.
+- [x] Merge landing implementation and verify exact-merge Pages and live bytes.
+- [x] Append immutable publication evidence and close this item.
 
 Product findings, audit exceptions and pending owner rehearsals remain with their owning projects.
+
+LAND-18 publication: [PR #82](https://github.com/GBrooks1970/portfolio/pull/82), merge `69e4fdc410d73b5c6e54567bd1113973d48df702`. Exact-merge quality and Pages passed; both live HTML files match the merged bytes. See [publication closure](implementation-logs/2026-11-06_land-18_publication-closure.md).
