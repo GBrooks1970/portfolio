@@ -1,9 +1,13 @@
+import sys
 import unittest
 import json
 import re
-from generate_reviews import ROOT
+from pathlib import Path
 
-from generate_reviews import public_link, render, check_reviews
+TOOLS_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(TOOLS_DIR))
+
+from generate_reviews import ROOT, public_link, render, check_reviews, validate_snapshot
 
 
 class ReviewPublicationTests(unittest.TestCase):
@@ -23,9 +27,39 @@ class ReviewPublicationTests(unittest.TestCase):
     def test_committed_output_matches_snapshot(self):
         check_reviews()
 
-    def test_overall_grade_does_not_replace_bundle_identifier(self):
+    def test_latest_reviews_matrix_renders_expected_grades_and_identifiers(self):
         output = render(json.loads((ROOT / 'data/reviews.json').read_text(encoding='utf-8')))
-        row = re.search(r'<tr>\s*<td><code>gb.automation.smoketests.sudoku.poc</code></td>.*?</tr>', output, re.S)[0]
-        cells = re.findall(r'<td>(.*?)</td>', row, re.S)
-        self.assertIn('CODE_REVIEW_CODEX_v2_20260929T0633Z', cells[2])
-        self.assertEqual(cells[5], '<code>B</code>')
+        matrix_match = re.search(r'<h2>Latest Reviews Matrix</h2>.*?<table>(.*?)</table>', output, re.S)
+        self.assertIsNotNone(matrix_match)
+        matrix_table = matrix_match.group(1)
+
+        # Credit Dashboard SUT has B+ grade from CODEX review
+        row_cds = re.search(r'<tr>\s*<td><code>credit-dashboard-sut</code></td>.*?</tr>', matrix_table, re.S)[0]
+        cells_cds = re.findall(r'<td>(.*?)</td>', row_cds, re.S)
+        self.assertIn('CODE_REVIEW_CODEX_v1_20261105T0859Z', cells_cds[2])
+        self.assertEqual(cells_cds[5], 'B+')
+
+        # Sudoku has Claude Opus review as latest
+        row_sudoku = re.search(r'<tr>\s*<td><code>gb.automation.smoketests.sudoku.poc</code></td>.*?</tr>', matrix_table, re.S)[0]
+        cells_sudoku = re.findall(r'<td>(.*?)</td>', row_sudoku, re.S)
+        self.assertIn('CODE_REVIEW_Claude_v2_20261105T1425Z', cells_sudoku[2])
+        self.assertEqual(cells_sudoku[5], 'Not assigned')
+
+    def test_all_15_review_projects_present_and_have_anchors(self):
+        snapshot = json.loads((ROOT / 'data/reviews.json').read_text(encoding='utf-8'))
+        self.assertEqual(len(snapshot['reviewProjects']), 15)
+        output = render(snapshot)
+        for project in snapshot['reviewProjects']:
+            self.assertIn(f'id="review-{project}"', output)
+
+    def test_hidden_project_rejected_in_reviews(self):
+        snapshot = json.loads((ROOT / 'data/reviews.json').read_text(encoding='utf-8'))
+        leaked = dict(snapshot)
+        leaked['reviewProjects'] = list(snapshot['reviewProjects']) + ['azure-dotnet-platform']
+        leaked['repositories'] = dict(snapshot['repositories'], **{'azure-dotnet-platform': 'GBrooks1970/azure-dotnet-platform'})
+        with self.assertRaises(ValueError):
+            validate_snapshot(leaked)
+
+
+if __name__ == "__main__":
+    unittest.main()

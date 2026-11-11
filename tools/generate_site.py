@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "data" / "presentation.json"
 DEFAULT_REGISTRY_LOCK = ROOT / "data" / "registry-lock.json"
 DEFAULT_SITE = ROOT / "data" / "site.json"
+DEFAULT_REVIEWS = ROOT / "data" / "reviews.json"
 DEFAULT_TEMPLATE = ROOT / "index.template.html"
 DEFAULT_OUTPUT = ROOT / "index.html"
 DEFAULT_SITEMAP_OUTPUT = ROOT / "sitemap.xml"
@@ -397,7 +398,12 @@ def _action_link(action: dict[str, str], css_class: str) -> str:
     )
 
 
-def render_card(project: str, entry: dict[str, Any], github: str) -> str:
+def render_card(
+    project: str,
+    entry: dict[str, Any],
+    github: str,
+    has_review: bool = False,
+) -> str:
     repo_url = f"https://github.com/{github}"
     title = _escape(entry["title"])
     chips = "".join(f'<span class="chip">{_escape(tag)}</span>' for tag in entry["tags"])
@@ -408,6 +414,10 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
         actions.append(_action_link(entry["actions"]["report"], "report"))
     if entry["actions"]["documentation"] is not None:
         actions.append(_action_link(entry["actions"]["documentation"], "documentation"))
+    if has_review:
+        actions.append(
+            f'<a class="btn" href="reviews.html#review-{_escape(project)}">Code reviews</a>'
+        )
     workflow = entry["actions"]["workflow"]
     if workflow is not None:
         workflow_url = f"{repo_url}/actions/workflows/{workflow}"
@@ -432,7 +442,9 @@ def render_card(project: str, entry: dict[str, Any], github: str) -> str:
 def render_capability_groups(
     groups: dict[str, dict[str, Any]],
     entries: list[tuple[str, dict[str, Any], str]],
+    review_projects: set[str] | None = None,
 ) -> str:
+    review_set = review_projects or set()
     members: dict[str, list[tuple[str, dict[str, Any], str]]] = {
         key: [] for key in groups
     }
@@ -442,7 +454,12 @@ def render_capability_groups(
     rendered_groups = []
     for key, group in sorted(groups.items(), key=lambda item: (item[1]["order"], item[0])):
         cards = "\n\n".join(
-            render_card(*entry)
+            render_card(
+                entry[0],
+                entry[1],
+                entry[2],
+                has_review=(entry[0] in review_set),
+            )
             for entry in sorted(members[key], key=lambda item: (item[1]["order"], item[0]))
         )
         heading_id = f"capability-{key}"
@@ -461,7 +478,11 @@ def render_capability_groups(
     return "\n\n".join(rendered_groups)
 
 
-def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
+def render_methodology(
+    entries: list[tuple[str, dict[str, Any], str]],
+    review_projects: set[str] | None = None,
+) -> str:
+    review_set = review_projects or set()
     # The section shell and its landing-owned narrative live in index.template.html; this token
     # injects the per-methodology-project entries.
     #
@@ -488,6 +509,10 @@ def render_methodology(entries: list[tuple[str, dict[str, Any], str]]) -> str:
             for kind in ("demo", "report", "documentation")
             if entry["actions"][kind] is not None
         ]
+        if project in review_set:
+            actions.append(
+                f'<a class="btn" href="reviews.html#review-{_escape(project)}">Code reviews</a>'
+            )
         actions_html = f'\n    <div class="actions">{"".join(actions)}</div>' if actions else ""
 
         blocks.append(
@@ -506,9 +531,13 @@ def render_site(
     manifest: dict[str, Any],
     registry_lock: dict[str, Any],
     site: dict[str, Any],
+    reviews: dict[str, Any] | None = None,
 ) -> str:
     validate_site(site)
     groups, projects, registry = validate_sources(manifest, registry_lock)
+    if reviews is None and DEFAULT_REVIEWS.exists():
+        reviews = load_json(DEFAULT_REVIEWS)
+    review_projects = set(reviews.get("reviewProjects", [])) if reviews else set()
     showcase = sorted(
         (
             (project, entry, registry[project]["github"])
@@ -544,8 +573,8 @@ def render_site(
         "{{CAPABILITY_GROUP_COUNT}}": str(len(groups)),
         "{{CAPABILITY_GROUP_NAMES}}": " · ".join(_escape(label) for label in group_labels),
         "{{PUBLIC_EVIDENCE_COUNT}}": str(public_evidence_count),
-        "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase),
-        "{{METHODOLOGY}}": render_methodology(methodology),
+        "{{SHOWCASE_GROUPS}}": render_capability_groups(groups, showcase, review_projects),
+        "{{METHODOLOGY}}": render_methodology(methodology, review_projects),
     }
     rendered = template
     for token, value in replacements.items():
@@ -583,6 +612,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--registry-lock", type=Path, default=DEFAULT_REGISTRY_LOCK)
     parser.add_argument("--site", type=Path, default=DEFAULT_SITE)
+    parser.add_argument("--reviews", type=Path, default=DEFAULT_REVIEWS)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--sitemap-output", type=Path, default=DEFAULT_SITEMAP_OUTPUT)
@@ -595,12 +625,14 @@ def main() -> int:
     args = parse_args()
     try:
         site = load_json(args.site)
+        reviews = load_json(args.reviews) if args.reviews.exists() else None
         outputs = {
             args.output: render_site(
                 args.template.read_text(encoding="utf-8"),
                 load_json(args.manifest),
                 load_json(args.registry_lock),
                 site,
+                reviews=reviews,
             ).encode("utf-8"),
             args.sitemap_output: render_sitemap(site).encode("utf-8"),
             args.robots_output: render_robots(site).encode("utf-8"),

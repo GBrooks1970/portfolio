@@ -44,7 +44,7 @@
         "workflow": "ci.yml",
         "demo": null,
         "report": {
-          "label": "Live report",
+          "label": "Published report",
           "url": "https://gbrooks1970.github.io/magento-checkout-automation/"
         },
         "documentation": null
@@ -66,7 +66,7 @@
         "workflow": "ci.yml",
         "demo": null,
         "report": {
-          "label": "Live report",
+          "label": "Published report",
           "url": "https://gbrooks1970.github.io/orangehrm-pim-automation/"
         },
         "documentation": null
@@ -164,7 +164,7 @@
     "mobile-forex-automation": {
       "title": "Mobile Forex Automation",
       "discipline": "Mobile-web test automation",
-      "summary": "A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&L oracles, and on-device breakpoint and overflow checks.",
+      "summary": "A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&L oracles, and emulated-device breakpoint and overflow checks.",
       "order": 70,
       "group": "mobile-products",
       "tags": [
@@ -386,7 +386,7 @@
     "credit-dashboard-sut": {
       "title": "Credit Dashboard SUT",
       "discipline": "Specification-driven SUT design + contract-first BDD",
-      "summary": "A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 4 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness runs 60 API executions with every response validated against the contract. A React UI served by the same service runs 59 browser executions through the same harness and Gherkin store, with 216 component tests and 128 axe-core scans that find no violations. Two independent fresh-context reviews of the service, the harness and the UI, and the fixes to both, are done. Phase 5 is complete: all 30 seeded defects are implemented, each shown to turn a committed check red for its stated reason, and 34 screenshots (eight pages at two widths in the light and dark theme, and the tab bar) are compared with baselines made on Linux CI. The Serenity report of the scenario runs is published beside the Kanban board on GitHub Pages. An independent review of the Phase 5 additions, its fixes and a confirmation pass are done, with the limits that remain recorded, and the project was closed on 23 October 2026.",
+      "summary": "A UK credit-health dashboard built as a complete system under test, specification-first: OpenAPI 3.1 contract, 73 tagged Gherkin scenarios, ASP.NET Core API, React UI, shared Serenity/JS harness, 30 seeded mutation defects, axe-core scans, and visual regression baselines. Delivered through Phase 5 and closed on 23 October 2026.",
       "order": 150,
       "group": "api-bdd-protocols",
       "tags": [

@@ -8,6 +8,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_REVIEWS_DATA = ROOT / "data" / "reviews.json"
+DEFAULT_REVIEWS_OUTPUT = ROOT / "reviews.html"
 
 
 def public_link(url: str, repositories: dict[str, str]) -> str:
@@ -23,65 +25,74 @@ def public_link(url: str, repositories: dict[str, str]) -> str:
     return f"https://github.com/{repositories[project]}/{kind}/main/{path}"
 
 
+def validate_snapshot(snapshot: dict) -> None:
+    source = snapshot.get("source")
+    if not isinstance(source, dict) or not source.get("repository") or not source.get("commit"):
+        raise ValueError("reviews snapshot requires source repository and commit")
+    commit = source["commit"]
+    if not isinstance(commit, str) or re.fullmatch(r"[0-9a-f]{40}", commit) is None:
+        raise ValueError(f"source.commit must be a 40-character lowercase git SHA: {commit}")
+    repositories = snapshot.get("repositories")
+    if not isinstance(repositories, dict) or not repositories:
+        raise ValueError("reviews snapshot requires repositories map")
+    review_projects = snapshot.get("reviewProjects")
+    if not isinstance(review_projects, list) or not review_projects:
+        raise ValueError("reviews snapshot requires reviewProjects list")
+    for project in review_projects:
+        if project not in repositories:
+            raise ValueError(f"reviewProject {project} not present in repositories map")
+    html_text = snapshot.get("html", "")
+    if not isinstance(html_text, str) or not html_text.strip():
+        raise ValueError("reviews snapshot requires non-empty html")
+    if "azure-dotnet-platform" in html_text or "azure-dotnet-platform" in review_projects:
+        raise ValueError("hidden project azure-dotnet-platform must not be published in reviews")
+    for project in review_projects:
+        expected_anchor = f'id="review-{project}"'
+        if expected_anchor not in html_text:
+            raise ValueError(f"reviews html missing card anchor: {expected_anchor}")
+
+
 def render(snapshot: dict) -> str:
+    validate_snapshot(snapshot)
     document = re.sub(
         r'href="([^"]+)"',
         lambda match: 'href="' + html.escape(public_link(match[1], snapshot['repositories']), quote=True) + '"',
         snapshot['html'],
     )
-    # Prefer the explicit overall grade over the central parser's table-header match.
-    for card in re.findall(r'<div class="card">(.*?)(?=<div class="card">|\Z)', document, re.S):
-        project = re.search(r'<h3>([^<]+)', card)
-        grade = re.search(r'Overall Grade:\s*([A-F][+-]?)\b', card)
-        if project and grade:
-            name, value = project[1].strip(), grade[1]
-            row = re.compile(r'<tr>\s*<td><code>' + re.escape(name) + r'</code></td>.*?</tr>', re.S)
-            def correct_row(match):
-                cells = list(re.finditer(r'<td>.*?</td>', match[0], re.S))
-                if len(cells) != 7:
-                    raise ValueError('Expected seven review matrix columns')
-                cell = cells[5]
-                return match[0][:cell.start()] + '<td><code>' + value + '</code></td>' + match[0][cell.end():]
-            document = row.sub(correct_row, document)
-            corrected = re.sub(r'(<strong>Grade:</strong>\s*<code>)[^<]+', lambda m: m[1] + value, card, count=1)
-            document = document.replace(card, corrected)
-    document = re.sub(r'\s*<p>Generation audit:.*?</p>', '', document, flags=re.S)
-    document = document.replace('Coverage and Generation Audit', 'Review snapshot coverage')
-    document = document.replace('<div class="container">', '<div class="container">\n<nav aria-label="Portfolio"><a href="index.html">Back to portfolio</a></nav>', 1)
-    document = document.replace('<table>', '<div class="table-scroll" tabindex="0" role="region" aria-label="Latest reviews matrix"><table>')
-    document = document.replace('</table>', '</table></div>')
-    style = """
-    * { box-sizing: border-box; }
-    .container { min-width: 0; }
-    .table-scroll { max-width: 100%; overflow-x: auto; }
-    .card, p, h3, code, a { overflow-wrap: anywhere; }
-    a:focus-visible, summary:focus-visible, .table-scroll:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
-    nav { margin-bottom: 1.5rem; }
-    @media (max-width: 600px) { body { padding: 1rem; } .card { padding: 1rem; } }
-"""
-    document = document.replace('</style>', style + '</style>', 1)
-    return '\n'.join(line.rstrip() for line in document.splitlines()) + '\n'
+    if '<nav aria-label="Portfolio">' not in document:
+        nav_html = '<nav aria-label="Portfolio"><a href="index.html">Back to portfolio</a></nav>\n'
+        if '<main class="container">' in document:
+            document = document.replace('<main class="container">', f'<main class="container">\n{nav_html}', 1)
+        elif '<div class="container">' in document:
+            document = document.replace('<div class="container">', f'<div class="container">\n{nav_html}', 1)
+    return "\n".join(line.rstrip() for line in document.splitlines()) + "\n"
 
 
-def check_reviews() -> None:
-    snapshot = json.loads((ROOT / 'data/reviews.json').read_text(encoding='utf-8'))
+def check_reviews(
+    data_path: Path = DEFAULT_REVIEWS_DATA,
+    output_path: Path = DEFAULT_REVIEWS_OUTPUT,
+) -> None:
+    snapshot = json.loads(data_path.read_text(encoding="utf-8"))
     expected = render(snapshot)
-    if (ROOT / 'reviews.html').read_text(encoding='utf-8') != expected:
-        raise ValueError('reviews.html is stale; run python tools/generate_reviews.py')
+    if not output_path.exists() or output_path.read_text(encoding="utf-8") != expected:
+        raise ValueError("reviews.html is stale; run python tools/generate_reviews.py")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--check', action='store_true')
+    parser.add_argument("--check", action="store_true", help="Fail if output is stale.")
+    parser.add_argument("--data", type=Path, default=DEFAULT_REVIEWS_DATA)
+    parser.add_argument("--output", type=Path, default=DEFAULT_REVIEWS_OUTPUT)
     args = parser.parse_args()
     if args.check:
-        check_reviews()
+        check_reviews(args.data, args.output)
     else:
-        snapshot = json.loads((ROOT / 'data/reviews.json').read_text(encoding='utf-8'))
-        (ROOT / 'reviews.html').write_text(render(snapshot), encoding='utf-8', newline='\n')
-    print('reviews generation: PASS')
+        snapshot = json.loads(args.data.read_text(encoding="utf-8"))
+        rendered = render(snapshot)
+        args.output.write_text(rendered, encoding="utf-8", newline="\n")
+    print("reviews generation: PASS")
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

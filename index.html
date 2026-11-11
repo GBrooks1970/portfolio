@@ -213,7 +213,8 @@
       <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">TypeScript</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/magento-checkout-automation">Repo</a>
-          <a class="btn report" href="https://gbrooks1970.github.io/magento-checkout-automation/">Live report</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/magento-checkout-automation/">Published report</a>
+          <a class="btn" href="reviews.html#review-magento-checkout-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml" aria-label="Magento Checkout Automation CI workflow"><img class="badge" alt="Magento Checkout Automation CI status" src="https://github.com/GBrooks1970/magento-checkout-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -226,7 +227,8 @@
       <div class="chips"><span class="chip">Serenity/JS</span><span class="chip">Playwright</span><span class="chip">Cucumber</span><span class="chip">Docker</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/orangehrm-pim-automation">Repo</a>
-          <a class="btn report" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Live report</a>
+          <a class="btn report" href="https://gbrooks1970.github.io/orangehrm-pim-automation/">Published report</a>
+          <a class="btn" href="reviews.html#review-orangehrm-pim-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml" aria-label="OrangeHRM PIM Automation CI workflow"><img class="badge" alt="OrangeHRM PIM Automation CI status" src="https://github.com/GBrooks1970/orangehrm-pim-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -240,6 +242,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/parabank-bank-automation">Repo</a>
           <a class="btn report" href="https://gbrooks1970.github.io/parabank-bank-automation/">Serenity report</a>
+          <a class="btn" href="reviews.html#review-parabank-bank-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml" aria-label="ParaBank Bank Automation CI workflow"><img class="badge" alt="ParaBank Bank Automation CI status" src="https://github.com/GBrooks1970/parabank-bank-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -262,6 +265,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/bfx-ws-screenplay">Repo</a>
           <a class="btn demo" href="https://gbrooks1970.github.io/bfx-ws-screenplay/">Interactive Kanban board</a>
+          <a class="btn" href="reviews.html#review-bfx-ws-screenplay">Code reviews</a>
           <a href="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml" aria-label="Bitfinex WebSocket Screenplay CI workflow"><img class="badge" alt="Bitfinex WebSocket Screenplay CI status" src="https://github.com/GBrooks1970/bfx-ws-screenplay/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -275,6 +279,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/NeoCognitus70/calculator-screenplay-bdd">Repo</a>
           <a class="btn documentation" href="https://neocognitus70.github.io/calculator-screenplay-bdd/">API reference</a>
+          <a class="btn" href="reviews.html#review-calculator-screenplay-bdd">Code reviews</a>
           <a href="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml" aria-label="Calculator Screenplay BDD CI workflow"><img class="badge" alt="Calculator Screenplay BDD CI status" src="https://github.com/NeoCognitus70/calculator-screenplay-bdd/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -289,6 +294,7 @@
         <a class="btn primary" href="https://github.com/GBrooks1970/saleor-graphql-automation">Repo</a>
           <a class="btn report" href="https://gbrooks1970.github.io/saleor-graphql-automation/">Serenity reports</a>
           <a class="btn documentation" href="https://github.com/GBrooks1970/saleor-graphql-automation/blob/main/README.md">Project documentation</a>
+          <a class="btn" href="reviews.html#review-saleor-graphql-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/saleor-graphql-automation/actions/workflows/ci.yml" aria-label="Saleor GraphQL Automation CI workflow"><img class="badge" alt="Saleor GraphQL Automation CI status" src="https://github.com/GBrooks1970/saleor-graphql-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -297,12 +303,13 @@
     <article class="card" data-project="credit-dashboard-sut">
       <h4><a href="https://github.com/GBrooks1970/credit-dashboard-sut">Credit Dashboard SUT</a></h4>
       <p class="disc">Specification-driven SUT design + contract-first BDD</p>
-      <p class="desc">A fictional UK credit-health dashboard built as a system under test, specification first: one OpenAPI 3.1 contract, 73 Gherkin scenarios tagging every business rule, seven schema-validated persona fixtures and recorded decision briefs, all checked in CI. Phases 0 to 4 are complete: an ASP.NET Core API serves all 36 contract operations, a Schemathesis run is clean against it on every commit, and a Serenity/JS harness runs 60 API executions with every response validated against the contract. A React UI served by the same service runs 59 browser executions through the same harness and Gherkin store, with 216 component tests and 128 axe-core scans that find no violations. Two independent fresh-context reviews of the service, the harness and the UI, and the fixes to both, are done. Phase 5 is complete: all 30 seeded defects are implemented, each shown to turn a committed check red for its stated reason, and 34 screenshots (eight pages at two widths in the light and dark theme, and the tab bar) are compared with baselines made on Linux CI. The Serenity report of the scenario runs is published beside the Kanban board on GitHub Pages. An independent review of the Phase 5 additions, its fixes and a confirmation pass are done, with the limits that remain recorded, and the project was closed on 23 October 2026.</p>
+      <p class="desc">A UK credit-health dashboard built as a complete system under test, specification-first: OpenAPI 3.1 contract, 73 tagged Gherkin scenarios, ASP.NET Core API, React UI, shared Serenity/JS harness, 30 seeded mutation defects, axe-core scans, and visual regression baselines. Delivered through Phase 5 and closed on 23 October 2026.</p>
       <div class="chips"><span class="chip">OpenAPI</span><span class="chip">Specification-driven</span><span class="chip">Gherkin</span><span class="chip">Decision briefs</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/credit-dashboard-sut">Repo</a>
           <a class="btn report" href="https://gbrooks1970.github.io/credit-dashboard-sut/report/">Serenity report</a>
           <a class="btn documentation" href="https://github.com/GBrooks1970/credit-dashboard-sut/blob/main/DOCS/.design/api-specification.md">API specification</a>
+          <a class="btn" href="reviews.html#review-credit-dashboard-sut">Code reviews</a>
           <a href="https://github.com/GBrooks1970/credit-dashboard-sut/actions/workflows/ci.yml" aria-label="Credit Dashboard SUT CI workflow"><img class="badge" alt="Credit Dashboard SUT CI status" src="https://github.com/GBrooks1970/credit-dashboard-sut/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -325,6 +332,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern">Repo</a>
           <a class="btn report" href="https://neocognitus70.github.io/hand-baked-screenplay-pattern/">Sample report</a>
+          <a class="btn" href="reviews.html#review-hand-baked-screenplay-pattern">Code reviews</a>
           <a href="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml" aria-label="Hand-Baked Screenplay Pattern CI workflow"><img class="badge" alt="Hand-Baked Screenplay Pattern CI status" src="https://github.com/NeoCognitus70/hand-baked-screenplay-pattern/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -339,6 +347,7 @@
         <a class="btn primary" href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc">Repo</a>
           <a class="btn demo" href="https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/">Solver visualisation</a>
           <a class="btn report" href="https://gbrooks1970.github.io/gb.automation.smoketests.sudoku.poc/parity/">Parity evidence</a>
+          <a class="btn" href="reviews.html#review-gb.automation.smoketests.sudoku.poc">Code reviews</a>
           <a href="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml" aria-label="Sudoku Multi-Stack Parity POC CI workflow"><img class="badge" alt="Sudoku Multi-Stack Parity POC CI status" src="https://github.com/GBrooks1970/gb.automation.smoketests.sudoku.poc/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -352,6 +361,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/auth-separation-screenplay-poc">Repo</a>
           <a class="btn documentation" href="https://gbrooks1970.github.io/auth-separation-screenplay-poc/">API reference</a>
+          <a class="btn" href="reviews.html#review-auth-separation-screenplay-poc">Code reviews</a>
           <a href="https://github.com/GBrooks1970/auth-separation-screenplay-poc/actions/workflows/ci.yml" aria-label="Auth Separation Screenplay POC CI workflow"><img class="badge" alt="Auth Separation Screenplay POC CI status" src="https://github.com/GBrooks1970/auth-separation-screenplay-poc/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -399,6 +409,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/markdown-renderer">Repo</a>
           <a class="btn demo" href="https://gbrooks1970.github.io/markdown-renderer/">Live demo</a>
+          <a class="btn" href="reviews.html#review-markdown-renderer">Code reviews</a>
           <a href="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml" aria-label="Markdown Renderer CI workflow"><img class="badge" alt="Markdown Renderer CI status" src="https://github.com/GBrooks1970/markdown-renderer/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -407,11 +418,12 @@
     <article class="card" data-project="mobile-forex-automation">
       <h4><a href="https://github.com/GBrooks1970/mobile-forex-automation">Mobile Forex Automation</a></h4>
       <p class="disc">Mobile-web test automation</p>
-      <p class="desc">A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&amp;L oracles, and on-device breakpoint and overflow checks.</p>
+      <p class="desc">A deterministic responsive forex demo exercised through Pixel 7 and iPhone 14 emulation: touch-first Screenplay journeys, exact seeded-price and P&amp;L oracles, and emulated-device breakpoint and overflow checks.</p>
       <div class="chips"><span class="chip">Playwright</span><span class="chip">Screenplay</span><span class="chip">Mobile</span><span class="chip">TypeScript</span></div>
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/mobile-forex-automation">Repo</a>
           <a class="btn demo" href="https://gbrooks1970.github.io/mobile-forex-automation/">Live demo</a>
+          <a class="btn" href="reviews.html#review-mobile-forex-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml" aria-label="Mobile Forex Automation CI workflow"><img class="badge" alt="Mobile Forex Automation CI status" src="https://github.com/GBrooks1970/mobile-forex-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -434,6 +446,7 @@
       <div class="actions">
         <a class="btn primary" href="https://github.com/GBrooks1970/juice-shop-dast-automation">Repo</a>
           <a class="btn report" href="https://gbrooks1970.github.io/juice-shop-dast-automation/">DAST scan report</a>
+          <a class="btn" href="reviews.html#review-juice-shop-dast-automation">Code reviews</a>
           <a href="https://github.com/GBrooks1970/juice-shop-dast-automation/actions/workflows/ci.yml" aria-label="OWASP Juice Shop DAST CI workflow"><img class="badge" alt="OWASP Juice Shop DAST CI status" src="https://github.com/GBrooks1970/juice-shop-dast-automation/actions/workflows/ci.yml/badge.svg?branch=main"></a>
       </div>
     </article>
@@ -459,12 +472,13 @@
     <p class="disc">Methodology and tooling</p>
     <p><a href="https://github.com/NeoCognitus70/portfolio-prompts">portfolio-prompts</a> is the open-source prompt library behind this workflow; its README documents every lifecycle prompt in full.</p>
     <div class="chips"><span class="chip">Registry</span><span class="chip">Lifecycle</span><span class="chip">Handover</span></div>
+    <div class="actions"><a class="btn" href="reviews.html#review-portfolio-prompts">Code reviews</a></div>
   </div>
   <div class="approach" data-project="auth-separation">
     <p class="disc">Specification Driven Development</p>
     <p><a href="https://github.com/GBrooks1970/auth-separation">auth-separation</a> is a technology-agnostic specification set for separating authentication, authorisation and user information into three independent services: three OpenAPI 3.1 contracts, an AsyncAPI 3.0 event contract and 21 Gherkin acceptance scenarios, all validated in CI — and then proven, by generating all three service skeletons from the contracts alone, to be complete enough to build from.</p>
     <div class="chips"><span class="chip">OpenAPI 3.1</span><span class="chip">AsyncAPI 3.0</span><span class="chip">Gherkin</span></div>
-    <div class="actions"><a class="btn demo" href="https://gbrooks1970.github.io/auth-separation/">Interactive Kanban board</a></div>
+    <div class="actions"><a class="btn demo" href="https://gbrooks1970.github.io/auth-separation/">Interactive Kanban board</a><a class="btn" href="reviews.html#review-auth-separation">Code reviews</a></div>
   </div>
 </section>
 

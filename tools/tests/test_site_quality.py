@@ -64,8 +64,8 @@ class SiteQualityTests(unittest.TestCase):
         summary, errors = SITE.audit_document(self.document, ROOT)
         self.assertEqual(errors, [])
         self.assertEqual(summary.external_urls, 66)
-        self.assertEqual(summary.interactive_elements, 70)
-        self.assertEqual(summary.internal_references, 7)
+        self.assertEqual(summary.interactive_elements, 85)
+        self.assertEqual(summary.internal_references, 22)
         self.assertEqual(summary.contrast_pairs, 20)
 
     def test_duplicate_canonical_is_rejected(self) -> None:

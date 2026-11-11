@@ -167,6 +167,15 @@ class GenerateSiteTests(unittest.TestCase):
         self.assertEqual(sitemap.encode("utf-8"), (ROOT / "sitemap.xml").read_bytes())
         self.assertEqual(robots.encode("utf-8"), (ROOT / "robots.txt").read_bytes())
 
+    def test_renders_derived_review_actions(self) -> None:
+        reviews = GENERATE.load_json(ROOT / "data" / "reviews.json")
+        review_projects = set(reviews.get("reviewProjects", []))
+        self.assertEqual(len(review_projects), 15)
+        for project in review_projects:
+            self.assertIn(f'href="reviews.html#review-{project}">Code reviews</a>', self.rendered)
+        self.assertNotIn("reviews.html#review-tradeblotter-wpf-screenplay", self.rendered)
+        self.assertNotIn("reviews.html#review-loan-origination-parity", self.rendered)
+
     def test_site_manifest_rejects_identity_and_url_drift(self) -> None:
         invalid = copy.deepcopy(self.site)
         invalid["author"]["url"] = "https://example.test/"

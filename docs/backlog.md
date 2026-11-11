@@ -1,7 +1,7 @@
 # Portfolio Landing — Backlog
 
-**Version:** 40
-**Last updated:** 2026-10-18
+**Version:** 41
+**Last updated:** 2026-11-07
 **Status:** ACTIVE — LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
@@ -70,6 +70,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 | LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
 | LAND-15 | P2 | DONE | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
+| LAND-18 | P0 | IN REVIEW | — | Project data and review publication refresh |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -1078,3 +1079,22 @@ Acceptance criteria:
 LAND-17 pre-publication evidence: [implementation log](implementation-logs/2026-10-18_land-17_bfx-kanban-refresh.md). Full local gate passes with 74 tests and external links enabled; refreshed PR and deployment evidence remain pending.
 
 LAND-17 completion: [PR #46](https://github.com/GBrooks1970/portfolio/pull/46) merged as `61af8cb4f28454860e87ee2c4dd5a58e55f1a810`. Exact-merge [quality](https://github.com/GBrooks1970/portfolio/actions/runs/39173135247) and [Pages](https://github.com/GBrooks1970/portfolio/actions/runs/39173135151) passed. Live HTML matches the merge and board navigation works. See the [publication closure](implementation-logs/2026-10-18_land-17_publication-closure.md); earlier pre-publication evidence is retained as history.
+
+## LAND-18 — Project data and review publication refresh
+
+**Priority:** P0
+**Status:** IN REVIEW
+**Authority:** Owner approved proceeding as recommended on 2026-11-07.
+
+Refresh project presentation data, lock registry at current canonical commit, import the 6 November central review index public export, provide per-project review actions, and regenerate reviews.html and index.html with full quality gate compliance. Plan: [LAND-18](implementation-plans/2026-11-06_project-data-and-review-refresh.md).
+
+Acceptance criteria:
+- [x] Pinned registry lock updated from canonical portfolio-prompts commit.
+- [x] Central review index public export imported into data/reviews.json, surfacing 18 review bundles across 15 projects including 8 November bundles and 6 focused Credit Dashboard records.
+- [x] Project presentation metadata updated in data/presentation.json, reflecting concise summaries and accurate evidence/lifecycle boundaries.
+- [x] Per-project "Code reviews" action links generated on showcase and methodology cards pointing to reviews.html#review-<project-id> where bundles exist.
+- [x] Generated reviews.html and index.html match source contracts, preserving accessibility features (keyboard focus, table scrolling, responsive cards).
+- [x] Full local gate (python tools/verify_portfolio.py --registry-repository ../portfolio-prompts) passes with external URLs enabled.
+- [x] Immutable implementation log written.
+
+LAND-18 implementation evidence: [implementation log](implementation-logs/2026-11-07_land-18_project-data-and-reviews-refresh.md). Full local gate passed with 77 tests and external links enabled; branch `codex/project-data-and-reviews-refresh` ready for PR.
