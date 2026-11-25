@@ -1114,10 +1114,13 @@ repository, automating the refresh, and the `reviews.html` line-ending mismatch 
 
 Acceptance criteria:
 
-- [ ] The snapshot is rewritten by `tools/refresh_learning_paths_snapshot.py` with `--commit 7fa013c… --item LAND-19`, and its `--check` passes (it exits 1 before the refresh).
-- [ ] A test shows `reference-history/<name>.md` becomes text while `reference-history/../`, deeper folders and other folders still fail.
-- [ ] `generate_learning_paths.py --check`, `generate_site.py --check` and `verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as `main`
+- [x] The snapshot is rewritten by `tools/refresh_learning_paths_snapshot.py` with `--commit 7fa013c… --item LAND-19`, and its `--check` passes (it exits 1 before the refresh).
+- [x] A test shows `reference-history/<name>.md` becomes text while `reference-history/../`, deeper folders and other folders still fail.
+- [x] `generate_learning_paths.py --check`, `generate_site.py --check` and `verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as `main`
       and one more test; `index.html`, `sitemap.xml` and `robots.txt` do not change.
-- [ ] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, Version 12 and the `7fa013c` / LAND-19 'Public snapshot' row.
+- [x] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, Version 12 and the `7fa013c` / LAND-19 'Public snapshot' row.
 - [ ] The pull request's quality run passes in CI, and the owner merges it.
 - [ ] GitHub Pages deploys the exact merge commit; the live page matches `origin/main` after line-ending normalisation and shows Version 12.
+
+Implementation evidence: branch `chore/land-19-refresh-learning-paths-v12`, based on `3cdf163`, with the plan committed first. See the
+[implementation log](implementation-logs/2026-11-25_land-19_learning-paths-refresh.md).
