@@ -4,8 +4,8 @@ created: 2026-11-24T22:53Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-19
-status: proposed
-approved: pending
+status: approved
+approved: 2026-11-24, Gary Brooks ("Approve as recommended", every recommended option below); the owner merges
 language: en-GB
 ---
 
@@ -62,8 +62,8 @@ Branch `chore/land-19-refresh-learning-paths-v12`; pull request 1 carries the pl
 
 | Decision | Options | Recommended | Owner's answer |
 |---|---|---|---|
-| Priority | P1 or P2 | P2: the public page is behind by metadata only; its content is the same as version 11 | |
-| `source.commit` | The document's last-change commit `7fa013c…`; or the repository head | The document's last-change commit, as for LAND-13 and LAND-15 | |
-| Generator link rule | (a) accept an optional `reference-history/` prefix only; (b) accept any one-folder relative `.md`/`.html` path; (c) no change, and refresh later | (a): it admits exactly the one form the document uses and keeps the fail-closed rule for every other folder; a future link into another folder fails loudly and is decided then | |
-| Pull requests | Two (change, then closure); or one | Two, as for LAND-11 to LAND-18 | |
-| Who does it | Directly; or a subagent | Directly: it is small and touches a public site | |
+| Priority | P1 or P2 | P2: the public page is behind by metadata only; its content is the same as version 11 | As recommended, approved 2026-11-24 |
+| `source.commit` | The document's last-change commit `7fa013c…`; or the repository head | The document's last-change commit, as for LAND-13 and LAND-15 | As recommended, approved 2026-11-24 |
+| Generator link rule | (a) accept an optional `reference-history/` prefix only; (b) accept any one-folder relative `.md`/`.html` path; (c) no change, and refresh later | (a): it admits exactly the one form the document uses and keeps the fail-closed rule for every other folder; a future link into another folder fails loudly and is decided then | As recommended, approved 2026-11-24 |
+| Pull requests | Two (change, then closure); or one | Two, as for LAND-11 to LAND-18 | As recommended, approved 2026-11-24 |
+| Who does it | Directly; or a subagent | Directly: it is small and touches a public site | As recommended, approved 2026-11-24 |
