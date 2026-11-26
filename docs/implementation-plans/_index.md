@@ -22,4 +22,4 @@ Every implementation plan is written to a file here before implementation starts
 
 | [`2026-11-06_project-data-and-review-refresh.md`](2026-11-06_project-data-and-review-refresh.md) | LAND-18 Project data and review publication | 2026-11-06 | implemented | [PR #82](https://github.com/GBrooks1970/portfolio/pull/82) (`69e4fdc`, 2026-11-06) |
 
-| [`2026-11-24_land-19-refresh-learning-paths-v12.md`](2026-11-24_land-19-refresh-learning-paths-v12.md) | LAND-19 Refresh the Learning Paths snapshot to version 12 | 2026-11-24 | approved | - |
+| [`2026-11-24_land-19-refresh-learning-paths-v12.md`](2026-11-24_land-19-refresh-learning-paths-v12.md) | LAND-19 Refresh the Learning Paths snapshot to version 12 | 2026-11-24 | implemented | [PR #85](https://github.com/GBrooks1970/portfolio/pull/85) (`af06a53`, 2026-11-26) |

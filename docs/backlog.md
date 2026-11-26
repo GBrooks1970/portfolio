@@ -1,8 +1,8 @@
 # Portfolio Landing — Backlog
 
-**Version:** 43
-**Last updated:** 2026-11-24
-**Status:** ACTIVE — LAND-19 (Learning Paths snapshot refresh to version 12) is IN PROGRESS. LAND-18 project data and reviews refresh is DONE.  LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
+**Version:** 44
+**Last updated:** 2026-11-26
+**Status:** ACTIVE — LAND-19 (Learning Paths snapshot refresh to version 12) is DONE. LAND-18 project data and reviews refresh is DONE.  LAND-17 BFX Kanban link is DONE. LAND-16 Saleor report/card refresh is DONE. LAND-01 through LAND-08 closed; **the LAND-09 public-evidence programme (09A–09D) is COMPLETE**. LAND-10 review publication is DONE. LAND-11 (TradeBlotter card refresh) is DONE. LAND-12 (Learning Paths page) is DONE. LAND-13 (Learning Paths snapshot refresh) is DONE. LAND-14 (versioned, dual-theme Learning Paths page) is DONE. LAND-15 (Learning Paths snapshot refresh to version 11) is DONE.
 **Source evidence:** [`portfolio-page-audit-2026-08-01.md`](portfolio-page-audit-2026-08-01.md)
 
 ## Purpose and authority
@@ -68,7 +68,7 @@ Do not promote a candidate improvement into required work without recording the 
 | LAND-13 | P1 | DONE | LAND-12 | Refresh the Learning Paths snapshot to the current edition |
 | LAND-14 | P1 | DONE | LAND-13 | Publish the versioned, dual-theme Learning Paths page |
 | LAND-15 | P2 | DONE | LAND-14 | Refresh the Learning Paths snapshot to version 11 |
-| LAND-19 | P2 | IN PROGRESS | LAND-15 | Refresh the Learning Paths snapshot to version 12 |
+| LAND-19 | P2 | DONE | LAND-15 | Refresh the Learning Paths snapshot to version 12 |
 
 ### LAND-01 — Restore public inventory and factual accuracy
 
@@ -1098,7 +1098,7 @@ LAND-18 publication: [PR #82](https://github.com/GBrooks1970/portfolio/pull/82),
 ## LAND-19 — Refresh the Learning Paths snapshot to version 12
 
 **Priority:** P2
-**Status:** IN PROGRESS
+**Status:** DONE
 **Type:** Snapshot refresh (data and generated page) and one generator link rule
 **Authority:** Owner approved the plan on 2026-11-24 ('Approve as recommended'), including P2. Plan:
 [`implementation-plans/2026-11-24_land-19-refresh-learning-paths-v12.md`](implementation-plans/2026-11-24_land-19-refresh-learning-paths-v12.md).
@@ -1119,8 +1119,13 @@ Acceptance criteria:
 - [x] `generate_learning_paths.py --check`, `generate_site.py --check` and `verify_portfolio.py --registry-repository ../portfolio-prompts --skip-external` pass with the same counts as `main`
       and one more test; `index.html`, `sitemap.xml` and `robots.txt` do not change.
 - [x] Real Chromium at 1280 px and 375 px in both themes: no horizontal overflow, the switch at the top right, Version 12 and the `7fa013c` / LAND-19 'Public snapshot' row.
-- [ ] The pull request's quality run passes in CI, and the owner merges it.
-- [ ] GitHub Pages deploys the exact merge commit; the live page matches `origin/main` after line-ending normalisation and shows Version 12.
+- [x] The pull request's quality run passes in CI ([run 45666023197](https://github.com/GBrooks1970/portfolio/actions/runs/45666023197) on `cdca301`), and the owner merges [PR #85](https://github.com/GBrooks1970/portfolio/pull/85) (`af06a53`, 2026-11-26T21:00:04Z).
+- [x] GitHub Pages deploys the exact merge commit; the live page matches `origin/main` after line-ending normalisation and shows Version 12 (Pages run 45895018563; SHA-256 `3881a66e…`; 16 of 16 browser checks against the live URL).
 
 Implementation evidence: branch `chore/land-19-refresh-learning-paths-v12`, based on `3cdf163`, with the plan committed first. See the
 [implementation log](implementation-logs/2026-11-25_land-19_learning-paths-refresh.md).
+
+Completion evidence: [PR #85](https://github.com/GBrooks1970/portfolio/pull/85) merged as `af06a5327a14aee4a5bc8bcc0647cf4657f9a863` at 2026-11-26T21:00:04Z. Exact-merge
+[quality](https://github.com/GBrooks1970/portfolio/actions/runs/45895020051) and
+[Pages](https://github.com/GBrooks1970/portfolio/actions/runs/45895018563) runs passed. The live `learning-paths.html` matches the merged file;
+`index.html` is unchanged. See the [publication closure](implementation-logs/2026-11-26_land-19_publication-closure.md).
