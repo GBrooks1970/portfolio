@@ -41,6 +41,12 @@ class LearningPathsVersionedPageTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 public_link(url)
 
+    def test_reference_history_names_become_text_but_other_folders_still_fail(self):
+        self.assertIsNone(public_link("reference-history/PORTFOLIO_LEARNING_PATHS_OUTLINE_2026-10-06.md"))
+        for url in ["reference-history/../secret.md", "reference-history/sub/x.md", "other-folder/x.md", "/reference-history/x.md"]:
+            with self.assertRaises(ValueError):
+                public_link(url)
+
     def test_the_private_maintenance_guide_is_text_not_a_link(self):
         self.assertIn("Maintaining this document: maintenance guide.", self.output)
         self.assertNotIn("MAINTENANCE.html", self.output)

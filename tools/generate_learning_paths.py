@@ -35,7 +35,7 @@ def public_link(url: str) -> str | None:
         if PRIVATE_SOURCE_HOST in url:
             return None
         return url
-    if re.fullmatch(r"[A-Za-z0-9_.-]+\.(?:md|html)", url):
+    if re.fullmatch(r"(?:reference-history/)?[A-Za-z0-9_.-]+\.(?:md|html)", url):
         return None
     raise ValueError(f"Unsupported Learning Paths link: {url}")
 
