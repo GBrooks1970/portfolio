@@ -4,8 +4,9 @@ created: 2026-11-24T22:53Z
 project: portfolio-landing
 type: implementation-plan
 item: LAND-19
-status: approved
+status: implemented
 approved: 2026-11-24, Gary Brooks ("Approve as recommended", every recommended option below); the owner merges
+delivered: PR #85, merge commit af06a53, merged 2026-11-26T21:00:04Z by the owner
 language: en-GB
 ---
 
@@ -67,3 +68,15 @@ Branch `chore/land-19-refresh-learning-paths-v12`; pull request 1 carries the pl
 | Generator link rule | (a) accept an optional `reference-history/` prefix only; (b) accept any one-folder relative `.md`/`.html` path; (c) no change, and refresh later | (a): it admits exactly the one form the document uses and keeps the fail-closed rule for every other folder; a future link into another folder fails loudly and is decided then | As recommended, approved 2026-11-24 |
 | Pull requests | Two (change, then closure); or one | Two, as for LAND-11 to LAND-18 | As recommended, approved 2026-11-24 |
 | Who does it | Directly; or a subagent | Directly: it is small and touches a public site | As recommended, approved 2026-11-24 |
+
+## Outcome
+
+Delivered as planned. [PR #85](https://github.com/GBrooks1970/portfolio/pull/85) (three commits: `dc22c97` the plan, `e4ad365` its approval and the backlog item, `cdca301` the generator rule, test, snapshot, page and log) was merged by the owner as
+`af06a5327a14aee4a5bc8bcc0647cf4657f9a863` on 2026-11-26 at 21:00:04Z. The logs are
+[`docs/implementation-logs/2026-11-25_land-19_learning-paths-refresh.md`](../implementation-logs/2026-11-25_land-19_learning-paths-refresh.md) and
+[`2026-11-26_land-19_publication-closure.md`](../implementation-logs/2026-11-26_land-19_publication-closure.md).
+
+- **Change:** `data/learning-paths.json` now pins `7fa013c470a2442d2a0c3c74ceb00db94ba1f823`; `learning-paths.html` regenerated (4 insertions, 4 deletions, metadata only); `public_link()` admits the `reference-history/` prefix, with one new test. `index.html`, `sitemap.xml` and `robots.txt` did not change.
+- **Verification, as planned:** the refresh `--check` exited 1 before and 0 after; both `generate_*` checks passed; `verify_portfolio.py --skip-external` reported the same counts as `main` and 80 tests OK; the new test failed against the old generator; real Chromium passed 16 of 16 locally and against the live URL.
+- **The check that would have failed if the refresh had not published:** the live page returned HTTP 200 (48,118 bytes), its SHA-256 equals `origin/main` after line-ending normalisation (`3881a66e…4c3c41`), it shows Version 12, `7fa013c` and LAND-19, and contains neither `437e27f` nor LAND-15.
+- **Differences from the plan:** none in design or scope. The gates were run in a `core.autocrlf=false` worktree because the Windows checkout fails `reviews.html` on `main` (recorded in the implementation log, out of scope).
